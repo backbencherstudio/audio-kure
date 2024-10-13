@@ -2,26 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: "Reddit Sans", sans-serif ;
+* {
+    font-family: "Reddit Sans", sans-serif;
 }
+
 .merriweather {
     font-family: "Merriweather", serif !important;
-  }
-  
-  .btnGrad {
+}
+
+.btnGrad {
     background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
     color: white; 
     border: none; 
-    transition: background 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .btnGrad:hover {
-    filter: brightness(1.1);
-  }
-  
-  .btnGrad:active {
-    transform: scale(0.95); /* Scale down on click */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
-  }
-  
+    transition: filter 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btnGrad:hover {
+    filter: brightness(.8);
+}
+
+.btnGrad:active {
+    transform: scale(0.95);  
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  
+}
+
+img {
+    pointer-events: none;
+}
