@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../shared/CustomAnsButton";
 
-function MentalQuestionPage1() {
+function EmotionalQuestionPage2() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
@@ -32,4 +32,4 @@ function MentalQuestionPage1() {
   );
 }
 
-export default MentalQuestionPage1;
+export default EmotionalQuestionPage2;
