@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../shared/CustomAnsButton";
 
-function PhysicalQuistionPage1() {
+function MentalQuestionPage1() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
     const answer = { ans1: selectedAnswer };
 
     localStorage.setItem("answers", JSON.stringify(answer));
-    navigate("/question-physical-2");
+    navigate("/question-mental-2");
   };
   return (
     <div className="h-screen text-center">
@@ -28,4 +28,4 @@ function PhysicalQuistionPage1() {
     </div>
   );
 }
-export default PhysicalQuistionPage1;
+export default MentalQuestionPage1;

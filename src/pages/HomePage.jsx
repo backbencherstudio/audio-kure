@@ -41,16 +41,6 @@ function HomePage() {
             <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
               Emotional Suggestible
             </button>
-            <Link to={"/question-physical-1"}>
-              <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
-                Physical Suggestible
-              </button>
-            </Link>
-            <Link to={"/question-emotional-1"}>
-              <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
-                Emotional Suggestible
-              </button>
-            </Link>
           </div>
           <div className="flex mt-4">
             <img className=" h-[40px] w-[136px]" src={home_members} alt="" />
