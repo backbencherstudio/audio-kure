@@ -32,14 +32,18 @@ function HomePage() {
             </p>
             <p className="mt-10 text-base font-medium mb-5">Start by selecting your gender:</p>
             <div className="flex justify-center gap-5 mb-10">
-              <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
-                Physical Suggestible
-              </button>
-              <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
-                Emotional Suggestible
-              </button>
+              <Link to={'/question-physical-1'}>
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
 
+                  Physical Suggestible
+                </button>
+              </Link>
+              <Link to={'/question-emotional-1'}>
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-3 transition duration-300">
 
+                  Emotional Suggestible
+                </button>
+              </Link>
             </div>
             <div className="flex mt-4">
               <img className=' h-[40px] w-[136px]' src={home_members} alt="" />
@@ -63,9 +67,6 @@ function HomePage() {
             />
           </div>
         </div>
-
-
-
         <div className="grid grid-cols-3 mt-8 gap-10">
           <div className='border  flex flex-col items-center gap-5 p-10 rounded-3xl'>
             <p className=" italic">Enhance weight loss by 71% with hypnosis.</p>
@@ -89,22 +90,26 @@ function HomePage() {
           </div>
         </div>
 
-        <footer className="flex justify-between items-center py-20">
-          <div className="flex flex-col justify-between items-center">
-            <img
-              className="max-w-full"
-              alt=""
-              src={logo2}
-            />
-            <p>© 2024 Kure. All rights reserved.</p>
-          </div>
-          <div className="flex flex-col ">
-            <div>
-              <Link to="/privacy-policy" className="mx-2">Privacy Policy</Link>
-              <Link to="/terms-of-service" className="mx-2">Terms & Conditions</Link>
+        <footer className="  justify-between items-center py-20">
+          <div className='flex justify-between items-center '>
+            <div className="    justify-between items-center">
+              <img
+                className=" "
+                alt=""
+                src={logo2}
+              />
             </div>
-            <p className="text-sm">Disclaimer: Results may vary from person to person</p>
+            <div className="flex flex-col ">
+              <div>
+                <Link to="/privacy-policy" className="mx-2">Privacy Policy</Link>
+                <Link to="/terms-of-service" className="mx-2">Terms & Conditions</Link>
+              </div>
 
+            </div>
+          </div>
+          <div className='flex justify-between mt-10'>
+            <p>© 2024 Kure. All rights reserved.</p>
+            <p className="text-sm">Disclaimer: Results may vary from person to person</p>
           </div>
         </footer>
       </div>
