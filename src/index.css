@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 * {
-    font-family: "Reddit Sans", sans-serif;
+  font-family: "Reddit Sans", sans-serif;
 }
 
 .merriweather {
-    font-family: "Merriweather", serif !important;
+  font-family: "Merriweather", serif !important;
 }
 
 .btnGrad {
-    background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
-   
+  background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
 }
- 
 
 img {
-    pointer-events: none;
+  pointer-events: none;
+}
+
+.label {
+  /* display: none !important;
+   */
+   color: red;
 }
