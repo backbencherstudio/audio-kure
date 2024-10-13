@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/layout";
 import HomePage from "./pages/HomePage";
-import ErrorPage from "./pages/Error/ErrorPage";
-import PhysicalQuistionPage1 from "./pages/Quiz/PhysicalQuestionPage1";
-import PhysicalQuistionPage2 from "./pages/Quiz/PhysicalQuestionPage2";
-import EmotionalQuestionPage1 from "./pages/Quiz/EmotionalQuestionPage1";
-
+import ErrorPage from "./pages/Error/ErrorPage"; 
+import EmotionalQuestionPage1 from "./pages/Questions/EmotionalQuestionPage1";
+import PhysicalQuestionPage2 from "./pages/Questions/PhysicalQuestionPage2";
+import PhysicalQuestionPage1 from "./pages/Questions/PhysicalQuestionPage1";
+import EmotionalQuestionPage2 from "./pages/Questions/EmotionalQuestionPage2";
+import Analyzing from "./pages/Questions/Analysing/Analyzing";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,11 +19,15 @@ const router = createBrowserRouter([
       },
       {
         path: "question-physical-1",
-        element: <PhysicalQuistionPage1 />,
+        element: <PhysicalQuestionPage1></PhysicalQuestionPage1>
+      },
+      {
+        path: "/analysis",
+        element: <Analyzing/>
       },
       {
         path: "question-physical-2",
-        element: <PhysicalQuistionPage2 />,
+        element: <PhysicalQuestionPage2 />,
       },
       {
         path: "question-emotional-1",
@@ -30,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "question-emotional-2",
-        element: <EmotionalQuestionPage1 />,
+        element: <EmotionalQuestionPage2 />,
       },
     ],
   },

@@ -1,20 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
+import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 
-function EmotionalQuestionPage2() {
+function PhysicalQuestionPage2() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
-    // Retrieve current answers from localStorage
-    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || {};
+    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
+    const newAnswer = { ans2: selectedAnswer };
+    currentAnswers.push(newAnswer);
 
-    const updatedAnswers = { ...currentAnswers, ans2: selectedAnswer };
-
-    localStorage.setItem("answers", JSON.stringify(updatedAnswers));
+    localStorage.setItem("answers", JSON.stringify(currentAnswers));
+    navigate("/analysis")
   };
 
   return (
     <div className="h-screen text-center">
+      <ProgressBars value={50} navigate={"question-physical-1"}></ProgressBars>
       <h1 className="text-4xl pt-20">Which one comes first ?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
@@ -32,4 +34,4 @@ function EmotionalQuestionPage2() {
   );
 }
 
-export default EmotionalQuestionPage2;
+export default PhysicalQuestionPage2;

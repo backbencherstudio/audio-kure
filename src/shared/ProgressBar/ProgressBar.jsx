@@ -3,15 +3,17 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import logo from "./../../assets/images/logo.png"
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
-const ProgressBars = ({ value }) => {
+const ProgressBars = ({ value, navigate }) => {
+    console.log(navigate);
+    
     return (
         <div>
             <div className='flex items-center justify-evenly'>
                 <div>
-                    <Link className='flex items-center gap-5'><GrLinkPrevious ></GrLinkPrevious > Back</Link>
+                    <Link to={`/${navigate ? navigate : ""}`} className='flex items-center gap-5'><GrLinkPrevious ></GrLinkPrevious > Back</Link>
                 </div>
                 <div>
-                    <img src={logo} alt="" />
+                    <Link to={'/'}>  <img className='h-28 my-3' src={logo} alt="" /></Link>
                 </div>
                 <div> </div>
             </div>

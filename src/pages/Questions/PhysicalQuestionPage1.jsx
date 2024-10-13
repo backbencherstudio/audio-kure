@@ -2,36 +2,32 @@ import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 
-function PhysicalQuestionPage2() {
+function PhysicalQuestionPage1() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
-    // Retrieve current answers from localStorage
-    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || {};
+    const answer = [{ ans1: selectedAnswer }];
 
-    const updatedAnswers = { ...currentAnswers, ans2: selectedAnswer };
-
-    localStorage.setItem("answers", JSON.stringify(updatedAnswers));
+    localStorage.setItem("answers", JSON.stringify(answer));
+    navigate("/question-physical-2");
   };
-
   return (
     <div className="h-screen text-center">
-      <ProgressBars value={50}></ProgressBars>
+      <ProgressBars  value={10} navigate={''}/>
       <h1 className="text-4xl pt-20">Which one comes first ?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
           <CustomAnsButton
-            text="Love"
-            onClick={() => handleAnswerSelect("Love")}
+            text="Fare of rejection"
+            onClick={() => handleAnswerSelect("Fare of rejection")}
           />
           <CustomAnsButton
-            text="Money (career or security)"
-            onClick={() => handleAnswerSelect("Money (career or security)")}
+            text="Fare of loosing control"
+            onClick={() => handleAnswerSelect("Fare of loosing control")}
           />
         </div>
       </div>
     </div>
   );
 }
-
-export default PhysicalQuestionPage2;
+export default PhysicalQuestionPage1;

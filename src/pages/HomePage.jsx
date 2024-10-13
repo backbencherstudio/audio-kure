@@ -6,6 +6,7 @@ import home_card_1 from "./../assets/images/home_card_1.png";
 import home_card_2 from "./../assets/images/home_card_2.png";
 import home_card_3 from "./../assets/images/home_card_3.png";
 import logo2 from "./../assets/images/logo.png";
+import Analyzing from "./Questions/Analysing/Analyzing";
 
 function HomePage() {
   return (
@@ -80,7 +81,7 @@ function HomePage() {
 
           <div className="border  flex flex-col items-center gap-5 p-10 rounded-3xl">
             <p className=" italic">
-              Hypnotherapy has remained a well-kept weight loss secret."
+              Hypnotherapy has remained a well-kept weight loss secret.
             </p>
             <img className="w-[120px]" alt="" src={home_card_3} />
           </div>
@@ -109,7 +110,7 @@ function HomePage() {
             </p>
           </div>
         </footer>
-      </div>
+      </div> 
     </div>
   );
 }
