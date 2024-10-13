@@ -2,9 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/layout";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/Error/ErrorPage";
-import PhysicalQuistionPage1 from "./pages/PhysicalQuestionPage1";
-import PhysicalQuistionPage2 from "./pages/PhysicalQuestionPage2";
-import EmotionalQuestionPage1 from "./pages/EmotionalQuestionPage1";
+import PhysicalQuistionPage1 from "./pages/Quiz/PhysicalQuestionPage1";
+import PhysicalQuistionPage2 from "./pages/Quiz/PhysicalQuestionPage2";
+import EmotionalQuestionPage1 from "./pages/Quiz/EmotionalQuestionPage1";
 
 const router = createBrowserRouter([
   {

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import CustomAnsButton from "../shared/CustomAnsButton";
+import CustomAnsButton from "../../shared/CustomAnsButton";
 
-function PhysicalQuestionPage2() {
+function EmotionalQuestionPage2() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
@@ -23,8 +23,8 @@ function PhysicalQuestionPage2() {
             onClick={() => handleAnswerSelect("Love")}
           />
           <CustomAnsButton
-            text="Money (career or sequrity)"
-            onClick={() => handleAnswerSelect("Money (career or sequrity)")}
+            text="Money (career or security)"
+            onClick={() => handleAnswerSelect("Money (career or security)")}
           />
         </div>
       </div>
@@ -32,4 +32,4 @@ function PhysicalQuestionPage2() {
   );
 }
 
-export default PhysicalQuestionPage2;
+export default EmotionalQuestionPage2;

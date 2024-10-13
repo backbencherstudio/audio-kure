@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import CustomAnsButton from "../shared/CustomAnsButton";
+import CustomAnsButton from "../../shared/CustomAnsButton";
+import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 
-function EmotionalQuestionPage2() {
+function PhysicalQuestionPage2() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
@@ -15,6 +16,7 @@ function EmotionalQuestionPage2() {
 
   return (
     <div className="h-screen text-center">
+      <ProgressBars value={50}></ProgressBars>
       <h1 className="text-4xl pt-20">Which one comes first ?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
@@ -23,8 +25,8 @@ function EmotionalQuestionPage2() {
             onClick={() => handleAnswerSelect("Love")}
           />
           <CustomAnsButton
-            text="Money (career or sequrity)"
-            onClick={() => handleAnswerSelect("Money (career or sequrity)")}
+            text="Money (career or security)"
+            onClick={() => handleAnswerSelect("Money (career or security)")}
           />
         </div>
       </div>
@@ -32,4 +34,4 @@ function EmotionalQuestionPage2() {
   );
 }
 
-export default EmotionalQuestionPage2;
+export default PhysicalQuestionPage2;
