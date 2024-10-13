@@ -68,21 +68,21 @@ function HomePage() {
 
         <div className="grid grid-cols-3 mt-8 gap-10">
           <div className='border  flex flex-col items-center gap-5 p-10 rounded-3xl'>
-            <p className=" italic">"Enhance weight loss by 71% with hypnosis."</p>
+            <p className=" italic">Enhance weight loss by 71% with hypnosis.</p>
             <img
               className="w-[120px]" alt="" src={home_card_1}
             />
           </div>
 
           <div className='border  flex flex-col items-center gap-5 p-10 rounded-3xl'>
-            <p className=" italic">"Hypnotherapy provides an edge over other weight-loss methods."</p>
+            <p className=" italic">Hypnotherapy provides an edge over other weight-loss methods.</p>
             <img
               className="w-[120px]" alt="" src={home_card_2}
             />
           </div>
 
           <div className='border  flex flex-col items-center gap-5 p-10 rounded-3xl'>
-            <p className=" italic">“Hypnotherapy has remained a well-kept weight loss secret." </p>
+            <p className=" italic">Hypnotherapy has remained a well-kept weight loss secret."</p>
             <img
               className="w-[120px]" alt="" src={home_card_3}
             />
