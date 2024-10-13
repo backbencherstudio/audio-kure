@@ -80,7 +80,7 @@ function HomePage() {
 
           <div className="border  flex flex-col items-center gap-5 p-10 rounded-3xl">
             <p className=" italic">
-              Hypnotherapy has remained a well-kept weight loss secret."
+              Hypnotherapy has remained a well-kept weight loss secret.
             </p>
             <img className="w-[120px]" alt="" src={home_card_3} />
           </div>

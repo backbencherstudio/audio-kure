@@ -1,20 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import CustomAnsButton from "../shared/CustomAnsButton";
+import CustomAnsButton from "../../shared/CustomAnsButton";
+import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 
-function PhysicalQuestionPage1() {
+function PhysicalQuistionPage1() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
-    const newAnswer = [{ ans1: selectedAnswer }];
+    const answer = [{ ans1: selectedAnswer }];
 
-    localStorage.setItem("answers", JSON.stringify(newAnswer));
-
+    localStorage.setItem("answers", JSON.stringify(answer));
     navigate("/question-physical-2");
   };
-
   return (
     <div className="h-screen text-center">
-      <h1 className="text-4xl pt-20">Which one comes first?</h1>
+      <ProgressBars value={10} />
+      <h1 className="text-4xl pt-20">Which one comes first ?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
           <CustomAnsButton
@@ -22,13 +22,12 @@ function PhysicalQuestionPage1() {
             onClick={() => handleAnswerSelect("Fare of rejection")}
           />
           <CustomAnsButton
-            text="Fare of losing control"
-            onClick={() => handleAnswerSelect("Fare of losing control")}
+            text="Fare of loosing control"
+            onClick={() => handleAnswerSelect("Fare of loosing control")}
           />
         </div>
       </div>
     </div>
   );
 }
-
-export default PhysicalQuestionPage1;
+export default PhysicalQuistionPage1;

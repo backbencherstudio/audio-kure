@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import CustomAnsButton from "../shared/CustomAnsButton";
+import CustomAnsButton from "../../shared/CustomAnsButton";
 
 function EmotionalQuestionPage2() {
   const navigate = useNavigate();
@@ -7,7 +7,6 @@ function EmotionalQuestionPage2() {
   const handleAnswerSelect = (selectedAnswer) => {
     // Retrieve current answers from localStorage
     const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
-
     const newAnswer = { ans2: selectedAnswer };
     currentAnswers.push(newAnswer);
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
@@ -23,8 +22,8 @@ function EmotionalQuestionPage2() {
             onClick={() => handleAnswerSelect("Love")}
           />
           <CustomAnsButton
-            text="Money (career or sequrity)"
-            onClick={() => handleAnswerSelect("Money (career or sequrity)")}
+            text="Money (career or security)"
+            onClick={() => handleAnswerSelect("Money (career or security)")}
           />
         </div>
       </div>
