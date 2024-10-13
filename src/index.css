@@ -12,19 +12,9 @@
 
 .btnGrad {
     background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
-    color: white; 
-    border: none; 
-    transition: filter 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+   
 }
-
-.btnGrad:hover {
-    filter: brightness(.8);
-}
-
-.btnGrad:active {
-    transform: scale(0.95);  
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  
-}
+ 
 
 img {
     pointer-events: none;

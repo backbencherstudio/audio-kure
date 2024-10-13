@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
-   <div className="bg-[#07001C]  text-white">
+   <div className="bg-[#07001C] min-h-screen text-white">
    <App />
    </div>
   </StrictMode>
