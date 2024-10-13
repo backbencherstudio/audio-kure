@@ -5,6 +5,7 @@ import ErrorPage from "./pages/Error/ErrorPage";
 import PhysicalQuistionPage1 from "./pages/PhysicalQuestionPage1";
 import PhysicalQuistionPage2 from "./pages/PhysicalQuestionPage2";
 import EmotionalQuestionPage1 from "./pages/EmotionalQuestionPage1";
+import EmotionalQuestionPage2 from "./pages/EmotionalQuestionPage2";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "question-emotional-2",
-        element: <EmotionalQuestionPage1 />,
+        element: <EmotionalQuestionPage2 />,
       },
     ],
   },

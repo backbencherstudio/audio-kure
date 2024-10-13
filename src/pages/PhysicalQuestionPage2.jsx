@@ -5,17 +5,20 @@ function PhysicalQuestionPage2() {
   const navigate = useNavigate();
 
   const handleAnswerSelect = (selectedAnswer) => {
-    // Retrieve current answers from localStorage
-    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || {};
+    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
 
-    const updatedAnswers = { ...currentAnswers, ans2: selectedAnswer };
+    const newAnswer = { ans2: selectedAnswer };
 
-    localStorage.setItem("answers", JSON.stringify(updatedAnswers));
+    currentAnswers.push(newAnswer);
+
+    localStorage.setItem("answers", JSON.stringify(currentAnswers));
+
+    navigate("/summary");
   };
 
   return (
     <div className="h-screen text-center">
-      <h1 className="text-4xl pt-20">Which one comes first ?</h1>
+      <h1 className="text-4xl pt-20">Which one comes first?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
           <CustomAnsButton
@@ -23,8 +26,8 @@ function PhysicalQuestionPage2() {
             onClick={() => handleAnswerSelect("Love")}
           />
           <CustomAnsButton
-            text="Money (career or sequrity)"
-            onClick={() => handleAnswerSelect("Money (career or sequrity)")}
+            text="Money (career or security)"
+            onClick={() => handleAnswerSelect("Money (career or security)")}
           />
         </div>
       </div>

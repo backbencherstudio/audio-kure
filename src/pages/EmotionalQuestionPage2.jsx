@@ -6,11 +6,11 @@ function EmotionalQuestionPage2() {
 
   const handleAnswerSelect = (selectedAnswer) => {
     // Retrieve current answers from localStorage
-    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || {};
+    const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
 
-    const updatedAnswers = { ...currentAnswers, ans2: selectedAnswer };
-
-    localStorage.setItem("answers", JSON.stringify(updatedAnswers));
+    const newAnswer = { ans2: selectedAnswer };
+    currentAnswers.push(newAnswer);
+    localStorage.setItem("answers", JSON.stringify(currentAnswers));
   };
 
   return (
