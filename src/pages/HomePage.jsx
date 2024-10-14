@@ -13,13 +13,12 @@ function HomePage() {
       <div className="container min-h-screen mx-auto">
         <header className="py-4">
           <div className="flex  w-fit mx-auto lg:mx-0 ">
-            <Link className="h-32" to={"/"}>
-              <img
-                className=" h-full "
-                alt="logo"
-                src={logo2}
-                decoding="async"
-              />
+            <Link className="flex" to={"/"}>
+              {" "}
+              <img className="h-12 my-3" src={logo2} alt="" />
+              <span className="flex flex-col font-bold text-2xl justify-center font-serif">
+                healer
+              </span>
             </Link>
           </div>
         </header>

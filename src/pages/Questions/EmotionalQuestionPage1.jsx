@@ -9,12 +9,11 @@ function EmotionalQuestionPage1() {
     const answer = [{ ans1: selectedAnswer }];
     localStorage.setItem("answers", JSON.stringify(answer));
     navigate("/question-emotional-2");
-    
   };
 
   return (
-    <div className="h-screen text-center"> 
-      <ProgressBars value={10} navigate={""}></ProgressBars>
+    <div className="h-screen text-center">
+      <ProgressBars page={1} value={10} navigate={""}></ProgressBars>
       <h1 className="text-4xl pt-20">Which one come first?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
