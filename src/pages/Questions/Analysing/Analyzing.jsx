@@ -29,11 +29,11 @@ const Analyzing = () => {
   useEffect(() => {
     if (progress === 100) {
       
-      setTimeout(() => navigate("/"), 350); 
+      setTimeout(() => navigate("/"), 300); 
     }
-  }, [progress, navigate]); // Effect runs when progress updates
+  }, [progress, navigate]); 
 
-  // Calculate active step based on progress:
+  
   const activeStep = Math.min(Math.floor((progress / 100) * steps.length), steps.length - 1);
 
   return (
