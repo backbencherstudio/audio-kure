@@ -6,11 +6,12 @@ import home_card_1 from "./../assets/images/home_card_1.png";
 import home_card_2 from "./../assets/images/home_card_2.png";
 import home_card_3 from "./../assets/images/home_card_3.png";
 import logo2 from "./../assets/images/logo.png";
+import Footer from "../shared/Footer";
 
 function HomePage() {
   return (
     <div className=" ">
-      <div className="container min-h-screen mx-auto">
+      <div className="container min-h-screen mx-auto ">
         <header className="py-4">
           <div className="flex  w-fit mx-auto lg:mx-0 ">
             <Link className="flex" to={"/"}>
@@ -38,12 +39,12 @@ function HomePage() {
             </p>
             <div className="flex flex-col lg:flex-row   justify-between gap-5 mb-10 w-full">
               <Link className="w-full " to={"/question-physical-1"}>
-                <button className="btnGrad w-full font-bold rounded-lg px-10 py-5 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Physical Suggestible
                 </button>
               </Link>
               <Link className="w-full " to={"/question-emotional-1"}>
-                <button className="btnGrad w-full font-bold rounded-lg px-10 py-5 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Emotional Suggestible
                 </button>
               </Link>
@@ -60,11 +61,11 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="flex-1">
+          <div className="flex-1 flex items-center justify-center">
             <img className="max-h-[455.234px]" alt="" src={home_hero_image} />
           </div>
         </div>
-        <div className="grid lg:grid-cols-3 grid-cols-1 px-5 lg:px-0  mt-8 gap-10">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-5 lg:px-0  mt-8 gap-5">
           <div className="border  flex flex-col items-center gap-5 p-10 rounded-3xl">
             <p className=" italic">Enhance weight loss by 71% with hypnosis.</p>
             <img className="w-[120px]" alt="" src={home_card_1} />
@@ -85,29 +86,7 @@ function HomePage() {
           </div>
         </div>
 
-        <footer className="  justify-between items-center py-20">
-          <div className="flex justify-between items-center ">
-            <div className="    justify-between items-center">
-              <img className=" " alt="" src={logo2} />
-            </div>
-            <div className="flex flex-col ">
-              <div>
-                <Link to="/privacy-policy" className="mx-2">
-                  Privacy Policy
-                </Link>
-                <Link to="/terms-of-service" className="mx-2">
-                  Terms & Conditions
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-between mt-10">
-            <p>© 2024 Kure. All rights reserved.</p>
-            <p className="text-sm">
-              Disclaimer: Results may vary from person to person
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

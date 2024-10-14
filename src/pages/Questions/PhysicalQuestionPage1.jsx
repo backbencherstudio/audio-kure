@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
+import Footer2 from "../../shared/Footer2";
 
 function PhysicalQuestionPage1() {
   const navigate = useNavigate();

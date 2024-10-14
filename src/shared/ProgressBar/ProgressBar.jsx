@@ -43,6 +43,7 @@ const ProgressBars = ({ value, navigate, page }) => {
         completed={value ? value : 10}
         labelColor="transparent"
         labelAlignment="center"
+        borderRadius="0px 10px 10px 0px"
         height="8px"
         bgColor="#C4AFFF"
         baseBgColor="#2D2C2C"

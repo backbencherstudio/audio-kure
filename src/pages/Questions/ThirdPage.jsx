@@ -40,7 +40,7 @@ const ThirdPage = () => {
                         It’s almost like losing weight while sleeping.
                     </p>
                     <p>Medical research studies and Kure user data suggests that hypnosis is perfectly safe and allows you to achieve better and lasting weight loss results*.</p>
-                    <Link className="mt-4 btnGrad text-center font-medium text-xl py-5 rounded-3xl text-white px-4  rounded-md" to={'/analysis'}>Got it</Link>
+                    <Link className="mt-4 btnGrad text-center font-medium text-xl py-5 rounded-3xl text-white px-4  " to={'/analysis'}>Got it</Link>
                     <p className="mt-2 text-sm">
                         *Source:
                         <span className="text-blue-600">
