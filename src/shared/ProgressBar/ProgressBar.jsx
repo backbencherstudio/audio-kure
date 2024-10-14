@@ -1,14 +1,22 @@
+import React from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import logo from "./../../assets/images/logo.png";
+import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import Logo from "../Logo";
 const ProgressBars = ({ value, navigate, page }) => {
   console.log(navigate);
 
   return (
     <div>
-      <div className="flex items-center justify-between px-4">
-        <Logo />
+      <div className="flex items-center lg:container mx-auto justify-between px-4">
+        <div>
+          <Link
+            to={`/${navigate ? navigate : ""}`}
+            className="flex items-center gap-2 font-semibold"
+          >
+            <GrLinkPrevious></GrLinkPrevious> Back
+          </Link>
+        </div>
         <div>
           <Link className="flex justify-center" to={"/"}>
             {" "}

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
+import Footer2 from "../../shared/Footer2";
 
 function PhysicalQuestionPage1() {
   const navigate = useNavigate();
@@ -12,21 +13,24 @@ function PhysicalQuestionPage1() {
     navigate("/question-physical-2");
   };
   return (
-    <div className="h-screen text-center">
-      <ProgressBars page={1} value={10} navigate={""} />
-      <h1 className="text-4xl pt-20">Which one come first?</h1>
-      <div className="flex justify-center mt-10">
-        <div className="grid gap-3 w-[400px]">
-          <CustomAnsButton
-            text="Fare of rejection"
-            onClick={() => handleAnswerSelect("Fare of rejection")}
-          />
-          <CustomAnsButton
-            text="Fare of loosing control"
-            onClick={() => handleAnswerSelect("Fare of loosing control")}
-          />
+    <div>
+      <div className="min-h-[90vh]  text-center">
+        <ProgressBars page={1} value={10} navigate={""} />
+        <h1 className="text-4xl pt-20">Which one come first?</h1>
+        <div className="flex justify-center mt-10">
+          <div className="grid gap-3 w-[400px]">
+            <CustomAnsButton
+              text="Fare of rejection"
+              onClick={() => handleAnswerSelect("Fare of rejection")}
+            />
+            <CustomAnsButton
+              text="Fare of loosing control"
+              onClick={() => handleAnswerSelect("Fare of loosing control")}
+            />
+          </div>
         </div>
       </div>
+      <Footer2 />
     </div>
   );
 }

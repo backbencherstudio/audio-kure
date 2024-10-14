@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 function Footer() {
   return (
-    <footer className="  justify-between items-center py-20">
+    <footer className="container mx-auto  justify-between items-center py-10">
       <div className="flex justify-between items-center ">
         <div className="    justify-between items-center">
           <Logo />

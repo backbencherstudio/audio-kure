@@ -11,7 +11,7 @@ import Footer from "../shared/Footer";
 function HomePage() {
   return (
     <div className=" ">
-      <div className="container min-h-screen mx-auto">
+      <div className="container min-h-screen mx-auto max-w-[1200px]">
         <header className="py-4">
           <div className="flex  w-fit mx-auto lg:mx-0 ">
             <Link className="flex" to={"/"}>
