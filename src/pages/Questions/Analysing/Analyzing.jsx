@@ -15,24 +15,26 @@ const Analyzing = () => {
     const interval = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress < 100) {
-          return oldProgress + 1;  
+          return oldProgress + 1; // Increment progress by 1 each time
         } else {
-          clearInterval(interval); 
-          return oldProgress; 
+          clearInterval(interval); // Clear interval when progress reaches 100
+          return oldProgress; // Avoid incrementing further
         }
       });
-    }, 50); 
+    }, 50); // 50ms for smooth progress
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
 
   useEffect(() => {
-    if (progress === 100) { 
-      navigate("/");
+    if (progress === 100) {
+      
+      setTimeout(() => navigate("/"), 350); 
     }
-  }, [progress, navigate]);  
+  }, [progress, navigate]); // Effect runs when progress updates
 
-  const activeStep = Math.floor((progress / 100) * steps.length);
+  // Calculate active step based on progress:
+  const activeStep = Math.min(Math.floor((progress / 100) * steps.length), steps.length - 1);
 
   return (
     <div className='flex items-center justify-center min-h-screen'>
@@ -43,8 +45,8 @@ const Analyzing = () => {
         </div>
         <div className="steps">
           {steps.map((step, index) => (
-            <div key={index} className={`step ${index < activeStep ? 'completed' : ''}`}>
-              {index < activeStep ? <span>&#10003;</span> : <span>•••</span>} {step}
+            <div key={index} className={`step ${index <= activeStep ? 'completed' : ''}`}>
+              {index <= activeStep ? <span>&#10003;</span> : <span>•••</span>} {step}
             </div>
           ))}
         </div>
