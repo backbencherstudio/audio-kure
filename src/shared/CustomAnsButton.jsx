@@ -8,7 +8,7 @@ function CustomAnsButton({ text, onClick }) {
       className="border flex border-gray-600 rounded-2xl p-3 hover:bg-[#80808034] justify-between items-center"
       onClick={onClick}
     >
-      <p>{text}</p>
+      <p className="text-sm font-semibold">{text}</p>
       <FaArrowRightLong />
     </button>
   );

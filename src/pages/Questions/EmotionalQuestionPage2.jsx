@@ -20,7 +20,7 @@ function EmotionalQuestionPage2() {
       <div className="min-h-[90vh]  text-center">
         <ProgressBars
           page={2}
-          value={50}
+          value={100}
           navigate={"question-emotional-1"}
         ></ProgressBars>
         <h1 className="text-4xl pt-20">Which one come first?</h1>
