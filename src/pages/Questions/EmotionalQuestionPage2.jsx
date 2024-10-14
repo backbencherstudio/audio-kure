@@ -5,21 +5,20 @@ import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 function EmotionalQuestionPage2() {
   const navigate = useNavigate();
 
-  const handleAnswerSelect = (selectedAnswer) => {
-    // Retrieve current answers from localStorage
+  const handleAnswerSelect = (selectedAnswer) => { 
     const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
     const newAnswer = { ans2: selectedAnswer };
     currentAnswers.push(newAnswer);
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
-    navigate("/analysis");
+    navigate("/let's go");
   };
 
   return (
     <div className="h-screen text-center">
       <ProgressBars
         page={2}
-        value={50}
-        navigate={"question-emotional-1"}
+        value={60}
+        navigate={"/question-emotional-1"}
       ></ProgressBars>
       <h1 className="text-4xl pt-20">Which one come first?</h1>
       <div className="flex justify-center mt-10">

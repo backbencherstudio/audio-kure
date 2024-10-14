@@ -7,6 +7,7 @@ import PhysicalQuestionPage2 from "./pages/Questions/PhysicalQuestionPage2";
 import PhysicalQuestionPage1 from "./pages/Questions/PhysicalQuestionPage1";
 import EmotionalQuestionPage2 from "./pages/Questions/EmotionalQuestionPage2";
 import Analyzing from "./pages/Questions/Analysing/Analyzing";
+import ThirdPage from "./pages/Questions/ThirdPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "question-emotional-2",
         element: <EmotionalQuestionPage2 />,
+      },
+      {
+        path: "/let's go",
+        element:<ThirdPage></ThirdPage>,
       },
     ],
   },
