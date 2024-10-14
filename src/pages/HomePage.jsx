@@ -6,7 +6,6 @@ import home_card_1 from "./../assets/images/home_card_1.png";
 import home_card_2 from "./../assets/images/home_card_2.png";
 import home_card_3 from "./../assets/images/home_card_3.png";
 import logo2 from "./../assets/images/logo.png";
-import Analyzing from "./Questions/Analysing/Analyzing";
 
 function HomePage() {
   return (
