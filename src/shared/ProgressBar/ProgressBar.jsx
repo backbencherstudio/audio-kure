@@ -5,7 +5,7 @@ import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 const ProgressBars = ({ value, navigate }) => {
     console.log(navigate);
-    
+
     return (
         <div>
             <div className='flex items-center justify-evenly'>
@@ -17,10 +17,12 @@ const ProgressBars = ({ value, navigate }) => {
                 </div>
                 <div> </div>
             </div>
-            <ProgressBar className='bg-transparent'
+            <ProgressBar className=' '
                 completed={value ? value : 10}
                 labelColor="transparent"
                 labelAlignment="center"
+                height='8px'
+                bgColor='#FFFF00'
             />
         </div>
     );

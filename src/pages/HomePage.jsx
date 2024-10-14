@@ -27,7 +27,7 @@ function HomePage() {
 
         <div className="flex flex-col-reverse lg:flex-row items-center justify-evenly gap-20 mb-20 lg:px-20 px-5">
           <div className="flex-1 ">
-            <h2 className="lg:text-5xl text-2xl   merriweather font-medium">
+            <h2 className="lg:text-5xl text-2xl text-white   merriweather font-medium">
               Discover how to lose weight while you sleep
             </h2>
             <p className="mt-4 lg:max-w-[520.611px]">
@@ -110,7 +110,7 @@ function HomePage() {
             </p>
           </div>
         </footer>
-      </div> 
+      </div>
     </div>
   );
 }

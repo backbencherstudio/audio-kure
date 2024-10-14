@@ -17,7 +17,7 @@ function PhysicalQuestionPage2() {
   return (
     <div className="h-screen text-center">
       <ProgressBars value={50} navigate={"question-physical-1"}></ProgressBars>
-      <h1 className="text-4xl pt-20">Which one comes first ?</h1>
+      <h1 className="text-4xl pt-20">Which one come first?</h1>
       <div className="flex justify-center mt-10">
         <div className="grid gap-3 w-[400px]">
           <CustomAnsButton
