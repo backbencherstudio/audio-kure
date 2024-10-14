@@ -1,38 +1,49 @@
 import React from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import logo from "./../../assets/images/logo.png";
-import { GrLinkPrevious } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
+import { Link, useNavigate } from "react-router-dom";
+
 const ProgressBars = ({ value, navigate, page }) => {
-  console.log(navigate);
+  const navigateHook = useNavigate();
+
+  const handleBackClick = () => {
+    if (navigate) { 
+      navigateHook(navigate);
+    } else {
+      // Go back to the previous page
+      navigateHook(-1);  
+    }
+  };
 
   return (
     <div>
-      <div className="flex items-center lg:container mx-auto justify-between px-4">
+      <div className="flex container mx-auto items-center justify-between px-4">
         <div>
-          <Link
-            to={`/${navigate ? navigate : ""}`}
-            className="flex items-center gap-2 font-semibold"
+          <button
+            onClick={handleBackClick}
+            className="flex items-center gap-2 font-semibold bg-transparent border-none cursor-pointer"
           >
-            <GrLinkPrevious></GrLinkPrevious> Back
-          </Link>
+            <GrLinkPrevious />
+            Back
+          </button>
         </div>
         <div>
           <Link className="flex justify-center" to={"/"}>
-            {" "}
             <img className="h-12 my-3" src={logo} alt="" />
             <span className="flex flex-col font-bold text-2xl justify-center font-serif">
               healer
             </span>
           </Link>
         </div>
-        <div className="font-bold">{page} of 2</div>
+        <div className="font-bold">{page} of 3</div>
       </div>
       <ProgressBar
-        className=" "
+        className=""
         completed={value ? value : 10}
         labelColor="transparent"
         labelAlignment="center"
+        borderRadius="0px 10px 10px 0px"
         height="8px"
         bgColor="#C4AFFF"
         baseBgColor="#2D2C2C"

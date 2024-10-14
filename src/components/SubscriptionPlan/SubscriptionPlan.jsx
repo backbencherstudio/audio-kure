@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdOutlineCheck } from "react-icons/md";
 import gift from './../../assets/images/gift.png'
 import gift_big from './../../assets/images/free_gift_big.png'
+import safe_payment from './../../assets/images/safe_checkout_brands.png'
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
@@ -115,19 +116,20 @@ const SubscriptionPlan = () => {
                                 Get my plan
                             </button>
 
-                            <p className="text-center text-xs mt-2">Guaranteed safe checkout</p>
+                            <p className="text-center text-xs my-4">Guaranteed safe checkout</p>
+                            <img src={safe_payment} alt="safe-payment" />
                         </form>
                     </div>
                     <div className='md:w-1/2'>
-                        <h2 className="text-[1.125rem] text-white font-semibold mb-4"  >All plans includes:</h2>
+                        <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10"  >All plans includes:</h2>
                         <ul className='space-y-5'>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> ntroduction to hypnosis sessions</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> Personalized daily bedtime hypnotherapy sessions</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> Special 21-day program for accelerated weight loss</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> Full 24/7 Client support</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> Privacy and security guarantee</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl min-h-[12px] min-w-[12px]' /> Progress tracking</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> ntroduction to hypnosis sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Personalized daily bedtime hypnotherapy sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Special 21-day program for accelerated weight loss</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Full 24/7 Client support</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Privacy and security guarantee</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Progress tracking</li>
                         </ul>
                         <div>
                             <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">If you select the 3-month plan:</h1>

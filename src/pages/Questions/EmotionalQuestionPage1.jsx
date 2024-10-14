@@ -13,24 +13,21 @@ function EmotionalQuestionPage1() {
   };
 
   return (
-    <div>
-      <div className="min-h-[90vh] text-center">
-        <ProgressBars page={1} value={10} navigate={""}></ProgressBars>
-        <h1 className="text-4xl pt-20">Which one come first?</h1>
-        <div className="flex justify-center mt-10">
-          <div className="grid gap-3 w-[400px]">
-            <CustomAnsButton
-              text="Fare of rejection"
-              onClick={() => handleAnswerSelect("Fare of rejection")}
-            />
-            <CustomAnsButton
-              text="Fare of loosing control"
-              onClick={() => handleAnswerSelect("Fare of loosing control")}
-            />
-          </div>
+    <div className="h-screen text-center">
+      <ProgressBars page={1} value={30} navigate={"/"}></ProgressBars>
+      <h1 className="text-4xl pt-20">Which one come first?</h1>
+      <div className="flex justify-center mt-10">
+        <div className="grid gap-3 w-[400px]">
+          <CustomAnsButton
+            text="Fare of rejection"
+            onClick={() => handleAnswerSelect("Fare of rejection")}
+          />
+          <CustomAnsButton
+            text="Fare of loosing control"
+            onClick={() => handleAnswerSelect("Fare of loosing control")}
+          />
         </div>
       </div>
-      <Footer2 />
     </div>
   );
 }

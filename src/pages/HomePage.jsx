@@ -11,7 +11,7 @@ import Footer from "../shared/Footer";
 function HomePage() {
   return (
     <div className=" ">
-      <div className="container min-h-screen mx-auto max-w-[1200px]">
+      <div className="container min-h-screen mx-auto ">
         <header className="py-4">
           <div className="flex  w-fit mx-auto lg:mx-0 ">
             <Link className="flex" to={"/"}>
@@ -39,12 +39,12 @@ function HomePage() {
             </p>
             <div className="flex flex-col lg:flex-row   justify-between gap-5 mb-10 w-full">
               <Link className="w-full " to={"/question-physical-1"}>
-                <button className="btnGrad w-full font-bold rounded-lg px-10 py-5 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Physical Suggestible
                 </button>
               </Link>
               <Link className="w-full " to={"/question-emotional-1"}>
-                <button className="btnGrad w-full font-bold rounded-lg px-10 py-5 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Emotional Suggestible
                 </button>
               </Link>
@@ -61,7 +61,7 @@ function HomePage() {
             </div>
           </div>
 
-          <div className="flex-1">
+          <div className="flex-1 flex items-center justify-center">
             <img className="max-h-[455.234px]" alt="" src={home_hero_image} />
           </div>
         </div>

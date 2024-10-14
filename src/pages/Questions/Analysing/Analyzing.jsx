@@ -1,74 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import './Analyzing.css';
+import { useNavigate } from 'react-router-dom';
 
 const Analyzing = () => {
-  const [submittedAnswers, setSubmittedAnswers] = useState([]);
-  const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
+  const [progress, setProgress] = useState(0);
+  const steps = [
+    "Analyzing your answers",
+    "Calculating your weight loss forecast",
+    "Creating your personalized hypnosis program"
+  ];
 
   useEffect(() => {
-    const answers = localStorage.getItem("answers");
-    if (answers) {
-      const parsedAnswers = JSON.parse(answers);
-      setSubmittedAnswers(parsedAnswers);
-    }
+    const interval = setInterval(() => {
+      setProgress((oldProgress) => {
+        if (oldProgress < 100) {
+          return oldProgress + 1;  
+        } else {
+          clearInterval(interval); 
+          return oldProgress; 
+        }
+      });
+    }, 50); 
+
+    return () => clearInterval(interval); 
   }, []);
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs";
-    script.type = "module";
-    document.body.appendChild(script);
+    if (progress === 100) { 
+      navigate("/");
+    }
+  }, [progress, navigate]);  
 
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 500);
-
-    const timer = setTimeout(() => {
-      clearInterval(interval);
-      navigate('/');
-    }, 5000);
-
-    return () => {
-      document.body.removeChild(script);
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
-  }, [navigate]);
+  const activeStep = Math.floor((progress / 100) * steps.length);
 
   return (
-    <div className='analyzing-background'>
-      <div className='analyzing-container'>
-        <h2>AI is Analyzing Your Data</h2>
-        <p className='subheader'>This may take a few seconds...</p>
-        <div className='progress-bar'>
-          <div className='progress' style={{ width: `${progress}%` }}></div>
+    <div className='flex items-center justify-center min-h-screen'>
+      <div className="loading-container lg:w-1/3">
+        <h1 className='text-3xl my-3 mb-4'>All set! Just a moment while we process your data...</h1>
+        <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }} />
         </div>
-        <div className='answers-list'>
-          {submittedAnswers.length > 0 ? (
-            submittedAnswers.map((answer, index) => (
-              <div className='answer-item' key={index}>
-                {Object.values(answer).join(", ")}
-              </div>
-            ))
-          ) : (
-            <p>No answers submitted.</p>
-          )}
+        <div className="steps">
+          {steps.map((step, index) => (
+            <div key={index} className={`step ${index < activeStep ? 'completed' : ''}`}>
+              {index < activeStep ? <span>&#10003;</span> : <span>•••</span>} {step}
+            </div>
+          ))}
         </div>
-        <dotlottie-player
-          src="https://lottie.host/0123d81d-006d-4b3f-a5d2-fb1e53087da7/234nC2lRkd.json"
-          background="transparent"
-          speed="1"
-          loop
-          autoplay>
-        </dotlottie-player>
+        <div className="testimonial">
+          <div className="stars">★★★★★</div>
+          <p>
+            "It's the easiest weight loss solution I've ever tried. Evening sessions have greatly
+            enhanced my sleep quality and significantly reduced my stress."
+          </p>
+          <p className="author">- Laura K.</p>
+          <p className="verified">VERIFIED USER</p>
+        </div>
       </div>
     </div>
   );

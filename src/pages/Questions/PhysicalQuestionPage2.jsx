@@ -12,32 +12,29 @@ function PhysicalQuestionPage2() {
     currentAnswers.push(newAnswer);
 
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
-    navigate("/analysis");
+    navigate("/let's go");
   };
 
   return (
-    <div>
-      <div className="min-h-[90vh] text-center">
-        <ProgressBars
-          page={2}
-          value={50}
-          navigate={"question-physical-1"}
-        ></ProgressBars>
-        <h1 className="text-4xl pt-20">Which one come first?</h1>
-        <div className="flex justify-center mt-10">
-          <div className="grid gap-3 w-[400px]">
-            <CustomAnsButton
-              text="Love"
-              onClick={() => handleAnswerSelect("Love")}
-            />
-            <CustomAnsButton
-              text="Money (career or security)"
-              onClick={() => handleAnswerSelect("Money (career or security)")}
-            />
-          </div>
+    <div className="h-screen text-center">
+      <ProgressBars
+        page={2}
+        value={60}
+        navigate={"/question-physical-1"}
+      ></ProgressBars>
+      <h1 className="text-4xl pt-20">Which one come first?</h1>
+      <div className="flex justify-center mt-10">
+        <div className="grid gap-3 w-[400px]">
+          <CustomAnsButton
+            text="Love"
+            onClick={() => handleAnswerSelect("Love")}
+          />
+          <CustomAnsButton
+            text="Money (career or security)"
+            onClick={() => handleAnswerSelect("Money (career or security)")}
+          />
         </div>
       </div>
-      <Footer2 />
     </div>
   );
 }
