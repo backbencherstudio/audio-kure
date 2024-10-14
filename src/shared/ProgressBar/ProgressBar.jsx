@@ -1,7 +1,7 @@
 import React from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import logo from "./../../assets/images/logo.png";
-import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
+import { GrLinkPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
 const ProgressBars = ({ value, navigate, page }) => {
   console.log(navigate);
