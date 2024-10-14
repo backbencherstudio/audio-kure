@@ -9,9 +9,12 @@ import logo2 from "./../assets/images/logo.png";
 import Footer from "../shared/Footer";
 
 function HomePage() {
+  const handleType = (type) => {
+    localStorage.setItem("type", type);
+  };
   return (
     <div className=" ">
-      <div className="container min-h-screen mx-auto ">
+      <div className="container max-w-[1400px] min-h-screen mx-auto lg:px-4">
         <header className="py-4">
           <div className="flex  w-fit mx-auto lg:mx-0 ">
             <Link className="flex" to={"/"}>
@@ -27,7 +30,7 @@ function HomePage() {
         <div className="flex flex-col-reverse lg:flex-row items-center justify-evenly gap-20 mb-20 lg:px-20 px-5">
           <div className="flex-1 ">
             <h2 className="lg:text-5xl text-2xl text-white   merriweather font-medium">
-              Discover how to lose weight while you sleep
+              Welcome to the Worlds Largest Audio Hypnosis Library
             </h2>
             <p className="mt-4 lg:max-w-[520.611px]">
               Break through mental barriers, stop food cravings, and fix your
@@ -38,12 +41,20 @@ function HomePage() {
               Start by selecting your gender:
             </p>
             <div className="flex flex-col lg:flex-row   justify-between gap-5 mb-10 w-full">
-              <Link className="w-full " to={"/question-physical-1"}>
+              <Link
+                onClick={() => handleType("physical")}
+                className="w-full "
+                to={"/question-physical-1"}
+              >
                 <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Physical Suggestible
                 </button>
               </Link>
-              <Link className="w-full " to={"/question-emotional-1"}>
+              <Link
+                onClick={() => handleType("emotional")}
+                className="w-full "
+                to={"/question-emotional-1"}
+              >
                 <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Emotional Suggestible
                 </button>
