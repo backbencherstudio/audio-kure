@@ -1,64 +1,61 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './Analyzing.css';
 import { useNavigate } from 'react-router-dom';
 
 const Analyzing = () => {
-  const [submittedAnswers, setSubmittedAnswers] = useState([]);
-  const [progress, setProgress] = useState(0);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const answers = localStorage.getItem("answers");
-    if (answers) {
-      const parsedAnswers = JSON.parse(answers);
-      setSubmittedAnswers(parsedAnswers);
-    }
-  }, []);
+  const [progress, setProgress] = useState(0);
+  const steps = [
+    "Analyzing your answers",
+    "Calculating your weight loss forecast",
+    "Creating your personalized hypnosis program"
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
+      setProgress((oldProgress) => {
+        if (oldProgress < 100) {
+          return oldProgress + 1;  
+        } else {
+          clearInterval(interval); 
+          return oldProgress; 
         }
-        return prev + 20;
       });
-    }, 500);
+    }, 50); 
 
-    const timer = setTimeout(() => {
-      clearInterval(interval);
-      // navigate('/');
-    }, 5000);
+    return () => clearInterval(interval); 
+  }, []);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
-  }, [navigate]);
+  useEffect(() => {
+    if (progress === 100) { 
+      navigate("/");
+    }
+  }, [progress, navigate]);  
+
+  const activeStep = Math.floor((progress / 100) * steps.length);
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] text-white font-['Roboto', sans-serif]">
-      <div className="text-center bg-black bg-opacity-70 p-10 rounded-lg shadow-lg animate-fadeIn">
-        <h2 className="text-3xl text-green-400 mb-2"> Analyzing Your Data</h2>
-        <p className="text-lg mb-5 opacity-80">This may take a few seconds...</p>
-        <div className="bg-gray-700 rounded-lg overflow-hidden h-5 mb-5">
-          <div
-            className="bg-gradient-to-r from-[#00ffcc] to-[#00aaff] h-full transition-all duration-500 ease-in-out"
-            style={{ width: `${progress}%` }}
-          ></div>
+    <div className='flex items-center justify-center min-h-screen'>
+      <div className="loading-container lg:w-1/3">
+        <h1 className='text-3xl my-3 mb-4'>All set! Just a moment while we process your data...</h1>
+        <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${progress}%` }} />
         </div>
-
-        <div className="mb-5">
-          <p className="my-2 text-xl font-medium">Your Selections</p>
-          {submittedAnswers.length > 0 ? (
-            submittedAnswers.map((answer, index) => (
-              <div className="bg-white bg-opacity-10 p-2 rounded mb-2 animate-slideIn" key={index}>
-                {Object.values(answer).join(", ")}
-              </div>
-            ))
-          ) : (
-            <p>No answers submitted.</p>
-          )}
+        <div className="steps">
+          {steps.map((step, index) => (
+            <div key={index} className={`step ${index < activeStep ? 'completed' : ''}`}>
+              {index < activeStep ? <span>&#10003;</span> : <span>•••</span>} {step}
+            </div>
+          ))}
+        </div>
+        <div className="testimonial">
+          <div className="stars">★★★★★</div>
+          <p>
+            "It's the easiest weight loss solution I've ever tried. Evening sessions have greatly
+            enhanced my sleep quality and significantly reduced my stress."
+          </p>
+          <p className="author">- Laura K.</p>
+          <p className="verified">VERIFIED USER</p>
         </div>
       </div>
     </div>

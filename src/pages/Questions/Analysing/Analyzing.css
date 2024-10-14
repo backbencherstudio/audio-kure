@@ -1,0 +1,75 @@
+.loading-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background-color: #1b0c38;
+  padding: 40px;
+  border-radius: 10px; 
+  margin: auto;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.progress-bar-container {
+  background-color: #2c1348;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 8px;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #5e4dd1;
+  transition: width 0.5s ease;
+}
+
+.steps {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.step {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.step.completed span {
+  color: #66e56d;
+}
+
+.step span {
+  margin-right: 10px;
+}
+
+.testimonial {
+  background-color: #2c1348;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.stars {
+  font-size: 20px;
+  color: #ffcc00;
+  margin-bottom: 10px;
+}
+
+.testimonial p {
+  margin: 0;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.author {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.verified {
+  font-size: 12px;
+  color: #888888;
+  margin-top: 5px;
+}
