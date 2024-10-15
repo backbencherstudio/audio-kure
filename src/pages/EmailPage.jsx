@@ -2,17 +2,16 @@ import { useNavigate } from "react-router-dom";
 import Footer2 from "../shared/Footer2";
 import Logo from "../shared/Logo";
 import { useState } from "react";
+import { MdLockOpen } from "react-icons/md";
 
 function EmailPage() {
+  const [email, setEmail] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
-  const handleAnswerSelect = (selectedAnswer) => {
-    const answer = [{ ans1: selectedAnswer }];
-    localStorage.setItem("answers", JSON.stringify(answer));
-    navigate("/question-emotional-2");
+  const handleUnlock = () => {
+    localStorage.setItem("user", email);
   };
-
   return (
     <div className="container mx-auto max-w-[1400px] px-4">
       <div className=" min-h-[90vh] text-center">
@@ -35,13 +34,14 @@ function EmailPage() {
               placeholder="Email"
               name=""
               id=""
+              onChange={(e) => setEmail(e.target.value)}
             />
 
-            <div className="mt-5 text-start w-[80%] mx-auto flex">
-              <div className="flex items-center space-x-2 bg-gray-900 p-4 rounded-lg">
+            <div className="mt-3 text-start w-[90%] mx-auto flex">
+              <div className="flex items-center space-x-2 p-4 rounded-lg">
                 <div
                   className={`w-7 h-5 rounded ${
-                    isChecked ? "bg-teal-500" : "bg-gray-700"
+                    isChecked ? "bg-teal-500" : "bg-transparent border "
                   } 
         flex items-center justify-center cursor-pointer`}
                   onClick={() => setIsChecked(!isChecked)}
@@ -56,7 +56,7 @@ function EmailPage() {
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
+                        strokeWidth={1}
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
@@ -71,6 +71,21 @@ function EmailPage() {
                   <span className="text-teal-500">Privacy Policy</span>.
                 </label>
               </div>
+            </div>
+            <div className="w-[90%] mx-auto">
+              <button
+                onClick={() => handleUnlock()}
+                className="btnGrad w-full font-bold rounded-2xl px-10 py-4 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center"
+              >
+                <MdLockOpen
+                  style={{
+                    margin: "1px",
+                    marginInline: "3px",
+                    fontSize: "20px",
+                  }}
+                />{" "}
+                Unlock my program
+              </button>
             </div>
           </div>
         </div>
