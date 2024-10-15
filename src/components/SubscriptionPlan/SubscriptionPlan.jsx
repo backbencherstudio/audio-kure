@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdOutlineCheck } from "react-icons/md";
-import gift from './../../assets/images/gift.png'
-import gift_big from './../../assets/images/free_gift_big.png'
-import safe_payment from './../../assets/images/safe_checkout_brands.png'
-import logo from './../../assets/images/logo.png'
-import refund from './../../assets/images/refund_badge.png'
+import gift from './../../assets/images/gift.png';
+import gift_big from './../../assets/images/free_gift_big.png';
+import safe_payment from './../../assets/images/safe_checkout_brands.png';
+import logo from './../../assets/images/logo.png';
+import refund from './../../assets/images/refund_badge.png';
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import GoogleReviews from '../GoogleReviews/GoogleReviews';
 import Footer from '../../shared/Footer';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
     <div
-        className={`relative rounded-2xl p-4 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'
-            }`}
+        className={`relative rounded-2xl p-4 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'}`}
         onClick={() => onSelect(id, discountedPrice)}
     >
         <div className="flex items-center">
-            <div className={`w-5 h-5 rounded-full border-2 ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'
-                } mr-3 flex items-center justify-center`}>
+            <div className={`w-5 h-5 rounded-full border-2 ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'} mr-3 flex items-center justify-center`}>
                 {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
             </div>
             <div className="flex-grow flex justify-between items-center">
                 <div>
                     <p className="font-semibold">{duration} plan</p>
-                    <p className={`text-sm line-through ${isPopular ? 'text-gray-500' : 'text-gray-500'}`}>${originalPrice}</p>
+                    <div className='flex gap-2'>
+                        <p className={`text-sm line-through ${isPopular ? 'text-gray-500' : 'text-gray-500'}`}>${originalPrice}</p>
+                        <p className={`text-sm ${isPopular ? 'text-gray-500' : 'text-gray-500'}`}>${discountedPrice}</p>
+                    </div>
                 </div>
                 <div className="my-1">
                     <div className={`text-center border-l border-zinc-50 pl-2 ${isPopular ? 'pt-5' : ''}`}>
                         <p className="text-base text-[#5817E9] line-through ">{originalPerDay}</p>
-                        <p className="text-[2rem] " style={{ fontFamily: 'Merriweather' }}>${discountedPrice}</p>
+                        <p className="text-[2rem] " style={{ fontFamily: 'Merriweather' }}>${perDay}</p>
                         <p className={`text-sm ${isPopular ? 'text-gray-500' : 'text-gray-500'}`}>per day</p>
                     </div>
                 </div>
@@ -50,17 +51,72 @@ const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, ori
 
 const SubscriptionPlan = () => {
     const [selectedPlan, setSelectedPlan] = useState('7day');
-    const [selectedPrice, setSelectedPrice] = useState('6.93'); 
+    const [selectedPrice, setSelectedPrice] = useState('6.93');
+    const [plans, setPlans] = useState([]);
+
+    useEffect(() => {
+        const type = localStorage.getItem('type'); 
+        const adjustedPlans = getAdjustedPlans(type); 
+        setPlans(adjustedPlans); 
+    }, []);
+
+    const getAdjustedPlans = (type) => {
+        // Define your base plans
+        const basePlans = [
+            {
+                id: "7day",
+                duration: "7 day",
+                originalPrice: "14.14",
+                discountedPrice: "6.93",
+                perDay: "0.99",
+                originalPerDay: "$2.02"
+            },
+            {
+                id: "1month",
+                duration: "1-month",
+                originalPrice: "30.00",
+                discountedPrice: "16.19",
+                perDay: "0.54",
+                originalPerDay: "$1.11",
+                isPopular: true
+            },
+            {
+                id: "3month",
+                duration: "3-month",
+                originalPrice: "84.94",
+                discountedPrice: "25.99",
+                perDay: "0.31",
+                originalPerDay: "$0.63",
+                hasGift: true
+            }
+        ];
+
+        // Adjust prices based on type
+        return basePlans.map(plan => {
+            if (type === 'physical') {
+                return {
+                    ...plan,
+                    discountedPrice: (parseFloat(plan.discountedPrice) * 1.1).toFixed(2), 
+                };
+            } else if (type === 'emotional') {
+                return {
+                    ...plan,
+                    discountedPrice: (parseFloat(plan.discountedPrice) * 0.9).toFixed(2), 
+                };
+            }
+            return plan;
+        });
+    };
 
     const handlePlanSelect = (planId, price) => {
         setSelectedPlan(planId);
-        setSelectedPrice(price); 
+        setSelectedPrice(price);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Selected plan:', selectedPlan);
-        console.log('Price:', selectedPrice); 
+        console.log('Price:', selectedPrice);
     };
 
     return (
@@ -80,38 +136,21 @@ const SubscriptionPlan = () => {
                         <h2 className="text-[1.125rem] text-white font-semibold mb-4">Select your plan:</h2>
                         <form onSubmit={handleSubmit}>
                             <div className="space-y-4 mb-4">
-                                <PaymentPlan
-                                    id="7day"
-                                    duration="7 day"
-                                    originalPrice="14.14"
-                                    originalPerDay="$12"
-                                    discountedPrice="6.93"
-                                    perDay="0.99"
-                                    isSelected={selectedPlan === '7day'}
-                                    onSelect={handlePlanSelect}
-                                />
-                                <PaymentPlan
-                                    id="1month"
-                                    duration="1-month"
-                                    originalPerDay="$21"
-                                    originalPrice="30.00"
-                                    discountedPrice="16.19"
-                                    perDay="0.54"
-                                    isPopular
-                                    isSelected={selectedPlan === '1month'}
-                                    onSelect={handlePlanSelect}
-                                />
-                                <PaymentPlan
-                                    id="3month"
-                                    duration="3-month"
-                                    originalPerDay="$21"
-                                    originalPrice="84.94"
-                                    discountedPrice="25.99"
-                                    perDay="0.31"
-                                    hasGift
-                                    isSelected={selectedPlan === '3month'}
-                                    onSelect={handlePlanSelect}
-                                />
+                                {plans.map(plan => (
+                                    <PaymentPlan
+                                        key={plan.id}
+                                        id={plan.id}
+                                        duration={plan.duration}
+                                        originalPrice={plan.originalPrice}
+                                        discountedPrice={plan.discountedPrice}
+                                        perDay={plan.perDay}
+                                        originalPerDay={plan.originalPerDay}
+                                        isSelected={selectedPlan === plan.id}
+                                        isPopular={plan.isPopular}
+                                        hasGift={plan.hasGift}
+                                        onSelect={handlePlanSelect}
+                                    />
+                                ))}
                             </div>
 
                             <p className="text-base text-[#bec4d2] font-medium mb-10">
@@ -133,19 +172,19 @@ const SubscriptionPlan = () => {
                         </form>
                     </div>
                     <div className='md:w-1/2'>
-                        <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10"  >All plans includes:</h2>
+                        <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">All plans include:</h2>
                         <ul className='space-y-5'>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Introduction to hypnosis sessions</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Personalized daily bedtime hypnotherapy sessions</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Special 21-day program for accelerated weight loss</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Full 24/7 Client support</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Privacy and security guarantee</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Progress tracking</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8 ml-1' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Introduction to hypnosis sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Personalized daily bedtime hypnotherapy sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Special 21-day program for accelerated weight loss</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Full 24/7 Client support</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Privacy and security guarantee</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Progress tracking</li>
                         </ul>
                         <div>
                             <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">If you select the 3-month plan:</h1>
-                            <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl' >
+                            <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl'>
                                 <div className='md:flex gap-4 '>
                                     <div className='flex md:block justify-center mb-5 md:mb-0'>
                                         <img src={gift_big} alt="gift-image" className='w-32 md:w-full' />
@@ -160,8 +199,8 @@ const SubscriptionPlan = () => {
                     </div>
                 </div>
                 <div className='px-0 md:px-4'>
-                    <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl mx-4 md:mx-0 mt-5 md:mt-10' >
-                        <div className='md:flex items-center gap-4 '>
+                    <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl mx-4 md:mx-0 mt-5 md:mt-10'>
+                        <div className='md:flex items-center gap-4'>
                             <div className='flex md:block justify-center mb-5 md:mb-0'>
                                 <img src={refund} alt="refund-image" className='w-32' />
                             </div>

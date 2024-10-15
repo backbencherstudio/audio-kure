@@ -14,11 +14,11 @@ function EmotionalQuestionPage1() {
 
   return (
     <div>
-      <div className=" min-h-[90vh] text-center">
+      <div className=" min-h-[83vh] text-center">
         <ProgressBars page={1} value={30} navigate={"/"}></ProgressBars>
         <h1 className="text-4xl pt-20">Which one come first?</h1>
         <div className="flex justify-center mt-10">
-          <div className="grid gap-3 w-[400px]">
+          <div className="grid gap-3 lg:w-[480px] md:w-[480px] w-full px-3">
             <CustomAnsButton
               text="Fare of rejection"
               onClick={() => handleAnswerSelect("Fare of rejection")}

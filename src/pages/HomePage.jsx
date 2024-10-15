@@ -20,7 +20,7 @@ function HomePage() {
             <Link className="flex" to={"/"}>
               {" "}
               <img className="h-12 my-3" src={logo2} alt="" />
-              <span className="flex flex-col font-bold text-2xl justify-center font-serif">
+              <span className="flex flex-col font-bold ml-1 text-2xl justify-center font-serif">
                 healer
               </span>
             </Link>
