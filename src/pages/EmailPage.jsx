@@ -48,7 +48,7 @@ function EmailPage() {
                 >
                   {isChecked && (
                     <svg
-                      className="w-7 h-5 text-white"
+                      className="w-5 h-5 text-white"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
