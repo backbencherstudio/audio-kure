@@ -8,11 +8,10 @@ const ProgressBars = ({ value, navigate, page }) => {
   const navigateHook = useNavigate();
 
   const handleBackClick = () => {
-    if (navigate) { 
+    if (navigate) {
       navigateHook(navigate);
     } else {
-      // Go back to the previous page
-      navigateHook(-1);  
+      navigateHook(-1);
     }
   };
 
@@ -36,7 +35,7 @@ const ProgressBars = ({ value, navigate, page }) => {
             </span>
           </Link>
         </div>
-        <div className="font-bold">{page} of 3</div>
+        <div className="font-bold">{page} of 4</div>
       </div>
       <ProgressBar
         className=""

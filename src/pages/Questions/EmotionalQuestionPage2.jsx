@@ -10,7 +10,7 @@ function EmotionalQuestionPage2() {
     const newAnswer = { ans2: selectedAnswer };
     currentAnswers.push(newAnswer);
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
-    navigate("/let's go");
+    navigate("/body");
   };
 
   return (
@@ -18,7 +18,7 @@ function EmotionalQuestionPage2() {
       <div className="text-center">
         <ProgressBars
           page={2}
-          value={60}
+          value={50}
           navigate={"/question-emotional-1"}
         ></ProgressBars>
         <h1 className="text-4xl pt-20">Which one come first?</h1>
