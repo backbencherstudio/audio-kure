@@ -8,6 +8,8 @@ import PhysicalQuestionPage1 from "./pages/Questions/PhysicalQuestionPage1";
 import EmotionalQuestionPage2 from "./pages/Questions/EmotionalQuestionPage2";
 import Analyzing from "./pages/Questions/Analysing/Analyzing";
 import ThirdPage from "./pages/Questions/ThirdPage";
+import SubscriptionPlan from "./components/SubscriptionPlan/SubscriptionPlan";
+import WelcomePage from "./pages/Welcome/WelcomePage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
         path: "/let's go",
         element:<ThirdPage></ThirdPage>,
       },
+      {
+        path: "subscriptionplan",
+        element: <SubscriptionPlan />,
+      },
+      {
+        path: "/welcome",
+        element: <WelcomePage/>
+      }
     ],
   },
 ]);

@@ -15,25 +15,25 @@ const Analyzing = () => {
     const interval = setInterval(() => {
       setProgress((oldProgress) => {
         if (oldProgress < 100) {
-          return oldProgress + 1; // Increment progress by 1 each time
+          return oldProgress + 1;
         } else {
-          clearInterval(interval); // Clear interval when progress reaches 100
-          return oldProgress; // Avoid incrementing further
+          clearInterval(interval);
+          return oldProgress;
         }
       });
-    }, 50); // 50ms for smooth progress
+    }, 50);
 
-    return () => clearInterval(interval); // Clean up the interval on component unmount
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     if (progress === 100) {
-      
-      setTimeout(() => navigate("/"), 300); 
-    }
-  }, [progress, navigate]); 
 
-  
+      setTimeout(() => navigate("/welcome"), 300);
+    }
+  }, [progress, navigate]);
+
+
   const activeStep = Math.min(Math.floor((progress / 100) * steps.length), steps.length - 1);
 
   return (
