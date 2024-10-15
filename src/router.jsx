@@ -9,6 +9,7 @@ import EmotionalQuestionPage2 from "./pages/Questions/EmotionalQuestionPage2";
 import Analyzing from "./pages/Questions/Analysing/Analyzing";
 import ThirdPage from "./pages/Questions/ThirdPage";
 import SubscriptionPlan from "./components/SubscriptionPlan/SubscriptionPlan";
+import WelcomePage from "./pages/Welcome/WelcomePage";
 import EmailPage from "./pages/EmailPage";
 import Payment from "./pages/paymentPage/Payment";
 const router = createBrowserRouter([
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "email",
         element: <EmailPage />,
+      },
+      {
+        path: "/welcome",
+        element: <WelcomePage />
       },
       {
         path: "payment",

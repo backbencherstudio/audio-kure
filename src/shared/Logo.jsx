@@ -5,7 +5,7 @@ const Logo = () => {
     <div>
       <Link className="flex justify-center" to={"/"}>
         {" "}
-        <img className="h-12 my-3" src={logo} alt="" />
+        <img className="h-12 my-3 mr-2" src={logo} alt="" />
         <span className="flex flex-col ml-1 font-bold text-2xl justify-center font-serif">
           healer
         </span>
