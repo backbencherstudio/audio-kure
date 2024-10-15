@@ -37,7 +37,7 @@ function EmailPage() {
       localStorage.setItem("user", JSON.stringify(user));
       navigate(`/subscriptionplan?code=${code}`); // Redirect to the next page after unlocking
     } else {
-      toast.warning("Please agree to the privacy policy.");
+      toast.warning("Please enter valid email & agree to the privacy policy.");
     }
   };
 
