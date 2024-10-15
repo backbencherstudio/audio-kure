@@ -10,6 +10,7 @@ import Analyzing from "./pages/Questions/Analysing/Analyzing";
 import ThirdPage from "./pages/Questions/ThirdPage";
 import SubscriptionPlan from "./components/SubscriptionPlan/SubscriptionPlan";
 import EmailPage from "./pages/EmailPage";
+import Payment from "./pages/paymentPage/Payment";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "email",
         element: <EmailPage />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
     ],
   },

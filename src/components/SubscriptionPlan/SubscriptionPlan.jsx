@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unescaped-entities */
+import  { useState } from 'react';
 import { MdOutlineCheck } from "react-icons/md";
 import gift from './../../assets/images/gift.png'
 import gift_big from './../../assets/images/free_gift_big.png'
@@ -118,12 +121,14 @@ const SubscriptionPlan = () => {
                                 by visiting subscription page in my account on website.
                             </p>
 
+
                             <button
                                 type="submit"
                                 className="w-full bg-gradient-to-l from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
                             >
                                 Get my plan
                             </button>
+
 
                             <p className="text-center text-xs my-4">Guaranteed safe checkout</p>
                             <img src={safe_payment} alt="safe-payment" />
