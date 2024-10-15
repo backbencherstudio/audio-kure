@@ -22,7 +22,7 @@ const Body = () => {
                         Subconscious mind influencing miscommunication between the gut and the brain is the key factor in causing overweight and making bad dietary choices*.
                     </p>
                     <p className=" text-base">
-                        Over 50,000 users begin the Kure self-hypnosis course each month, successfully rebalancing their gut-brain connection by eliminating negative thought patterns and overcoming subconscious obstacles.
+                        Over 50,000 users begin the Kure self-hypnosis course each month, successfully re balancing their gut-brain connection by eliminating negative thought patterns and overcoming subconscious obstacles.
                     </p>
                     <p className=" text-base italic">
                         "I was shocked how effective this hypnosis app is." - <span className="font-semibold">Elena, using Kure app since 2024.</span>
