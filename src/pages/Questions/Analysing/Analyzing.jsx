@@ -29,7 +29,7 @@ const Analyzing = () => {
   useEffect(() => {
     if (progress === 100) {
 
-      // setTimeout(() => navigate("/welcome"), 300);
+      setTimeout(() => navigate("/welcome"), 2000);
     }
   }, [progress, navigate]);
 
