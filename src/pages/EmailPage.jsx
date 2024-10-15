@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../shared/Logo";
 import { useState } from "react";
 import { MdLockOpen } from "react-icons/md";
+import { toast } from "react-toastify";
 
 function EmailPage() {
   const [email, setEmail] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
 
   // Function to generate a unique hexadecimal ID
@@ -18,15 +19,25 @@ function EmailPage() {
     return id;
   }
 
+  // Email validation function
+  const isValidEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
   const handleUnlock = () => {
     if (email && isChecked) {
+      if (!isValidEmail(email)) {
+        toast.warning("Please enter a valid email address.");
+        return;
+      }
       const code = generateHexId(32);
       const user = { code: code, email: email };
       // Store the user object as a JSON string
       localStorage.setItem("user", JSON.stringify(user));
       navigate(`/subscriptionplan?code=${code}`); // Redirect to the next page after unlocking
     } else {
-      alert("Please enter your email and agree to the privacy policy.");
+      toast.warning("Please enter valid email & agree to the privacy policy.");
     }
   };
 
