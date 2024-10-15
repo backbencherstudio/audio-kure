@@ -3,7 +3,11 @@ import { MdOutlineCheck } from "react-icons/md";
 import gift from './../../assets/images/gift.png'
 import gift_big from './../../assets/images/free_gift_big.png'
 import safe_payment from './../../assets/images/safe_checkout_brands.png'
+import logo from './../../assets/images/logo.png'
+import refund from './../../assets/images/refund_badge.png'
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
+import GoogleReviews from '../GoogleReviews/GoogleReviews';
+import Footer from '../../shared/Footer';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
     <div
@@ -58,10 +62,15 @@ const SubscriptionPlan = () => {
 
     return (
         <div className='bg-[#191435] text-white'>
+            <div className='bg-[#07001C]'>
+                <nav className='max-w-[1400px] mx-auto py-2 px-4'>
+                    <img src={logo} alt="logo" className='w-16 ' />
+                </nav>
+            </div>
             <CountDownTimer />
             <div className='max-w-[1400px] mx-auto mt-24'>
                 <div>
-                    <h1 style={{ fontFamily: 'Merriweather' }} className='text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 '>Get personal hypnotherapy sessions for your weight loss success!</h1>
+                    <h1 style={{ fontFamily: 'Merriweather' }} className='text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 px-4 xl:px-0'>Get personal hypnotherapy sessions for your weight loss success!</h1>
                 </div>
                 <div className='md:flex gap-6 px-4'>
                     <div className="md:w-1/2 ">
@@ -135,7 +144,7 @@ const SubscriptionPlan = () => {
                             <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">If you select the 3-month plan:</h1>
                             <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl' >
                                 <div className='md:flex gap-4 '>
-                                    <div className='flex md:block justify-center'>
+                                    <div className='flex md:block justify-center mb-5 md:mb-0'>
                                         <img src={gift_big} alt="gift-image" className='w-32 md:w-full' />
                                     </div>
                                     <div className='text-center md:text-left space-y-2'>
@@ -147,6 +156,23 @@ const SubscriptionPlan = () => {
                         </div>
                     </div>
                 </div>
+                <div className='px-0 md:px-4'>
+                    <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl mx-4 md:mx-0 mt-5 md:mt-10' >
+                        <div className='md:flex items-center gap-4 '>
+                            <div className='flex md:block justify-center mb-5 md:mb-0'>
+                                <img src={refund} alt="refund-image" className='w-32' />
+                            </div>
+                            <div className='text-center md:text-left space-y-2'>
+                                <h1 className='text-2xl font-bold merriweather mt-1 '>Risk-free guarantee</h1>
+                                <p className='text-[14px]'>No results? Reach out to our customer support and we can cancel your subscription at any time without additional charges.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <GoogleReviews />
+            </div>
+            <div className='max-w-[1400px] mx-auto px-4'>
+                <Footer />
             </div>
         </div>
     );
