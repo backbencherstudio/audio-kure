@@ -13,7 +13,7 @@ function PhysicalQuestionPage1() {
   };
   return (
     <div className="flex flex-col  justify-between">
-      <div className=" min-h-[84vh] text-center">
+      <div className=" text-center">
         <ProgressBars page={1} value={30} navigate={"/"} />
         <h1 className="text-4xl pt-20">Which one come first?</h1>
         <div className="flex justify-center mt-10">
