@@ -8,6 +8,7 @@ import refund from './../../assets/images/refund_badge.png';
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import GoogleReviews from '../GoogleReviews/GoogleReviews';
 import Footer from '../../shared/Footer';
+import { Link } from 'react-router-dom';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
     <div
@@ -123,7 +124,7 @@ const SubscriptionPlan = () => {
         <div className='bg-[#191435] text-white'>
             <div className='bg-[#07001C]'>
                 <nav className='max-w-[1400px] mx-auto py-2 px-4'>
-                    <img src={logo} alt="logo" className='w-16 ' />
+                    <Link to="/"><img src={logo} alt="logo" className='w-16 ' /></Link>
                 </nav>
             </div>
             <CountDownTimer />
