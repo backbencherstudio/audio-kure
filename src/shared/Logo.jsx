@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Logo = () => {
   return (
     <div>
-      <Link className="flex justify-center" to={"/"}>
+      <Link className="flex " to={"/"}>
         {" "}
         <img className="h-12 my-3" src={logo} alt="" />
         <span className="flex flex-col ml-1 font-bold text-2xl justify-center font-serif">
