@@ -11,6 +11,7 @@ import refund from './../../assets/images/refund_badge.png'
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import GoogleReviews from '../GoogleReviews/GoogleReviews';
 import Footer from '../../shared/Footer';
+import { Link } from 'react-router-dom';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
     <div
@@ -122,12 +123,12 @@ const SubscriptionPlan = () => {
                             </p>
 
 
-                            <button
+                            <Link to="/payment"
                                 type="submit"
-                                className="w-full bg-gradient-to-l from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
+                                className="w-full bg-gradient-to-l block text-center from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
                             >
                                 Get my plan
-                            </button>
+                            </Link>
 
 
                             <p className="text-center text-xs my-4">Guaranteed safe checkout</p>

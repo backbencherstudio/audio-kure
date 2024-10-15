@@ -58,10 +58,12 @@ const router = createBrowserRouter([
         path: "/welcome",
         element: <WelcomePage />
       },
+
       {
         path: "payment",
         element: <Payment />,
       },
+      
     ],
   },
 ]);
