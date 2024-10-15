@@ -14,6 +14,7 @@ import EmailPage from "./pages/EmailPage";
 import AudioLayout from "./pages/Audios/Audios";
 import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
+import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/audios",
         element: <Doctors />,
+      },
+      {
+        path: "/audios/dr/:id",
+        element: <AudioDescriptions></AudioDescriptions>,
       },
     ],
   },
