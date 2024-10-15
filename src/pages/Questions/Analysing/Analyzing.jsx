@@ -29,7 +29,7 @@ const Analyzing = () => {
   useEffect(() => {
     if (progress === 100) {
 
-      setTimeout(() => navigate("/welcome"), 300);
+      // setTimeout(() => navigate("/welcome"), 300);
     }
   }, [progress, navigate]);
 
@@ -37,8 +37,8 @@ const Analyzing = () => {
   const activeStep = Math.min(Math.floor((progress / 100) * steps.length), steps.length - 1);
 
   return (
-    <div className='flex items-center justify-center min-h-screen'>
-      <div className="loading-container lg:w-1/3">
+    <div className='flex items-center justify-center lg:pt-20 pt-5 mx-5 '>
+      <div className="loading-container lg:w-1/3 p-2 lg:p-20">
         <h1 className='text-3xl my-3 mb-4'>All set! Just a moment while we process your data...</h1>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${progress}%` }} />

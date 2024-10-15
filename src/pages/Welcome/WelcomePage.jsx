@@ -10,7 +10,7 @@ const WelcomePage = () => {
         <div className='relative h-screen overflow-hidden'>
 
 
-            <div className='container mx-auto relative z-10 '>
+            <div className='container mx-auto relative   '>
                 <header className="py-4">
                     <div className="flex w-fit mx-auto lg:mx-0">
                         <Link className="flex" to={"/"}>
@@ -22,7 +22,7 @@ const WelcomePage = () => {
                     </div>
                 </header>
 
-                <div className='  flex items-center justify-center'>
+                <div className='  flex items-center justify-center lg:pt-20 pt-5 mx-5 '>
                     <div className=" shadow-md bg-indigo-900/75  rounded-lg p-8 max-w-lg flex flex-col mx-auto mt-8 transition-transform transform  ">
                         <h4 className="text-xl text-center text-white  ">
                             After analyzing your data, we have detected you as a <span className="font-semibold text-white bg-green-600 px-4 uppercase">{userType} suggestible.</span>
