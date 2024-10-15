@@ -53,6 +53,10 @@ const router = createBrowserRouter([
         path: "email",
         element: <EmailPage />,
       },
+      {
+        path: "/welcome",
+        element: <WelcomePage />
+      }
     ],
   },
 ]);
