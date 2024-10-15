@@ -13,7 +13,7 @@ const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, ori
     <div
         className={`relative rounded-2xl p-4 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'
             }`}
-        onClick={() => onSelect(id)}
+        onClick={() => onSelect(id, discountedPrice)}
     >
         <div className="flex items-center">
             <div className={`w-5 h-5 rounded-full border-2 ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'
@@ -50,14 +50,17 @@ const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, ori
 
 const SubscriptionPlan = () => {
     const [selectedPlan, setSelectedPlan] = useState('7day');
+    const [selectedPrice, setSelectedPrice] = useState('6.93'); 
 
-    const handlePlanSelect = (planId) => {
+    const handlePlanSelect = (planId, price) => {
         setSelectedPlan(planId);
+        setSelectedPrice(price); 
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Selected plan:', selectedPlan);
+        console.log('Price:', selectedPrice); 
     };
 
     return (
@@ -112,10 +115,10 @@ const SubscriptionPlan = () => {
                             </div>
 
                             <p className="text-base text-[#bec4d2] font-medium mb-10">
-                                By clicking Get my plan, I agree to pay $6.93 for my plan and that if I do not cancel before
+                                By clicking Get my plan, I agree to pay ${selectedPrice} for my plan and that if I do not cancel before
                                 the end of the 1-week introductory plan, Kure will automatically charge my payment
                                 method the regular price $30.99 every 1-month thereafter until I cancel. I can cancel online
-                                by visiting subscription page in my account on website.
+                                by visiting the subscription page in my account on the website.
                             </p>
 
                             <button
@@ -133,7 +136,7 @@ const SubscriptionPlan = () => {
                         <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10"  >All plans includes:</h2>
                         <ul className='space-y-5'>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> ntroduction to hypnosis sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Introduction to hypnosis sessions</li>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Personalized daily bedtime hypnotherapy sessions</li>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Special 21-day program for accelerated weight loss</li>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl' /> Full 24/7 Client support</li>
