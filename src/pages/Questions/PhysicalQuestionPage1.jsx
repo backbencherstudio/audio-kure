@@ -13,8 +13,8 @@ function PhysicalQuestionPage1() {
     navigate("/question-physical-2");
   };
   return (
-    <div className="">
-      <div className="min-h-[90vh] text-center">
+    <div className="flex flex-col  justify-between">
+      <div className=" min-h-[84vh] text-center">
         <ProgressBars page={1} value={30} navigate={"/"} />
         <h1 className="text-4xl pt-20">Which one come first?</h1>
         <div className="flex justify-center mt-10">

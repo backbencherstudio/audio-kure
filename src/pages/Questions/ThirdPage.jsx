@@ -7,10 +7,10 @@ const ThirdPage = () => {
     return (
         <div>
             <ProgressBars page={3} value={80}></ProgressBars>
-            <div className=" flex mt-20  gap-10  w-full h-fit   items-center justify-center text-gray-800 p-5   rounded-md">
+            <div className=" flex flex-col-reverse lg:flex-row lg:mt-20 mt-10     gap-10  w-full h-fit   items-center justify-center text-gray-800 p-5   rounded-md">
                 <div className='text-white max-w-lg flex flex-col gap-3'>
-                    <h2 className="text-4xl mb-4 merriweather">How Will Kure Help You?</h2>
-                    <p className="mb-6 text-xl max-w-lg">
+                    <h2 className="lg:text-4xl md:text-4xl text-2xl   merriweather">How Will Kure Help You?</h2>
+                    <p className="  max-w-lg">
                         Our personalized hypnosis sessions will remove key reasons behind your weight gain.
                     </p>
 
@@ -33,23 +33,23 @@ const ThirdPage = () => {
                         </div>
                     </div>
 
-                    <p className="mt-6">
+                    <p className=" ">
                         Simply open the Kure app and listen to a soothing hypnosis session before bedtime.
                     </p>
-                    <p className="font-bold text-purple-600">
+                    <p className="font-bold text-purple-300/95">
                         It’s almost like losing weight while sleeping.
                     </p>
                     <p>Medical research studies and Kure user data suggests that hypnosis is perfectly safe and allows you to achieve better and lasting weight loss results*.</p>
-                    <Link className="mt-4 btnGrad text-center font-medium text-xl py-5 rounded-3xl text-white px-4  " to={'/analysis'}>Got it</Link>
+                    <Link className="  btnGrad text-center font-medium text-xl lg:py-4 py-3 rounded-3xl text-white px-4  " to={'/analysis'}>Got it</Link>
                     <p className="mt-2 text-sm">
+                        <span className="text-purple-300/95 font-medium underline">
                         *Source:
-                        <span className="text-blue-600">
                             Journal of Integrative Medicine Volume 19, Issue 1, January 2021, Pages 1-5.
                         </span>
                     </p>
                 </div>
                 <div>
-                    <img className='max-h-[570px] rounded-2xl' src={img} alt="" />
+                    <img className='lg:max-h-[570px] rounded-2xl' src={img} alt="" />
                 </div>
             </div>
         </div>

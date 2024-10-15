@@ -14,7 +14,7 @@ function EmotionalQuestionPage1() {
 
   return (
     <div>
-      <div className=" min-h-[90vh] text-center">
+      <div className=" min-h-[83vh] text-center">
         <ProgressBars page={1} value={30} navigate={"/"}></ProgressBars>
         <h1 className="text-4xl pt-20">Which one come first?</h1>
         <div className="flex justify-center mt-10">

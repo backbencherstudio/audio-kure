@@ -17,7 +17,7 @@ function PhysicalQuestionPage2() {
 
   return (
     <div>
-      <div className="min-h-[90vh] text-center">
+      <div className="min-h-[83vh] text-center">
         <ProgressBars
           page={2}
           value={60}
