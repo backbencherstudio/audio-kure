@@ -21,7 +21,7 @@ const CountDownTimer = () => {
 
     return (
         <div className="bg-[#EE8D99] text-gray-800 text-center py-4">
-            <span className='text-[18px] font-semibold'>Start your first session tonight! Your discount ends in:</span>
+            <span className='text-[18px] font-semibold px-4'>Start your first session tonight! Your discount ends in:</span>
             <span className="font-bold m-1 bg-[#CE5561] px-6 py-1 rounded text-white">
                 {formatTime(timeLeft)}
             </span>
