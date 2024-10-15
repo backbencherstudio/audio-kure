@@ -5,7 +5,7 @@ function Footer2() {
         <p className="text-xs text-gray-400 font-medium">
           © 2024 Healer. All rights reserved.
         </p>
-        <p className="text-xs text-gray-400 font-medium">
+        <p className="text-xs mt-1 text-gray-400 font-medium">
           Disclaimer: Results may vary from person to person
         </p>
       </div>

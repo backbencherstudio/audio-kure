@@ -2,11 +2,12 @@ import React from 'react';
 import { FaCheck } from 'react-icons/fa';
 import img from "./../../assets/images/info_3_main.png"
 import ProgressBars from '../../shared/ProgressBar/ProgressBar';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
+import Footer2 from '../../shared/Footer2';
 const ThirdPage = () => {
     return (
         <div>
-            <ProgressBars page={3} value={80}></ProgressBars>
+            <ProgressBars page={3} value={97}></ProgressBars>
             <div className=" flex flex-col-reverse lg:flex-row lg:mt-20 mt-10     gap-10  w-full h-fit   items-center justify-center text-gray-800 p-5   rounded-md">
                 <div className='text-white max-w-lg flex flex-col gap-3'>
                     <h2 className="lg:text-4xl md:text-4xl text-2xl   merriweather">How Will Kure Help You?</h2>
@@ -52,6 +53,7 @@ const ThirdPage = () => {
                     <img className='lg:max-h-[570px] rounded-2xl' src={img} alt="" />
                 </div>
             </div>
+            <Footer2/>
         </div>
     );
 };

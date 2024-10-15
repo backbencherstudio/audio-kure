@@ -15,7 +15,7 @@ function PhysicalQuestionPage1() {
   return (
     <div className="flex flex-col  justify-between">
       <div className=" min-h-[84vh] text-center">
-        <ProgressBars page={1} value={30} navigate={"/"} />
+        <ProgressBars page={1} value={25} navigate={"/"} />
         <h1 className="text-4xl pt-20">Which one come first?</h1>
         <div className="flex justify-center mt-10 px-3">
           <div className="grid gap-3 w-[400px]">
