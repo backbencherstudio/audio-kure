@@ -260,7 +260,9 @@ const SubscriptionPlan = () => {
                         Get my plan
                     </button>
                     <p className="text-center text-xs my-4">Guaranteed safe checkout</p>
-                    <img src={safe_payment} alt="safe-payment" />
+                    <div className='flex justify-center'>
+                        <img src={safe_payment} alt="safe-payment" />
+                    </div>
                 </div>
                 <div className='px-0 md:px-4'>
                     <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl mx-4 md:mx-0 mt-5 md:mt-10'>
