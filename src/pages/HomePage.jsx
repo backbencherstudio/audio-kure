@@ -96,7 +96,6 @@ function HomePage() {
             <img className="w-[120px]" alt="" src={home_card_3} />
           </div>
         </div>
-
         <Footer />
       </div>
     </div>

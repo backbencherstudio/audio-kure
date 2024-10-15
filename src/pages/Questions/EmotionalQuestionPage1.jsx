@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
-import Footer2 from "../../shared/Footer2";
 
 function EmotionalQuestionPage1() {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ function EmotionalQuestionPage1() {
           </div>
         </div>
       </div>
-      <Footer2 />
     </div>
   );
 }
