@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
-import Footer2 from "../../shared/Footer2";
 
 function EmotionalQuestionPage1() {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ function EmotionalQuestionPage1() {
 
   return (
     <div>
-      <div className=" min-h-[83vh] text-center">
+      <div className="text-center">
         <ProgressBars page={1} value={30} navigate={"/"}></ProgressBars>
         <h1 className="text-4xl pt-20">Which one come first?</h1>
         <div className="flex justify-center mt-10">
@@ -30,7 +29,6 @@ function EmotionalQuestionPage1() {
           </div>
         </div>
       </div>
-      <Footer2 />
     </div>
   );
 }

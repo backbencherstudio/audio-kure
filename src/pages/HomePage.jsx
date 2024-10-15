@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
 import home_hero_image from "./../assets/images/home_hero_image.png";
-import home_card_1 from "./../assets/images/home_card_1.png";
-import home_card_2 from "./../assets/images/home_card_2.png";
-import home_card_3 from "./../assets/images/home_card_3.png";
 import logo2 from "./../assets/images/logo.png";
 import Footer from "../shared/Footer";
 
@@ -13,10 +10,10 @@ function HomePage() {
     localStorage.setItem("type", type);
   };
   return (
-    <div className=" ">
-      <div className="container max-w-[1400px] min-h-screen mx-auto lg:px-4">
+    <div className="">
+      <div className="container min-h-[80vh] max-w-[1400px] mx-auto lg:px-4 ">
         <header className="py-4">
-          <div className="flex  w-fit mx-auto lg:mx-0 ">
+          <div className="flex  w-fit ml-4">
             <Link className="flex" to={"/"}>
               {" "}
               <img className="h-12 my-3" src={logo2} alt="" />
@@ -27,9 +24,9 @@ function HomePage() {
           </div>
         </header>
 
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-evenly gap-20 mb-20 lg:px-20 px-5">
+        <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-evenly gap-20 mb-20 lg:px-20 px-5 lg:pt-16">
           <div className="flex-1 ">
-            <h2 className="lg:text-5xl text-2xl text-white   merriweather font-medium">
+            <h2 className="text-4xl  text-white lg:pt-10 md:pt-10 merriweather font-medium">
               Welcome to the Worlds Largest Audio Hypnosis Library
             </h2>
             <p className="mt-4 lg:max-w-[520.611px]">
@@ -43,10 +40,10 @@ function HomePage() {
             <div className="flex flex-col lg:flex-row   justify-between gap-5 mb-10 w-full">
               <Link
                 onClick={() => handleType("physical")}
-                className="w-full "
+                className="w-full"
                 to={"/question-physical-1"}
               >
-                <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-4 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Physical Suggestible
                 </button>
               </Link>
@@ -55,7 +52,7 @@ function HomePage() {
                 className="w-full "
                 to={"/question-emotional-1"}
               >
-                <button className="btnGrad w-full font-bold rounded-lg px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
+                <button className="btnGrad w-full font-bold rounded-lg px-10 py-4 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor">
                   Emotional Suggestible
                 </button>
               </Link>
@@ -76,27 +73,6 @@ function HomePage() {
             <img className="max-h-[455.234px]" alt="" src={home_hero_image} />
           </div>
         </div>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-5 lg:px-0  mt-8 gap-5">
-          <div className="border  flex flex-col items-center gap-5 p-10 rounded-3xl">
-            <p className=" italic">Enhance weight loss by 71% with hypnosis.</p>
-            <img className="w-[120px]" alt="" src={home_card_1} />
-          </div>
-
-          <div className="border  flex flex-col items-center gap-5 p-10 rounded-3xl">
-            <p className=" italic">
-              Hypnotherapy provides an edge over other weight-loss methods.
-            </p>
-            <img className="w-[120px]" alt="" src={home_card_2} />
-          </div>
-
-          <div className="border  flex flex-col items-center gap-5 p-10 rounded-3xl">
-            <p className=" italic">
-              Hypnotherapy has remained a well-kept weight loss secret.
-            </p>
-            <img className="w-[120px]" alt="" src={home_card_3} />
-          </div>
-        </div>
-
         <Footer />
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Footer2 from "../shared/Footer2";
 import Logo from "../shared/Logo";
 import { useState } from "react";
 import { MdLockOpen } from "react-icons/md";
@@ -106,7 +105,6 @@ function EmailPage() {
           </div>
         </div>
       </div>
-      <Footer2 />
     </div>
   );
 }
