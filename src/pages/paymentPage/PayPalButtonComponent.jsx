@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
-import { FaPaypal } from "react-icons/fa";
 
 const PayPalButtonComponent = ({ amount, handleApproveOrder }) => {
     return (
-        <div className="border border-yellow-400 bg-yellow-50 p-6 rounded-lg shadow-md">
+        <div className="border border-yellow-400 bg-yellow-50 px-3 pb-2 pt-3 rounded-lg shadow-md">
             
             <PayPalButtons
                 createOrder={(data, actions) => {
