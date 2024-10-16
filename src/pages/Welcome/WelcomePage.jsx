@@ -2,9 +2,24 @@ import { Link } from "react-router-dom";
 import Logo from "../../shared/Logo";
 
 const WelcomePage = () => {
-  const userType = localStorage.getItem("type");
+  const answers = JSON.parse(localStorage.getItem("answers")) || [];
+  const counts = {
+    physical: 0,
+    emotional: 0,
+  };
+  answers.forEach((answer) => {
+    Object.values(answer).forEach((value) => {
+      if (value === "physical") {
+        counts.physical += 1;
+      } else if (value === "emotional") {
+        counts.emotional += 1;
+      }
+    });
+  });
+  const userType =
+    counts.physical > counts.emotional ? "physical" : "emotional";
   const code = JSON.parse(localStorage.getItem("user"))?.code;
-
+  localStorage.setItem("userType", userType);
   return (
     <div>
       <Logo />
