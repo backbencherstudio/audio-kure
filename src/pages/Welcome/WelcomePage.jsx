@@ -3,6 +3,7 @@ import Logo from "../../shared/Logo";
 
 const WelcomePage = () => {
   const userType = localStorage.getItem("type");
+  const code = JSON.parse(localStorage.getItem("user"))?.code;
 
   return (
     <div>
@@ -22,7 +23,7 @@ const WelcomePage = () => {
                 on your journey!
               </p>
               <Link
-                to="/email"
+                to={`/subscriptionplan?code=${code}`}
                 className="mt-6 inline-block btnGrad w-full text-center text-white font-semibold py-2 px-4 rounded hover:bg-indigo-500  "
               >
                 Get Started
