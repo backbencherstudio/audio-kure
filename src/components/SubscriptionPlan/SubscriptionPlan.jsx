@@ -131,12 +131,6 @@ const SubscriptionPlan = () => {
                 </nav>
             </div>
             <CountDownTimer />
-            <div class="relative p-4">
-                <div class="absolute inset-0 rounded-lg border-4 border-transparent bg-gradient-to-r from-blue-500 to-purple-500"></div>
-                <div class="relative z-10 p-4 bg-white rounded-lg">
-                    Your content here
-                </div>
-            </div>
             <div className='max-w-[1400px] mx-auto mt-24'>
                 <div>
                     <h1 style={{ fontFamily: 'Merriweather' }} className='text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 px-4 xl:px-0'>Get personal hypnotherapy sessions for your weight loss success!</h1>
