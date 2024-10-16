@@ -174,7 +174,7 @@ const SubscriptionPlan = () => {
                     <div className='md:w-1/2'>
                         <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">All plans include:</h2>
                         <ul className='space-y-5'>
-                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8 ml-1' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Introduction to hypnosis sessions</li>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Personalized daily bedtime hypnotherapy sessions</li>
                             <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Special 21-day program for accelerated weight loss</li>
