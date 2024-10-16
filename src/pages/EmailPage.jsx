@@ -35,7 +35,7 @@ function EmailPage() {
       const user = { code: code, email: email };
       // Store the user object as a JSON string
       localStorage.setItem("user", JSON.stringify(user));
-      navigate(`/subscriptionplan?code=${code}`); // Redirect to the next page after unlocking
+      navigate(`/analysis`); // Redirect to the next page after unlocking
     } else {
       toast.warning("Please enter valid email & agree to the privacy policy.");
     }
