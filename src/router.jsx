@@ -17,6 +17,7 @@ import QuestionPage3 from "./pages/Questions/QuestionPage3";
 import QuestionPage4 from "./pages/Questions/QuestionPage4";
 import QuestionPage5 from "./pages/Questions/QuestionPage5";
 
+import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Doctors />,
+      },
+      {
+        path: "/audios/dr/:id",
+        element: <AudioDescriptions></AudioDescriptions>,
       },
     ],
   },
