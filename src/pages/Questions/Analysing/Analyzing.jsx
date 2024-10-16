@@ -39,7 +39,7 @@ const Analyzing = () => {
   );
 
   return (
-    <div className="flex items-center justify-center lg:pt-20 pt-5 mx-5">
+    <div className="flex  items-center justify-center lg:pt-20 pt-5 mx-5">
       <div className="loading-container lg:w-1/3 p-2 lg:p-20">
         <h1 className="text-3xl my-3 mb-4">
           All set! Just a moment while we process your data...

@@ -9,9 +9,9 @@
 .merriweather {
   font-family: "Merriweather", serif !important;
 }
-
 .btnGrad {
   background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 img {
@@ -19,16 +19,75 @@ img {
 }
 
 .label {
-  /* display: none !important;
-   */
-   color: red;
+  color: red;
 }
 
- 
+.unique-hover-heart .icon,
+.unique-hover-coin .icon {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 1; /* Keep visible */
+  transform: translateY(0); /* Start at original position */
+}
 
+/* Hover effect for continuous bubbling */
+.unique-hover-heart:hover .icon,
+.unique-hover-coin:hover .icon {
+  animation: bubble 0.8s infinite; /* Trigger animation on hover */
+}
 
+@keyframes bubble {
+  0% {
+    transform: translateY(0) scale(1); /* Original position and size */
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2); /* Move up and scale up */
+  }
+  100% {
+    transform: translateY(0) scale(1); /* Move back down and original size */
+  }
+}
 
+/* Positioning for heart icons */
+.unique-hover-heart .icon:nth-child(1) {
+  top: -20px;
+  left: 10%;
+}
+.unique-hover-heart .icon:nth-child(2) {
+  top: -15px;
+  left: 25%;
+}
+.unique-hover-heart .icon:nth-child(3) {
+  top: -10px;
+  left: 40%;
+}
+.unique-hover-heart .icon:nth-child(4) {
+  top: -15px;
+  right: 10%;
+}
+.unique-hover-heart .icon:nth-child(5) {
+  top: -20px;
+  right: 25%;
+}
 
-
-
- 
+/* Positioning for coin icons */
+.unique-hover-coin .icon:nth-child(1) {
+  top: -20px;
+  left: 10%;
+}
+.unique-hover-coin .icon:nth-child(2) {
+  top: -15px;
+  left: 25%;
+}
+.unique-hover-coin .icon:nth-child(3) {
+  top: -10px;
+  left: 40%;
+}
+.unique-hover-coin .icon:nth-child(4) {
+  top: -15px;
+  right: 10%;
+}
+.unique-hover-coin .icon:nth-child(5) {
+  top: -20px;
+  right: 25%;
+}

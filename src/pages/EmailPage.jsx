@@ -42,7 +42,7 @@ function EmailPage() {
   };
 
   return (
-    <div>
+    <div className="">
       <Logo />
       <div className="mx-auto max-w-[1400px] ">
         <div className="text-center">
