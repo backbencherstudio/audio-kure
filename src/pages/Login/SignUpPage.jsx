@@ -177,7 +177,7 @@ function SignUpPage() {
       </div>
       <div className="flex justify-center min-h-[80vh]">
         <div className="flex justify-center flex-col">
-          <div className="w-[400px] md:w-[450px] lg:w-[450px] mx-5">
+          <div className="mx-5">
             <div className="text-center">
               <h2 className="text-4xl text-center">
                 Last step. Set up your account
