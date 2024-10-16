@@ -3,7 +3,7 @@ import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 
 const Question = ({ question, answers, handleAnswerSelect, page }) => {
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between ">
       <div className="min-h-[84vh] text-center">
         <ProgressBars page={page} value={page * 17} navigate={"/"} />
         <h1 className="text-4xl pt-20">{question}</h1>

@@ -11,7 +11,7 @@ import Logo from '../../shared/Logo';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
     <div
-        className={`relative rounded-2xl p-4 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'}`}
+        className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'}`}
         onClick={() => onSelect(id, discountedPrice)}
     >
         <div className="flex items-center">

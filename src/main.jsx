@@ -1,4 +1,3 @@
-// src/main.jsx
 
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
@@ -6,12 +5,15 @@ import App from "./App";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
-    <div className="bg-[#07001C] min-h-screen text-white">
-      <App />
+    <div className="   text-white"> 
+      <div className="">
+        <App />
+      </div>
     </div>
     <ToastContainer />
   </StrictMode>
