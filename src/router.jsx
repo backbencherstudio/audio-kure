@@ -16,7 +16,7 @@ import QuestionPage2 from "./pages/Questions/QuestionPage2";
 import QuestionPage3 from "./pages/Questions/QuestionPage3";
 import QuestionPage4 from "./pages/Questions/QuestionPage4";
 import QuestionPage5 from "./pages/Questions/QuestionPage5";
-
+import Payment from "./pages/paymentPage/Payment";
 import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 const router = createBrowserRouter([
   {
@@ -67,6 +67,30 @@ const router = createBrowserRouter([
       {
         path: "welcome",
         element: <WelcomePage />,
+      },
+      {
+        path: "/payment",
+        element: <Payment />,
+      },
+    ],
+  },
+  {
+    path: "/signup",
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "",
+        element: <SignUpPage />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "",
+        element: <LoginPage />,
       },
     ],
   },
