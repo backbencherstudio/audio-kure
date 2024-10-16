@@ -14,6 +14,7 @@ import EmailPage from "./pages/EmailPage";
 import AudioLayout from "./pages/Audios/Audios";
 import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
+import Physical from "./pages/Physical/Physical";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/welcome",
         element: <WelcomePage />,
+      },
+      {
+        path: "/physical",
+        element: <Physical />,
       },
     ],
   },

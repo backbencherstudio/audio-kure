@@ -120,8 +120,8 @@ const SubscriptionPlan = () => {
     };
 
     return (
-        <div className='bg-[#191435] text-white'>
-            <div className='bg-[#07001C]'>
+        <div className='text-white'>
+            <div className=''>
                 <nav className='max-w-[1400px] mx-auto py-2 px-4'>
                     <Logo />
                 </nav>
