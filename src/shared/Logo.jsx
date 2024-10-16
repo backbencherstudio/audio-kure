@@ -2,9 +2,8 @@ import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 const Logo = () => {
   return (
-    <div>
-      <Link className="flex " to={"/"}>
-        {" "}
+    <div className="max-w-[1400px] mx-auto pl-4">
+      <Link className="flex" to={"/"}>
         <img className="h-12 my-3" src={logo} alt="" />
         <span className="flex flex-col ml-1 font-bold text-2xl justify-center font-serif">
           healer
