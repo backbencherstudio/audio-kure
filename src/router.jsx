@@ -14,22 +14,24 @@ import EmailPage from "./pages/EmailPage";
 import AudioLayout from "./pages/Audios/Audios";
 import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
+import SignUpPage from "./pages/Login/SignupPage";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout></Layout>,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <HomePage></HomePage>,
+        path: "", // Change to an empty string for the home page
+        element: <HomePage />,
       },
       {
         path: "question-physical-1",
-        element: <PhysicalQuestionPage1></PhysicalQuestionPage1>,
+        element: <PhysicalQuestionPage1 />,
       },
       {
-        path: "/analysis",
+        path: "analysis", // Remove leading slash
         element: <Analyzing />,
       },
       {
@@ -45,25 +47,34 @@ const router = createBrowserRouter([
         element: <EmotionalQuestionPage2 />,
       },
       {
-        path: "/body",
-        element: <Body></Body>,
-      },
-
-      {
-        path: "/let's go",
-        element: <ThirdPage></ThirdPage>,
+        path: "body", // Remove leading slash
+        element: <Body />,
       },
       {
-        path: "/subscriptionplan",
+        path: "let's go", // Remove leading slash
+        element: <ThirdPage />,
+      },
+      {
+        path: "subscriptionplan", // Remove leading slash
         element: <SubscriptionPlan />,
       },
       {
-        path: "email",
+        path: "email", // Remove leading slash
         element: <EmailPage />,
       },
       {
-        path: "/welcome",
+        path: "welcome", // Remove leading slash
         element: <WelcomePage />,
+      },
+    ],
+  },
+  {
+    path: "/signup",
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "", // Change to an empty string for the signup page
+        element: <SignUpPage />,
       },
     ],
   },
@@ -73,7 +84,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/audios",
+        path: "", // Change to an empty string for the default audios page
         element: <Doctors />,
       },
     ],
