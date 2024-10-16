@@ -3,21 +3,19 @@ import { MdOutlineCheck } from "react-icons/md";
 import gift from './../../assets/images/gift.png';
 import gift_big from './../../assets/images/free_gift_big.png';
 import safe_payment from './../../assets/images/safe_checkout_brands.png';
-import logo from './../../assets/images/logo.png';
 import refund from './../../assets/images/refund_badge.png';
 import CountDownTimer from '../CountDownTimer/CountDownTimer';
 import GoogleReviews from '../GoogleReviews/GoogleReviews';
 import Footer from '../../shared/Footer';
-import { Link } from 'react-router-dom';
 import Logo from '../../shared/Logo';
 
 const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, originalPerDay, isPopular, hasGift, isSelected, onSelect }) => (
     <div
-        className={`relative rounded-2xl p-1.5 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'}`}
+        className={`relative rounded-2xl p-4 cursor-pointer ${isPopular ? 'bg-white text-gray-900' : 'bg-white text-gray-900'}`}
         onClick={() => onSelect(id, discountedPrice)}
     >
         <div className="flex items-center">
-            <div className={`w-4 h-4 rounded-full border-2 ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'} mr-3 flex items-center justify-center ${isPopular ? 'mt-8 mb-2' : ''}`}>
+            <div className={`w-5 h-5 rounded-full border-2 ${isSelected ? 'border-teal-500 bg-teal-500' : 'border-gray-300'} mr-3 flex items-center justify-center ${isPopular ? 'mt-8 mb-2' : ''}`}>
                 {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
             </div>
             <div className={`flex-grow flex justify-between items-center ${isPopular ? 'pt-8 pb-2' : 'py-2'}`}>
@@ -26,7 +24,6 @@ const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, ori
                     <div className='flex gap-2'>
                         <p className={`text-sm line-through ${isPopular ? 'text-gray-500' : 'text-gray-500'}`}>${originalPrice}</p>
                         <p className={`text-sm ${isPopular ? 'text-gray-500' : 'text-gray-500'}`}>${discountedPrice}</p>
-
                     </div>
                     {hasGift && (
                         <div className="flex items-center text-xs text-white bg-teal-500  w-[140px] font-semibold  py-1.5 px-2 rounded-full">
@@ -49,12 +46,11 @@ const PaymentPlan = ({ id, duration, originalPrice, discountedPrice, perDay, ori
                 MOST POPULAR
             </div>
         )}
-
     </div>
 );
 
 const SubscriptionPlan = () => {
-    const [selectedPlan, setSelectedPlan] = useState('');
+    const [selectedPlan, setSelectedPlan] = useState('7day');
     const [selectedPrice, setSelectedPrice] = useState('6.93');
     const [plans, setPlans] = useState([]);
 
@@ -126,141 +122,81 @@ const SubscriptionPlan = () => {
     return (
         <div className='bg-[#191435] text-white'>
             <div className='bg-[#07001C]'>
-                <nav className=''>
+                <nav className='max-w-[1400px] mx-auto py-2 px-4'>
                     <Logo />
                 </nav>
             </div>
             <CountDownTimer />
             <div className='max-w-[1400px] mx-auto mt-24'>
                 <div>
-                    <h1 style={{ fontFamily: 'Merriweather' }} className='text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 px-4 xl:px-0'>Get personal hypnotherapy sessions for your weight loss success!</h1>
+                    <h1 style={{ fontFamily: 'Merriweather' }} className='text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 px-4 xl:px-0'>Congratulations! you are <span className='text-[#8A5EFF] capitalize'>physical</span> suggestible</h1>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2'>
-                    <div className='md:flex gap-6 px-4'>
-                        <div className="md:w-1/2 ">
-                            <h2 className="text-[1.125rem] text-white font-semibold mb-4">Select your plan:</h2>
-                            <form onSubmit={handleSubmit}>
+                <div className='md:flex gap-6 px-4'>
+                    <div className="md:w-1/2 ">
+                        <h2 className="text-[1.125rem] text-white font-semibold mb-4">Select your plan:</h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="space-y-4 mb-4">
+                                {plans.map(plan => (
+                                    <PaymentPlan
+                                        key={plan.id}
+                                        id={plan.id}
+                                        duration={plan.duration}
+                                        originalPrice={plan.originalPrice}
+                                        discountedPrice={plan.discountedPrice}
+                                        perDay={plan.perDay}
+                                        originalPerDay={plan.originalPerDay}
+                                        isSelected={selectedPlan === plan.id}
+                                        isPopular={plan.isPopular}
+                                        hasGift={plan.hasGift}
+                                        onSelect={handlePlanSelect}
+                                    />
+                                ))}
+                            </div>
 
-                                <div className="space-y-4 mb-4">
-                                    {plans.map(plan => (
-                                        <PaymentPlan
-                                            key={plan.id}
-                                            id={plan.id}
-                                            duration={plan.duration}
-                                            originalPrice={plan.originalPrice}
-                                            discountedPrice={plan.discountedPrice}
-                                            perDay={plan.perDay}
-                                            originalPerDay={plan.originalPerDay}
-                                            isSelected={selectedPlan === plan.id}
-                                            isPopular={plan.isPopular}
-                                            hasGift={plan.hasGift}
-                                            onSelect={handlePlanSelect}
-                                        />
-                                    ))}
-                                </div>
-                                <p className="text-sm text-justify md:text-left text-[#bec4d2] font-medium mb-10 ">
-                                    By clicking Get my plan, I agree to pay ${selectedPrice} for my plan and that if I do not cancel before
-                                    the end of the 1-week introductory plan, Healer will automatically charge my payment
-                                    method the regular price $30.99 every 1-month thereafter until I cancel. I can cancel online
-                                    by visiting the subscription page in my account on the website.
-                                </p>
-                            </form>
-                        </div>
+                            <p className="text-base text-[#bec4d2] font-medium mb-10">
+                                By clicking Get my plan, I agree to pay ${selectedPrice} for my plan and that if I do not cancel before
+                                the end of the 1-week introductory plan, Kure will automatically charge my payment
+                                method the regular price $30.99 every 1-month thereafter until I cancel. I can cancel online
+                                by visiting the subscription page in my account on the website.
+                            </p>
 
-                        <div className='md:w-1/2'>
-                            <h2 className="text-[1.125rem] text-white font-semibold mb-4 ">All plans include:</h2>
-                            <ul className='space-y-2'>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8 ml-1' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Introduction to hypnosis sessions</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Personalized daily bedtime hypnotherapy sessions</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Special 21-day program for accelerated weight loss</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Full 24/7 Client support</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Privacy and security guarantee</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Progress tracking</li>
-                            </ul>
-                            <div>
-                                <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">If you select the 3-month plan:</h1>
-                                <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl'>
-                                    <div className='md:flex gap-4 '>
-                                        <div className='flex md:block justify-center mb-5 md:mb-0'>
-                                            <img src={gift_big} alt="gift-image" className='w-32 md:w-full' />
-                                        </div>
-                                        <div className='text-center md:text-left space-y-2'>
-                                            <h1 className='text-2xl md:text-base font-bold merriweather mt-1 '>Secret gift</h1>
-                                            <p className='md:text-xs text-base'>The Healer team wants to support your relationship with food and your transformation, so we've prepared a surprise for you!</p>
-                                        </div>
+                            <button
+                                type="submit"
+                                className="w-full bg-gradient-to-l from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
+                            >
+                                Get my plan
+                            </button>
+
+                            <p className="text-center text-xs my-4">Guaranteed safe checkout</p>
+                            <img src={safe_payment} alt="safe-payment" />
+                        </form>
+                    </div>
+                    <div className='md:w-1/2'>
+                        <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">All plans include:</h2>
+                        <ul className='space-y-5'>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Introduction to hypnosis sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Personalized daily bedtime hypnotherapy sessions</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Special 21-day program for accelerated weight loss</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Full 24/7 Client support</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Privacy and security guarantee</li>
+                            <li className='flex items-center text-base gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Progress tracking</li>
+                        </ul>
+                        <div>
+                            <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">If you select the 3-month plan:</h1>
+                            <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl'>
+                                <div className='md:flex gap-4 '>
+                                    <div className='flex md:block justify-center mb-5 md:mb-0'>
+                                        <img src={gift_big} alt="gift-image" className='w-32 md:w-full' />
+                                    </div>
+                                    <div className='text-center md:text-left space-y-2'>
+                                        <h1 className='text-2xl font-bold merriweather mt-1 '>Secret gift</h1>
+                                        <p className='text-[14px]'>The Kure team wants to support your relationship with food and your transformation, so we've prepared a surprise for you!</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='md:flex gap-6 px-4'>
-                        <div className="md:w-1/2 ">
-                            <h2 className="text-[1.125rem] text-white font-semibold mb-4">Select your plan:</h2>
-                            <form onSubmit={handleSubmit}>
-                                <div className="space-y-4 mb-4">
-                                    {plans.map(plan => (
-                                        <PaymentPlan
-                                            key={plan.id}
-                                            id={plan.id}
-                                            duration={plan.duration}
-                                            originalPrice={plan.originalPrice}
-                                            discountedPrice={plan.discountedPrice}
-                                            perDay={plan.perDay}
-                                            originalPerDay={plan.originalPerDay}
-                                            isSelected={selectedPlan === plan.id}
-                                            isPopular={plan.isPopular}
-                                            hasGift={plan.hasGift}
-                                            onSelect={handlePlanSelect}
-                                        />
-                                    ))}
-                                </div>
-                                <p className="text-sm text-justify md:text-left text-[#bec4d2] font-medium mb-10 ">
-                                    By clicking Get my plan, I agree to pay ${selectedPrice} for my plan and that if I do not cancel before
-                                    the end of the 1-week introductory plan, Healer will automatically charge my payment
-                                    method the regular price $30.99 every 1-month thereafter until I cancel. I can cancel online
-                                    by visiting the subscription page in my account on the website.
-                                </p>
-                            </form>
-                        </div>
-                        <div className='md:w-1/2'>
-                            <h2 className="text-[1.125rem] text-white font-semibold mb-4 ">All plans include:</h2>
-                            <ul className='space-y-2'>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8 ml-1' /> Digital app created by experts in hypnosis, neuroscience and food addiction</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Introduction to hypnosis sessions</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Personalized daily bedtime hypnotherapy sessions</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Special 21-day program for accelerated weight loss</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Full 24/7 Client support</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Privacy and security guarantee</li>
-                                <li className='flex items-center text-xs gap-2'><MdOutlineCheck className='text-teal-400 text-xl w-8' /> Progress tracking</li>
-                            </ul>
-                            <div>
-                                <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">If you select the 3-month plan:</h1>
-                                <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl'>
-                                    <div className='md:flex gap-4 '>
-                                        <div className='flex md:block justify-center mb-5 md:mb-0'>
-                                            <img src={gift_big} alt="gift-image" className='w-32 md:w-full' />
-                                        </div>
-                                        <div className='text-center md:text-left space-y-2'>
-                                            <h1 className='text-2xl md:text-base font-bold merriweather mt-1 '>Secret gift</h1>
-                                            <p className='md:text-xs text-base'>The Healer team wants to support your relationship with food and your transformation, so we've prepared a surprise for you!</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div className='px-4'>
-                    <button
-                        type="submit"
-                        className="w-full mt-5 md:mt-5 bg-gradient-to-l from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear "
-                    >
-                        Get my plan
-                    </button>
-                    <p className="text-center text-xs my-4">Guaranteed safe checkout</p>
-                    <img src={safe_payment} alt="safe-payment" />
                 </div>
                 <div className='px-0 md:px-4'>
                     <div className='bg-[#07001C] border border-zinc-600 p-4 rounded-3xl mx-4 md:mx-0 mt-5 md:mt-10'>

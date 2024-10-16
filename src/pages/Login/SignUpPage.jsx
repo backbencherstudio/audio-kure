@@ -13,12 +13,12 @@ function SignUpPage() {
     password: "",
     confirmPassword: "",
   });
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]); // 6 input fields for OTP
-  const [step, setStep] = useState(1); // 1 for sign-up, 2 for OTP
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [step, setStep] = useState(1);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [countdown, setCountdown] = useState(120); // 2 minutes in seconds
+  const [countdown, setCountdown] = useState(120);
   const [isCounting, setIsCounting] = useState(false);
-  const [isResendDisabled, setIsResendDisabled] = useState(false); // New state for resend button
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const user = localStorage.getItem("user");
   useEffect(() => {
@@ -177,7 +177,7 @@ function SignUpPage() {
       </div>
       <div className="flex justify-center min-h-[80vh]">
         <div className="flex justify-center flex-col">
-          <div className="w-[400px] md:w-[450px] lg:w-[450px] mx-5">
+          <div className="mx-5">
             <div className="text-center">
               <h2 className="text-4xl text-center">
                 Last step. Set up your account
@@ -277,7 +277,7 @@ function SignUpPage() {
                         value={digit}
                         onChange={(e) => handleOtpChange(index, e.target.value)}
                         className="w-[15%] text-sm"
-                        // inputProps={{ maxLength: 1 }}
+                      // inputProps={{ maxLength: 1 }}
                       />
                     ))}
                   </div>
@@ -296,11 +296,10 @@ function SignUpPage() {
                   {/* Resend OTP Button */}
                   <div className="flex justify-between mt-3">
                     <div
-                      className={`w-full text-right ${
-                        isResendDisabled
+                      className={`w-full text-right ${isResendDisabled
                           ? "text-gray-400"
                           : "hover:opacity-85 text-orange-700"
-                      } p-3  cursor-pointer underline`}
+                        } p-3  cursor-pointer underline`}
                       onClick={() => {
                         if (!isResendDisabled) {
                           handleResendOtp();
