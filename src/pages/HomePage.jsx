@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
 import home_hero_image from "./../assets/images/home_hero_image.png";
-import logo2 from "./../assets/images/logo.png";
 import Footer from "../shared/Footer";
+import Logo from "../shared/Logo";
 
 function HomePage() {
   const handleType = (type) => {
@@ -11,19 +11,8 @@ function HomePage() {
   };
   return (
     <div className="">
-      <div className="container min-h-[80vh] max-w-[1400px] mx-auto lg:px-4 ">
-        <header className="py-4">
-          <div className="flex  w-fit ml-4">
-            <Link className="flex" to={"/"}>
-              {" "}
-              <img className="h-12 my-3" src={logo2} alt="" />
-              <span className="flex flex-col font-bold ml-1 text-2xl justify-center font-serif">
-                healer
-              </span>
-            </Link>
-          </div>
-        </header>
-
+      <Logo />
+      <div className="container min-h-[80vh] max-w-[1400px] mx-auto px-4 ">
         <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-evenly gap-20 mb-20 lg:px-20 px-5 lg:pt-16">
           <div className="flex-1 ">
             <h2 className="text-4xl  text-white lg:pt-10 md:pt-10 merriweather font-medium">

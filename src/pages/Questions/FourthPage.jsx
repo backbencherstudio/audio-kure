@@ -49,7 +49,7 @@ const ThirdPage = () => {
           </p>
           <Link
             className="  btnGrad text-center font-medium text-xl lg:py-4 py-3 rounded-3xl text-white px-4  "
-            to={"/analysis"}
+            to={"/email"}
           >
             Got it
           </Link>
