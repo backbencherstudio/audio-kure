@@ -44,8 +44,8 @@ function EmailPage() {
   return (
     <div>
       <Logo />
-      <div className="container mx-auto max-w-[1400px] ">
-        <div className="min-h-[90vh] text-center">
+      <div className="mx-auto max-w-[1400px] ">
+        <div className="text-center">
           <div className="flex justify-center">
             <div className="lg:max-w-[550px] md:max-w-[500px] text-center">
               <h1 className="text-4xl pt-20 font-serif">
