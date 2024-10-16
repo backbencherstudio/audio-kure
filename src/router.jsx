@@ -2,10 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/layout";
 import HomePage from "./pages/HomePage";
 import ErrorPage from "./pages/Error/ErrorPage";
-import EmotionalQuestionPage1 from "./pages/Questions/EmotionalQuestionPage1";
-import PhysicalQuestionPage2 from "./pages/Questions/PhysicalQuestionPage2";
-import PhysicalQuestionPage1 from "./pages/Questions/PhysicalQuestionPage1";
-import EmotionalQuestionPage2 from "./pages/Questions/EmotionalQuestionPage2";
 import Analyzing from "./pages/Questions/Analysing/Analyzing";
 import ThirdPage from "./pages/Questions/FourthPage";
 import SubscriptionPlan from "./components/SubscriptionPlan/SubscriptionPlan";
@@ -16,6 +12,10 @@ import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
 import SignUpPage from "./pages/Login/SignupPage";
 import LoginPage from "./pages/Login/LoginPage";
+import QuestionPage2 from "./pages/Questions/QuestionPage2";
+import QuestionPage3 from "./pages/Questions/QuestionPage3";
+import QuestionPage4 from "./pages/Questions/QuestionPage4";
+import QuestionPage5 from "./pages/Questions/QuestionPage5";
 
 const router = createBrowserRouter([
   {
@@ -24,47 +24,47 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "", // Change to an empty string for the home page
+        path: "",
         element: <HomePage />,
       },
       {
-        path: "question-physical-1",
-        element: <PhysicalQuestionPage1 />,
+        path: "question-2",
+        element: <QuestionPage2 />,
       },
       {
-        path: "analysis", // Remove leading slash
+        path: "question-3",
+        element: <QuestionPage3 />,
+      },
+      {
+        path: "question-4",
+        element: <QuestionPage4 />,
+      },
+      {
+        path: "question-5",
+        element: <QuestionPage5 />,
+      },
+      {
+        path: "analysis",
         element: <Analyzing />,
       },
       {
-        path: "question-physical-2",
-        element: <PhysicalQuestionPage2 />,
-      },
-      {
-        path: "question-emotional-1",
-        element: <EmotionalQuestionPage1 />,
-      },
-      {
-        path: "question-emotional-2",
-        element: <EmotionalQuestionPage2 />,
-      },
-      {
-        path: "body", // Remove leading slash
+        path: "body",
         element: <Body />,
       },
       {
-        path: "let's go", // Remove leading slash
+        path: "let's go",
         element: <ThirdPage />,
       },
       {
-        path: "subscriptionplan", // Remove leading slash
+        path: "subscriptionplan",
         element: <SubscriptionPlan />,
       },
       {
-        path: "email", // Remove leading slash
+        path: "email",
         element: <EmailPage />,
       },
       {
-        path: "welcome", // Remove leading slash
+        path: "welcome",
         element: <WelcomePage />,
       },
     ],
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "", // Change to an empty string for the default audios page
+        path: "",
         element: <Doctors />,
       },
     ],
