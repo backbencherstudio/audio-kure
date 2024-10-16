@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import CustomAnsButton from "../../shared/CustomAnsButton";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
-import Footer2 from "../../shared/Footer2";
 
 function PhysicalQuestionPage2() {
   const navigate = useNavigate();
@@ -12,15 +11,15 @@ function PhysicalQuestionPage2() {
     currentAnswers.push(newAnswer);
 
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
-    navigate("/let's go");
+    navigate("/body");
   };
 
   return (
     <div>
-      <div className="min-h-[90vh] text-center">
+      <div className="text-center">
         <ProgressBars
           page={2}
-          value={60}
+          value={50}
           navigate={"/question-physical-1"}
         ></ProgressBars>
         <h1 className="text-4xl pt-20">Which one come first?</h1>
@@ -37,7 +36,6 @@ function PhysicalQuestionPage2() {
           </div>
         </div>
       </div>
-      <Footer2 />
     </div>
   );
 }

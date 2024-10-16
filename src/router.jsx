@@ -7,10 +7,13 @@ import PhysicalQuestionPage2 from "./pages/Questions/PhysicalQuestionPage2";
 import PhysicalQuestionPage1 from "./pages/Questions/PhysicalQuestionPage1";
 import EmotionalQuestionPage2 from "./pages/Questions/EmotionalQuestionPage2";
 import Analyzing from "./pages/Questions/Analysing/Analyzing";
-import ThirdPage from "./pages/Questions/ThirdPage";
+import ThirdPage from "./pages/Questions/FourthPage";
 import SubscriptionPlan from "./components/SubscriptionPlan/SubscriptionPlan";
 import WelcomePage from "./pages/Welcome/WelcomePage";
 import EmailPage from "./pages/EmailPage";
+import AudioLayout from "./pages/Audios/Audios";
+import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
+import Body from "./pages/Questions/Body";
 import Payment from "./pages/paymentPage/Payment";
 const router = createBrowserRouter([
   {
@@ -43,11 +46,16 @@ const router = createBrowserRouter([
         element: <EmotionalQuestionPage2 />,
       },
       {
+        path: "/body",
+        element: <Body></Body>,
+      },
+
+      {
         path: "/let's go",
         element: <ThirdPage></ThirdPage>,
       },
       {
-        path: "subscriptionplan",
+        path: "/subscriptionplan",
         element: <SubscriptionPlan />,
       },
       {
@@ -56,14 +64,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/welcome",
-        element: <WelcomePage />
+        element: <WelcomePage />,
       },
-
       {
-        path: "payment",
+        path: "/payment",
         element: <Payment />,
       },
-      
+    ],
+  },
+  {
+    path: "/audios",
+    element: <AudioLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/audios",
+        element: <Doctors />,
+      },
     ],
   },
 ]);

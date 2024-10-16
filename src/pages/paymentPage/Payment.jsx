@@ -1,13 +1,13 @@
 import axios from "axios";
-import Footer2 from "../../shared/Footer2";
 import logo from './../../assets/images/logo.png';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import PayPalButtonComponent from "./PayPalButtonComponent";
+import { toast } from "react-toastify";
 
 
 
 const Payment = () => {
-    const amount = 2;
+    const amount = 1;
 
     const handleCreateOrder = async () => {
         try {
@@ -19,12 +19,20 @@ const Payment = () => {
     };
 
     const handleApproveOrder = async (data) => {
+
+        if (await data?.facilitatorAccessToken) {
+            console.log(30, data?.facilitatorAccessToken);
+            toast.success("payment successFull")
+        }
+
         try {
             console.log('Order approved, details:', data);
             const { data: paymentData } = await axios.post('http://localhost:5000/api/v1/payment/execute-payment', {
                 orderID: data.orderID,
-                payerID: data.payerID, 
+                payerID: data.payerID,
             });
+
+
             console.log('Payment executed successfully:', paymentData);
         } catch (error) {
             console.error('Error approving PayPal order:', error);
@@ -43,17 +51,22 @@ const Payment = () => {
 
 
             <div className="max-w-[1140px] mx-auto">
-                <div className="w-[500px]">
+                <div className=" max-w-[250px] ">
                     <PayPalScriptProvider options={{ "client-id": 'AeMnBMlrboT2yZ77Ny1Zuwm-UnhJeeMzvE1D1ana1ZetUAzPfo7C-Px41iR4FijH5SN1FHEYrGokg3G2' }}>
                         <PayPalButtonComponent
                             amount={amount}
                             handleApproveOrder={handleApproveOrder} />
                     </PayPalScriptProvider>
                 </div>
+
+
+
+
+
+
             </div>
 
 
-            <Footer2 />
         </div>
     );
 };
