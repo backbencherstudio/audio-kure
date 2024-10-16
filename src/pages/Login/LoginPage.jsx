@@ -63,7 +63,7 @@ function LoginPage() {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="flex justify-center">
         <Logo />
       </div>

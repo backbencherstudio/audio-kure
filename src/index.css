@@ -9,9 +9,9 @@
 .merriweather {
   font-family: "Merriweather", serif !important;
 }
-
 .btnGrad {
   background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 img {
@@ -91,4 +91,3 @@ img {
   top: -20px;
   right: 25%;
 }
-  
