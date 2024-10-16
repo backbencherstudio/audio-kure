@@ -1,9 +1,9 @@
 import { TextField, Alert, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import UserManagement from "../../service/User";
 import { toast } from "react-toastify";
 import Logo from "../../shared/Logo";
+import UserManagement from "../../service/User";
 
 function SignUpPage() {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ function SignUpPage() {
   const [isCounting, setIsCounting] = useState(false);
   const [isResendDisabled, setIsResendDisabled] = useState(false); // New state for resend button
   const [loading, setLoading] = useState(false);
+  const user = localStorage.getItem("user");
   useEffect(() => {
     let timer;
     if (isCounting && countdown > 0) {
@@ -28,7 +29,7 @@ function SignUpPage() {
       }, 1000);
     } else if (countdown === 0) {
       setIsCounting(false);
-      setIsResendDisabled(false); // Enable resend button when countdown finishes
+      setIsResendDisabled(false);
     }
     return () => clearInterval(timer);
   }, [isCounting, countdown]);
@@ -116,7 +117,7 @@ function SignUpPage() {
     }
 
     try {
-      await UserManagement.upsertUser({ name, email, password });
+      await UserManagement.upsertUser({ name, email, password, user });
       toast.success("User created successfully");
 
       // Clear form fields
@@ -170,143 +171,157 @@ function SignUpPage() {
   };
 
   return (
-    <div className="flex justify-center py-20">
-      <div className="md:w-[400px] w-full lg:w-[450px] mx-5">
-        <div className="flex justify-center">
-          <Logo />
-        </div>
-        <h2 className="text-3xl text-center font-bold mt-8">
-          Last step. Set up your account
-        </h2>
-        <div className="bg-white shadow-md px-8 pb-5 rounded-lg">
-          {step === 1 && (
-            <>
-              <label className="block mt-5 pt-10 text-gray-500 text-sm">
-                Name<span className="text-red-500 text-xs">*</span>
-              </label>
-              <TextField
-                size="small"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                className="w-full text-sm"
-              />
-              <label className="block mt-5 text-gray-500 text-sm">
-                Email<span className="text-red-500 text-xs">*</span>
-              </label>
-              <TextField
-                size="small"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full text-sm"
-              />
-              <label className="block mt-5 text-gray-500 text-sm">
-                Password<span className="text-red-500 text-xs">*</span>
-              </label>
-              <TextField
-                size="small"
-                type="password"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                className="w-full text-sm"
-              />
-              <label className="block mt-5 text-gray-500 text-sm">
-                Confirm password<span className="text-red-500 text-xs">*</span>
-              </label>
-              <TextField
-                size="small"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={(e) =>
-                  setFormData({ ...formData, confirmPassword: e.target.value })
-                }
-                className="w-full text-sm"
-              />
-              {errorMsg && (
-                <Alert severity="error" className="mt-3">
-                  {errorMsg}
-                </Alert>
-              )}
-              <div
-                className="w-full text-center py-2 hover:opacity-85 cursor-pointer bg-[#359eff] text-white mt-5 rounded"
-                onClick={handleSendOtp}
-              >
-                {loading ? (
-                  <CircularProgress
-                    style={{
-                      color: "white",
-                      width: "20px",
-                      height: "20px",
-                    }}
-                  />
-                ) : (
-                  " Sign Up"
-                )}
-              </div>
-            </>
-          )}
-          {step === 2 && (
-            <>
-              <label className="block mt-5 pt-8 text-gray-500 text-sm">
-                Enter OTP<span className="text-red-500 text-xs">*</span>
-              </label>
-              <div className="flex justify-between mt-2">
-                {otp.map((digit, index) => (
+    <div>
+      <div className="flex justify-center">
+        <Logo />
+      </div>
+      <div className="flex justify-center min-h-[80vh]">
+        <div className="flex justify-center flex-col">
+          <div className="w-[400px] md:w-[450px] lg:w-[450px] mx-5">
+            <div className="text-center">
+              <h2 className="text-4xl text-center">
+                Last step. Set up your account
+              </h2>
+              <p className="mt-4 font-[230] text-[15px]">
+                Set name or nickname for your account and create a password to
+                access your Healer app
+              </p>
+            </div>
+            <div className="bg-slate-100 shadow-md px-8 pb-5 rounded-2xl">
+              {step === 1 && (
+                <>
+                  <label className="block mt-5 pt-10 text-gray-500 text-sm">
+                    Name<span className="text-red-500 text-xs">*</span>
+                  </label>
                   <TextField
-                    key={index}
-                    id={`otp-input-${index}`}
                     size="small"
-                    value={digit}
-                    onChange={(e) => handleOtpChange(index, e.target.value)}
-                    className="w-[15%] text-sm"
-                    // inputProps={{ maxLength: 1 }}
-                  />
-                ))}
-              </div>
-              {errorMsg && (
-                <Alert severity="error" className="mt-3">
-                  {errorMsg}
-                </Alert>
-              )}
-              <div
-                className="w-full text-center p-3 hover:opacity-85 cursor-pointer bg-[#359eff] text-white mt-5 rounded"
-                onClick={handleVerifyOtp}
-              >
-                Verify OTP
-              </div>
-
-              {/* Resend OTP Button */}
-              <div className="flex justify-between mt-3">
-                <div
-                  className={`w-full text-right ${
-                    isResendDisabled
-                      ? "text-gray-400"
-                      : "hover:opacity-85 text-orange-700"
-                  } p-3  cursor-pointer underline`}
-                  onClick={() => {
-                    if (!isResendDisabled) {
-                      handleResendOtp();
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
                     }
-                  }}
-                >
-                  Resend OTP
-                </div>
-
-                {/* Countdown Timer */}
-                {isCounting && (
-                  <div className="text-center pt-3 text-md">
-                    {Math.floor(countdown / 60)}:
-                    {(countdown % 60).toString().padStart(2, "0")}
+                    className="w-full text-sm"
+                  />
+                  <label className="block mt-5 text-gray-500 text-sm">
+                    Email<span className="text-red-500 text-xs">*</span>
+                  </label>
+                  <TextField
+                    size="small"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="w-full text-sm"
+                  />
+                  <label className="block mt-5 text-gray-500 text-sm">
+                    Password<span className="text-red-500 text-xs">*</span>
+                  </label>
+                  <TextField
+                    size="small"
+                    type="password"
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
+                    className="w-full text-sm"
+                  />
+                  <label className="block mt-5 text-gray-500 text-sm">
+                    Confirm password
+                    <span className="text-red-500 text-xs">*</span>
+                  </label>
+                  <TextField
+                    size="small"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        confirmPassword: e.target.value,
+                      })
+                    }
+                    className="w-full text-sm"
+                  />
+                  {errorMsg && (
+                    <Alert severity="error" className="mt-3">
+                      {errorMsg}
+                    </Alert>
+                  )}
+                  <div
+                    className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
+                    onClick={handleSendOtp}
+                  >
+                    {loading ? (
+                      <CircularProgress
+                        style={{
+                          color: "white",
+                          width: "20px",
+                          height: "20px",
+                        }}
+                      />
+                    ) : (
+                      "Create account"
+                    )}
                   </div>
-                )}
-              </div>
-            </>
-          )}
+                </>
+              )}
+              {step === 2 && (
+                <>
+                  <label className="block mt-5 pt-8 text-gray-500 text-sm">
+                    Enter OTP<span className="text-red-500 text-xs">*</span>
+                  </label>
+                  <div className="flex justify-between mt-2">
+                    {otp.map((digit, index) => (
+                      <TextField
+                        key={index}
+                        id={`otp-input-${index}`}
+                        size="small"
+                        value={digit}
+                        onChange={(e) => handleOtpChange(index, e.target.value)}
+                        className="w-[15%] text-sm"
+                        // inputProps={{ maxLength: 1 }}
+                      />
+                    ))}
+                  </div>
+                  {errorMsg && (
+                    <Alert severity="error" className="mt-3">
+                      {errorMsg}
+                    </Alert>
+                  )}
+                  <div
+                    className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
+                    onClick={handleVerifyOtp}
+                  >
+                    Verify OTP
+                  </div>
+
+                  {/* Resend OTP Button */}
+                  <div className="flex justify-between mt-3">
+                    <div
+                      className={`w-full text-right ${
+                        isResendDisabled
+                          ? "text-gray-400"
+                          : "hover:opacity-85 text-orange-700"
+                      } p-3  cursor-pointer underline`}
+                      onClick={() => {
+                        if (!isResendDisabled) {
+                          handleResendOtp();
+                        }
+                      }}
+                    >
+                      Resend OTP
+                    </div>
+
+                    {/* Countdown Timer */}
+                    {isCounting && (
+                      <div className="text-center pt-3 text-md text-black">
+                        {Math.floor(countdown / 60)}:
+                        {(countdown % 60).toString().padStart(2, "0")}
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

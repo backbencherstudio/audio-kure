@@ -15,6 +15,7 @@ import AudioLayout from "./pages/Audios/Audios";
 import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
 import SignUpPage from "./pages/Login/SignupPage";
+import LoginPage from "./pages/Login/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -73,8 +74,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "", // Change to an empty string for the signup page
+        path: "",
         element: <SignUpPage />,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "",
+        element: <LoginPage />,
       },
     ],
   },
