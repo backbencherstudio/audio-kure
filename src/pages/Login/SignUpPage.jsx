@@ -34,14 +34,12 @@ const SignUpPage = () => {
     const res = await registerUser(data);
     if (res?.data?.success) {
       toast("Check Your Email For Verify OTP")
-      // document.getElementById('my_modal_3').showModal()
       setOpen(true)
       return
     }
 
     if (res?.data?.data.success) {
       toast(res?.data?.data.message)
-      // document.getElementById('my_modal_3').showModal()
       setOpen(true)
       return
     }
@@ -57,7 +55,6 @@ const SignUpPage = () => {
     }
     if (res?.error?.status === 400) {
       toast.error(res?.error.data.message)
-      // res?.error.data.errorSources.map(item => toast.error(item?.message))
       return
     }
 

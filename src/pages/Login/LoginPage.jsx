@@ -8,7 +8,6 @@ import { setUser } from "../../redux/fetures/auth/authSlice";
 import { useAppDispatch } from '../../redux/hooks';
 
 
-// const currentUser = useSelector(selectCurrentUser);
 
 function LoginPage() {
   const [email, setEmail] = useState("");

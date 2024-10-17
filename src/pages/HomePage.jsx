@@ -1,11 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
 import home_hero_image from "./../assets/images/home_hero_image.png";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
+import { useSelector } from "react-redux";
+import { logOut, selectCurrentUser } from "../redux/fetures/auth/authSlice";
+import { useAppDispatch } from "../redux/hooks";
 
 function HomePage() {
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+
+  console.log(currentUser);
+
+
+  const handleLOgout = () => {
+    // logOutUser({ email: currentUser?.email });
+    dispatch(logOut());
+    localStorage.removeItem("layout");
+    navigate("/login");
+  };
+
+
   const handleAnswerSelect = (selectedAnswer) => {
     const answer = [{ ans1: selectedAnswer }];
     localStorage.setItem("answers", JSON.stringify(answer));
@@ -13,15 +31,20 @@ function HomePage() {
 
   return (
     <div>
-     
+
       <div className="container z-50 mx-auto bg-transparent ">
 
         <div className="  flex  justify-between items-center">
           <Logo />
           <div>
-            <Link to={"/login"}>Log In</Link>
+
+            {
+              currentUser ? <button onClick={() => { handleLOgout() }} >Log Out</button> : <Link to={"/login"}>Log In</Link>
+            }
+
           </div>
         </div>
+
         <div className="container   mx-auto px-4">
           <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="flex-1">
