@@ -14,14 +14,14 @@ function HomePage() {
   return (
     <div>
 
-      <div className="container z-50 mx-auto bg-transparent ">
-
-        <div className="  flex  justify-between items-center">
+        <div className="  flex items-center container justify-between mx-auto ">
           <Logo />
           <div>
             <Link to={"/login"}>Log In</Link>
           </div>
         </div>
+      <div className="container z-50 mx-auto bg-transparent ">
+
         <div className="container   mx-auto px-4">
           <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="flex-1">
