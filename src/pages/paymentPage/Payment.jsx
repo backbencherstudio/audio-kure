@@ -7,8 +7,24 @@ import logoPaypal from "./../../assets/images/PayPal.png";
 import credit_cards from "./../../assets/images/credit_cards.png";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 
 const Payment = () => {
+  const currentUser = useSelector(selectCurrentUser);
+
+
+  const [planData, setPlanData] = useState({})
+  useEffect(()=>{
+    const plan = localStorage.getItem("plan")
+    const parsedPlan = plan ? JSON.parse(plan) : null;
+    const userType = localStorage.getItem("userType")
+    setPlanData({parsedPlan, userType})    
+  },[])
+
+  console.log(planData);
+  
+
   const amount = 2;
 
   const handleCreateOrder = async () => {
@@ -25,8 +41,12 @@ const Payment = () => {
 
   const handleApproveOrder = async (data) => {
     if (await data?.facilitatorAccessToken) {
-      console.log(30, data?.facilitatorAccessToken);
       toast.success("Payment successful");
+      
+
+
+
+
     }
     try {
       await axios.post(

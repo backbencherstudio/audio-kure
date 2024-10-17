@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/no-unescaped-entities */
+import { useState, useEffect } from "react";
 import { MdOutlineCheck } from "react-icons/md";
 import gift from "./../../assets/images/gift.png";
 import gift_big from "./../../assets/images/free_gift_big.png";
@@ -9,6 +11,8 @@ import GoogleReviews from "../GoogleReviews/GoogleReviews";
 import Footer from "../../shared/Footer";
 import Logo from "../../shared/Logo";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 
 const PaymentPlan = ({
   id,
@@ -23,40 +27,34 @@ const PaymentPlan = ({
   onSelect,
 }) => (
   <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${
-      isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
-    }`}
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
+      }`}
     onClick={() => onSelect(id, discountedPrice)}
   >
     <div className="flex items-center">
       <div
-        className={`w-5 h-5 rounded-full border-2 ${
-          isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
-        } mr-3 flex items-center justify-center ${
-          isPopular ? "mt-8 mb-2" : ""
-        }`}
+        className={`w-5 h-5 rounded-full border-2 ${isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
+          } mr-3 flex items-center justify-center ${isPopular ? "mt-8 mb-2" : ""
+          }`}
       >
         {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
       </div>
       <div
-        className={`flex-grow flex justify-between items-center ${
-          isPopular ? "pt-8 pb-2" : "py-2"
-        }`}
+        className={`flex-grow flex justify-between items-center ${isPopular ? "pt-8 pb-2" : "py-2"
+          }`}
       >
         <div className="space-y-1">
           <p className="font-semibold">{duration} plan</p>
           <div className="flex gap-2">
             <p
-              className={`text-sm line-through ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm line-through ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               ${originalPrice}
             </p>
             <p
-              className={`text-sm ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               ${discountedPrice}
             </p>
@@ -77,9 +75,8 @@ const PaymentPlan = ({
               ${perDay}
             </p>
             <p
-              className={`text-sm ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               per day
             </p>
@@ -96,7 +93,7 @@ const PaymentPlan = ({
 );
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("7day");
+  const [selectedPlan, setSelectedPlan] = useState("7 day");
   const [selectedPrice, setSelectedPrice] = useState("6.93");
   const [plans, setPlans] = useState([]);
   const navigate = useNavigate();
@@ -106,11 +103,13 @@ const SubscriptionPlan = () => {
     setPlans(adjustedPlans);
   }, []);
 
+  const currentUser = useSelector(selectCurrentUser);
+
   const getAdjustedPlans = (type) => {
     // Define your base plans
     const basePlans = [
       {
-        id: "7day",
+        id: "7 day",
         duration: "7 day",
         originalPrice: "14.14",
         discountedPrice: "6.93",
@@ -118,7 +117,7 @@ const SubscriptionPlan = () => {
         originalPerDay: "$2.02",
       },
       {
-        id: "1month",
+        id: "1 month",
         duration: "1-month",
         originalPrice: "30.00",
         discountedPrice: "16.19",
@@ -127,7 +126,7 @@ const SubscriptionPlan = () => {
         isPopular: true,
       },
       {
-        id: "3month",
+        id: "3 month",
         duration: "3-month",
         originalPrice: "84.94",
         discountedPrice: "25.99",
@@ -165,8 +164,17 @@ const SubscriptionPlan = () => {
       plan: selectedPlan,
       price: selectedPrice,
     };
+
     localStorage.setItem("plan", JSON.stringify(plan));
-    navigate("/signup");
+
+    if (!currentUser) {
+      navigate("/login");
+      return
+    }
+
+    navigate("/payment");
+
+
   };
 
   return (
@@ -221,12 +229,14 @@ const SubscriptionPlan = () => {
                 my account on the website.
               </p>
 
+
               <button
                 type="submit"
                 className="w-full bg-gradient-to-l from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
               >
                 Get my plan
               </button>
+
 
               <p className="text-center text-xs my-4">
                 Guaranteed safe checkout
