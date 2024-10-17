@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import PayPalButtonComponent from "./PayPalButtonComponent";
@@ -25,10 +24,10 @@ const Payment = () => {
   const handleApproveOrder = async (data) => {
     if (await data?.facilitatorAccessToken) {
       console.log(30, data?.facilitatorAccessToken);
-      toast.success("payment successful");
+      toast.success("Payment successful");
     }
     try {
-      const { data: paymentData } = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
@@ -36,7 +35,7 @@ const Payment = () => {
         }
       );
     } catch (error) {
-      // console.error('Error approving PayPal order:', error);
+      console.error("Error approving PayPal order:", error);
     }
   };
 
@@ -46,7 +45,7 @@ const Payment = () => {
     <div>
       <div className="bg-[#07001C]">
         <nav className="max-w-[1400px] mx-auto py-2 px-4">
-          <img src={logo} alt="logo" className="w-16 " />
+          <img src={logo} alt="logo" className="w-16" />
         </nav>
       </div>
 
@@ -56,17 +55,21 @@ const Payment = () => {
             className={`border rounded-lg mb-4 ${
               paymentMethod === "paypal" ? "border-blue-500" : ""
             }`}
+            onClick={() => setPaymentMethod("paypal")}
           >
             <label className="flex items-center justify-between p-4 cursor-pointer">
               <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="paypal"
-                  checked={paymentMethod === "paypal"}
-                  onChange={() => setPaymentMethod("paypal")}
-                  className="mr-3"
-                />
+                <div
+                  className={`w-5 h-5 rounded-full border-2 ${
+                    paymentMethod === "paypal"
+                      ? "border-teal-500 bg-teal-500"
+                      : "border-gray-300"
+                  } mr-3 flex items-center justify-center`}
+                >
+                  {paymentMethod === "paypal" && (
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  )}
+                </div>
                 <span>PayPal</span>
               </div>
               <div className="text-blue-600 font-bold">PayPal</div>
@@ -93,17 +96,21 @@ const Payment = () => {
             className={`border rounded-lg ${
               paymentMethod === "credit" ? "border-blue-500" : ""
             }`}
+            onClick={() => setPaymentMethod("credit")}
           >
             <label className="flex items-center justify-between p-4 cursor-pointer">
               <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="credit"
-                  checked={paymentMethod === "credit"}
-                  onChange={() => setPaymentMethod("credit")}
-                  className="mr-3"
-                />
+                <div
+                  className={`w-5 h-5 rounded-full border-2 ${
+                    paymentMethod === "credit"
+                      ? "border-teal-500 bg-teal-500"
+                      : "border-gray-300"
+                  } mr-3 flex items-center justify-center`}
+                >
+                  {paymentMethod === "credit" && (
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  )}
+                </div>
                 <span>Credit card</span>
               </div>
               <div className="flex space-x-2">
