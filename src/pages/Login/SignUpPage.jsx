@@ -1,330 +1,273 @@
-import { TextField, Alert, CircularProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import Logo from "../../shared/Logo";
-import UserManagement from "../../service/User";
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import authApi from '../../redux/fetures/auth/authApi';
+import { Dialog } from '@mui/material';
 
-function SignUpPage() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [step, setStep] = useState(1);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [countdown, setCountdown] = useState(120);
-  const [isCounting, setIsCounting] = useState(false);
-  const [isResendDisabled, setIsResendDisabled] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const user = localStorage.getItem("user");
-  useEffect(() => {
-    let timer;
-    if (isCounting && countdown > 0) {
-      timer = setInterval(() => {
-        setCountdown((prev) => prev - 1);
-      }, 1000);
-    } else if (countdown === 0) {
-      setIsCounting(false);
-      setIsResendDisabled(false);
+const SignUpPage = () => {
+  const inputStyle = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+  const [registerUser, { isLoading }] = authApi.useRegisterUserMutation()
+  const [verifyOTP, { isLoading: verifyLoading }] = authApi.useVerifyOTPMutation()
+  const [userEmail, setUserEmail] = useState("")
+  const navigate = useNavigate()
+  const [open, setOpen] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+  const password = watch('password', '');
+
+
+  const onSubmit = async (data) => {
+    console.log(data);
+
+    if(data.password !== data.confirmPassword ){
+      toast.error("password not matched")
+      return
     }
-    return () => clearInterval(timer);
-  }, [isCounting, countdown]);
+    
+    setUserEmail(data?.email)
+    const res = await registerUser(data);
+    if (res?.data?.success) {
+      toast("Check Your Email For Verify OTP")
+      // document.getElementById('my_modal_3').showModal()
+      setOpen(true)
+      return
+    }
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    if (res?.data?.data.success) {
+      toast(res?.data?.data.message)
+      // document.getElementById('my_modal_3').showModal()
+      setOpen(true)
+      return
+    }
+
+    if (res?.error?.data.success == false) {
+      toast.error(res?.error?.data?.message)
+      return
+    }
+
+    if (res?.data?.success) {
+      toast.success(res?.data.message)
+      return
+    }
+    if (res?.error?.status === 400) {
+      toast.error(res?.error.data.message)
+      // res?.error.data.errorSources.map(item => toast.error(item?.message))
+      return
+    }
+
   };
 
-  const validatePasswordStrength = (password) => {
-    return password.length >= 6;
-  };
+  const verifyOtp = async (otp) => {
+    const verifyData = { email: userEmail, otp }
+    const res = await verifyOTP(verifyData);
 
-  const handleSendOtp = async () => {
-    setLoading(true);
-    setErrorMsg(null);
-    const { email } = formData;
-
-    if (!email) {
-      setErrorMsg("Email is required.");
-      setLoading(false);
-      return;
+    if (res?.error?.status === 400) {
+      toast.error(res?.error?.data.message)
     }
 
-    if (!validateEmail(email)) {
-      setErrorMsg("Invalid email format.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      await UserManagement.sendOtp(email);
-      setStep(2); // Move to OTP step
-      setIsCounting(true); // Start the countdown
-      setIsResendDisabled(true); // Disable resend button
-      setCountdown(120); // Reset countdown to 2 minutes
-      toast.success("OTP sent to your email.");
-      setLoading(false);
-    } catch (error) {
-      setErrorMsg(`Error: ${error.response.data.message || error.message}`);
+    console.log(res);
+    
+    if (res?.data?.success) {
+      toast.success("Registration Successfull");
+      setOpen(false)
+      navigate("/login")
+    } else {
+      toast.error(res?.data?.message);
     }
   };
 
-  const handleVerifyOtp = async () => {
-    setErrorMsg(null);
-    const otpString = otp.join(""); // Join the OTP array into a string
 
-    if (otpString.length !== 6) {
-      setErrorMsg("Please enter all 6 digits of the OTP.");
-      return;
-    }
+  // ======================================================== fill up OTP function Start
 
-    try {
-      const isValid = await UserManagement.verifyOtp(formData.email, otpString);
-      if (isValid) {
-        await handleSignUp(); // Proceed to complete sign-up
-      } else {
-        setErrorMsg("Invalid OTP. Please try again.");
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+
+  const inputRefs = useRef([]);
+
+  const handleChange = (element, index) => {
+    if (/^[0-9]$/.test(element.value)) {
+      const newOtp = [...otp];
+      newOtp[index] = element.value;
+      setOtp(newOtp);
+
+      if (index < 5 && element.value !== "") {
+        inputRefs.current[index + 1].focus();
       }
-    } catch (error) {
-      setErrorMsg(`${error.response?.data?.message}`);
-      toast.error(`Error: ${error.response?.data?.message}`);
     }
   };
 
-  const handleSignUp = async () => {
-    setErrorMsg(null);
-
-    const { name, email, password, confirmPassword } = formData;
-
-    // Basic validation
-    if (!name || !email || !password || !confirmPassword) {
-      setErrorMsg("All fields are required.");
-      return;
-    }
-
-    if (!validatePasswordStrength(password)) {
-      setErrorMsg("Password must be at least 6 characters long.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setErrorMsg("Passwords do not match.");
-      return;
-    }
-
-    try {
-      await UserManagement.upsertUser({ name, email, password, user });
-      toast.success("User created successfully");
-
-      // Clear form fields
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-      setOtp(["", "", "", "", "", ""]);
-      setStep(1); // Reset to step 1
-      navigate("/login");
-    } catch (error) {
-      setErrorMsg(`Error: ${error?.response?.data?.message || error.message}`);
+  const handleBackspace = (event, index) => {
+    if (event.key === "Backspace" && otp[index] === "") {
+      if (index > 0) {
+        inputRefs.current[index - 1].focus();
+      }
     }
   };
 
-  const handleResendOtp = async () => {
-    setErrorMsg(null);
-    const { email } = formData;
-
-    if (!email) {
-      setErrorMsg("Email is required to resend OTP.");
-      return;
-    }
-
-    try {
-      await UserManagement.sendOtp(email);
-      toast.success("OTP resent successfully.");
-      setCountdown(120); // Reset countdown to 2 minutes
-      setIsCounting(true); // Start the countdown
-      setIsResendDisabled(true); // Disable resend button
-      setOtp(["", "", "", "", "", ""]); // Clear the OTP inputs
-    } catch (error) {
-      setErrorMsg(`Error: ${error.response?.data?.message || error.message}`);
-      toast.error(`Error: ${error.response?.data?.message || error.message}`);
-    }
+  const handleOTPSubmit = (e) => {
+    e.preventDefault();
+    verifyOtp(otp.join(''));
   };
+  // ======================================================== fill up OTP function End
 
-  const handleOtpChange = (index, value) => {
-    if (value.length > 1) return; // Allow only one character
-
-    const newOtp = [...otp];
-    newOtp[index] = value;
-    setOtp(newOtp);
-
-    // Move to the next input when a digit is entered
-    if (value && index < 5) {
-      document.getElementById(`otp-input-${index + 1}`).focus();
-    }
+   const handleClose = () => {
+    setOpen(false);
   };
 
   return (
-    <div className="">
-      <div className="flex justify-center">
-        <Logo />
-      </div>
-      <div className="flex justify-center min-h-[80vh]">
-        <div className="flex justify-center flex-col">
-          <div className="mx-5">
-            <div className="text-center">
-              <h2 className="text-4xl text-center">
-                Last step. Set up your account
-              </h2>
-              <p className="mt-4 font-[230] text-[15px]">
-                Set name or nickname for your account and create a password to
-                access your Healer app
+
+    <div className=' h-screen flex items-center justify-center'>
+
+      <div className="w-[25%]">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
+          <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Username
+            </label>
+            <input
+              {...register('name', { required: 'Username is required' })}
+              type="text"
+              className={inputStyle}
+              placeholder="Enter your username"
+            />
+            {errors.username && (
+              <p className="text-red-500 text-xs italic">{errors.username.message}</p>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Email
+            </label>
+            <input
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Invalid email address',
+                },
+              })}
+              type="email"
+              className={inputStyle}
+              placeholder="Enter your email"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs italic">{errors.email.message}</p>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Password
+            </label>
+            <input
+              {...register('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Password must be at least 6 characters long',
+                },
+              })}
+              type="password"
+              className={inputStyle}
+              placeholder="Enter your password"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-xs italic">{errors.password.message}</p>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Confirm Password
+            </label>
+            <input
+              {...register('confirmPassword', {
+                required: 'Please confirm your password',
+                validate: (value) => value === password || 'Passwords do not match',
+              })}
+              type="password"
+              className={inputStyle}
+              placeholder="Confirm your password"
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-xs italic">
+                {errors.confirmPassword.message}
               </p>
-            </div>
-            <div className="bg-slate-100 shadow-md px-8 pb-5 rounded-2xl">
-              {step === 1 && (
-                <>
-                  <label className="block mt-5 pt-10 text-gray-500 text-sm">
-                    Name<span className="text-red-500 text-xs">*</span>
-                  </label>
-                  <TextField
-                    size="small"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full text-sm"
-                  />
-                  <label className="block mt-5 text-gray-500 text-sm">
-                    Email<span className="text-red-500 text-xs">*</span>
-                  </label>
-                  <TextField
-                    size="small"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    className="w-full text-sm"
-                  />
-                  <label className="block mt-5 text-gray-500 text-sm">
-                    Password<span className="text-red-500 text-xs">*</span>
-                  </label>
-                  <TextField
-                    size="small"
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) =>
-                      setFormData({ ...formData, password: e.target.value })
-                    }
-                    className="w-full text-sm"
-                  />
-                  <label className="block mt-5 text-gray-500 text-sm">
-                    Confirm password
-                    <span className="text-red-500 text-xs">*</span>
-                  </label>
-                  <TextField
-                    size="small"
-                    type="password"
-                    value={formData.confirmPassword}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        confirmPassword: e.target.value,
-                      })
-                    }
-                    className="w-full text-sm"
-                  />
-                  {errorMsg && (
-                    <Alert severity="error" className="mt-3">
-                      {errorMsg}
-                    </Alert>
-                  )}
-                  <div
-                    className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
-                    onClick={handleSendOtp}
-                  >
-                    {loading ? (
-                      <CircularProgress
-                        style={{
-                          color: "white",
-                          width: "20px",
-                          height: "20px",
-                        }}
-                      />
-                    ) : (
-                      "Create account"
-                    )}
-                  </div>
-                </>
-              )}
-              {step === 2 && (
-                <>
-                  <label className="block mt-5 pt-8 text-gray-500 text-sm">
-                    Enter OTP<span className="text-red-500 text-xs">*</span>
-                  </label>
-                  <div className="flex justify-between mt-2">
-                    {otp.map((digit, index) => (
-                      <TextField
-                        key={index}
-                        id={`otp-input-${index}`}
-                        size="small"
-                        value={digit}
-                        onChange={(e) => handleOtpChange(index, e.target.value)}
-                        className="w-[15%] text-sm"
-                      // inputProps={{ maxLength: 1 }}
-                      />
-                    ))}
-                  </div>
-                  {errorMsg && (
-                    <Alert severity="error" className="mt-3">
-                      {errorMsg}
-                    </Alert>
-                  )}
-                  <div
-                    className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
-                    onClick={handleVerifyOtp}
-                  >
-                    Verify OTP
-                  </div>
+            )}
+          </div>
 
-                  {/* Resend OTP Button */}
-                  <div className="flex justify-between mt-3">
-                    <div
-                      className={`w-full text-right ${isResendDisabled
-                          ? "text-gray-400"
-                          : "hover:opacity-85 text-orange-700"
-                        } p-3  cursor-pointer underline`}
-                      onClick={() => {
-                        if (!isResendDisabled) {
-                          handleResendOtp();
-                        }
-                      }}
-                    >
-                      Resend OTP
-                    </div>
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[120px] flex justify-center items-center "
+            >
+              {
+                isLoading ? <span className="loading loading-dots loading-md"></span> : "Register"
+              }
+            </button>
+          </div>
 
-                    {/* Countdown Timer */}
-                    {isCounting && (
-                      <div className="text-center pt-3 text-md text-black">
-                        {Math.floor(countdown / 60)}:
-                        {(countdown % 60).toString().padStart(2, "0")}
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
+          <div className='mt-3 text-black'>
+            <p>If You Are Already Registred Go To <Link to="/login" className=' text-blue-600 font-semibold'>Login </Link>  </p>
+          </div>
+
+        </form>
+      </div>
+
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <div className="modal-box">
+          <div className="modal-content flex flex-col items-center">
+            <h2>Enter OTP</h2>
+            <form
+              className="flex flex-col justify-center items-center p-8"
+              onSubmit={handleOTPSubmit}
+            >
+              <div className="flex space-x-2">
+                {otp.map((_, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    maxLength="1"
+                    value={otp[index]}
+                    onChange={(e) => handleChange(e.target, index)}
+                    onKeyDown={(e) => handleBackspace(e, index)}
+                    ref={(el) => (inputRefs.current[index] = el)}
+                    className="bg-gray-800 text-white border border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-4 py-2 text-center w-12"
+                    required
+                  />
+                ))}
+              </div>
+              <button type="submit" className="mt-5">
+                {verifyLoading ? (
+                  <span className="loading loading-dots loading-md"></span>
+                ) : (
+                  "Verify OTP"
+                )}
+              </button>
+            </form>
           </div>
         </div>
-      </div>
+      </Dialog>
+
     </div>
   );
-}
+};
 
 export default SignUpPage;
