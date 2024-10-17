@@ -5,16 +5,20 @@ import App from "./App";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <StrictMode>
-    <div className="   text-white"> 
-      <div className="">
-        <App />
+    <Provider store={store} >
+      <div className="   text-white">
+        <div className="">
+          <App />
+        </div>
       </div>
-    </div>
-    <ToastContainer />
+      <ToastContainer />
+    </Provider>
   </StrictMode>
 );

@@ -1,14 +1,23 @@
 import { TextField, Alert, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import UserManagement from "../../service/User";
 import Logo from "../../shared/Logo";
+import authApi from "../../redux/fetures/auth/authApi";
+import { verifyToken } from "../../utils/verifyToken";
+import { setUser } from "../../redux/fetures/auth/authSlice";
+import { useAppDispatch } from '../../redux/hooks';
+
+
+// const currentUser = useSelector(selectCurrentUser);
+
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [login] = authApi.useLoginMutation()
+  const dispatch = useAppDispatch();
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,9 +25,9 @@ function LoginPage() {
   };
 
   const handleLogin = async () => {
-    setErrorMsg(null); // Clear previous error messages
+
+    setErrorMsg(null); 
     setLoading(true);
-    // Validate input fields
     if (!email || !password) {
       setErrorMsg("All fields are required.");
       setLoading(false);
@@ -38,22 +47,36 @@ function LoginPage() {
     }
 
     try {
-      const response = await UserManagement.loginUser(email, password);
+      const userInfo = { email, password }
+      const response = await login(userInfo).unwrap();
+      const token = response.data.accessToken;
+      const user = verifyToken(token);
+      dispatch(setUser({ user, token }));
 
-      if (response && response.token) {
-        localStorage.setItem("token", response.token);
+      if (response?.success) {
+        setLoading(false)
         navigate("/");
-        setLoading(false);
-        window.location.reload();
-      } else {
-        setErrorMsg("Invalid email or password.");
-        setLoading(false);
       }
+
+      // if (response && response.token) {
+      //   localStorage.setItem("token", response.token);
+
+      //   setLoading(false);
+      //   window.location.reload();
+      // } else {
+      //   setErrorMsg("Invalid email or password.");
+      //   setLoading(false);
+      // }
+
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
       setLoading(false);
     }
+
+
+
+
   };
 
   const handleKeyPress = (e) => {
