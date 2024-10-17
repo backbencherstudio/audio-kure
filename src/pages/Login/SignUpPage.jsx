@@ -172,6 +172,20 @@ function SignUpPage() {
 
   return (
     <div className="">
+      <div className="area"> {/* Fixed area covering full viewport */}
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
       <div className="flex justify-center">
         <Logo />
       </div>
@@ -297,8 +311,8 @@ function SignUpPage() {
                   <div className="flex justify-between mt-3">
                     <div
                       className={`w-full text-right ${isResendDisabled
-                          ? "text-gray-400"
-                          : "hover:opacity-85 text-orange-700"
+                        ? "text-gray-400"
+                        : "hover:opacity-85 text-orange-700"
                         } p-3  cursor-pointer underline`}
                       onClick={() => {
                         if (!isResendDisabled) {

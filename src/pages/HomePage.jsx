@@ -13,7 +13,7 @@ function HomePage() {
 
   return (
     <div>
-     
+
       <div className="container z-50 mx-auto bg-transparent ">
 
         <div className="  flex  justify-between items-center">
