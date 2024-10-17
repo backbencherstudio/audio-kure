@@ -41,8 +41,16 @@ const Payment = () => {
 
   const handleApproveOrder = async (data) => {
     if (await data?.facilitatorAccessToken) {
+
+      const persisData = {
+        plan : parsedPlan.plan,
+        
+
+      }
+
+
       toast.success("Payment successful");
-      
+
 
 
 
