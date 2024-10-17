@@ -189,8 +189,8 @@ function SignUpPage() {
       <div className="flex justify-center">
         <Logo />
       </div>
-      <div className="flex justify-center min-h-[80vh]">
-        <div className="flex justify-center flex-col">
+      <div className="flex justify-center min-h-[80vh] text-white ">
+        <div className="flex justify-center flex-col backdrop-blur-md backdrop-brightness-200  rounded-xl  shadow-lg">
           <div className="mx-5">
             <div className="text-center">
               <h2 className="text-4xl text-center">
@@ -201,21 +201,28 @@ function SignUpPage() {
                 access your Healer app
               </p>
             </div>
-            <div className="bg-slate-100 shadow-md px-8 pb-5 rounded-2xl">
+            <div className="  text-white  shadow-md px-8 pb-5 rounded-2xl">
               {step === 1 && (
                 <>
-                  <label className="block mt-5 pt-10 text-gray-500 text-sm">
+                  <label className="block mt-5 mb-2 pt-10  text-sm">
                     Name<span className="text-red-500 text-xs">*</span>
                   </label>
                   <TextField
+                    style={{ color: 'white' }}
                     size="small"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full text-sm"
+                    InputProps={{
+                      style: { color: 'white' },
+                    }}
+                    InputLabelProps={{
+                      style: { color: 'white' },
+                    }}
+                    className="w-full text-sm text-white "
                   />
-                  <label className="block mt-5 text-gray-500 text-sm">
+                  <label className="block mt-5 mb-2  text-sm">
                     Email<span className="text-red-500 text-xs">*</span>
                   </label>
                   <TextField
@@ -224,9 +231,15 @@ function SignUpPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
+                    InputProps={{
+                      style: { color: 'white' }, // Change input text color
+                    }}
+                    InputLabelProps={{
+                      style: { color: 'white' }, // Change label color
+                    }}
                     className="w-full text-sm"
                   />
-                  <label className="block mt-5 text-gray-500 text-sm">
+                  <label className="block mt-5 mb-2  text-sm">
                     Password<span className="text-red-500 text-xs">*</span>
                   </label>
                   <TextField
@@ -236,9 +249,15 @@ function SignUpPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, password: e.target.value })
                     }
-                    className="w-full text-sm"
+                    InputProps={{
+                      style: { color: 'white' }, // Change input text color
+                    }}
+                    InputLabelProps={{
+                      style: { color: 'white' }, // Change label color
+                    }}
+                    className="w-full text-sm text-white "
                   />
-                  <label className="block mt-5 text-gray-500 text-sm">
+                  <label className="block mt-5 mb-2  text-sm">
                     Confirm password
                     <span className="text-red-500 text-xs">*</span>
                   </label>
@@ -252,7 +271,13 @@ function SignUpPage() {
                         confirmPassword: e.target.value,
                       })
                     }
-                    className="w-full text-sm"
+                    InputProps={{
+                      style: { color: 'white' }, // Change input text color
+                    }}
+                    InputLabelProps={{
+                      style: { color: 'white' }, // Change label color
+                    }}
+                    className="w-full text-sm text-white "
                   />
                   {errorMsg && (
                     <Alert severity="error" className="mt-3">
@@ -279,7 +304,7 @@ function SignUpPage() {
               )}
               {step === 2 && (
                 <>
-                  <label className="block mt-5 pt-8 text-gray-500 text-sm">
+                  <label className="block mt-5 mb-2 pt-8  text-sm">
                     Enter OTP<span className="text-red-500 text-xs">*</span>
                   </label>
                   <div className="flex justify-between mt-2">
