@@ -7,6 +7,8 @@ import Logo from "../shared/Logo";
 import { useSelector } from "react-redux";
 import { logOut, selectCurrentUser } from "../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks";
+import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
+import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
@@ -70,34 +72,20 @@ function HomePage() {
               <p className=" mt-5 text-3xl font-medium mb-5">
                 What is your top priority in life?
               </p>
-              <div className="flex flex-col lg:flex-row justify-between gap-5 mb-10 w-full">
+              <div className="flex flex-col items-center lg:flex-row justify-between gap-5 mb-10 w-full">
                 <Link
                   onClick={() => handleAnswerSelect("physical")}
-                  className="w-full group relative"
+                  className="w-full"
                   to={"/question-2"}
                 >
-                  <button className="btnGrad w-full text-xl  font-bold rounded-lg px-10 py-4 transition duration-300 transform hover:scale-105 unique-hover-heart">
-                    Love
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                  </button>
+                  <LoveButton></LoveButton>
                 </Link>
                 <Link
                   onClick={() => handleAnswerSelect("emotional")}
-                  className="w-full group relative"
+                  className="w-full"
                   to={"/question-2"}
                 >
-                  <button className="btnGrad w-full font-bold text-xl rounded-lg px-10 py-4 transition duration-300 transform hover:scale-105 unique-hover-coin">
-                    Money
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                  </button>
+                  <MoneyButton />
                 </Link>
               </div>
 
