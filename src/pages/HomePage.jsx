@@ -11,10 +11,9 @@ import { useAppDispatch } from "../redux/hooks";
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   console.log(currentUser);
-
 
   const handleLOgout = () => {
     // logOutUser({ email: currentUser?.email });
@@ -23,7 +22,6 @@ function HomePage() {
     navigate("/login");
   };
 
-
   const handleAnswerSelect = (selectedAnswer) => {
     const answer = [{ ans1: selectedAnswer }];
     localStorage.setItem("answers", JSON.stringify(answer));
@@ -31,17 +29,21 @@ function HomePage() {
 
   return (
     <div>
-
       <div className="container z-50 mx-auto bg-transparent ">
-
         <div className="  flex  justify-between items-center">
           <Logo />
           <div>
-
-            {
-              currentUser ? <button onClick={() => { handleLOgout() }} >Log Out</button> : <Link to={"/login"}>Log In</Link>
-            }
-
+            {currentUser ? (
+              <button
+                onClick={() => {
+                  handleLOgout();
+                }}
+              >
+                Log Out
+              </button>
+            ) : (
+              <Link to={"/login"}>Log In</Link>
+            )}
           </div>
         </div>
 
@@ -49,15 +51,15 @@ function HomePage() {
           <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="flex-1">
               <h2 className="text-3xl   text-white    merriweather font-bold leading-snug">
-                Forget everything you know about hypnosis and embark on a healing
-                journey with just 5 simple questions that will transform your life
-                forever!
+                Forget everything you know about hypnosis and embark on a
+                healing journey with just 5 simple questions that will transform
+                your life forever!
               </h2>
               <p className="mt-2 lg:max-w-[520.611px]">
-                The following questions may seem unusual, but they are designed to
-                help pinpoint your brain's thinking patterns and behaviors. This
-                will allow us to determine the most effective hypnosis techniques
-                specifically tailored for you.
+                The following questions may seem unusual, but they are designed
+                to help pinpoint your brain's thinking patterns and behaviors.
+                This will allow us to determine the most effective hypnosis
+                techniques specifically tailored for you.
               </p>
               <p className="mt-2 lg:max-w-[520.611px]">
                 Based on your personality type, unlock access to over 100
