@@ -9,23 +9,24 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
+import authApi from "../../redux/fetures/auth/authApi";
 
 const Payment = () => {
   const currentUser = useSelector(selectCurrentUser);
-
-
   const [planData, setPlanData] = useState({})
-  useEffect(()=>{
+  const [purchasePlan] = authApi.usePurchasePlanMutation()
+
+  useEffect(() => {
     const plan = localStorage.getItem("plan")
     const parsedPlan = plan ? JSON.parse(plan) : null;
     const userType = localStorage.getItem("userType")
-    setPlanData({parsedPlan, userType})    
-  },[])
+    setPlanData({ parsedPlan, userType })
+  }, [])
 
   console.log(planData);
-  
 
-  const amount = 2;
+
+  const amount = planData?.parsedPlan?.price;
 
   const handleCreateOrder = async () => {
     try {
@@ -43,13 +44,20 @@ const Payment = () => {
     if (await data?.facilitatorAccessToken) {
 
       const persisData = {
-        plan : parsedPlan.plan,
-        
-
+        plan: planData?.parsedPlan.plan,
+        price: planData?.parsedPlan.price,
+        email: currentUser?.email,
+        userType: planData?.userType
       }
 
+      console.log(persisData);
 
-      toast.success("Payment successful");
+
+      const res = await purchasePlan(persisData);
+      console.log(res);
+
+
+      toast.success("Payment successfullllll");
 
 
 
@@ -197,7 +205,7 @@ const Payment = () => {
 
               {paymentMethod === "credit" && (
                 <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[360px]" : "h-0"
-                } mt-4 p-4 rounded-md`}>
+                  } mt-4 p-4 rounded-md`}>
                   <StripeButtonComponent amount={amount} />
                 </div>
               )}
