@@ -18,6 +18,7 @@ import QuestionPage4 from "./pages/Questions/QuestionPage4";
 import QuestionPage5 from "./pages/Questions/QuestionPage5";
 import Payment from "./pages/paymentPage/Payment";
 import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
+import Physical from "./pages/Physical/Physical";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "welcome",
         element: <WelcomePage />,
+      },
+      {
+        path: "/physical",
+        element: <Physical />,
       },
       {
         path: "/payment",
