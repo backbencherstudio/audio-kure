@@ -109,8 +109,8 @@ function LoginPage() {
                 {errorMsg}
               </Alert>
             )}
-            <div className="bg-slate-100 shadow-md px-8 pb-5 pt-5 rounded-lg">
-              <label className="block mt-5 text-gray-500 text-sm">
+            <div className="backdrop-blur-md backdrop-brightness-200 shadow-md px-8 pb-5 pt-5 rounded-lg">
+              <label className="block mt-5 text-white text-sm">
                 Email<span className="text-red-500 text-xs">*</span>
               </label>
               <TextField
@@ -118,9 +118,9 @@ function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full text-sm"
+                className="w-full text-sm bg-white/50 rounded-md"
               />
-              <label className="block mt-5 text-gray-500 text-sm">
+              <label className="block mt-5 text-white text-sm">
                 Password<span className="text-red-500 text-xs">*</span>
               </label>
               <TextField
@@ -129,10 +129,10 @@ function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full text-sm"
+                className="w-full text-sm bg-white/50 rounded-md"
               />
 
-              <p className="text-black mt-3 font-semibold "> If you are not registrad go to  <Link to="/signup" className="text-blue-600" > Registred </Link>  </p>
+              <p className=" mt-3 font-semibold "> If you are not registrad go to  <Link to="/signup" className="text-blue-600" > Registred </Link>  </p>
 
 
               <div
