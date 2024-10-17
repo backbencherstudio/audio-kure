@@ -26,7 +26,6 @@
 
 .buy-gpay {
     background-color: black;
-    color: white;
     font-size: 14px;
     font-weight: 500;
     padding: 10px;
@@ -57,7 +56,6 @@
 
 .submit-button {
     background-color: #000;
-    color: white;
     padding: 12px;
     border-radius: 5px;
     font-size: 16px;
