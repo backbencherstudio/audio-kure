@@ -5,7 +5,7 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen"> {/* Set flex container with min height */}
       <div className="area"> {/* Fixed area covering full viewport */}
-        <ul className="circles"> 
+        <ul className="circles">
           <li></li>
           <li></li>
           <li></li>
@@ -18,10 +18,12 @@ const Layout = () => {
           <li></li>
         </ul>
       </div>
-      <div className="flex-grow"> {/* This will fill the remaining space */}
-        <Outlet />
+      <div>
+        <div className=" px-2 lg:px-0">
+          <Outlet />
+        </div>
+        <Footer2 />
       </div>
-      <Footer2 />
     </div>
   );
 };

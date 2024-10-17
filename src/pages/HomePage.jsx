@@ -12,18 +12,18 @@ function HomePage() {
   };
 
   return (
-    <div>
+    <div className=" ">
 
-        <div className="  flex items-center container justify-between mx-auto ">
-          <Logo />
-          <div>
-            <Link to={"/login"}>Log In</Link>
-          </div>
+      <div className="  flex items-center container justify-between mx-auto ">
+        <Logo />
+        <div>
+          <Link to={"/login"}>Log In</Link>
         </div>
+      </div>
       <div className="container z-50 mx-auto bg-transparent ">
 
         <div className="container   mx-auto px-4">
-          <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
+          <div className="flex flex-col-reverse lg:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="flex-1">
               <h2 className="text-3xl   text-white    merriweather font-bold leading-snug">
                 Forget everything you know about hypnosis and embark on a healing
