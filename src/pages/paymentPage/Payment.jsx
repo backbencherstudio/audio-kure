@@ -3,8 +3,10 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import PayPalButtonComponent from "./PayPalButtonComponent";
 import StripeButtonComponent from "./StripePayment/StripeButtonComponent";
 import logo from "./../../assets/images/logo.png";
+import logoPaypal from "./../../assets/images/PayPal.png";
+import credit_cards from "./../../assets/images/credit_cards.png";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Payment = () => {
   const amount = 2;
@@ -40,104 +42,138 @@ const Payment = () => {
   };
 
   const [paymentMethod, setPaymentMethod] = useState("credit");
+  const [isPayPalVisible, setIsPayPalVisible] = useState(false);
+  const [isCreditVisible, setIsCreditVisible] = useState(false);
+
+  useEffect(() => {
+    if (paymentMethod === "paypal") {
+      setIsPayPalVisible(true);
+      setIsCreditVisible(false);  // Hide Credit section
+    } else if (paymentMethod === "credit") {
+      setIsPayPalVisible(false);  // Hide PayPal section
+      setIsCreditVisible(true);
+    } else {
+      setIsPayPalVisible(false);
+      setIsCreditVisible(false);
+    }
+  }, [paymentMethod]);
 
   return (
-    <div>
-      <div className="bg-[#07001C]">
+    <div className=" min-h-[95vh] px-4">
+      <div className="">
         <nav className="max-w-[1400px] mx-auto py-2 px-4">
           <img src={logo} alt="logo" className="w-16" />
         </nav>
       </div>
+      <div className="backdrop-blur-md backdrop-brightness-200 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
 
-      <div className="max-w-[1140px] mx-auto">
-        <div className="max-w-[500px]">
-          <div
-            className={`border rounded-lg mb-4 ${
-              paymentMethod === "paypal" ? "border-blue-500" : ""
-            }`}
-            onClick={() => setPaymentMethod("paypal")}
-          >
-            <label className="flex items-center justify-between p-4 cursor-pointer">
-              <div className="flex items-center">
-                <div
-                  className={`w-5 h-5 rounded-full border-2 ${
-                    paymentMethod === "paypal"
-                      ? "border-teal-500 bg-teal-500"
-                      : "border-gray-300"
-                  } mr-3 flex items-center justify-center`}
-                >
-                  {paymentMethod === "paypal" && (
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  )}
-                </div>
-                <span>PayPal</span>
+        <div className="md:w-2/5">
+          <h1 className=" text-xl font-medium mb-6 pb-6 border-b">Order summary</h1>
+          <div className="flex items-center justify-between border-b pb-4 mb-4">
+            <div className="flex items-center">
+              {/* Image */}
+              <div>
+                <img
+                  src={logoPaypal}
+                  alt="healer Plan"
+                  className="w-20 h-20 object-cover border rounded-md mr-4"
+                />
               </div>
-              <div className="text-blue-600 font-bold">PayPal</div>
-            </label>
-
-            {paymentMethod === "paypal" && (
-              <div className="bg-white mt-4 p-4 rounded-md">
-                <PayPalScriptProvider
-                  options={{
-                    "client-id":
-                      "AeMnBMlrboT2yZ77Ny1Zuwm-UnhJeeMzvE1D1ana1ZetUAzPfo7C-Px41iR4FijH5SN1FHEYrGokg3G2",
-                  }}
-                >
-                  <PayPalButtonComponent
-                    amount={amount}
-                    handleApproveOrder={handleApproveOrder}
-                  />
-                </PayPalScriptProvider>
+              <div className="space-y-2">
+                <h3 className="text-sm font-medium">1-month plan</h3>
+                <p className="text-xs text-gray-500">Discount 51%</p>
               </div>
-            )}
+            </div>
+            {/* Price */}
+            <div className="text-right space-y-2">
+              <p className="text-sm font-medium">$30.99</p>
+              <p className="text-xs text-red-500">-$15.80</p>
+            </div>
           </div>
 
-          <div
-            className={`border rounded-lg ${
-              paymentMethod === "credit" ? "border-blue-500" : ""
-            }`}
-            onClick={() => setPaymentMethod("credit")}
-          >
-            <label className="flex items-center justify-between p-4 cursor-pointer">
-              <div className="flex items-center">
-                <div
-                  className={`w-5 h-5 rounded-full border-2 ${
-                    paymentMethod === "credit"
+          {/* Total */}
+          <div className="flex justify-between items-center">
+            <p className="text-lg font-bold">Total:</p>
+            <p className="text-lg font-bold ">$15.19</p>
+          </div>
+        </div>
+        <div className="md:w-3/4 mt-20 md:mt-0">
+          <h1 className=" text-xl font-medium mb-6">Select a payment method</h1>
+          <div className="max-w-[550px]">
+            <div
+              className={`border rounded-lg mb-4 ${paymentMethod === "paypal" ? "border-zinc-300" : ""
+                }`}
+              onClick={() => setPaymentMethod("paypal")}
+            >
+              <label className={`flex items-center justify-between p-4 cursor-pointer ${paymentMethod === "paypal" ? 'border-b' : ''} rounded-t-lg`}>
+                <div className="flex items-center">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 ${paymentMethod === "paypal"
                       ? "border-teal-500 bg-teal-500"
                       : "border-gray-300"
-                  } mr-3 flex items-center justify-center`}
-                >
-                  {paymentMethod === "credit" && (
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                  )}
+                      } mr-3 flex items-center justify-center`}
+                  >
+                    {paymentMethod === "paypal" && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
+                  </div>
+                  <span className="">PayPal</span>
                 </div>
-                <span>Credit card</span>
-              </div>
-              <div className="flex space-x-2">
-                <img src="/api/placeholder/30/20" alt="Visa" className="h-5" />
-                <img
-                  src="/api/placeholder/30/20"
-                  alt="Mastercard"
-                  className="h-5"
-                />
-                <img
-                  src="/api/placeholder/30/20"
-                  alt="Maestro"
-                  className="h-5"
-                />
-                <img
-                  src="/api/placeholder/30/20"
-                  alt="PayPal"
-                  className="h-5"
-                />
-              </div>
-            </label>
+                <div className="text-blue-600 font-bold"><img src={logoPaypal} alt="" className="w-20" /></div>
+              </label>
 
-            {paymentMethod === "credit" && (
-              <div className="bg-white mt-4 p-4 rounded-md">
-                <StripeButtonComponent amount={amount} />
-              </div>
-            )}
+              {paymentMethod === "paypal" && (
+                <div
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${isPayPalVisible ? "h-[80px]" : "h-0 duration-300"
+                    }   mt-4 rounded-md`}
+                >
+                  <PayPalScriptProvider
+                    options={{
+                      "client-id":
+                        "AeMnBMlrboT2yZ77Ny1Zuwm-UnhJeeMzvE1D1ana1ZetUAzPfo7C-Px41iR4FijH5SN1FHEYrGokg3G2",
+                    }}
+                  >
+                    <PayPalButtonComponent
+                      amount={amount}
+                      handleApproveOrder={handleApproveOrder}
+                    />
+                  </PayPalScriptProvider>
+                </div>
+              )}
+            </div>
+
+            <div
+              className={`border rounded-lg ${paymentMethod === "credit" ? "border-zinc-300" : ""
+                }`}
+              onClick={() => setPaymentMethod("credit")}
+            >
+              <label className={`flex items-center justify-between p-4 cursor-pointer ${paymentMethod === "credit" ? 'border-b rounded-t' : 'rounded-lg'} `}>
+                <div className="flex items-center">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 ${paymentMethod === "credit"
+                      ? "border-teal-500 bg-teal-500"
+                      : "border-gray-300"
+                      } mr-3 flex items-center justify-center`}
+                  >
+                    {paymentMethod === "credit" && (
+                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                    )}
+                  </div>
+                  <span className="">Credit card</span>
+                </div>
+                <div className="flex space-x-2">
+                  <img src={credit_cards} alt="Visa" className="h-5" />
+
+                </div>
+              </label>
+
+              {paymentMethod === "credit" && (
+                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[360px]" : "h-0"
+                } mt-4 p-4 rounded-md`}>
+                  <StripeButtonComponent amount={amount} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

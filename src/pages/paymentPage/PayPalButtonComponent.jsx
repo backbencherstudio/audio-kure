@@ -4,7 +4,7 @@ import { PayPalButtons, FUNDING } from "@paypal/react-paypal-js";
 
 const PayPalButtonComponent = ({ amount, handleApproveOrder }) => {
     return (
-        <div className="border border-yellow-400 bg-yellow-50 px-3 pb-2 pt-3 rounded-lg shadow-md">
+        <div className="px-3 pb-2 pt-1 ">
             
             <PayPalButtons
                 createOrder={(data, actions) => {
@@ -27,8 +27,8 @@ const PayPalButtonComponent = ({ amount, handleApproveOrder }) => {
                 }}
                 style={{
                     layout: 'vertical', 
-                    color: 'blue',
-                    shape: 'rect',
+                    color: 'gold',
+                    shape: 'pill',
                     label: 'paypal',
                 }}
                 fundingSource={FUNDING.PAYPAL} 
