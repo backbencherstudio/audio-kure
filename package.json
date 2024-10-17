@@ -10,10 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-   "@paypal/react-paypal-js": "^8.7.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.4",
+    "@paypal/react-paypal-js": "^8.7.0",
     "@ramonak/react-progress-bar": "^5.3.0",
     "@stripe/react-stripe-js": "^2.8.1",
     "@stripe/stripe-js": "^4.8.0",
@@ -30,6 +30,7 @@
     "react-toastify": "^10.0.6",
     "react-tsparticles": "^2.12.2",
     "sort-by": "^1.2.0",
+    "swiper": "^11.1.14",
     "tsparticles": "^3.5.0"
   },
   "devDependencies": {

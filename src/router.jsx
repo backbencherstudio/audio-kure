@@ -19,6 +19,7 @@ import QuestionPage5 from "./pages/Questions/QuestionPage5";
 import Payment from "./pages/paymentPage/Payment";
 import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 import Physical from "./pages/Physical/Physical";
+import DailyAudios from "./pages/UserAudios/DailyAudios";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/daily-audios",
+    element: <DailyAudios />,
+  }
 ]);
 
 export default router;
