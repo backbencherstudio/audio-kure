@@ -4,6 +4,8 @@ import home_members from "./../assets/images/home_members.png";
 import home_hero_image from "./../assets/images/home_hero_image.png";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
+import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
+import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 
 function HomePage() {
   const handleAnswerSelect = (selectedAnswer) => {
@@ -50,29 +52,15 @@ function HomePage() {
                   onClick={() => handleAnswerSelect("physical")}
                   className="w-full group relative"
                   to={"/question-2"}
-                >
-                  <button className="btnGrad w-full text-xl  font-bold rounded-lg px-10 py-4 transition duration-300 transform hover:scale-105 unique-hover-heart">
-                    Love
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                    <span className="icon hidden group-hover:block">❤️</span>
-                  </button>
+                > 
+                  <LoveButton></LoveButton>
                 </Link>
                 <Link
                   onClick={() => handleAnswerSelect("emotional")}
                   className="w-full group relative"
                   to={"/question-2"}
                 >
-                  <button className="btnGrad w-full font-bold text-xl rounded-lg px-10 py-4 transition duration-300 transform hover:scale-105 unique-hover-coin">
-                    Money
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                    <span className="icon  hidden group-hover:block">💰</span>
-                  </button>
+                  <MoneyButton/>
                 </Link>
               </div>
 
