@@ -18,7 +18,7 @@ const Layout = () => {
           <li></li>
         </ul>
       </div>
-      <div className="flex-grow"> {/* This will fill the remaining space */}
+      <div className="flex-grow"> 
         <Outlet />
       </div>
       <Footer2 />
