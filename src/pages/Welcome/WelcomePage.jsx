@@ -22,7 +22,7 @@ const WelcomePage = () => {
   localStorage.setItem("userType", userType);
   return (
     <div>
-      <Logo />
+     <div className="container mx-auto"> <Logo /></div>
       <div className="relative max-w-[1400px] mx-auto overflow-hidden">
         <div className=" mx-auto relative">
           <div className="  flex items-center justify-center lg:pt-20 pt-5 mx-5 ">
