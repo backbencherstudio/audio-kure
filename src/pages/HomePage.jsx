@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
-import home_hero_image from "./../assets/images/home_hero_image.png";
+// import home_hero_image from "./../assets/images/home_hero_image.png";
+// import home_hero_image from "https://www.wellmeright.com/blog/content/images/size/w2000/2024/03/Quantum-Healing-Hypnosis-Benefits.jpg";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
 import { useSelector } from "react-redux";
@@ -72,7 +73,7 @@ function HomePage() {
               <p className=" mt-5 text-3xl font-medium mb-5">
                 What is your top priority in life?
               </p>
-              <div className="flex flex-col items-center lg:flex-row justify-between gap-5 mb-10 w-full">
+              <div className="flex flex-col items-center lg:flex-row justify-between gap-12 mb-10 w-full">
                 <Link
                   onClick={() => handleAnswerSelect("physical")}
                   className="w-full"
@@ -101,7 +102,7 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center">
-              <img className=" " alt="" src={home_hero_image} />
+              <img className="rounded-xl " alt="" src="https://www.wellmeright.com/blog/content/images/size/w2000/2024/03/Quantum-Healing-Hypnosis-Benefits.jpg" />
             </div>
           </div>
           <Footer />

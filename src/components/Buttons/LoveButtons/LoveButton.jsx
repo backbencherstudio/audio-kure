@@ -4,8 +4,8 @@ import './LoveButton.css';
 
 const LoveButton = () => {
     return (
-        <div>
-            <button className="button w-2/3 lg:my-10 mx-auto rounded-xl">
+        <div className='w-full'>
+            <button className="button  w-full lg:my-5 mx-auto rounded-xl">
                 <span className="button__text ">
                     Love
                 </span>
