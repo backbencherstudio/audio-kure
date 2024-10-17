@@ -170,8 +170,8 @@ const SubscriptionPlan = () => {
   };
 
   return (
-    <div className="bg-[#191435] text-white">
-      <div className="bg-[#07001C]">
+    <div className="text-white">
+      <div className="">
         <nav className="max-w-[1400px] mx-auto py-2 px-4">
           <Logo />
         </nav>
@@ -211,39 +211,6 @@ const SubscriptionPlan = () => {
                   />
                 ))}
               </div>
-    return (
-        <div className='text-white'>
-            <div className=''>
-                <nav className='max-w-[1400px] mx-auto py-2 px-4'>
-                    <Logo />
-                </nav>
-            </div>
-            <CountDownTimer />
-            <div className='max-w-[1400px] mx-auto mt-24'>
-                <div>
-                    <h1 style={{ fontFamily: 'Merriweather' }} className='text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 px-4 xl:px-0'>Congratulations! you are <span className='text-[#8A5EFF] capitalize'>physical</span> suggestible</h1>
-                </div>
-                <div className='md:flex gap-6 px-4'>
-                    <div className="md:w-1/2 ">
-                        <h2 className="text-[1.125rem] text-white font-semibold mb-4">Select your plan:</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="space-y-4 mb-4">
-                                {plans.map(plan => (
-                                    <PaymentPlan
-                                        key={plan.id}
-                                        id={plan.id}
-                                        duration={plan.duration}
-                                        originalPrice={plan.originalPrice}
-                                        discountedPrice={plan.discountedPrice}
-                                        perDay={plan.perDay}
-                                        originalPerDay={plan.originalPerDay}
-                                        isSelected={selectedPlan === plan.id}
-                                        isPopular={plan.isPopular}
-                                        hasGift={plan.hasGift}
-                                        onSelect={handlePlanSelect}
-                                    />
-                                ))}
-                            </div>
 
               <p className="text-base text-[#bec4d2] font-medium mb-10">
                 By clicking Get my plan, I agree to pay ${selectedPrice} for my
