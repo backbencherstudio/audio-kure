@@ -135,8 +135,7 @@ const SubscriptionPlan = () => {
         hasGift: true,
       },
     ];
-
-    // Adjust prices based on type
+ 
     return basePlans.map((plan) => {
       if (type === "physical") {
         return {
@@ -180,19 +179,19 @@ const SubscriptionPlan = () => {
   return (
     <div className="text-white">
       <div className="">
-        <nav className="max-w-[1400px] mx-auto py-2 px-4">
+        <nav className="container mx-auto py-2 px-4">
           <Logo />
         </nav>
       </div>
       <CountDownTimer />
-      <div className="max-w-[1400px] mx-auto mt-24">
+      <div className="container mx-auto mt-5">
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
-            className="text-[1.75rem] md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-14 px-4 xl:px-0"
+            className="text-[1.75rem]  md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
           >
             Congratulations! you are{" "}
-            <span className="text-[#8A5EFF] capitalize">physical</span>{" "}
+            <span className="text-[#8A5EFF] merriweather capitalize">physical</span>{" "}
             suggestible
           </h1>
         </div>
@@ -328,7 +327,7 @@ const SubscriptionPlan = () => {
         </div>
         <GoogleReviews />
       </div>
-      <div className="max-w-[1400px] mx-auto px-4">
+      <div className="container mx-auto px-4">
         <Footer />
       </div>
     </div>
