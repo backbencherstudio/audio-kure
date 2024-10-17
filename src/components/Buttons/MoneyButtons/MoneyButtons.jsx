@@ -8,13 +8,13 @@ import './Money.css';
 const MoneyButton = () => {
     return (
         <div>
-            <button className="button w-2/3 my-10 rounded-xl">
+            <button className="button w-2/3 lg:my-10 mx-auto rounded-xl">
                 <span className="button__text ">
                     Money
                 </span>
-                <img src={money4} alt="" className="button__cone" />
-                <img src={money2} alt="" className="button__torus" />
-                <img src={money3} alt="" className="button__icosahedron" />
+                <img src={money} alt="" className="button__cone" />
+                <img src={money} alt="" className="button__torus" />
+                <img src={money} alt="" className="button__icosahedron" />
                 <img src={money} alt="" className="button__sphere" />
             </button>
 

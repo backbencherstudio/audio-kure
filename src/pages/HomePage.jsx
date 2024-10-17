@@ -47,20 +47,20 @@ function HomePage() {
               <p className=" mt-5 text-3xl font-medium mb-5">
                 What is your top priority in life?
               </p>
-              <div className="flex flex-col lg:flex-row justify-between gap-5 mb-10 w-full">
+              <div className="flex flex-col items-center lg:flex-row justify-between gap-5 mb-10 w-full">
                 <Link
                   onClick={() => handleAnswerSelect("physical")}
-                  className="w-full group relative"
+                  className="w-full"
                   to={"/question-2"}
-                > 
+                >
                   <LoveButton></LoveButton>
                 </Link>
                 <Link
                   onClick={() => handleAnswerSelect("emotional")}
-                  className="w-full group relative"
+                  className="w-full"
                   to={"/question-2"}
                 >
-                  <MoneyButton/>
+                  <MoneyButton />
                 </Link>
               </div>
 
