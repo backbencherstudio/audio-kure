@@ -1,8 +1,5 @@
 import React from 'react';
-import money from "./../../../assets/buttons/love/money.png";
-import money2 from "./../../../assets/buttons/love/money2.png";
-import money3 from "./../../../assets/buttons/love/money3.png";
-import money4 from "./../../../assets/buttons/love/money4.png";
+import money from "./../../../assets/buttons/love/money.png"; 
 import './Money.css';
 
 const MoneyButton = () => {
