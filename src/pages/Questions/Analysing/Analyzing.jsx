@@ -29,7 +29,7 @@ const Analyzing = () => {
 
   useEffect(() => {
     if (progress >= 100) {
-      // navigate("/welcome");
+      navigate("/welcome");
     }
   }, [progress, navigate]);
 
