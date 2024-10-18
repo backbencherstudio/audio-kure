@@ -20,6 +20,7 @@ import Payment from "./pages/paymentPage/Payment";
 import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 import Physical from "./pages/Physical/Physical";
 import SignUpPage from "./pages/Login/SignUpPage";
+import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "/payment",
         element: <Payment />,
+      },
+      {
+        path: "/orderConfirmation",
+        element: <OrderConfirmation />,
       },
     ],
   },
