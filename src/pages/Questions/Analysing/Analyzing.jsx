@@ -14,22 +14,22 @@ const Analyzing = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((oldProgress) => {
-       
+
         if (oldProgress < 99) {
           return oldProgress + 1;
         } else {
           clearInterval(interval);
-          return 100; 
+          return 100;
         }
       });
-    }, 30); 
+    }, 30);
 
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (progress >= 100) {
-      navigate("/welcome");
+      // navigate("/welcome");
     }
   }, [progress, navigate]);
 
