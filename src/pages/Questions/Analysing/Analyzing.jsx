@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Analyzing.css";
+import Brain from "./Brain/BrainSVG";
+import BrainSVG from "./Brain/BrainSVG";
 
 const Analyzing = () => {
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const Analyzing = () => {
 
   useEffect(() => {
     if (progress >= 100) {
-      // navigate("/welcome");
+      navigate("/welcome");
     }
   }, [progress, navigate]);
 
@@ -39,11 +41,17 @@ const Analyzing = () => {
   );
 
   return (
-    <div className="flex  items-center justify-center lg:pt-20 pt-5 mx-5">
-      <div className="loading-container lg:w-1/3 p-2 lg:p-20">
+    <div className="flex  items-center justify-center  lg:mt-10 mx-5">
+      <div className=" backdrop-blur-md border rounded-md lg:w-1/3 p-2 lg:p-10">
+
         <h1 className="text-3xl my-3 mb-4">
+
           All set! Just a moment while we process your data...
         </h1>
+        <div className="h-52 my-5    ">
+
+          <BrainSVG />
+        </div>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${progress}%` }} />
         </div>
