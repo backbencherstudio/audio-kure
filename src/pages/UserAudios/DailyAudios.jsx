@@ -14,10 +14,6 @@ const DailyAudios = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
