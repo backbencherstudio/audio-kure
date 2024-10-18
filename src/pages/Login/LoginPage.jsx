@@ -63,7 +63,7 @@ function LoginPage() {
           return
         }
         setLoading(false)
-        navigate("/");
+        navigate("/payment");
       }
 
     } catch (error) {

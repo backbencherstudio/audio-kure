@@ -38,9 +38,10 @@ const DailyAudios = () => {
                           ring-1 ring-black ring-opacity-5 transition transform 
                           ease-out duration-300 origin-top-right z-10">
 
-              <div>
+              <div className='flex justify-center items-center' >
                 {currentUser ? (
                   <button
+                    className='text-center'
                     onClick={() => {
                       handleLOgout();
                     }}
@@ -48,7 +49,7 @@ const DailyAudios = () => {
                     Log Out
                   </button>
                 ) : (
-                  <Link to={"/login"}>Log In</Link>
+                  <Link to={"/login"} className='text-center mx-auto' >Log In</Link>
                 )}
               </div>
 
