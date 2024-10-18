@@ -9,6 +9,7 @@ const DailyAudios = () => {
     const handleDropdown = () => {
         setIsOpen(!isOpen);
     }
+    
 
   return (
     <div className='area overflow-y-scroll'>

@@ -11,3 +11,11 @@
 .swiper-pagination-bullet-active {
   background: #4937af; /* Customize active pagination bullet color */
 }
+
+.days-slider {
+  overflow: visible; /* Allow overflow to see the last slide */
+}
+
+.swiper-slide {
+  width: auto; /* Adjust the width */
+}
