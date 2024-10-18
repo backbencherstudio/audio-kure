@@ -10,6 +10,7 @@ import { logOut, selectCurrentUser } from "../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks";
 import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
 import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
+import heroImage from './../assets/hero.jpg'
 
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
@@ -102,7 +103,7 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center">
-              <img className="rounded-xl " alt="" src="https://www.wellmeright.com/blog/content/images/size/w2000/2024/03/Quantum-Healing-Hypnosis-Benefits.jpg" />
+              <img className="rounded-xl " alt="" src={heroImage} />
             </div>
           </div>
           <Footer />
