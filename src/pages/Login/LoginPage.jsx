@@ -23,11 +23,12 @@ function LoginPage() {
     return re.test(String(email).toLowerCase());
   };
 
+  const currentDate = new Date();
   const handleLogin = async () => {
 
     setErrorMsg(null);
     setLoading(true);
-    
+
     if (!email || !password) {
       setErrorMsg("All fields are required.");
       setLoading(false);
@@ -53,7 +54,14 @@ function LoginPage() {
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
 
+      const expiresDate = new Date(user?.expiresDate)
+
       if (response?.success) {
+        if (currentDate < expiresDate) {
+          navigate("/daily-audios");
+          setLoading(false)
+          return
+        }
         setLoading(false)
         navigate("/payment");
       }
@@ -121,8 +129,8 @@ function LoginPage() {
                 className="w-full text-sm bg-white/20 text-white rounded-md"
                 InputProps={{
 
-                  style: { color: 'white' } 
-          
+                  style: { color: 'white' }
+
                 }}
               />
               <label className="block mt-5 text-white text-sm mb-2">
@@ -137,10 +145,10 @@ function LoginPage() {
                 className="w-full text-sm bg-white/20 text-white rounded-md"
                 InputProps={{
 
-                  style: { color: 'white', } 
-          
+                  style: { color: 'white', }
+
                 }}
-                
+
               />
 
               <p className=" mt-3 font-semibold "> If you are not registrad go to  <Link to="/signup" className="text-blue-600" > Registred </Link>  </p>

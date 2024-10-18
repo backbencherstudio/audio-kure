@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import sessionImg from '../../assets/images/cure_session.png';
 // import audio1 from '../../assets/audios/audio1.mp3';
 // import audio2 from '../../assets/audios/audio2.mp3';
@@ -89,7 +89,7 @@ const Sessions = () => {
     sessions.forEach((session, index) => {
       session.isUnlocked = completedSessions.includes(index); // Unlock if previous session completed
     });
-  }, [completedSessions]);
+  }, []);
 
   const handlePlayAudio = (session) => {
     setCurrentAudio(session);
