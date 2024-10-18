@@ -35,6 +35,7 @@
     "react-tsparticles": "^2.12.2",
     "redux-persist": "^6.0.0",
     "sort-by": "^1.2.0",
+    "swiper": "^11.1.14",
     "tsparticles": "^3.5.0"
   },
   "devDependencies": {
