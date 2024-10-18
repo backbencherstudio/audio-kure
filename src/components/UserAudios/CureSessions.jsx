@@ -11,7 +11,7 @@ import Sessions from './Sessions';
 const CureSessions = () => {
   return (
     <div>
-        <div className='container mx-4 md:mx-auto'>
+        <div className='max-w-7xl mx-4 md:mx-auto'>
             <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey em!</div>
             <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
             <Swiper

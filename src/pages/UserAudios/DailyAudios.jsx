@@ -12,7 +12,7 @@ const DailyAudios = () => {
 
   return (
     <div className='area overflow-y-scroll'>
-    <div className='container mx-auto'>
+    <div className='max-w-7xl mx-auto'>
       <div className='relative'>
         <div className='grid justify-end my-4 mx-4'>
           <button onClick={handleDropdown}>
