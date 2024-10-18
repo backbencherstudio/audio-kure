@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
+  // baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://kure-server.vercel.app/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -17,8 +18,6 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
- console.log(result);
- 
     
   if (result?.error?.status === 403) {
     toast.error(`${result?.error?.data.message}`);

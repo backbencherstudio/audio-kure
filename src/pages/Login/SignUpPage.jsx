@@ -1,19 +1,21 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../redux/fetures/auth/authApi";
 import { Dialog } from "@mui/material";
 
 const SignUpPage = () => {
   const inputStyle =
-    "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
+    "bg-white/20 text-white shadow appearance-none rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-white placeholder:text-sm";
   const [registerUser, { isLoading }] = authApi.useRegisterUserMutation();
   const [verifyOTP, { isLoading: verifyLoading }] =
     authApi.useVerifyOTPMutation();
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  
+ 
 
   const {
     register,
@@ -21,17 +23,17 @@ const SignUpPage = () => {
     formState: { errors },
     watch,
   } = useForm();
+
+
   const password = watch("password", "");
-
   const onSubmit = async (data) => {
-    console.log(data);
-
     if (data.password !== data.confirmPassword) {
       toast.error("password not matched");
       return;
     }
 
     setUserEmail(data?.email);
+    
     const res = await registerUser(data);
     if (res?.data?.success) {
       toast("Check Your Email For Verify OTP");
@@ -117,15 +119,29 @@ const SignUpPage = () => {
 
   return (
     <div className=" h-screen flex items-center justify-center">
-      <div className="w-[25%]">
+       <div className="area"> {/* Fixed area covering full viewport */}
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div className="md:w-[25%] ">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="backdrop-blur-md backdrop-brightness-200 shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-sm font-bold mb-2">
               Username
             </label>
             <input
@@ -142,7 +158,7 @@ const SignUpPage = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-sm font-bold mb-2">
               Email
             </label>
             <input
@@ -165,7 +181,7 @@ const SignUpPage = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-sm font-bold mb-2">
               Password
             </label>
             <input
@@ -188,7 +204,7 @@ const SignUpPage = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-sm font-bold mb-2">
               Confirm Password
             </label>
             <input
@@ -211,7 +227,7 @@ const SignUpPage = () => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-[120px] flex justify-center items-center "
+              className="btnGrad w-full text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline flex justify-center items-center hover:scale-105 duration-300"
             >
               {isLoading ? (
                 <span className="loading loading-dots loading-md"></span>
@@ -221,7 +237,7 @@ const SignUpPage = () => {
             </button>
           </div>
 
-          <div className="mt-3 text-black">
+          <div className="mt-3">
             <p>
               If You Are Already Registred Go To{" "}
               <Link to="/login" className=" text-blue-600 font-semibold">

@@ -10,7 +10,7 @@ import EmailPage from "./pages/EmailPage";
 import AudioLayout from "./pages/Audios/Audios";
 import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
-import SignUpPage from "./pages/Login/SignupPage";
+// import SignUpPage from "./pages/Login/SignupPage";
 import LoginPage from "./pages/Login/LoginPage";
 import QuestionPage2 from "./pages/Questions/QuestionPage2";
 import QuestionPage3 from "./pages/Questions/QuestionPage3";
@@ -19,6 +19,12 @@ import QuestionPage5 from "./pages/Questions/QuestionPage5";
 import Payment from "./pages/paymentPage/Payment";
 import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 import Physical from "./pages/Physical/Physical";
+import SignUpPage from "./pages/Login/SignUpPage";
+import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
+import DailyAudios from "./pages/UserAudios/DailyAudios";
+import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
+import ProtectedRoute from "./layout/ProtectedRoute"
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,7 +33,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: <PPurchesProtectorRoute>
+          <HomePage />
+        </PPurchesProtectorRoute>
       },
       {
         path: "question-2",
@@ -77,6 +85,10 @@ const router = createBrowserRouter([
         path: "/payment",
         element: <Payment />,
       },
+      {
+        path: "/orderConfirmation",
+        element: <OrderConfirmation />,
+      },
     ],
   },
   {
@@ -101,6 +113,12 @@ const router = createBrowserRouter([
         element: <AudioDescriptions></AudioDescriptions>,
       },
     ],
+  },
+  {
+    path: "/daily-audios",
+    element: <ProtectedRoute>
+      <DailyAudios />
+    </ProtectedRoute>
   },
 ]);
 

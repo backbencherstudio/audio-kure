@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import PayPalButtonComponent from "./PayPalButtonComponent";
@@ -7,14 +8,32 @@ import logoPaypal from "./../../assets/images/PayPal.png";
 import credit_cards from "./../../assets/images/credit_cards.png";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
+import authApi from "../../redux/fetures/auth/authApi";
+import Logo from "../../shared/Logo";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
-  const amount = 2;
+  const navigate = useNavigate()
+  const currentUser = useSelector(selectCurrentUser);
+  const [planData, setPlanData] = useState({})
+  const [purchasePlan] = authApi.usePurchasePlanMutation()
+
+  useEffect(() => {
+    const plan = localStorage.getItem("plan")
+    const parsedPlan = plan ? JSON.parse(plan) : null;
+    const userType = localStorage.getItem("userType")
+    setPlanData({ parsedPlan, userType })
+  }, [])
+
+  const amount = parseFloat(planData?.parsedPlan?.price);
 
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/payment",
+        // "http://localhost:5000/api/v1/payment",
+        "https://kure-server.vercel.app/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -24,13 +43,25 @@ const Payment = () => {
   };
 
   const handleApproveOrder = async (data) => {
+
     if (await data?.facilitatorAccessToken) {
-      console.log(30, data?.facilitatorAccessToken);
+      const persisData = {
+        plan: planData?.parsedPlan.plan,
+        price: planData?.parsedPlan.price,
+        email: currentUser?.email,
+        userType: planData?.userType
+      }
+      const res = await purchasePlan(persisData);
+      if (res?.data?.success) {
+        navigate("/daily-audios")
+      }
       toast.success("Payment successful");
     }
+
     try {
       await axios.post(
-        "http://localhost:5000/api/v1/payment/execute-payment",
+        // "http://localhost:5000/api/v1/payment/execute-payment",
+        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
@@ -59,11 +90,9 @@ const Payment = () => {
   }, [paymentMethod]);
 
   return (
-    <div className=" min-h-[95vh] px-4">
-      <div className="">
-        <nav className="max-w-[1400px] mx-auto py-2 px-4">
-          <img src={logo} alt="logo" className="w-16" />
-        </nav>
+    <div className=" min-h-[95vh] container mx-auto">
+      <div className="">     {/* <img src={logo} alt="logo" className="w-16" /> */}
+        <Logo />
       </div>
       <div className="backdrop-blur-md backdrop-brightness-200 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
 
@@ -168,8 +197,8 @@ const Payment = () => {
               </label>
 
               {paymentMethod === "credit" && (
-                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[360px]" : "h-0"
-                } mt-4 p-4 rounded-md`}>
+                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[500px]" : "h-0"
+                  } mt-4 p-4 rounded-md`}>
                   <StripeButtonComponent amount={amount} />
                 </div>
               )}

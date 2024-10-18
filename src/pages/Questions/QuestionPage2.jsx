@@ -6,7 +6,7 @@ const QuestionPage2 = () => {
 
   const handleAnswerSelect = (selectedAnswer) => {
     const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
-    // const newAnswer = { ans2: selectedAnswer };
+     
     const newAnswer =
       selectedAnswer === "Fear of rejection" ? "physical" : "emotional";
     const existingAnswerIndex = currentAnswers.findIndex(

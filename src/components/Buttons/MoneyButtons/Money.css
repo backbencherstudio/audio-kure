@@ -1,42 +1,3 @@
-.heart {
-  position: relative;
-  width: 100px; /* Size of the heart */
-  height: 100px; /* Size of the heart */
-  background-color: red; /* Heart color */
-  transform: rotate(-45deg);
-  margin: 50px; /* Centering purposes */
-}
-
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 100px; /* Size of the heart */
-  height: 100px; /* Size of the heart */
-  background-color: red; /* Heart color */
-  border-radius: 50%; /* Makes it round */
-}
-
-.heart::before {
-  top: -50px; /* Positioning for the top-left circle */
-  left: 0;
-}
-
-.heart::after {
-  left: 50px; /* Positioning for the top-right circle */
-  top: 0;
-}
-
-:root {
-  --first-color: hsl(217, 75%, 80%);
-  --body-color: hsl(211, 100%, 95%);
-  --normal-font-size: 1.25rem;
-}
-
-a {
-  text-decoration: none;
-}
-
 /*=============== MAGIC BUTTON ===============*/
 .button {
   position: relative;
@@ -109,7 +70,7 @@ a {
 }
 
 .button:hover {
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
 .button:hover img {
@@ -117,11 +78,11 @@ a {
 }
 
 .button:hover .button__cone {
-  transform: translate(-38px, -10px) scale(1.2);
+  transform: translate(-48px, -10px) scale(1.2);
 }
 
 .button:hover .button__torus {
-  transform: translate(7px, -32px) scale(1.1);
+  transform: translate(5px, -40px) scale(1.1);
 }
 
 .button:hover .button__icosahedron {
@@ -129,5 +90,5 @@ a {
 }
 
 .button:hover .button__sphere {
-  transform: translate(-14px, 20px) scale(1.1);
+  transform: translate(-24px, 20px) scale(1.1);
 }
