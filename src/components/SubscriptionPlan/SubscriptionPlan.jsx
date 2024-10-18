@@ -135,7 +135,7 @@ const SubscriptionPlan = () => {
         hasGift: true,
       },
     ];
- 
+
     return basePlans.map((plan) => {
       if (type === "physical") {
         return {
@@ -165,9 +165,9 @@ const SubscriptionPlan = () => {
     const plan = {
       plan: selectedPlan,
       price: selectedPrice,
-      originalPrice: selectedPlanDetails?.originalPrice 
+      originalPrice: selectedPlanDetails?.originalPrice
     };
-console.log(plan);
+    console.log(plan);
     localStorage.setItem("plan", JSON.stringify(plan));
 
     if (!currentUser) {
@@ -183,7 +183,7 @@ console.log(plan);
   return (
     <div className="text-white">
       <div className="">
-        <nav className="container mx-auto py-2 px-4">
+        <nav className="container mx-auto   ">
           <Logo />
         </nav>
       </div>
