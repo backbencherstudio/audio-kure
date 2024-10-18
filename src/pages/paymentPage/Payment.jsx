@@ -12,8 +12,10 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import authApi from "../../redux/fetures/auth/authApi";
 import Logo from "../../shared/Logo";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
+  const navigate = useNavigate()
   const currentUser = useSelector(selectCurrentUser);
   const [planData, setPlanData] = useState({})
   const [purchasePlan] = authApi.usePurchasePlanMutation()
@@ -25,10 +27,7 @@ const Payment = () => {
     setPlanData({ parsedPlan, userType })
   }, [])
 
-  console.log(planData);
-
-
-  const amount = parseFloat(planData?.parsedPlan?.price) ;
+  const amount = parseFloat(planData?.parsedPlan?.price);
 
   const handleCreateOrder = async () => {
     try {
@@ -43,25 +42,21 @@ const Payment = () => {
   };
 
   const handleApproveOrder = async (data) => {
-    if (await data?.facilitatorAccessToken) {
 
+    if (await data?.facilitatorAccessToken) {
       const persisData = {
         plan: planData?.parsedPlan.plan,
         price: planData?.parsedPlan.price,
         email: currentUser?.email,
         userType: planData?.userType
       }
-
-      console.log(persisData);
-
-
       const res = await purchasePlan(persisData);
-      console.log(res);
-
-
-      toast.success("Payment successfullllll");
-
+      if (res?.data?.success) {
+        navigate("/daily-audios")
+      }
+      toast.success("Payment successful");
     }
+    
     try {
       await axios.post(
         "http://localhost:5000/api/v1/payment/execute-payment",
@@ -95,7 +90,7 @@ const Payment = () => {
   return (
     <div className=" min-h-[95vh] container mx-auto">
       <div className="">     {/* <img src={logo} alt="logo" className="w-16" /> */}
-          <Logo/>
+        <Logo />
       </div>
       <div className="backdrop-blur-md backdrop-brightness-200 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
 

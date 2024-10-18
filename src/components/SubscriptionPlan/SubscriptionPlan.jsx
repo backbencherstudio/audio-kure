@@ -109,7 +109,7 @@ const SubscriptionPlan = () => {
     // Define your base plans
     const basePlans = [
       {
-        id: "7 day",
+        id: "7",
         duration: "7 day",
         originalPrice: "14.14",
         discountedPrice: "6.93",
@@ -117,7 +117,7 @@ const SubscriptionPlan = () => {
         originalPerDay: "$2.02",
       },
       {
-        id: "1 month",
+        id: "30",
         duration: "1-month",
         originalPrice: "30.00",
         discountedPrice: "16.19",
@@ -126,7 +126,7 @@ const SubscriptionPlan = () => {
         isPopular: true,
       },
       {
-        id: "3 month",
+        id: "90",
         duration: "3-month",
         originalPrice: "84.94",
         discountedPrice: "25.99",
@@ -160,6 +160,8 @@ const SubscriptionPlan = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const selectedPlanDetails = plans.find(plan => plan.id === selectedPlan);
+
+
     const plan = {
       plan: selectedPlan,
       price: selectedPrice,
