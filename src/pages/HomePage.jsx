@@ -15,11 +15,7 @@ import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  console.log(currentUser);
-  
-
+  const navigate = useNavigate(); 
 
   const handleLOgout = () => {
     dispatch(logOut());
