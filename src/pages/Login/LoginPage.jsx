@@ -1,5 +1,5 @@
 import { TextField, Alert, CircularProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Logo from "../../shared/Logo";
 import authApi from "../../redux/fetures/auth/authApi";
@@ -25,8 +25,9 @@ function LoginPage() {
 
   const handleLogin = async () => {
 
-    setErrorMsg(null); 
+    setErrorMsg(null);
     setLoading(true);
+    
     if (!email || !password) {
       setErrorMsg("All fields are required.");
       setLoading(false);
@@ -54,18 +55,8 @@ function LoginPage() {
 
       if (response?.success) {
         setLoading(false)
-        navigate("/");
+        navigate("/payment");
       }
-
-      // if (response && response.token) {
-      //   localStorage.setItem("token", response.token);
-
-      //   setLoading(false);
-      //   window.location.reload();
-      // } else {
-      //   setErrorMsg("Invalid email or password.");
-      //   setLoading(false);
-      // }
 
     } catch (error) {
       console.error("Login error:", error);
@@ -118,8 +109,8 @@ function LoginPage() {
                 {errorMsg}
               </Alert>
             )}
-            <div className="bg-slate-100 shadow-md px-8 pb-5 pt-5 rounded-lg">
-              <label className="block mt-5 text-gray-500 text-sm">
+            <div className="backdrop-blur-md backdrop-brightness-200 shadow-md px-8 pb-5 pt-5 rounded-lg">
+              <label className="block mt-5 text-white text-sm">
                 Email<span className="text-red-500 text-xs">*</span>
               </label>
               <TextField
@@ -127,9 +118,9 @@ function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full text-sm"
+                className="w-full text-sm bg-white/50 rounded-md"
               />
-              <label className="block mt-5 text-gray-500 text-sm">
+              <label className="block mt-5 text-white text-sm">
                 Password<span className="text-red-500 text-xs">*</span>
               </label>
               <TextField
@@ -138,8 +129,11 @@ function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="w-full text-sm"
+                className="w-full text-sm bg-white/50 rounded-md"
               />
+
+              <p className=" mt-3 font-semibold "> If you are not registrad go to  <Link to="/signup" className="text-blue-600" > Registred </Link>  </p>
+
 
               <div
                 className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"

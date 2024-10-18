@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 
 const GoogleReviews = () => {
@@ -9,9 +9,8 @@ const GoogleReviews = () => {
             const response = await fetch('reviews.json');
             const result = await response.json()
             setReviews(result);
-            console.log(result);
         } catch (error) {
-
+            console.log(error);            
         }
     }
     useEffect(() => {

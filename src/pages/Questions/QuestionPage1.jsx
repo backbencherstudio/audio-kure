@@ -19,6 +19,7 @@ const QuestionPage1 = () => {
       answers={answers}
       handleAnswerSelect={handleAnswerSelect}
       page={1}
+      route="/"
     />
   );
 };

@@ -51,7 +51,7 @@ function HomePage() {
         </div>
 
         <div className="container   mx-auto px-4">
-          <div className="flex flex-col-reverse lg:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
+          <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="flex-1">
               <h2 className="text-3xl   text-white    merriweather font-bold leading-snug">
                 Forget everything you know about hypnosis and embark on a

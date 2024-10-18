@@ -6,11 +6,16 @@ const QuestionPage5 = () => {
 
   const handleAnswerSelect = (selectedAnswer) => {
     const currentAnswers = JSON.parse(localStorage.getItem("answers")) || [];
-    const newAnswer =
-      selectedAnswer === "Outward"
-        ? { ans3: "physical" }
-        : { ans3: "emotional" };
-    currentAnswers.push(newAnswer);
+    const newAnswer = selectedAnswer === "Outward" ? "physical" : "emotional";
+    const existingAnswerIndex = currentAnswers.findIndex(
+      (answer) => answer.ans5 !== undefined
+    );
+
+    if (existingAnswerIndex > -1) {
+      currentAnswers[existingAnswerIndex].ans5 = newAnswer;
+    } else {
+      currentAnswers.push({ ans5: newAnswer });
+    }
 
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
     navigate("/body");
@@ -27,6 +32,7 @@ const QuestionPage5 = () => {
       answers={answers}
       handleAnswerSelect={handleAnswerSelect}
       page={4}
+      route="/question-4"
     />
   );
 };

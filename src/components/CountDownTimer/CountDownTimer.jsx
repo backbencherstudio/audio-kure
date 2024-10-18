@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 
 const CountDownTimer = () => {
     const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutes in seconds

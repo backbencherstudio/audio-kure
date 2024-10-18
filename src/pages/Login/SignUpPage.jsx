@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../redux/fetures/auth/authApi";
 import { Dialog } from "@mui/material";
@@ -14,6 +14,8 @@ const SignUpPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  
+ 
 
   const {
     register,
@@ -21,17 +23,17 @@ const SignUpPage = () => {
     formState: { errors },
     watch,
   } = useForm();
+
+
   const password = watch("password", "");
-
   const onSubmit = async (data) => {
-    console.log(data);
-
     if (data.password !== data.confirmPassword) {
       toast.error("password not matched");
       return;
     }
 
     setUserEmail(data?.email);
+    
     const res = await registerUser(data);
     if (res?.data?.success) {
       toast("Check Your Email For Verify OTP");
