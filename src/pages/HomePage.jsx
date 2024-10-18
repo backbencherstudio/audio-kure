@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Link, useNavigate } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
@@ -17,9 +18,10 @@ function HomePage() {
   const navigate = useNavigate();
 
   console.log(currentUser);
+  
+
 
   const handleLOgout = () => {
-    // logOutUser({ email: currentUser?.email });
     dispatch(logOut());
     localStorage.removeItem("layout");
     navigate("/login");

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Analyzing.css";
 
@@ -29,7 +29,7 @@ const Analyzing = () => {
 
   useEffect(() => {
     if (progress >= 100) {
-      // navigate("/welcome");
+      navigate("/welcome");
     }
   }, [progress, navigate]);
 

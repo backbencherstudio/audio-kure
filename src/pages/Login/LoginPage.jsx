@@ -54,8 +54,10 @@ function LoginPage() {
       dispatch(setUser({ user, token }));
 
       if (response?.success) {
+
         setLoading(false)
         navigate("/payment");
+        
       }
 
     } catch (error) {
