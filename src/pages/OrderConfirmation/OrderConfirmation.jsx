@@ -1,7 +1,7 @@
 const OrderConfirmation = () => {
     return (
         <div className=" mt-60 flex items-center justify-center p-4">
-            <div className="w-full max-w-xl backdrop-blur-md backdrop-brightness-200 rounded-lg shadow-sm p-8">
+            <div className="w-full max-w-2xl backdrop-blur-md backdrop-brightness-200 rounded-lg shadow-sm p-8">
                 {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-2xl font-extrabold bg-gradient-to-r from-white via-blue-500 to-teal-400 text-transparent bg-clip-text mb-6 merriweather">
@@ -10,7 +10,7 @@ const OrderConfirmation = () => {
                     <p className="text-gray-300">
                         We've sent you a letter with the further instructions to your email:
                     </p>
-                    <p className="text-gray-400 font-medium my-6">
+                    <p className="text-gray-400 font-medium my-4">
                         dr@besthealer.com
                     </p>
                     <p className="text-gray-300 text-sm">
