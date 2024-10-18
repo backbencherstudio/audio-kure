@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import PayPalButtonComponent from "./PayPalButtonComponent";
@@ -9,23 +10,25 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
+import authApi from "../../redux/fetures/auth/authApi";
+import Logo from "../../shared/Logo";
 
 const Payment = () => {
   const currentUser = useSelector(selectCurrentUser);
-
-
   const [planData, setPlanData] = useState({})
-  useEffect(()=>{
+  const [purchasePlan] = authApi.usePurchasePlanMutation()
+
+  useEffect(() => {
     const plan = localStorage.getItem("plan")
     const parsedPlan = plan ? JSON.parse(plan) : null;
     const userType = localStorage.getItem("userType")
-    setPlanData({parsedPlan, userType})    
-  },[])
+    setPlanData({ parsedPlan, userType })
+  }, [])
 
   console.log(planData);
-  
 
-  const amount = 2;
+
+  const amount = parseFloat(planData?.parsedPlan?.price) ;
 
   const handleCreateOrder = async () => {
     try {
@@ -43,17 +46,20 @@ const Payment = () => {
     if (await data?.facilitatorAccessToken) {
 
       const persisData = {
-        plan : parsedPlan.plan,
-        
-
+        plan: planData?.parsedPlan.plan,
+        price: planData?.parsedPlan.price,
+        email: currentUser?.email,
+        userType: planData?.userType
       }
 
-
-      toast.success("Payment successful");
-
+      console.log(persisData);
 
 
+      const res = await purchasePlan(persisData);
+      console.log(res);
 
+
+      toast.success("Payment successfullllll");
 
     }
     try {
@@ -87,11 +93,9 @@ const Payment = () => {
   }, [paymentMethod]);
 
   return (
-    <div className=" min-h-[95vh] px-4">
-      <div className="">
-        <nav className="max-w-[1400px] mx-auto py-2 px-4">
-          <img src={logo} alt="logo" className="w-16" />
-        </nav>
+    <div className=" min-h-[95vh] container mx-auto">
+      <div className="">     {/* <img src={logo} alt="logo" className="w-16" /> */}
+          <Logo/>
       </div>
       <div className="backdrop-blur-md backdrop-brightness-200 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
 
@@ -196,8 +200,8 @@ const Payment = () => {
               </label>
 
               {paymentMethod === "credit" && (
-                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[360px]" : "h-0"
-                } mt-4 p-4 rounded-md`}>
+                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[500px]" : "h-0"
+                  } mt-4 p-4 rounded-md`}>
                   <StripeButtonComponent amount={amount} />
                 </div>
               )}

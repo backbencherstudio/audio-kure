@@ -44,15 +44,15 @@ const authApi = baseApi.injectEndpoints({
       }),
     }),
 
-    // sendEmail: builder.mutation({
-    //   query: (emailInfo) => {        
-    //     return {
-    //       url: "/auth/sendEmail",
-    //       method: "POST",
-    //       body: emailInfo,
-    //     }
-    //   },
-    // }),
+    purchasePlan: builder.mutation({
+      query: (purchasePlan) => {                
+        return {
+          url: "/auth/purchasePlan",
+          method: "PATCH",
+          body: {purchasePlan},
+        }
+      },
+    }),
 
 
   }),

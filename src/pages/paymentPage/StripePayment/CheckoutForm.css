@@ -1,10 +1,5 @@
 .payment-form-container {
-    padding: 20px;
-    border: 1px solid #e1e1e1;
-    border-radius: 8px;
-    max-width: 400px;
-    margin: 20px auto;
-    background-color: #fff;
+    padding: 20px ;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -14,7 +9,7 @@
 }
 
 .payment-form-title {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
 }
