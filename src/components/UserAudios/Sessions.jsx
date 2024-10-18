@@ -9,6 +9,7 @@ import audio6 from '../../assets/audios/audio6.mp3';
 import SessionAudioPlay from './SessionAudioPlay';
 import { FaPlay } from 'react-icons/fa';
 import CustomAudioPlayer from './CustomAudioPlayer';
+import { selectClasses } from '@mui/material';
 
 const Sessions = ({ selectedDay }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -96,6 +97,7 @@ const Sessions = ({ selectedDay }) => {
               markAudioAsPlayed={markAudioAsPlayed}
               playedAudios={playedAudios}
               setSessionImage={setSessionImage}
+              selectedDay={selectedDay}
             />
           </div>
         </div>
