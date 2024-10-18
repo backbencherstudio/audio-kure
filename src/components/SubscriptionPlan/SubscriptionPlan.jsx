@@ -160,11 +160,13 @@ const SubscriptionPlan = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const selectedPlanDetails = plans.find(plan => plan.id === selectedPlan);
     const plan = {
       plan: selectedPlan,
       price: selectedPrice,
+      originalPrice: selectedPlanDetails?.originalPrice 
     };
-
+console.log(plan);
     localStorage.setItem("plan", JSON.stringify(plan));
 
     if (!currentUser) {
