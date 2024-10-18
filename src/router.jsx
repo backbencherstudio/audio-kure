@@ -21,6 +21,7 @@ import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescription
 import Physical from "./pages/Physical/Physical";
 import SignUpPage from "./pages/Login/SignUpPage";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
+import DailyAudios from "./pages/UserAudios/DailyAudios";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
         element: <AudioDescriptions></AudioDescriptions>,
       },
     ],
+  },
+  {
+    path: "/daily-audios",
+    element: <DailyAudios />,
   },
 ]);
 
