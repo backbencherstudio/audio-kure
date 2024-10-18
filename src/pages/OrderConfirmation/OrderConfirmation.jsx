@@ -1,7 +1,21 @@
+import { useEffect, useState } from 'react';
+import firework from './../../assets/images/firework.gif'
 const OrderConfirmation = () => {
+    const [showGif, setShowGif] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowGif(false);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
     return (
-        <div className=" mt-60 flex items-center justify-center p-4">
-            <div className="w-full max-w-xl backdrop-blur-md backdrop-brightness-200 rounded-lg shadow-sm p-8">
+        <div className=" mt-36 2xl:mt-60 flex items-center justify-center p-4">
+            {showGif && (
+                <img src={firework} alt="Fireworks" className='absolute z-50 rotate-45' />
+            )}
+            <div className="w-full max-w-2xl backdrop-blur-md backdrop-brightness-200 rounded-lg shadow-sm p-8">
                 {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-2xl font-extrabold bg-gradient-to-r from-white via-blue-500 to-teal-400 text-transparent bg-clip-text mb-6 merriweather">
