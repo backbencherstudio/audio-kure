@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
-import sessionImg from "../../assets/images/cure_session.png";
-import audio1 from "../../assets/audios/audio.mp3";
-import audio2 from "../../assets/audios/audio.mp3";
-import audio3 from "../../assets/audios/audio.mp3";
-import audio4 from "../../assets/audios/audio.mp3";
-import audio5 from "../../assets/audios/audio.mp3";
-import audio6 from "../../assets/audios/audio.mp3";
-import SessionAudioPlay from "./SessionAudioPlay";
-import { FaPlay } from "react-icons/fa";
-import CustomAudioPlayer from "./CustomAudioPlayer";
+import React, { useState, useEffect } from 'react';
+import sessionImg from '../../assets/images/cure_session.png';
+import audio1 from '../../assets/audios/audio1.mp3';
+import audio2 from '../../assets/audios/audio2.mp3';
+import audio3 from '../../assets/audios/audio3.mp3';
+import audio4 from '../../assets/audios/audio4.mp3';
+import audio5 from '../../assets/audios/audio5.mp3';
+import audio6 from '../../assets/audios/audio6.mp3';
+import SessionAudioPlay from './SessionAudioPlay';
+import { FaPlay } from 'react-icons/fa';
+import CustomAudioPlayer from './CustomAudioPlayer';
+import { selectClasses } from '@mui/material';
 
 const Sessions = ({ selectedDay }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -112,6 +113,7 @@ const Sessions = ({ selectedDay }) => {
               markAudioAsPlayed={markAudioAsPlayed}
               playedAudios={playedAudios}
               setSessionImage={setSessionImage}
+              selectedDay={selectedDay}
             />
           </div>
         </div>
