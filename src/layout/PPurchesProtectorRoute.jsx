@@ -13,12 +13,8 @@ const PPurchesProtectorRoute = ({ children }) => {
         user = verifyToken(token);
     }
     const expiresDate = new Date(user?.expiresDate)
-    const currentData = new Date()
-
-    console.log({expiresDate}, {currentData});
+    const currentData = new Date() 
     
-
-
     if (currentData < expiresDate) {
         return <Navigate to="/daily-audios" replace={true} />;
     }
