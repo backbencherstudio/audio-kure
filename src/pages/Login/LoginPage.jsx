@@ -143,12 +143,8 @@ function LoginPage() {
                   style: { color: 'white', }
 
                 }}
-
               />
-
               <p className=" mt-3 font-semibold "> If you are not registrad go to  <Link to="/signup" className="text-blue-600" > Registred </Link>  </p>
-
-
               <div
                 className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
                 onClick={handleLogin}

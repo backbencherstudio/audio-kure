@@ -203,7 +203,7 @@ const Payment = () => {
               {paymentMethod === "credit" && (
                 <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[500px]" : "h-0"
                   } mt-4 p-4 rounded-md`}>
-                  <StripeButtonComponent amount={amount} />
+                  <StripeButtonComponent />
                 </div>
               )}
             </div>
