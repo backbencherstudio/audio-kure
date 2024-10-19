@@ -5,7 +5,7 @@
                 "self": [
                     {
                         "name": "Lack of Confidence",
-                        "audio": "Lack of Confidence.mp3"
+                        "audio": "audios/testAudio.mp3"
                     },
                     {
                         "name": "Self-Image",
