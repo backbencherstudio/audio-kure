@@ -110,7 +110,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/daily-audios",
-    element: <DailyAudios />,
+    element: <DailyAudios />
+    // <ProtectedRoute>
+    // </ProtectedRoute>
   },
 ]);
 
