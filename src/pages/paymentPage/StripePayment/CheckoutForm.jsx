@@ -9,7 +9,7 @@ import { selectCurrentUser } from '../../../redux/fetures/auth/authSlice';
 import authApi from '../../../redux/fetures/auth/authApi';
 import { useNavigate } from 'react-router-dom';
 
-const CheckoutForm = ({ amount }) => {
+const CheckoutForm = () => {
     const currentUser = useSelector(selectCurrentUser);
     const [purchasePlan] = authApi.usePurchasePlanMutation()
     const stripe = useStripe();
@@ -30,13 +30,17 @@ const CheckoutForm = ({ amount }) => {
         const userType = localStorage.getItem("userType")
         setPlanData({ parsedPlan, userType })
     }, [])
+  
+    const amount = parseFloat(planData?.parsedPlan?.price);
+
+
 
     useEffect(() => {
         if (amount > 0) {
             axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
                 // axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
-                .then(res => {
-                    setClientSecret(res.data.data.clientSecret);
+                .then(res => {                    
+                    setClientSecret(res?.data?.data?.clientSecret);
                 })
                 .catch(error => {
                     console.error("Error fetching client secret:", error);
@@ -44,11 +48,14 @@ const CheckoutForm = ({ amount }) => {
         }
     }, [amount]);
 
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!stripe || !elements) return;
         if (!clientSecret) {
             setError('Client secret not ready. Please try again.');
+            toast.error("Client secret not ready. Please try again. or try another method")
             return;
         }
         setProcessing(true);
@@ -83,8 +90,6 @@ const CheckoutForm = ({ amount }) => {
                     orderID: paymentIntent.id,
                 }
                 const res = await purchasePlan(persisData);
-                console.log(res?.data);
-                
                 if (res?.data?.success) {
                     navigate("/daily-audios")
                 }

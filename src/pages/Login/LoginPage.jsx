@@ -138,18 +138,13 @@ function LoginPage() {
                 }}
               />
 
-              {/* Forgot Password Link */}
-              <div className="mt-3">
-                <Link to="/forgot-password" className="text-blue-600">
-                  Forgot Password?
-                </Link>
-              </div>
-
-              <p className="mt-3 font-semibold">
-                If you are not registered go to{" "}
+              <p className=" mt-3 font-semibold ">
+                {" "}
+                If you are not registrad go to{" "}
                 <Link to="/signup" className="text-blue-600">
-                  Register
-                </Link>
+                  {" "}
+                  Registred{" "}
+                </Link>{" "}
               </p>
 
               <div
