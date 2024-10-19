@@ -43,7 +43,9 @@ function EmailPage() {
 
   return (
     <div className="">
-      <div className="container mx-auto"><Logo /></div>
+      <div className="container mx-auto">
+        <Logo />
+      </div>
       <div className="mx-auto max-w-[1400px] ">
         <div className="text-center">
           <div className="flex justify-center">
@@ -63,6 +65,11 @@ function EmailPage() {
                 type="text"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleUnlock();
+                  }
+                }}
               />
 
               <div className="mt-3 text-start w-[90%] mx-auto flex">

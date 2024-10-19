@@ -13,6 +13,7 @@ import Logo from "../../shared/Logo";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
+import { toast } from "react-toastify";
 
 const PaymentPlan = ({
   id,
@@ -27,34 +28,40 @@ const PaymentPlan = ({
   onSelect,
 }) => (
   <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
-      }`}
+    className={`relative  rounded-2xl p-4 cursor-pointer ${
+      isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
+    }`}
     onClick={() => onSelect(id, discountedPrice)}
   >
     <div className="flex items-center">
       <div
-        className={`w-5 h-5 rounded-full border-2 ${isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
-          } mr-3 flex items-center justify-center ${isPopular ? "mt-8 mb-2" : ""
-          }`}
+        className={`w-5 h-5 rounded-full border-2 ${
+          isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
+        } mr-3 flex items-center justify-center ${
+          isPopular ? "mt-8 mb-2" : ""
+        }`}
       >
         {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
       </div>
       <div
-        className={`flex-grow flex justify-between items-center ${isPopular ? "pt-8 pb-2" : "py-2"
-          }`}
+        className={`flex-grow flex justify-between items-center ${
+          isPopular ? "pt-8 pb-2" : "py-2"
+        }`}
       >
         <div className="space-y-1">
           <p className="font-semibold">{duration} plan</p>
           <div className="flex gap-2">
             <p
-              className={`text-sm line-through ${isPopular ? "text-gray-500" : "text-gray-500"
-                }`}
+              className={`text-sm line-through ${
+                isPopular ? "text-gray-500" : "text-gray-500"
+              }`}
             >
               ${originalPrice}
             </p>
             <p
-              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
-                }`}
+              className={`text-sm ${
+                isPopular ? "text-gray-500" : "text-gray-500"
+              }`}
             >
               ${discountedPrice}
             </p>
@@ -75,8 +82,9 @@ const PaymentPlan = ({
               ${perDay}
             </p>
             <p
-              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
-                }`}
+              className={`text-sm ${
+                isPopular ? "text-gray-500" : "text-gray-500"
+              }`}
             >
               per day
             </p>
@@ -93,8 +101,8 @@ const PaymentPlan = ({
 );
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("7 day");
-  const [selectedPrice, setSelectedPrice] = useState("6.93");
+  const [selectedPlan, setSelectedPlan] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
   const [plans, setPlans] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -159,25 +167,27 @@ const SubscriptionPlan = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const selectedPlanDetails = plans.find(plan => plan.id === selectedPlan);
+    if (selectedPlan && selectedPrice) {
+      const selectedPlanDetails = plans.find(
+        (plan) => plan.id === selectedPlan
+      );
+      const plan = {
+        plan: selectedPlan,
+        price: selectedPrice,
+        originalPrice: selectedPlanDetails?.originalPrice,
+      };
+      console.log(plan);
+      localStorage.setItem("plan", JSON.stringify(plan));
 
+      if (!currentUser) {
+        navigate("/login");
+        return;
+      }
 
-    const plan = {
-      plan: selectedPlan,
-      price: selectedPrice,
-      originalPrice: selectedPlanDetails?.originalPrice
-    };
-    console.log(plan);
-    localStorage.setItem("plan", JSON.stringify(plan));
-
-    if (!currentUser) {
-      navigate("/login");
-      return
+      navigate("/payment");
+    } else {
+      toast.warning("Please select a plan");
     }
-
-    navigate("/payment");
-
-
   };
 
   return (
@@ -195,7 +205,9 @@ const SubscriptionPlan = () => {
             className="text-[1.75rem]  md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
           >
             Congratulations! you are{" "}
-            <span className="text-[#8A5EFF] merriweather capitalize">physical</span>{" "}
+            <span className="text-[#8A5EFF] merriweather capitalize">
+              physical
+            </span>{" "}
             suggestible
           </h1>
         </div>
@@ -224,14 +236,13 @@ const SubscriptionPlan = () => {
               </div>
 
               <p className="text-base text-[#bec4d2] font-medium mb-10">
-                By clicking Get my plan, I agree to pay ${selectedPrice} for my
-                plan and that if I do not cancel before the end of the 1-week
-                introductory plan, Kure will automatically charge my payment
-                method the regular price $30.99 every 1-month thereafter until I
-                cancel. I can cancel online by visiting the subscription page in
-                my account on the website.
+                By clicking Get my plan, I agree to pay ${selectedPrice || 0}{" "}
+                for my plan and that if I do not cancel before the end of the
+                1-week introductory plan, Kure will automatically charge my
+                payment method the regular price $30.99 every 1-month thereafter
+                until I cancel. I can cancel online by visiting the subscription
+                page in my account on the website.
               </p>
-
 
               <button
                 type="submit"
@@ -239,7 +250,6 @@ const SubscriptionPlan = () => {
               >
                 Get my plan
               </button>
-
 
               <p className="text-center text-xs my-4">
                 Guaranteed safe checkout
