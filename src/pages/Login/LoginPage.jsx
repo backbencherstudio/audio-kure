@@ -5,9 +5,7 @@ import Logo from "../../shared/Logo";
 import authApi from "../../redux/fetures/auth/authApi";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/fetures/auth/authSlice";
-import { useAppDispatch } from '../../redux/hooks';
-
-
+import { useAppDispatch } from "../../redux/hooks";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,7 +13,7 @@ function LoginPage() {
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [login] = authApi.useLoginMutation()
+  const [login] = authApi.useLoginMutation();
   const dispatch = useAppDispatch();
 
   const validateEmail = (email) => {
@@ -25,7 +23,6 @@ function LoginPage() {
 
   const currentDate = new Date();
   const handleLogin = async () => {
-
     setErrorMsg(null);
     setLoading(true);
 
@@ -48,33 +45,28 @@ function LoginPage() {
     }
 
     try {
-      const userInfo = { email, password }
+      const userInfo = { email, password };
       const response = await login(userInfo).unwrap();
       const token = response.data.accessToken;
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
 
-      const expiresDate = new Date(user?.expiresDate)
+      const expiresDate = new Date(user?.expiresDate);
 
       if (response?.success) {
         if (currentDate < expiresDate) {
           navigate("/daily-audios");
-          setLoading(false)
-          return
+          setLoading(false);
+          return;
         }
-        setLoading(false)
+        setLoading(false);
         navigate("/payment");
       }
-
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
       setLoading(false);
     }
-
-
-
-
   };
 
   const handleKeyPress = (e) => {
@@ -85,7 +77,7 @@ function LoginPage() {
 
   return (
     <div className="">
-      <div className="area"> {/* Fixed area covering full viewport */}
+      <div className="area">
         <ul className="circles">
           <li></li>
           <li></li>
@@ -102,7 +94,7 @@ function LoginPage() {
       <div className="flex justify-center">
         <Logo />
       </div>
-      <div className="flex  flex-col justify-center min-h-[70vh]">
+      <div className="flex flex-col justify-center min-h-[70vh]">
         <div className="flex justify-center">
           <div className="md:w-[450px] lg:w-[450px] w-full mx-5">
             <div className="text-center">
@@ -128,9 +120,7 @@ function LoginPage() {
                 onKeyPress={handleKeyPress}
                 className="w-full text-sm bg-white/20 text-white rounded-md"
                 InputProps={{
-
-                  style: { color: 'white' }
-
+                  style: { color: "white" },
                 }}
               />
               <label className="block mt-5 text-white text-sm mb-2">
@@ -144,15 +134,23 @@ function LoginPage() {
                 onKeyPress={handleKeyPress}
                 className="w-full text-sm bg-white/20 text-white rounded-md"
                 InputProps={{
-
-                  style: { color: 'white', }
-
+                  style: { color: "white" },
                 }}
-
               />
 
-              <p className=" mt-3 font-semibold "> If you are not registrad go to  <Link to="/signup" className="text-blue-600" > Registred </Link>  </p>
+              {/* Forgot Password Link */}
+              <div className="mt-3">
+                <Link to="/forgot-password" className="text-blue-600">
+                  Forgot Password?
+                </Link>
+              </div>
 
+              <p className="mt-3 font-semibold">
+                If you are not registered go to{" "}
+                <Link to="/signup" className="text-blue-600">
+                  Register
+                </Link>
+              </p>
 
               <div
                 className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"

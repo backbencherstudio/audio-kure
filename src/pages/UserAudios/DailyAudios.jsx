@@ -59,6 +59,8 @@ const DailyAudios = () => {
           )}
         </div>
       </div>
+
+      
       <CureSessions />
     </div>
   );
