@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const DailyAudios = () => {
   const [isOpen, setIsOpen] = useState();
-
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -23,6 +22,9 @@ const DailyAudios = () => {
     localStorage.removeItem("layout");
     navigate("/login");
   };
+
+  // console.log(currentUser);
+  
 
   return (
     <div className="area overflow-y-scroll">

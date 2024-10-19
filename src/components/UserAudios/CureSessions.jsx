@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import sessionImg from '../../assets/images/cure_session.png';
 import audio1 from '../../assets/audios/audio1.mp3';
