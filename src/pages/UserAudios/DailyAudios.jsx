@@ -17,7 +17,7 @@ const DailyAudios = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  
   const handleLOgout = () => {
     dispatch(logOut());
     localStorage.removeItem("layout");
@@ -61,7 +61,7 @@ const DailyAudios = () => {
       </div>
 
       
-      <CureSessions />
+      <CureSessions currentUser={currentUser} />
     </div>
   );
 };

@@ -16,7 +16,7 @@ import './CureSessions.css';
 import daysData from './days.json';
 import Sessions from './Sessions';
 
-const CureSessions = () => {
+const CureSessions = ({ currentUser }) => {
   const [selectedDay, setSelectedDay] = useState(1); // Start with Day 1
   const [playedAudios, setPlayedAudios] = useState({});
   const user = true; // Example, set to true to allow interaction
@@ -83,7 +83,7 @@ const CureSessions = () => {
       audios: [audio5, audio6],
     },
   ];
-
+console.log('currentUser', currentUser)
   useEffect(() => {
     const savedPlayedAudios = JSON.parse(localStorage.getItem('playedAudios')) || {};
     // Ensure each entry is an array
@@ -101,58 +101,67 @@ const CureSessions = () => {
   };
 
   const isDayUnlocked = (day) => {
-    if (day === 1) return true; // Day 1 is always unlocked
+    const createdDate = new Date(currentUser.createdAt);
+    const currentDate = new Date();
 
-    const prevDayAudios = playedAudios[day - 1] || [];
-    const expectedPrevDayAudios = sessions.find(s => s.id === day - 1)?.audios || [];
-    const allPrevDayAudiosPlayed = expectedPrevDayAudios.length > 0 && 
-                                    expectedPrevDayAudios.every(audio => prevDayAudios.includes(audio));
+    // Calculate how many days have passed since the created date
+    const elapsedTime = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24));
 
-    const currentTime = new Date();
-    const testTime = new Date(currentTime);
-    testTime.setHours(10, 0, 0, 0); // Set test time to 10:00 AM
-    const isAfter10AM = currentTime >= testTime;
-
-    return allPrevDayAudiosPlayed && isAfter10AM;
+    // Unlock days that match or are less than the elapsed time (i.e., days that should be available based on subscription period)
+    return day <= elapsedTime + 1; // `+1` because Day 1 is counted from Day 0
   };
 
-  return (
-    <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
-      <div className='max-w-7xl mx-4 md:mx-auto'>
-        <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey em!</div>
-        <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={3}
-          slidesPerGroup={1}
-          breakpoints={{
-            640: { slidesPerView: 4, spaceBetween: 5, slidesPerGroup: 1 },
-            768: { slidesPerView: 6, spaceBetween: 5, slidesPerGroup: 1 },
-            1024: { slidesPerView: 8, spaceBetween: 5, slidesPerGroup: 1 },
-            1280: { slidesPerView: 10, spaceBetween: 5, slidesPerGroup: 1 },
-          }}
-          className="days-slider"
-        >
-          {daysData.map((dayItem, index) => (
-            <SwiperSlide key={index} className='!mr-7 md:!mr-auto'>
-              <button 
-                className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedDay === dayItem.day ? 'bg-[#130e2b]' : ''}`}
-                style={isDayUnlocked(dayItem.day) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
-                onClick={() => handleDaySelection(dayItem.day)}
-                disabled={user === false || !isDayUnlocked(dayItem.day)}
-              >
-                <div className='text-slate-300'>Day</div>
-                <div className='grid justify-center text-slate-300'>{dayItem.day}</div>
-                <div className={`border ${selectedDay === dayItem.day ? 'p-[5px]' : 'p-[13px]'} rounded-full border-[#2f2861]`}>
-                  {selectedDay === dayItem.day ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
-                </div>
-              </button>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-      <Sessions selectedDay={selectedDay} setPlayedAudios={setPlayedAudios} playedAudios={playedAudios} sessions={sessions} />
+  // Calculate total days based on subscription
+  const getTotalDays = (createdAt, expiresDate) => {
+    const createdDate = new Date(createdAt);
+    const expirationDate = new Date(expiresDate);
+    const diffTime = Math.abs(expirationDate - createdDate);
+    const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return totalDays;
+  };
+
+  // Assuming `currentUser` has `createdAt` and `expiresDate` properties
+  const totalDays = getTotalDays(currentUser.createdAt, currentUser.expiresDate);
+  const daysData = Array.from({ length: totalDays }, (_, index) => ({ day: index + 1 }));
+  const calculatedDays = daysData.slice(0, -1);
+
+return (
+  <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
+    <div className='max-w-7xl mx-4 md:mx-auto'>
+      <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser.name}!</div>
+      <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={3}
+        slidesPerGroup={1}
+        breakpoints={{
+          640: { slidesPerView: 4, spaceBetween: 5, slidesPerGroup: 1 },
+          768: { slidesPerView: 6, spaceBetween: 5, slidesPerGroup: 1 },
+          1024: { slidesPerView: 8, spaceBetween: 5, slidesPerGroup: 1 },
+          1280: { slidesPerView: 10, spaceBetween: 5, slidesPerGroup: 1 },
+        }}
+        className="days-slider"
+      >
+        {calculatedDays.map((dayItem, index) => (
+          <SwiperSlide key={index} className='!mr-7 md:!mr-auto'>
+            <button 
+              className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedDay === dayItem.day ? 'bg-[#130e2b]' : ''}`}
+              style={isDayUnlocked(dayItem.day) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
+              onClick={() => handleDaySelection(dayItem.day)}
+              disabled={user === false || !isDayUnlocked(dayItem.day)}
+            >
+              <div className='text-slate-300'>Day</div>
+              <div className='grid justify-center text-slate-300'>{dayItem.day}</div>
+              <div className={`border ${selectedDay === dayItem.day ? 'p-[5px]' : 'p-[13px]'} rounded-full border-[#2f2861]`}>
+                {selectedDay === dayItem.day ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
+              </div>
+            </button>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
+    <Sessions selectedDay={selectedDay} setPlayedAudios={setPlayedAudios} playedAudios={playedAudios} sessions={sessions} />
+  </div>
   );
 };
 

@@ -126,9 +126,9 @@ const router = createBrowserRouter([
   // ============================================>>>> just for testing
   {
     path: "/daily-audios",
-    element: <DailyAudios />,
-    // <ProtectedRoute>
-    // </ProtectedRoute>
+    element: <ProtectedRoute>
+              <DailyAudios />
+             </ProtectedRoute>
   },
 ]);
 
