@@ -22,7 +22,9 @@ import Physical from "./pages/Physical/Physical";
 import SignUpPage from "./pages/Login/SignUpPage";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import DailyAudios from "./pages/UserAudios/DailyAudios";
-import ProtectedRoute from "./layout/ProtectedRoute";
+import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
+import ProtectedRoute from "./layout/ProtectedRoute"
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +33,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: <PPurchesProtectorRoute>
+          <HomePage />
+        </PPurchesProtectorRoute>
       },
       {
         path: "question-2",

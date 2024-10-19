@@ -65,16 +65,11 @@ function LoginPage() {
         setLoading(false)
         navigate("/payment");
       }
-
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
       setLoading(false);
     }
-
-
-
-
   };
 
   const handleKeyPress = (e) => {
