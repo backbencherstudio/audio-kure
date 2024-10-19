@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import {  useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../redux/fetures/auth/authApi";
-import { Dialog } from "@mui/material";
+import { CircularProgress, Dialog } from "@mui/material";
 
 const SignUpPage = () => {
   const inputStyle =
@@ -278,7 +278,13 @@ const SignUpPage = () => {
               </div>
               <button type="submit" className="mt-5">
                 {verifyLoading ? (
-                  <span className="loading loading-dots loading-md"></span>
+                  <CircularProgress
+                  style={{
+                    color: "white",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
                 ) : (
                   "Verify OTP"
                 )}

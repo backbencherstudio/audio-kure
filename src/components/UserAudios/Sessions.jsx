@@ -1,61 +1,53 @@
-import { useState, useEffect } from "react";
-import sessionImg from "../../assets/images/cure_session.png";
-import audio1 from "../../assets/audios/audio.mp3";
-import audio2 from "../../assets/audios/audio.mp3";
-import audio3 from "../../assets/audios/audio.mp3";
-import audio4 from "../../assets/audios/audio.mp3";
-import audio5 from "../../assets/audios/audio.mp3";
-import audio6 from "../../assets/audios/audio.mp3";
-import SessionAudioPlay from "./SessionAudioPlay";
-import { FaPlay } from "react-icons/fa";
-import CustomAudioPlayer from "./CustomAudioPlayer";
+import React, { useState, useEffect } from 'react';
+import sessionImg from '../../assets/images/cure_session.png';
+// import audio1 from '../../assets/audios/audio1.mp3';
+// import audio2 from '../../assets/audios/audio2.mp3';
+// import audio3 from '../../assets/audios/audio3.mp3';
+// import audio4 from '../../assets/audios/audio4.mp3';
+// import audio5 from '../../assets/audios/audio5.mp3';
+// import audio6 from '../../assets/audios/audio6.mp3';
+// import audio7 from '../../assets/audios/audio7.mp3';
+// import audio8 from '../../assets/audios/audio8.mp3';
+// import audio9 from '../../assets/audios/audio9.mp3';
+// import audio10 from '../../assets/audios/audio10.mp3';
+import SessionAudioPlay from './SessionAudioPlay';
+import { FaPlay } from 'react-icons/fa';
+import CustomAudioPlayer from './CustomAudioPlayer';
 
-const Sessions = ({ selectedDay }) => {
+const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [sessionImage, setSessionImage] = useState(null);
-  const [playedAudios, setPlayedAudios] = useState({});
 
-  const sessions = [
-    {
-      id: 1,
-      title: "Introduction",
-      image: sessionImg,
-      audios: [audio1, audio2],
-    },
-    {
-      id: 2,
-      title: "Understanding",
-      image: sessionImg,
-      audios: [audio3, audio4],
-    },
-    {
-      id: 3,
-      title: "Awareness",
-      image: sessionImg,
-      audios: [audio5, audio6],
-    },
-  ];
 
   useEffect(() => {
-    const savedPlayedAudios =
-      JSON.parse(localStorage.getItem("playedAudios")) || {};
+    const savedPlayedAudios = JSON.parse(localStorage.getItem("playedAudios")) || {};
     setPlayedAudios(savedPlayedAudios);
   }, []);
 
-  const markAudioAsPlayed = (audioSrc) => {
+  const markAudioAsPlayed = (day, audioSrc) => {
     setPlayedAudios((prev) => {
-      const newPlayedAudios = { ...prev, [audioSrc]: true };
-      localStorage.setItem("playedAudios", JSON.stringify(newPlayedAudios));
-      return newPlayedAudios;
+      // Ensure that the audio is not added again if it has already been played
+      const alreadyPlayed = prev[day] && prev[day].includes(audioSrc);
+      if (!alreadyPlayed) {
+        const updatedPlayedAudios = {
+          ...prev,
+          [day]: prev[day] ? [...prev[day], audioSrc] : [audioSrc]
+        };
+        localStorage.setItem("playedAudios", JSON.stringify(updatedPlayedAudios));
+        return updatedPlayedAudios;
+      }
+      return prev; // Return the previous state if audio is already played
     });
   };
 
   const handleAudioSelect = (audioSrc) => {
     setCurrentAudio(audioSrc);
     setSessionImage(sessionImg);
+    markAudioAsPlayed(selectedDay, audioSrc);
   };
 
   const currentSession = sessions.find((session) => session.id === selectedDay);
+  
 
   return (
     <div className="border-t mt-5 border-[#2f2861]">
@@ -71,7 +63,7 @@ const Sessions = ({ selectedDay }) => {
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
                 <img
                   src={currentSession.image}
-                  alt=""
+                  alt="session"
                   className="opacity-70 w-full"
                 />
                 <div className="absolute inset-0 flex flex-col justify-end items-center bg-gradient-to-t from-black to-transparent p-4">
@@ -109,9 +101,10 @@ const Sessions = ({ selectedDay }) => {
             <SessionAudioPlay
               sessions={sessions}
               setCurrentAudio={handleAudioSelect}
-              markAudioAsPlayed={markAudioAsPlayed}
               playedAudios={playedAudios}
               setSessionImage={setSessionImage}
+              selectedDay={selectedDay}
+              // markAudioAsPlayed={markAudioAsPlayed}
             />
           </div>
         </div>

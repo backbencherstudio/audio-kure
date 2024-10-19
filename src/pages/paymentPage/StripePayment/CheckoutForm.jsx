@@ -4,24 +4,43 @@ import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcEl
 import axios from 'axios';
 import './CheckoutForm.css';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../../redux/fetures/auth/authSlice';
+import authApi from '../../../redux/fetures/auth/authApi';
+import { useNavigate } from 'react-router-dom';
 
-const CheckoutForm = ({ amount }) => {
+const CheckoutForm = () => {
+    const currentUser = useSelector(selectCurrentUser);
+    const [purchasePlan] = authApi.usePurchasePlanMutation()
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState(false);
     const [clientSecret, setClientSecret] = useState('');
     const [name, setName] = useState('');
-
     const [cardError, setCardError] = useState('');
     const [expiryError, setExpiryError] = useState('');
     const [cvcError, setCvcError] = useState('');
+    const [planData, setPlanData] = useState({})
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const plan = localStorage.getItem("plan")
+        const parsedPlan = plan ? JSON.parse(plan) : null;
+        const userType = localStorage.getItem("userType")
+        setPlanData({ parsedPlan, userType })
+    }, [])
+  
+    const amount = parseFloat(planData?.parsedPlan?.price);
+
+
 
     useEffect(() => {
         if (amount > 0) {
-            axios.post('http://localhost:5000/api/v1/payment/create-payment-intent', { amount })
-                .then(res => {
-                    setClientSecret(res.data.data.clientSecret);
+            axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
+                // axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
+                .then(res => {                    
+                    setClientSecret(res?.data?.data?.clientSecret);
                 })
                 .catch(error => {
                     console.error("Error fetching client secret:", error);
@@ -29,18 +48,17 @@ const CheckoutForm = ({ amount }) => {
         }
     }, [amount]);
 
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (!stripe || !elements) return;
-
         if (!clientSecret) {
             setError('Client secret not ready. Please try again.');
+            toast.error("Client secret not ready. Please try again. or try another method")
             return;
         }
-
         setProcessing(true);
-
         const cardNumberElement = elements.getElement(CardNumberElement);
         const cardExpiryElement = elements.getElement(CardExpiryElement);
         const cardCvcElement = elements.getElement(CardCvcElement);
@@ -51,12 +69,11 @@ const CheckoutForm = ({ amount }) => {
             return;
         }
 
-        // Confirm card payment
         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: cardNumberElement,
                 billing_details: {
-                    name: name, // Name on the card
+                    name: name,
                 },
             },
         });
@@ -65,6 +82,17 @@ const CheckoutForm = ({ amount }) => {
             setError(error.message);
         } else if (paymentIntent.status === 'succeeded') {
             if (paymentIntent?.id) {
+                const persisData = {
+                    plan: planData?.parsedPlan.plan,
+                    price: planData?.parsedPlan.price,
+                    email: currentUser?.email,
+                    userType: planData?.userType,
+                    orderID: paymentIntent.id,
+                }
+                const res = await purchasePlan(persisData);
+                if (res?.data?.success) {
+                    navigate("/daily-audios")
+                }
                 toast.success("Payment successful!");
             }
         }
@@ -209,7 +237,7 @@ export default CheckoutForm;
 
 //     useEffect(() => {
 //         if (amount > 0) {
-//             axios.post('http://localhost:5000/api/v1/payment/create-payment-intent', { amount })
+//             axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
 //                 .then(res => {
 //                     setClientSecret(res.data.data.clientSecret);
 //                 })

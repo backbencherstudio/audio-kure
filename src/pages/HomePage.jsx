@@ -7,16 +7,35 @@ import home_members from "./../assets/images/home_members.png";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
 import { useSelector } from "react-redux";
-import { logOut, selectCurrentUser } from "../redux/fetures/auth/authSlice";
-import { useAppDispatch } from "../redux/hooks";
+import {
+  logOut,
+  selectCurrentUser,
+  useCurrentToken,
+} from "../redux/fetures/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
 import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
+import { verifyToken } from "../utils/verifyToken";
+import { useEffect } from "react";
 import heroImage from './../assets/hero.jpg'
-
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const token = useAppSelector(useCurrentToken);
+
+  let user;
+  if (token) {
+    user = verifyToken(token);
+  }
+  const expiresDate = new Date(user?.expiresDate);
+  const currentData = new Date();
+
+  useEffect(() => {
+    if (token && currentData > expiresDate) {
+      dispatch(logOut());
+    }
+  }, []);
 
   const handleLOgout = () => {
     dispatch(logOut());
@@ -50,7 +69,7 @@ function HomePage() {
         </div>
 
         <div className="container   mx-auto px-4">
-          <div className="flex flex-col-reverse lg:flex-row md:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
+          <div className="flex flex-col-reverse lg:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="flex-1">
               <h2 className="text-3xl   text-white    merriweather font-bold leading-snug">
                 Forget everything you know about hypnosis and embark on a
@@ -101,7 +120,7 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center">
-              <img className="rounded-xl " alt="" src={heroImage} />
+            <img className="rounded-xl " alt="" src={heroImage} />
             </div>
           </div>
           <Footer />

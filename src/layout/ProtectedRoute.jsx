@@ -13,10 +13,6 @@ const ProtectedRoute = ({ children }) => {
     }
     const currentUser = useAppSelector(selectCurrentUser);
 
-    console.log("Token:", token);
-    console.log("Decoded User from Token:", user);
-    console.log("Current User in Redux:", currentUser);
-
     if (!token || currentUser?.email !== user?.email) {
         dispatch(logOut());
         return <Navigate to="/login" replace={true} />;

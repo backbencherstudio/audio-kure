@@ -19,19 +19,27 @@ import QuestionPage5 from "./pages/Questions/QuestionPage5";
 import Payment from "./pages/paymentPage/Payment";
 import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 import Physical from "./pages/Physical/Physical";
-import SignUpPage from "./pages/Login/SignUpPage";
-import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import DailyAudios from "./pages/UserAudios/DailyAudios";
+import SignUpPage from "./pages/Login/SignUpPage";
+import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <PPurchesProtectorRoute>
+        <Layout />
+      </PPurchesProtectorRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: (
+          <PPurchesProtectorRoute>
+            <HomePage />
+          </PPurchesProtectorRoute>
+        ),
       },
       {
         path: "question-2",
@@ -74,17 +82,21 @@ const router = createBrowserRouter([
         element: <WelcomePage />,
       },
       {
-        path: "/physical",
+        path: "/physicalPage",
         element: <Physical />,
       },
       {
         path: "/payment",
-        element: <Payment />,
+        element: (
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        ),
       },
-      {
-        path: "/orderConfirmation",
-        element: <OrderConfirmation />,
-      },
+      // {
+      //   path: "/orderConfirmation",
+      //   element: <OrderConfirmation />,
+      // },
     ],
   },
   {
@@ -95,6 +107,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  // ============================================>>>> just for testing
   {
     path: "/audios",
     element: <AudioLayout />,
@@ -110,11 +123,12 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // ============================================>>>> just for testing
   {
     path: "/daily-audios",
     element: <ProtectedRoute>
-      <DailyAudios />
-    </ProtectedRoute>
+              <DailyAudios />
+             </ProtectedRoute>
   },
 ]);
 
