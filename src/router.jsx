@@ -28,62 +28,77 @@ import ProtectedRoute from "./layout/ProtectedRoute"
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element:
+      <PPurchesProtectorRoute>
+        <Layout />
+      </PPurchesProtectorRoute>,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "",
-        element: <PPurchesProtectorRoute>
-          <HomePage />
-        </PPurchesProtectorRoute>
+        element:          
+            <HomePage />          
       },
       {
         path: "question-2",
-        element: <QuestionPage2 />,
+        element:          
+            <QuestionPage2 />          
       },
       {
         path: "question-3",
-        element: <QuestionPage3 />,
+        element:          
+            <QuestionPage3 />,          
       },
       {
         path: "question-4",
-        element: <QuestionPage4 />,
+        element:          
+            <QuestionPage4 />          
       },
       {
         path: "question-5",
-        element: <QuestionPage5 />,
+        element:          
+            <QuestionPage5 />          
       },
       {
         path: "analysis",
-        element: <Analyzing />,
+        element:          
+            <Analyzing />          
       },
       {
         path: "body",
-        element: <Body />,
+        element:          
+            <Body />          
       },
       {
         path: "let's go",
-        element: <ThirdPage />,
+        element:          
+            <ThirdPage />          
       },
       {
         path: "subscriptionplan",
-        element: <SubscriptionPlan />,
+        element:          
+            <SubscriptionPlan />,          
       },
       {
         path: "email",
-        element: <EmailPage />,
+        element:          
+            <EmailPage />          
       },
       {
         path: "welcome",
-        element: <WelcomePage />,
+        element:          
+            <WelcomePage />          
       },
       {
-        path: "/physical",
+        path: "/physicalPage",
         element: <Physical />,
       },
       {
         path: "/payment",
-        element: <Payment />,
+        element:
+        <ProtectedRoute>
+          <Payment />          
+        </ProtectedRoute>
       },
       {
         path: "/orderConfirmation",
@@ -99,6 +114,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  // ============================================>>>> just for testing
   {
     path: "/audios",
     element: <AudioLayout />,
@@ -114,6 +130,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // ============================================>>>> just for testing
   {
     path: "/daily-audios",
     element: <ProtectedRoute>

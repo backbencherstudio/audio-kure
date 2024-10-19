@@ -17,8 +17,8 @@ import { useNavigate } from "react-router-dom";
 const Payment = () => {
   const navigate = useNavigate()
   const currentUser = useSelector(selectCurrentUser);
-  const [planData, setPlanData] = useState({})
   const [purchasePlan] = authApi.usePurchasePlanMutation()
+  const [planData, setPlanData] = useState({})
 
   useEffect(() => {
     const plan = localStorage.getItem("plan")
@@ -32,8 +32,8 @@ const Payment = () => {
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        // "http://localhost:5000/api/v1/payment",
         "https://kure-server.vercel.app/api/v1/payment",
+        // "https://kure-server.vercel.app/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -45,23 +45,27 @@ const Payment = () => {
   const handleApproveOrder = async (data) => {
 
     if (await data?.facilitatorAccessToken) {
+
       const persisData = {
         plan: planData?.parsedPlan.plan,
         price: planData?.parsedPlan.price,
         email: currentUser?.email,
-        userType: planData?.userType
+        userType: planData?.userType,
+        orderID: data.orderID,
+        payerID: data.payerID,
       }
       const res = await purchasePlan(persisData);
       if (res?.data?.success) {
         navigate("/daily-audios")
       }
       toast.success("Payment successful");
+
     }
 
     try {
       await axios.post(
-        // "http://localhost:5000/api/v1/payment/execute-payment",
         "https://kure-server.vercel.app/api/v1/payment/execute-payment",
+        // "https://kure-server.vercel.app/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,

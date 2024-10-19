@@ -45,7 +45,9 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     purchasePlan: builder.mutation({
-      query: (purchasePlan) => {                
+      query: (purchasePlan) => {    
+        console.log({purchasePlan});
+                    
         return {
           url: "/auth/purchasePlan",
           method: "PATCH",
