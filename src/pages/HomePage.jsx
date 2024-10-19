@@ -7,15 +7,34 @@ import home_members from "./../assets/images/home_members.png";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
 import { useSelector } from "react-redux";
-import { logOut, selectCurrentUser } from "../redux/fetures/auth/authSlice";
-import { useAppDispatch } from "../redux/hooks";
+import { logOut, selectCurrentUser, useCurrentToken } from "../redux/fetures/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
 import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
+import { verifyToken } from "../utils/verifyToken";
+import { useEffect } from "react";
 
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const token = useAppSelector(useCurrentToken);
+
+  let user;
+  if (token) {
+    user = verifyToken(token);
+  }
+  const expiresDate = new Date(user?.expiresDate)
+  const currentData = new Date()
+
+
+
+  useEffect(() => {
+    if (token && currentData > expiresDate) {
+      dispatch(logOut());
+    }
+  }, [])
+
 
   const handleLOgout = () => {
     dispatch(logOut());

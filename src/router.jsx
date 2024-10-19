@@ -24,12 +24,20 @@ import SignUpPage from "./pages/Login/SignUpPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <PPurchesProtectorRoute>
+        <Layout />
+      </PPurchesProtectorRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: (
+          <PPurchesProtectorRoute>
+            <HomePage />
+          </PPurchesProtectorRoute>
+        ),
       },
       {
         path: "question-2",
@@ -72,12 +80,16 @@ const router = createBrowserRouter([
         element: <WelcomePage />,
       },
       {
-        path: "/physical",
+        path: "/physicalPage",
         element: <Physical />,
       },
       {
         path: "/payment",
-        element: <Payment />,
+        element: (
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        ),
       },
       // {
       //   path: "/orderConfirmation",
@@ -93,6 +105,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  // ============================================>>>> just for testing
   {
     path: "/audios",
     element: <AudioLayout />,
@@ -108,9 +121,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // ============================================>>>> just for testing
   {
     path: "/daily-audios",
-    element: <DailyAudios />
+    element: <DailyAudios />,
     // <ProtectedRoute>
     // </ProtectedRoute>
   },
