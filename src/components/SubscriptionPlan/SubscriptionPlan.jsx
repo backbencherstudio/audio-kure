@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
+import PlanDescription from "../PlanDescription/PlanDescription";
 
 const PaymentPlan = ({
   id,
@@ -28,40 +29,34 @@ const PaymentPlan = ({
   onSelect,
 }) => (
   <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${
-      isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
-    }`}
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
+      }`}
     onClick={() => onSelect(id, discountedPrice)}
   >
     <div className="flex items-center">
       <div
-        className={`w-5 h-5 rounded-full border-2 ${
-          isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
-        } mr-3 flex items-center justify-center ${
-          isPopular ? "mt-8 mb-2" : ""
-        }`}
+        className={`w-5 h-5 rounded-full border-2 ${isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
+          } mr-3 flex items-center justify-center ${isPopular ? "mt-8 mb-2" : ""
+          }`}
       >
         {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
       </div>
       <div
-        className={`flex-grow flex justify-between items-center ${
-          isPopular ? "pt-8 pb-2" : "py-2"
-        }`}
+        className={`flex-grow flex justify-between items-center ${isPopular ? "pt-8 pb-2" : "py-2"
+          }`}
       >
         <div className="space-y-1">
           <p className="font-semibold">{duration} plan</p>
           <div className="flex gap-2">
             <p
-              className={`text-sm line-through ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm line-through ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               ${originalPrice}
             </p>
             <p
-              className={`text-sm ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               ${discountedPrice}
             </p>
@@ -82,9 +77,8 @@ const PaymentPlan = ({
               ${perDay}
             </p>
             <p
-              className={`text-sm ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               per day
             </p>
@@ -199,6 +193,7 @@ const SubscriptionPlan = () => {
       </div>
       <CountDownTimer />
       <div className="container mx-auto mt-5">
+        <PlanDescription />
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
