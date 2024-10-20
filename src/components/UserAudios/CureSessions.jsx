@@ -91,9 +91,18 @@ const CureSessions = ({ currentUser }) => {
         savedPlayedAudios[key] = []; // Default to empty array if not an array
       }
     });
-    
+
     setPlayedAudios(savedPlayedAudios);
-  }, []);
+
+    // Set the initial selectedDay based on the current date
+    const createdDate = new Date(currentUser.createdAt);
+    const currentDate = new Date();
+    createdDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    const elapsedDays = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24)) + 1;
+    setSelectedDay(elapsedDays);
+  }, [currentUser.createdAt]);
 
   const handleDaySelection = (day) => {
     if (isDayUnlocked(day)) {
@@ -109,7 +118,7 @@ const CureSessions = ({ currentUser }) => {
     const elapsedDays = Math.floor((currentDate - createdDate) / (1000 * 60 * 60 * 24)) + 1;
     return day <= elapsedDays;
   };
-  
+
   const getTotalDays = (createdAt, expiresDate) => {
     const createdDate = new Date(createdAt);
     const expirationDate = new Date(expiresDate);
