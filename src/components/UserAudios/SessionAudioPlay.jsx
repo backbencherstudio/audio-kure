@@ -2,9 +2,9 @@ import React from 'react';
 import playButton from '../../assets/images/play_button.png';
 import { FaPlay } from 'react-icons/fa';
 
-const SessionAudioPlay = ({ selectedDay, sessions, setCurrentAudio, markAudioAsPlayed, playedAudios, setSessionImage }) => {
+const SessionAudioPlay = ({ selectedMonth, sessions, setCurrentAudio, markAudioAsPlayed, playedAudios, setSessionImage }) => {
     // Get the session corresponding to the selected day
-    const session = sessions.find((s) => s.id === selectedDay);
+    const session = sessions.find((s) => s.id === selectedMonth);
     // console.log('session', session);
     
     // If no session is found for the selected day, don't render anything
@@ -16,7 +16,7 @@ const SessionAudioPlay = ({ selectedDay, sessions, setCurrentAudio, markAudioAsP
     
     return (
       <div>
-        <h2 className='text-2xl font-semibold text-white'>Audios for Session {session.title} - Day {selectedDay}</h2>
+        <h2 className='text-2xl font-semibold text-white'>Audios for Session {session.title} - Month {selectedMonth}</h2>
         <ul className='mt-4'>
           {session.audios.map((audio, index) => (
             <li 
@@ -30,7 +30,7 @@ const SessionAudioPlay = ({ selectedDay, sessions, setCurrentAudio, markAudioAsP
                   <div className='grid items-center'>
                     <div className='flex gap-1'>
                       {/* Apply font-bold if the audio is played */}
-                      <span className={`text-white ${playedAudios[selectedDay] && playedAudios[selectedDay].includes(audio) ? 'font-bold' : ''}`}>
+                      <span className={`text-white ${playedAudios[selectedMonth] && playedAudios[selectedMonth].includes(audio) ? 'font-bold' : ''}`}>
                         {session.title} {index + 1}
                       </span>
                     </div>
@@ -40,10 +40,10 @@ const SessionAudioPlay = ({ selectedDay, sessions, setCurrentAudio, markAudioAsP
                   onClick={() => {
                     setCurrentAudio(audio);
                     setSessionImage(session.image);
-                    // markAudioAsPlayed(selectedDay, audio); // Pass selectedDay and audio to correctly mark it as played
+                    // markAudioAsPlayed(selectedMonth, audio); // Pass selectedMonth and audio to correctly mark it as played
                   }}
-                  className={`bg-transparent p-1 rounded-lg ${playedAudios[selectedDay] && playedAudios[selectedDay].includes(audio) ? 'border-2' : ''}`}
-                  style={playedAudios[selectedDay] && playedAudios[selectedDay].includes(audio) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
+                  className={`bg-transparent p-1 rounded-lg ${playedAudios[selectedMonth] && playedAudios[selectedMonth].includes(audio) ? 'border-2' : ''}`}
+                  style={playedAudios[selectedMonth] && playedAudios[selectedMonth].includes(audio) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
                 >
                   <div className='p-1 grid items-center'>
                     <img 
