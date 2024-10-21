@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import  { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import sessionImg from '../../assets/images/cure_session.png';
 import audio1 from '../../assets/audios/audio1.mp3';
@@ -14,11 +15,30 @@ import audio10 from '../../assets/audios/audio10.mp3';
 import 'swiper/css';
 import './CureSessions.css';
 import Sessions from './Sessions';
+// import { useAppDispatch } from '../../redux/hooks';
+// import { useNavigate } from 'react-router-dom';
+// import { logOut } from '../../redux/fetures/auth/authSlice';
 
 const CureSessions = ({ currentUser }) => {
   const [selectedMonth, setSelectedMonth] = useState(1)
   const [playedAudios, setPlayedAudios] = useState({});
   const user = true; // Example, set to true to allow interaction
+
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+
+  // const currentData = new Date();
+  // const expirationDate = new Date(currentUser?.expiresDate);
+
+  // useEffect(() => {
+
+  //   if (expirationDate < currentData) {
+  //     dispatch(logOut());
+  //     localStorage.removeItem("layout");
+  //     navigate("/login");
+  //   }
+
+  // }, [])
 
   const sessions = [
     {
