@@ -4,15 +4,14 @@ const authApi = baseApi.injectEndpoints({
   
   endpoints: (builder) => ({
 
-    // getALlUser: builder.query({
-    //   query: () => {
-    //     return {        
-    //         url: "/auth",
-    //         method: "GET"
-    //     }
-    //   },
-    //   providesTags : ["all-users"],
-    // }),
+    getALlUser: builder.query({
+      query: () => {
+        return {        
+            url: "/auth",
+            method: "GET"
+        }
+      },
+    }),
 
     registerUser: builder.mutation({
       query: (user) => {
@@ -22,7 +21,6 @@ const authApi = baseApi.injectEndpoints({
             body: {user},
         }
       },
-      invalidatesTags: ["all-users"],
     }),
 
     verifyOTP: builder.mutation({
@@ -33,7 +31,6 @@ const authApi = baseApi.injectEndpoints({
             body: verifyData,         
         }
       },
-      invalidatesTags: ["all-users"],
     }),
 
     login: builder.mutation({

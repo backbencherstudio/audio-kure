@@ -6,8 +6,13 @@ import { useSelector } from "react-redux";
 import { logOut, selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { Link, useNavigate } from "react-router-dom";
+import authApi from './../../redux/fetures/auth/authApi';
 
 const DailyAudios = () => {
+  const { data } = authApi.useGetALlUserQuery()
+
+  console.log(data?.data);
+  
   const [isOpen, setIsOpen] = useState();
 
   const handleDropdown = () => {
