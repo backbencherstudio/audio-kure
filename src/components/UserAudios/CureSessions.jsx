@@ -101,7 +101,7 @@ console.log('currentUser', currentUser)
   };
 
   const isDayUnlocked = (day) => {
-    const createdDate = new Date(currentUser.createdAt);
+    const createdDate = new Date(currentUser?.createdAt);
     const currentDate = new Date();
 
     // Calculate how many days have passed since the created date
@@ -121,14 +121,14 @@ console.log('currentUser', currentUser)
   };
 
   // Assuming `currentUser` has `createdAt` and `expiresDate` properties
-  const totalDays = getTotalDays(currentUser.createdAt, currentUser.expiresDate);
+  const totalDays = getTotalDays(currentUser?.createdAt, currentUser?.expiresDate);
   const daysData = Array.from({ length: totalDays }, (_, index) => ({ day: index + 1 }));
   const calculatedDays = daysData.slice(0, -1);
 
 return (
   <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
     <div className='max-w-7xl mx-4 md:mx-auto'>
-      <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser.name}!</div>
+      <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser?.name}!</div>
       <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
       <Swiper
         spaceBetween={20}
