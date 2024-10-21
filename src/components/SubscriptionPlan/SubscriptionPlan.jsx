@@ -31,7 +31,7 @@ const PaymentPlan = ({
   <div
     className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
       }`}
-    onClick={() => onSelect(id, discountedPrice)}
+    onClick={() => onSelect(id)}
   >
     <div className="flex items-center">
       <div
@@ -98,87 +98,65 @@ const SubscriptionPlan = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [plans, setPlans] = useState([]);
+  const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const type = localStorage.getItem("type");
     const adjustedPlans = getAdjustedPlans(type);
     setPlans(adjustedPlans);
-  }, []);
+  }, [isDiscountPeriod]);
 
   const currentUser = useSelector(selectCurrentUser);
 
   const getAdjustedPlans = (type) => {
-    // Define your base plans
     const basePlans = [
       {
-        id: "7",
-        duration: "7 day",
-        originalPrice: "14.14",
-        discountedPrice: "6.93",
-        perDay: "0.99",
-        originalPerDay: "$2.02",
-      },
-      {
-        id: "30",
-        duration: "1-month",
-        originalPrice: "30.00",
-        discountedPrice: "16.19",
-        perDay: "0.54",
-        originalPerDay: "$1.11",
-        isPopular: true,
-      },
-      {
-        id: "90",
-        duration: "3-month",
-        originalPrice: "84.94",
-        discountedPrice: "25.99",
-        perDay: "0.31",
-        originalPerDay: "$0.63",
-        hasGift: true,
+        id: "1",
+        duration: "Annual",
+        originalPrice: "994",
+        discountedPrice: "494",
+        perDay: "1.47",
+        originalPerDay: "$2.73",
       },
     ];
 
-    return basePlans.map((plan) => {
-      if (type === "physical") {
-        return {
-          ...plan,
-          discountedPrice: (parseFloat(plan.discountedPrice) * 1.1).toFixed(2),
-        };
-      } else if (type === "emotional") {
-        return {
-          ...plan,
-          discountedPrice: (parseFloat(plan.discountedPrice) * 0.9).toFixed(2),
-        };
-      }
-      return plan;
-    });
+    return basePlans.map((plan) => ({
+      ...plan,
+      currentPrice: isDiscountPeriod ? plan.discountedPrice : plan.originalPrice,
+    }));
   };
 
-  const handlePlanSelect = (planId, price) => {
+  const handlePlanSelect = (planId) => {
     setSelectedPlan(planId);
-    setSelectedPrice(price);
   };
-
+  const handleCountdownEnd = () => {
+    setIsDiscountPeriod(false);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedPlan && selectedPrice) {
+    if (selectedPlan) {
       const selectedPlanDetails = plans.find(
         (plan) => plan.id === selectedPlan
       );
-      const plan = {
-        plan: selectedPlan,
-        price: selectedPrice,
-        originalPrice: selectedPlanDetails?.originalPrice,
-      };
-      console.log(plan);
-      localStorage.setItem("plan", JSON.stringify(plan));
-
-      if (!currentUser) {
-        navigate("/login");
-        return;
+      
+      if (selectedPlanDetails) {
+        const plan = {
+          plan: selectedPlan,
+          price: selectedPlanDetails.currentPrice,
+          originalPrice: selectedPlanDetails.originalPrice,
+        };
+        console.log(plan);
+        localStorage.setItem("plan", JSON.stringify(plan));
+  
+        if (!currentUser) {
+          navigate("/login");
+          return;
+        }
+  
+        navigate("/payment");
+      } else {
+        toast.warning("Selected plan not found");
       }
-
-      navigate("/payment");
     } else {
       toast.warning("Please select a plan");
     }
@@ -191,9 +169,9 @@ const SubscriptionPlan = () => {
           <Logo />
         </nav>
       </div>
-      <CountDownTimer />
+      <CountDownTimer onCountdownEnd={handleCountdownEnd} />
       <div className="container mx-auto mt-5">
-        <PlanDescription />
+        {/* <PlanDescription /> */}
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
@@ -212,14 +190,14 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
             <form onSubmit={handleSubmit}>
-              <div className="space-y-4 mb-4">
+            <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
                   <PaymentPlan
                     key={plan.id}
                     id={plan.id}
                     duration={plan.duration}
                     originalPrice={plan.originalPrice}
-                    discountedPrice={plan.discountedPrice}
+                    discountedPrice={plan.currentPrice}
                     perDay={plan.perDay}
                     originalPerDay={plan.originalPerDay}
                     isSelected={selectedPlan === plan.id}
@@ -229,7 +207,6 @@ const SubscriptionPlan = () => {
                   />
                 ))}
               </div>
-
               <p className="text-base text-[#bec4d2] font-medium mb-10">
                 By clicking Get my plan, I agree to pay ${selectedPrice || 0}{" "}
                 for my plan and that if I do not cancel before the end of the
