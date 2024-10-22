@@ -95,7 +95,7 @@ const PaymentPlan = ({
 );
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("1");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [plans, setPlans] = useState([]);
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
@@ -172,7 +172,7 @@ const SubscriptionPlan = () => {
     counts.physical > counts.emotional ? "physical" : "emotional";
   localStorage.setItem("userType", userType);
   const userCondition = userType;
-  
+
   return (
     <div className="text-white">
       <div className="">
