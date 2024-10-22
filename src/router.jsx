@@ -24,6 +24,7 @@ import SignUpPage from "./pages/Login/SignUpPage";
 import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
+import Summary from "./pages/Summary/Summary";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "welcome",
         element: <WelcomePage />,
+      },
+      {
+        path: "summary",
+        element: <Summary />,
       },
       {
         path: "/physicalPage",

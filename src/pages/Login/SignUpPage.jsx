@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../redux/fetures/auth/authApi";
 import { CircularProgress, Dialog } from "@mui/material";
@@ -14,6 +14,14 @@ const SignUpPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (user && user.email) {
+          setEmail(user.email);
+      }
+  }, []); 
 
 
 
@@ -172,6 +180,8 @@ const SignUpPage = () => {
               type="email"
               className={inputStyle}
               placeholder="Enter your email"
+              defaultValue={email}
+              readOnly
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic">
