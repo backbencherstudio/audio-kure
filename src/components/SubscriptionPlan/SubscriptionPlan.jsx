@@ -117,6 +117,8 @@ const SubscriptionPlan = () => {
         discountedPrice: "494",
         perDay: "1.47",
         originalPerDay: "$2.73",
+        isPopular: true,
+        hasGift: true
       },
     ];
 
@@ -138,7 +140,7 @@ const SubscriptionPlan = () => {
       const selectedPlanDetails = plans.find(
         (plan) => plan.id === selectedPlan
       );
-      
+
       if (selectedPlanDetails) {
         const plan = {
           plan: selectedPlan,
@@ -147,12 +149,12 @@ const SubscriptionPlan = () => {
         };
         console.log(plan);
         localStorage.setItem("plan", JSON.stringify(plan));
-  
+
         if (!currentUser) {
           navigate("/login");
           return;
         }
-  
+
         navigate("/payment");
       } else {
         toast.warning("Selected plan not found");
@@ -162,6 +164,15 @@ const SubscriptionPlan = () => {
     }
   };
 
+  const counts = {
+    physical: 0,
+    emotional: 0,
+  };
+  const userType =
+    counts.physical > counts.emotional ? "physical" : "emotional";
+  localStorage.setItem("userType", userType);
+  const userCondition = userType;
+  
   return (
     <div className="text-white">
       <div className="">
@@ -179,7 +190,7 @@ const SubscriptionPlan = () => {
           >
             Congratulations! you are{" "}
             <span className="text-[#8A5EFF] merriweather capitalize">
-              physical
+              {userCondition}
             </span>{" "}
             suggestible
           </h1>
@@ -190,7 +201,7 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
             <form onSubmit={handleSubmit}>
-            <div className="space-y-4 mb-4">
+              <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
                   <PaymentPlan
                     key={plan.id}
