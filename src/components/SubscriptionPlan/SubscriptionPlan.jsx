@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
+import PlanDescription from "../PlanDescription/PlanDescription";
 
 const PaymentPlan = ({
   id,
@@ -28,40 +29,34 @@ const PaymentPlan = ({
   onSelect,
 }) => (
   <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${
-      isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
-    }`}
-    onClick={() => onSelect(id, discountedPrice)}
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
+      }`}
+    onClick={() => onSelect(id)}
   >
     <div className="flex items-center">
       <div
-        className={`w-5 h-5 rounded-full border-2 ${
-          isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
-        } mr-3 flex items-center justify-center ${
-          isPopular ? "mt-8 mb-2" : ""
-        }`}
+        className={`w-5 h-5 rounded-full border-2 ${isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
+          } mr-3 flex items-center justify-center ${isPopular ? "mt-8 mb-2" : ""
+          }`}
       >
         {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
       </div>
       <div
-        className={`flex-grow flex justify-between items-center ${
-          isPopular ? "pt-8 pb-2" : "py-2"
-        }`}
+        className={`flex-grow flex justify-between items-center ${isPopular ? "pt-8 pb-2" : "py-2"
+          }`}
       >
         <div className="space-y-1">
           <p className="font-semibold">{duration} plan</p>
           <div className="flex gap-2">
             <p
-              className={`text-sm line-through ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm line-through ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               ${originalPrice}
             </p>
             <p
-              className={`text-sm ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               ${discountedPrice}
             </p>
@@ -82,9 +77,8 @@ const PaymentPlan = ({
               ${perDay}
             </p>
             <p
-              className={`text-sm ${
-                isPopular ? "text-gray-500" : "text-gray-500"
-              }`}
+              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
+                }`}
             >
               per day
             </p>
@@ -104,92 +98,81 @@ const SubscriptionPlan = () => {
   const [selectedPlan, setSelectedPlan] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [plans, setPlans] = useState([]);
+  const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     const type = localStorage.getItem("type");
     const adjustedPlans = getAdjustedPlans(type);
     setPlans(adjustedPlans);
-  }, []);
+  }, [isDiscountPeriod]);
 
   const currentUser = useSelector(selectCurrentUser);
 
   const getAdjustedPlans = (type) => {
-    // Define your base plans
     const basePlans = [
       {
-        id: "7",
-        duration: "7 day",
-        originalPrice: "14.14",
-        discountedPrice: "6.93",
-        perDay: "0.99",
-        originalPerDay: "$2.02",
-      },
-      {
-        id: "30",
-        duration: "1-month",
-        originalPrice: "30.00",
-        discountedPrice: "16.19",
-        perDay: "0.54",
-        originalPerDay: "$1.11",
+        id: "1",
+        duration: "Annual",
+        originalPrice: "994",
+        discountedPrice: "494",
+        perDay: "1.47",
+        originalPerDay: "$2.73",
         isPopular: true,
-      },
-      {
-        id: "90",
-        duration: "3-month",
-        originalPrice: "84.94",
-        discountedPrice: "25.99",
-        perDay: "0.31",
-        originalPerDay: "$0.63",
-        hasGift: true,
+        hasGift: true
       },
     ];
 
-    return basePlans.map((plan) => {
-      if (type === "physical") {
-        return {
-          ...plan,
-          discountedPrice: (parseFloat(plan.discountedPrice) * 1.1).toFixed(2),
-        };
-      } else if (type === "emotional") {
-        return {
-          ...plan,
-          discountedPrice: (parseFloat(plan.discountedPrice) * 0.9).toFixed(2),
-        };
-      }
-      return plan;
-    });
+    return basePlans.map((plan) => ({
+      ...plan,
+      currentPrice: isDiscountPeriod ? plan.discountedPrice : plan.originalPrice,
+    }));
   };
 
-  const handlePlanSelect = (planId, price) => {
+  const handlePlanSelect = (planId) => {
     setSelectedPlan(planId);
-    setSelectedPrice(price);
   };
-
+  const handleCountdownEnd = () => {
+    setIsDiscountPeriod(false);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedPlan && selectedPrice) {
+    if (selectedPlan) {
       const selectedPlanDetails = plans.find(
         (plan) => plan.id === selectedPlan
       );
-      const plan = {
-        plan: selectedPlan,
-        price: selectedPrice,
-        originalPrice: selectedPlanDetails?.originalPrice,
-      };
-      console.log(plan);
-      localStorage.setItem("plan", JSON.stringify(plan));
 
-      if (!currentUser) {
-        navigate("/login");
-        return;
+      if (selectedPlanDetails) {
+        const plan = {
+          plan: selectedPlan,
+          price: selectedPlanDetails.currentPrice,
+          originalPrice: selectedPlanDetails.originalPrice,
+        };
+        console.log(plan);
+        localStorage.setItem("plan", JSON.stringify(plan));
+
+        if (!currentUser) {
+          navigate("/login");
+          return;
+        }
+
+        navigate("/payment");
+      } else {
+        toast.warning("Selected plan not found");
       }
-
-      navigate("/payment");
     } else {
       toast.warning("Please select a plan");
     }
   };
 
+  const counts = {
+    physical: 0,
+    emotional: 0,
+  };
+  const userType =
+    counts.physical > counts.emotional ? "physical" : "emotional";
+  localStorage.setItem("userType", userType);
+  const userCondition = userType;
+  
   return (
     <div className="text-white">
       <div className="">
@@ -197,8 +180,9 @@ const SubscriptionPlan = () => {
           <Logo />
         </nav>
       </div>
-      <CountDownTimer />
+      <CountDownTimer onCountdownEnd={handleCountdownEnd} />
       <div className="container mx-auto mt-5">
+        {/* <PlanDescription /> */}
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
@@ -206,7 +190,7 @@ const SubscriptionPlan = () => {
           >
             Congratulations! you are{" "}
             <span className="text-[#8A5EFF] merriweather capitalize">
-              physical
+              {userCondition}
             </span>{" "}
             suggestible
           </h1>
@@ -224,7 +208,7 @@ const SubscriptionPlan = () => {
                     id={plan.id}
                     duration={plan.duration}
                     originalPrice={plan.originalPrice}
-                    discountedPrice={plan.discountedPrice}
+                    discountedPrice={plan.currentPrice}
                     perDay={plan.perDay}
                     originalPerDay={plan.originalPerDay}
                     isSelected={selectedPlan === plan.id}
@@ -234,7 +218,6 @@ const SubscriptionPlan = () => {
                   />
                 ))}
               </div>
-
               <p className="text-base text-[#bec4d2] font-medium mb-10">
                 By clicking Get my plan, I agree to pay ${selectedPrice || 0}{" "}
                 for my plan and that if I do not cancel before the end of the

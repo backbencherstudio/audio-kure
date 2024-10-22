@@ -1,5 +1,349 @@
-[
-    {
+{
+    "emotional": {
+        "self": [
+            {
+                "name": "Lack of Confidence",
+                "audio": "Lack of Confidence.mp3"
+            },
+            {
+                "name": "Self-Image",
+                "audio": "Self-Image.mp3"
+            },
+            {
+                "name": "Guilt",
+                "audio": "Guilt.mp3"
+            },
+            {
+                "name": "Grief",
+                "audio": "Grief.mp3"
+            },
+            {
+                "name": "I Am Enough",
+                "audio": "I Am Enough.mp3"
+            },
+            {
+                "name": "Not Good Enough",
+                "audio": "Not Good Enough.mp3"
+            },
+            {
+                "name": "Stubborn",
+                "audio": "Stubborn.mp3"
+            },
+            {
+                "name": "Self-Criticism",
+                "audio": "Self-Criticism.mp3"
+            },
+            {
+                "name": "Self-Defeating Behaviors",
+                "audio": "Self-Defeating Behaviors.mp3"
+            },
+            {
+                "name": "Bullying",
+                "audio": "Bullying.mp3"
+            },
+            {
+                "name": "Death or Loss",
+                "audio": "Death or Loss.mp3"
+            },
+            {
+                "name": "Fear of Failure",
+                "audio": "Fear of Failure.mp3"
+            },
+            {
+                "name": "Self-Esteem",
+                "audio": "Self-Esteem.mp3"
+            },
+            {
+                "name": "Self-Expression",
+                "audio": "Self-Expression.mp3"
+            },
+            {
+                "name": "Self-Forgiveness",
+                "audio": "Self-Forgiveness.mp3"
+            },
+            {
+                "name": "Self-Awareness",
+                "audio": "Self-Awareness.mp3"
+            },
+            {
+                "name": "Self-Actualization",
+                "audio": "Self-Actualization.mp3"
+            },
+            {
+                "name": "Self-Blame",
+                "audio": "Self-Blame.mp3"
+            },
+            {
+                "name": "Self-Confidence",
+                "audio": "Self-Confidence.mp3"
+            },
+            {
+                "name": "Fear of School",
+                "audio": "Fear of School.mp3"
+            },
+            {
+                "name": "Fear of Success",
+                "audio": "Fear of Success.mp3"
+            },
+            {
+                "name": "Fear of Water",
+                "audio": "Fear of Water.mp3"
+            },
+            {
+                "name": "Find Hidden Talents",
+                "audio": "Find Hidden Talents.mp3"
+            },
+            {
+                "name": "Forgiveness",
+                "audio": "Forgiveness.mp3"
+            },
+            {
+                "name": "Frustration",
+                "audio": "Frustration.mp3"
+            },
+            {
+                "name": "Freedom",
+                "audio": "Freedom.mp3"
+            },
+            {
+                "name": "Giving Up",
+                "audio": "Giving Up.mp3"
+            },
+            {
+                "name": "Grinding Jaw/Teeth",
+                "audio": "Grinding Jaw.mp3"
+            },
+            {
+                "name": "Gratitude",
+                "audio": "Gratitude.mp3"
+            },
+            {
+                "name": "Hair Twisting",
+                "audio": "Hair Twisting.mp3"
+            },
+            {
+                "name": "Surrender",
+                "audio": "Surrender.mp3"
+            },
+            {
+                "name": "Trust",
+                "audio": "Trust.mp3"
+            },
+            {
+                "name": "Hopelessness",
+                "audio": "Hopelessness.mp3"
+            },
+            {
+                "name": "Hypochondria",
+                "audio": "Hypochondria.mp3"
+            },
+            {
+                "name": "Hostility",
+                "audio": "Hostility.mp3"
+            },
+            {
+                "name": "Hoarding",
+                "audio": "Hoarding.mp3"
+            },
+            {
+                "name": "Hypertension",
+                "audio": "Hypertension.mp3"
+            },
+            {
+                "name": "Hypno-birthing",
+                "audio": "Hypno-birthing.mp3"
+            },
+            {
+                "name": "Indecision",
+                "audio": "Indecision.mp3"
+            },
+            {
+                "name": "Inferiority",
+                "audio": "Inferiority.mp3"
+            },
+            {
+                "name": "Inhibition",
+                "audio": "Inhibition.mp3"
+            },
+            {
+                "name": "Insecurity",
+                "audio": "Insecurity.mp3"
+            },
+            {
+                "name": "Irrational",
+                "audio": "Irrational.mp3"
+            },
+            {
+                "name": "Irrational Thoughts",
+                "audio": "Irrational Thoughts.mp3"
+            },
+            {
+                "name": "Jealousy",
+                "audio": "Jealousy.mp3"
+            },
+            {
+                "name": "Lack of Joy",
+                "audio": "Lack of Joy.mp3"
+            },
+            {
+                "name": "Lack of Ambition",
+                "audio": "Lack of Ambition.mp3"
+            },
+            {
+                "name": "Lack of Self-Confidence",
+                "audio": "Lack of Self-Confidence.mp3"
+            },
+            {
+                "name": "Lack of Freedom",
+                "audio": "Lack of Freedom.mp3"
+            },
+            {
+                "name": "Lack of Enthusiasm",
+                "audio": "Lack of Enthusiasm.mp3"
+            },
+            {
+                "name": "Abandonment",
+                "audio": "Abandonment.mp3"
+            },
+            {
+                "name": "Sadness",
+                "audio": "Sadness.mp3"
+            },
+            {
+                "name": "Passive-Aggressive",
+                "audio": "Passive-Aggressive.mp3"
+            },
+            {
+                "name": "Quantum Transformation 1: Past Life Regression 1",
+                "audio": "Past Life Regression 1.mp3"
+            },
+            {
+                "name": "Quantum Transformation 2: Past Life Regression 2",
+                "audio": "Past Life Regression 2.mp3"
+            },
+            {
+                "name": "Quantum Transformation 3: Past Life Regression 3",
+                "audio": "Past Life Regression 3.mp3"
+            }
+        ],
+
+
+        "ego": [
+            {
+                "name": "Fear of Losing Control",
+                "audio": "Fear of Losing Control.mp3"
+            },
+            {
+                "name": "Stuck",
+                "audio": "Stuck.mp3"
+            },
+            {
+                "name": "Concentration",
+                "audio": "Concentration.mp3"
+            },
+            {
+                "name": "Fear of Doing Mistakes",
+                "audio": "Fear of Doing Mistakes.mp3"
+            },
+            {
+                "name": "Creativity",
+                "audio": "Creativity.mp3"
+            },
+            {
+                "name": "Sabotage",
+                "audio": "Sabotage.mp3"
+            },
+            {
+                "name": "Self-Control",
+                "audio": "Self-Control.mp3"
+            },
+            {
+                "name": "Confused",
+                "audio": "Confused.mp3"
+            },
+            {
+                "name": "Anger",
+                "audio": "Anger.mp3"
+            },
+            {
+                "name": "Attention-Deficit Disorder (ADD)",
+                "audio": "ADD.mp3"
+            },
+            {
+                "name": "Attention, Deficit/Hyperactivity Disorder (ADHD)",
+                "audio": "ADHD.mp3"
+            },
+            {
+                "name": "Gambling",
+                "audio": "Gambling.mp3"
+            },
+            {
+                "name": "Lack of Initiative",
+                "audio": "Lack of Initiative.mp3"
+            },
+            {
+                "name": "Biofeedback",
+                "audio": "Biofeedback.mp3"
+            },
+            {
+                "name": "Breakthrough",
+                "audio": "Breakthrough.mp3"
+            },
+            {
+                "name": "Self-Mastery",
+                "audio": "Self-Mastery.mp3"
+            },
+            {
+                "name": "Let Go of Anger",
+                "audio": "Let Go of Anger.mp3"
+            },
+            {
+                "name": "Lower Blood Pressure",
+                "audio": "Lower Blood Pressure.mp3"
+            },
+            {
+                "name": "Manifestation",
+                "audio": "Manifestation.mp3"
+            },
+            {
+                "name": "Medication Side Effects",
+                "audio": "Medication Side Effects.mp3"
+            },
+            {
+                "name": "Memory",
+                "audio": "Memory.mp3"
+            },
+            {
+                "name": "Me Time",
+                "audio": "Me Time.mp3"
+            },
+            {
+                "name": "Mindfulness",
+                "audio": "Mindfulness.mp3"
+            },
+            {
+                "name": "Mistrust",
+                "audio": "Mistrust.mp3"
+            },
+            {
+                "name": "Moodiness",
+                "audio": "Moodiness.mp3"
+            },
+            {
+                "name": "Obsessive-Compulsive Disorder (OCD)",
+                "audio": "OCD.mp3"
+            },
+            {
+                "name": "Overwhelm",
+                "audio": "Overwhelm.mp3"
+            },
+            {
+                "name": "Procrastination",
+                "audio": "Procrastination.mp3"
+            }
+        ]
+    },
+    "physical": {
         "body": [
             {
                 "name": "Chronic Pain",
@@ -289,9 +633,7 @@
                 "name": "Video Game Addiction",
                 "audio": "Video Game Addiction.mp3"
             }
-        ]
-    },
-    {
+        ],
         "mind": [
             {
                 "name": "Anxiety & Trauma",
@@ -507,4 +849,4 @@
             }
         ]
     }
-]
+}

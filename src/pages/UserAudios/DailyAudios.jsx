@@ -22,7 +22,7 @@ const DailyAudios = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  
+  console.log('currentUser', currentUser)
   const handleLOgout = () => {
     dispatch(logOut());
     localStorage.removeItem("layout");
