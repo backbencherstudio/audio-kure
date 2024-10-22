@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: (
       <PPurchesProtectorRoute>
         <Layout />
-      </PPurchesProtectorRoute>
+       </PPurchesProtectorRoute>
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         path: "",
         element: (
           // <PPurchesProtectorRoute>
-          <HomePage />
+            <HomePage />
           // </PPurchesProtectorRoute>
         ),
       },
@@ -97,7 +97,7 @@ const router = createBrowserRouter([
         ),
       },
 
-
+      
 
 
       // {
@@ -139,7 +139,7 @@ const router = createBrowserRouter([
     path: "/daily-audios",
     element:
       <ProtectedRoute>
-        <DailyAudios />,
+        <DailyAudios />
       </ProtectedRoute>
   },
 ]);
