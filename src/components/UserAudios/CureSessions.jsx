@@ -110,18 +110,18 @@ const CureSessions = ({ currentUser }) => {
     const savedPlayedAudios = JSON.parse(localStorage.getItem('playedAudios')) || {};
     Object.keys(savedPlayedAudios).forEach(key => {
       if (!Array.isArray(savedPlayedAudios[key])) {
-        savedPlayedAudios[key] = []; // Default to empty array if not an array
+        savedPlayedAudios[key] = []; 
       }
     });
 
     setPlayedAudios(savedPlayedAudios);
 
-    // Set the initial selectedMonth based on the current date
-    const createdDate = new Date(currentUser.createdAt);
+
+    const createdDate = new Date(currentUser?.createdAt);
     const currentDate = new Date();
     const elapsedMonths = getElapsedMonths(createdDate, currentDate);
     setSelectedMonth(elapsedMonths);
-  }, [currentUser.createdAt]);
+  }, [currentUser?.createdAt]);
 
   const handleMonthSelection = (month) => {
     if (isMonthUnlocked(month)) {
@@ -150,14 +150,14 @@ const CureSessions = ({ currentUser }) => {
     return getElapsedMonths(createdDate, expirationDate);
   };
 
-  const totalMonths = getTotalMonths(currentUser.createdAt, currentUser.expiresDate);
+  const totalMonths = getTotalMonths(currentUser?.createdAt, currentUser?.expiresDate);
   const monthsData = Array.from({ length: totalMonths }, (_, index) => ({ month: index + 1 }));
   const calculatedMonths = monthsData.slice(0, -1);
 
   return (
     <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
       <div className='max-w-7xl mx-4 md:mx-auto'>
-        <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser.name}!</div>
+        <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser?.name}!</div>
         <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
         <Swiper
           spaceBetween={20}

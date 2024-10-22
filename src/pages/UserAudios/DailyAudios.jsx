@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../layout/layout.css";
 import { FaRegUser } from "react-icons/fa";
 import CureSessions from "../../components/UserAudios/CureSessions";
@@ -9,21 +9,34 @@ import { Link, useNavigate } from "react-router-dom";
 import authApi from './../../redux/fetures/auth/authApi';
 
 const DailyAudios = () => {
-  const { data } = authApi.useGetALlUserQuery()
+  const [currentEmail, setCurrentEmail] = useState("");
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  console.log(data?.data);
-  
-  const [isOpen, setIsOpen] = useState();
+  const { data, error, isLoading, refetch } = authApi.useGetSingleUserQuery(currentEmail, {
+    skip: !currentEmail,
+  });  
+
+  useEffect(() => {
+    if (currentEmail) {
+      refetch();
+    }
+  }, [currentEmail, refetch]);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  console.log('currentUser', currentUser)
-  const handleLOgout = () => {
+  useEffect(() => {
+    if (currentUser?.email) {
+      setCurrentEmail(currentUser.email);
+    }
+  }, [currentUser?.email]);
+
+  const handleLogout = () => {
     dispatch(logOut());
     localStorage.removeItem("layout");
     navigate("/login");
@@ -48,9 +61,7 @@ const DailyAudios = () => {
                 {currentUser ? (
                   <button
                     className="text-center"
-                    onClick={() => {
-                      handleLOgout();
-                    }}
+                    onClick={handleLogout}
                   >
                     Log Out
                   </button>
@@ -65,8 +76,17 @@ const DailyAudios = () => {
         </div>
       </div>
 
-      
-      <CureSessions currentUser={currentUser} />
+      {/* Loader for data fetching */}
+      {isLoading && <p>Loading user data...</p>}
+
+      {/* Show CureSessions only when data is available */}
+      {data?.data ? (
+        <CureSessions currentUser={data?.data} />
+      ) : (
+        !isLoading && <p>No data available</p>
+      )}
+
+      {error && <p>Error loading user data: {error.message}</p>}
     </div>
   );
 };

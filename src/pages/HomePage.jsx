@@ -1,15 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
 // import home_hero_image from "./../assets/images/home_hero_image.png";
 // import home_hero_image from "https://www.wellmeright.com/blog/content/images/size/w2000/2024/03/Quantum-Healing-Hypnosis-Benefits.jpg";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import {
   logOut,
-  selectCurrentUser,
+  // selectCurrentUser,
   useCurrentToken,
 } from "../redux/fetures/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -19,9 +19,9 @@ import { verifyToken } from "../utils/verifyToken";
 import { useEffect } from "react";
 import heroImage from './../assets/hero.jpg'
 function HomePage() {
-  const currentUser = useSelector(selectCurrentUser);
+  // const currentUser = useSelector(selectCurrentUser);
+  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const token = useAppSelector(useCurrentToken);
 
   let user;
@@ -35,13 +35,15 @@ function HomePage() {
     if (token && currentData > expiresDate) {
       dispatch(logOut());
     }
-  }, []);
+  }, [])
+ 
 
-  const handleLOgout = () => {
-    dispatch(logOut());
-    localStorage.removeItem("layout");
-    navigate("/login");
-  };
+
+  // const handleLOgout = () => {
+  //   dispatch(logOut());
+  //   localStorage.removeItem("layout");
+  //   navigate("/login");
+  // };
 
   const handleAnswerSelect = (selectedAnswer) => {
     const answer = [{ ans1: selectedAnswer }];

@@ -95,7 +95,7 @@ const PaymentPlan = ({
 );
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("1");
+  const [selectedPlan, setSelectedPlan] = useState("365");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [plans, setPlans] = useState([]);
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
@@ -111,7 +111,7 @@ const SubscriptionPlan = () => {
   const getAdjustedPlans = (type) => {
     const basePlans = [
       {
-        id: "1",
+        id: "365",
         duration: "Annual",
         originalPrice: "994",
         discountedPrice: "494",

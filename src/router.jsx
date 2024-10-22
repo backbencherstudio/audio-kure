@@ -38,9 +38,9 @@ const router = createBrowserRouter([
       {
         path: "",
         element: (
-          <PPurchesProtectorRoute>
-            <HomePage />
-          </PPurchesProtectorRoute>
+          // <PPurchesProtectorRoute>
+          <HomePage />
+          // </PPurchesProtectorRoute>
         ),
       },
       {
@@ -102,7 +102,7 @@ const router = createBrowserRouter([
         ),
       },
 
-      
+
 
 
       // {
@@ -142,9 +142,10 @@ const router = createBrowserRouter([
   // ============================================>>>> just for testing
   {
     path: "/daily-audios",
-    element: <ProtectedRoute>
-      <DailyAudios />
-    </ProtectedRoute>
+    element:
+      <ProtectedRoute>
+        <DailyAudios />,
+      </ProtectedRoute>
   },
 ]);
 

@@ -244,7 +244,7 @@ const SignUpPage = () => {
                   style={{
                     color: "white",
                     width: "20px",
-                    height: "32px",
+                    height: "20px",
                   }}
                 />
               ) : (
