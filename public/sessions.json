@@ -4,12 +4,12 @@
             {
                 "id": 1,
                 "name": "Lack of Confidence",
-                "audio": "Lack of Confidence.mp3"
+                "audio": "../src/assets/audios/audio1.mp3"
             },
             {
                 "id": 2,
                 "name": "Self-Image",
-                "audio": "Self-Image.mp3"
+                "audio": "../src/assets/audios/audio2.mp3"
             },
             {
                 "id": 3,

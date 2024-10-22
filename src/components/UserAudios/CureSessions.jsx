@@ -172,7 +172,7 @@ const CureSessions = ({ currentUser }) => {
           className="months-slider"
         >
           {calculatedMonths.map((monthItem, index) => (
-            <SwiperSlide key={index} className='!mr-7 md:!mr-auto'>
+            <SwiperSlide key={index} className=' !w-[90px] !mr-7 md:!mr-auto'>
               <button 
                 className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedMonth === monthItem.month ? 'bg-[#130e2b]' : ''}`}
                 style={isMonthUnlocked(monthItem.month) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
