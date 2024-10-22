@@ -9,7 +9,7 @@ const CountDownTimer = ({ onCountdownEnd }) => {
             const remaining = endTime - now;
             return remaining > 0 ? remaining : 0;
         }
-        return 3 * 60; 
+        return 10 * 60; 
     });
 
     useEffect(() => {
