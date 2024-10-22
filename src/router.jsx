@@ -37,9 +37,9 @@ const router = createBrowserRouter([
       {
         path: "",
         element: (
-          <PPurchesProtectorRoute>
-            <HomePage />
-          </PPurchesProtectorRoute>
+          // <PPurchesProtectorRoute>
+          <HomePage />
+          // </PPurchesProtectorRoute>
         ),
       },
       {
@@ -97,7 +97,7 @@ const router = createBrowserRouter([
         ),
       },
 
-      
+
 
 
       // {

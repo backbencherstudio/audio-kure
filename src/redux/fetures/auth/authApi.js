@@ -4,11 +4,11 @@ const authApi = baseApi.injectEndpoints({
   
   endpoints: (builder) => ({
 
-    getALlUser: builder.query({
-      query: () => {
+    getSingleUser: builder.query({
+      query: (email) => {
         return {        
-            url: "/auth",
-            method: "GET"
+            url: `/auth?email=${email}`,
+            method: "GET",
         }
       },
     }),
@@ -42,9 +42,7 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     purchasePlan: builder.mutation({
-      query: (purchasePlan) => {    
-        console.log({purchasePlan});
-                    
+      query: (purchasePlan) => {                    
         return {
           url: "/auth/purchasePlan",
           method: "PATCH",
