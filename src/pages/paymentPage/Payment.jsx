@@ -32,8 +32,8 @@ const Payment = () => {
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment",
-        // "https://kure-server.vercel.app/api/v1/payment",
+        "http://localhost:5000/api/v1/payment",
+        // "http://localhost:5000/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -64,8 +64,8 @@ const Payment = () => {
 
     try {
       await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
-        // "https://kure-server.vercel.app/api/v1/payment/execute-payment",
+        "http://localhost:5000/api/v1/payment/execute-payment",
+        // "http://localhost:5000/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
@@ -113,21 +113,21 @@ const Payment = () => {
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-sm font-medium">1-month plan</h3>
-                <p className="text-xs text-gray-500">Discount 51%</p>
+                <h3 className="text-sm font-medium">Annual plan</h3>
+                <p className="text-xs text-green-300 text-center">{`${amount === 994 ? '-' : 'Discount 49.7%'}`}</p>
               </div>
             </div>
             {/* Price */}
             <div className="text-right space-y-2">
-              <p className="text-sm font-medium">$30.99</p>
-              <p className="text-xs text-red-500">-$15.80</p>
+              <p className="text-sm font-medium">${amount}</p>
+              <p className="text-xs text-red-500">-</p>
             </div>
           </div>
 
           {/* Total */}
           <div className="flex justify-between items-center">
             <p className="text-lg font-bold">Total:</p>
-            <p className="text-lg font-bold ">$15.19</p>
+            <p className="text-lg font-bold ">${amount}</p>
           </div>
         </div>
         <div className="md:w-3/4 mt-20 md:mt-0">

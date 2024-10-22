@@ -1,17 +1,39 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const CountDownTimer = () => {
-    const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutes in seconds
+const CountDownTimer = ({ onCountdownEnd }) => {
+    const [timeLeft, setTimeLeft] = useState(() => {
+        const savedTime = localStorage.getItem('countdownTime');
+        if (savedTime) {
+            const endTime = parseInt(savedTime, 10);
+            const now = Math.floor(Date.now() / 1000);
+            const remaining = endTime - now;
+            return remaining > 0 ? remaining : 0;
+        }
+        return 3 * 60; 
+    });
 
     useEffect(() => {
-        if (timeLeft <= 0) return;
+        const endTime = Math.floor(Date.now() / 1000) + timeLeft;
+        localStorage.setItem('countdownTime', endTime.toString());
 
-        const timer = setInterval(() => {
-            setTimeLeft(prevTime => prevTime - 1);
-        }, 1000);
+        if (timeLeft > 0) {
+            const timerId = setInterval(() => {
+                const now = Math.floor(Date.now() / 1000);
+                const remaining = endTime - now;
+                if (remaining > 0) {
+                    setTimeLeft(remaining);
+                } else {
+                    setTimeLeft(0);
+                    clearInterval(timerId);
+                    onCountdownEnd();
+                }
+            }, 1000);
 
-        return () => clearInterval(timer);
-    }, [timeLeft]);
+            return () => clearInterval(timerId);
+        } else {
+            onCountdownEnd();
+        }
+    }, [onCountdownEnd]);
 
     const formatTime = (time) => {
         const minutes = Math.floor(time / 60);

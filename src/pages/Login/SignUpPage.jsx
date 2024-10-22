@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authApi from "../../redux/fetures/auth/authApi";
 import { CircularProgress, Dialog } from "@mui/material";
@@ -14,8 +14,8 @@ const SignUpPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  
- 
+
+
 
   const {
     register,
@@ -33,7 +33,7 @@ const SignUpPage = () => {
     }
 
     setUserEmail(data?.email);
-    
+
     const res = await registerUser(data);
     if (res?.data?.success) {
       toast("Check Your Email For Verify OTP");
@@ -119,7 +119,7 @@ const SignUpPage = () => {
 
   return (
     <div className=" h-screen flex items-center justify-center">
-       <div className="area"> {/* Fixed area covering full viewport */}
+      <div className="area"> {/* Fixed area covering full viewport */}
         <ul className="circles">
           <li></li>
           <li></li>
@@ -230,7 +230,13 @@ const SignUpPage = () => {
               className="btnGrad w-full text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline flex justify-center items-center hover:scale-105 duration-300"
             >
               {isLoading ? (
-                <span className="loading loading-dots loading-md"></span>
+                <CircularProgress
+                  style={{
+                    color: "white",
+                    width: "20px",
+                    height: "32px",
+                  }}
+                />
               ) : (
                 "Register"
               )}
@@ -279,12 +285,12 @@ const SignUpPage = () => {
               <button type="submit" className="mt-5">
                 {verifyLoading ? (
                   <CircularProgress
-                  style={{
-                    color: "white",
-                    width: "20px",
-                    height: "20px",
-                  }}
-                />
+                    style={{
+                      color: "black",
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
                 ) : (
                   "Verify OTP"
                 )}

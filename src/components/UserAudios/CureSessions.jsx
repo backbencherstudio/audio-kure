@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import  { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import sessionImg from '../../assets/images/cure_session.png';
@@ -13,13 +14,31 @@ import audio9 from '../../assets/audios/audio9.mp3';
 import audio10 from '../../assets/audios/audio10.mp3';
 import 'swiper/css';
 import './CureSessions.css';
-import daysData from './days.json';
 import Sessions from './Sessions';
+// import { useAppDispatch } from '../../redux/hooks';
+// import { useNavigate } from 'react-router-dom';
+// import { logOut } from '../../redux/fetures/auth/authSlice';
 
-const CureSessions = () => {
-  const [selectedDay, setSelectedDay] = useState(1); // Start with Day 1
+const CureSessions = ({ currentUser }) => {
+  const [selectedMonth, setSelectedMonth] = useState(1)
   const [playedAudios, setPlayedAudios] = useState({});
   const user = true; // Example, set to true to allow interaction
+
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+
+  // const currentData = new Date();
+  // const expirationDate = new Date(currentUser?.expiresDate);
+
+  // useEffect(() => {
+
+  //   if (expirationDate < currentData) {
+  //     dispatch(logOut());
+  //     localStorage.removeItem("layout");
+  //     navigate("/login");
+  //   }
+
+  // }, [])
 
   const sessions = [
     {
@@ -86,40 +105,56 @@ const CureSessions = () => {
 
   useEffect(() => {
     const savedPlayedAudios = JSON.parse(localStorage.getItem('playedAudios')) || {};
-    // Ensure each entry is an array
     Object.keys(savedPlayedAudios).forEach(key => {
       if (!Array.isArray(savedPlayedAudios[key])) {
         savedPlayedAudios[key] = []; // Default to empty array if not an array
       }
     });
-    
+
     setPlayedAudios(savedPlayedAudios);
-  }, []);
 
-  const handleDaySelection = (day) => {
-    setSelectedDay(day);
+    // Set the initial selectedMonth based on the current date
+    const createdDate = new Date(currentUser.createdAt);
+    const currentDate = new Date();
+    const elapsedMonths = getElapsedMonths(createdDate, currentDate);
+    setSelectedMonth(elapsedMonths);
+  }, [currentUser.createdAt]);
+
+  const handleMonthSelection = (month) => {
+    if (isMonthUnlocked(month)) {
+      setSelectedMonth(month);
+    }
   };
 
-  const isDayUnlocked = (day) => {
-    if (day === 1) return true; // Day 1 is always unlocked
-
-    const prevDayAudios = playedAudios[day - 1] || [];
-    const expectedPrevDayAudios = sessions.find(s => s.id === day - 1)?.audios || [];
-    const allPrevDayAudiosPlayed = expectedPrevDayAudios.length > 0 && 
-                                    expectedPrevDayAudios.every(audio => prevDayAudios.includes(audio));
-
-    const currentTime = new Date();
-    const testTime = new Date(currentTime);
-    testTime.setHours(10, 0, 0, 0); // Set test time to 10:00 AM
-    const isAfter10AM = currentTime >= testTime;
-
-    return allPrevDayAudiosPlayed && isAfter10AM;
+  const isMonthUnlocked = (month) => {
+    const createdDate = new Date(currentUser?.createdAt);
+    const currentDate = new Date();
+    const elapsedMonths = getElapsedMonths(createdDate, currentDate);
+    return month <= elapsedMonths;
   };
+
+  const getElapsedMonths = (startDate, endDate) => {
+    const startYear = startDate.getFullYear();
+    const startMonth = startDate.getMonth();
+    const endYear = endDate.getFullYear();
+    const endMonth = endDate.getMonth();
+    return (endYear - startYear) * 12 + (endMonth - startMonth) + 1;
+  };
+
+  const getTotalMonths = (createdAt, expiresDate) => {
+    const createdDate = new Date(createdAt);
+    const expirationDate = new Date(expiresDate);
+    return getElapsedMonths(createdDate, expirationDate);
+  };
+
+  const totalMonths = getTotalMonths(currentUser.createdAt, currentUser.expiresDate);
+  const monthsData = Array.from({ length: totalMonths }, (_, index) => ({ month: index + 1 }));
+  const calculatedMonths = monthsData.slice(0, -1);
 
   return (
     <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
       <div className='max-w-7xl mx-4 md:mx-auto'>
-        <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey em!</div>
+        <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser.name}!</div>
         <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
         <Swiper
           spaceBetween={20}
@@ -131,27 +166,29 @@ const CureSessions = () => {
             1024: { slidesPerView: 8, spaceBetween: 5, slidesPerGroup: 1 },
             1280: { slidesPerView: 10, spaceBetween: 5, slidesPerGroup: 1 },
           }}
-          className="days-slider"
+          className="months-slider"
         >
-          {daysData.map((dayItem, index) => (
+          {calculatedMonths.map((monthItem, index) => (
             <SwiperSlide key={index} className='!mr-7 md:!mr-auto'>
               <button 
-                className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedDay === dayItem.day ? 'bg-[#130e2b]' : ''}`}
-                style={isDayUnlocked(dayItem.day) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
-                onClick={() => handleDaySelection(dayItem.day)}
-                disabled={user === false || !isDayUnlocked(dayItem.day)}
+                className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedMonth === monthItem.month ? 'bg-[#130e2b]' : ''}`}
+                style={isMonthUnlocked(monthItem.month) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
+                onClick={() => handleMonthSelection(monthItem.month)}
+                disabled={user === false || !isMonthUnlocked(monthItem.month)}
               >
-                <div className='text-slate-300'>Day</div>
-                <div className='grid justify-center text-slate-300'>{dayItem.day}</div>
-                <div className={`border ${selectedDay === dayItem.day ? 'p-[5px]' : 'p-[13px]'} rounded-full border-[#2f2861]`}>
-                  {selectedDay === dayItem.day ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
+                <div className='text-slate-300'>Month</div>
+                <div className='grid justify-center text-slate-300'>{monthItem.month}</div>
+                <div className='grid justify-center'>
+                  <div className={`grid justify-center items-center border w-7 h-7  rounded-full border-[#2f2861]`}>
+                    {selectedMonth === monthItem.month ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
+                  </div>
                 </div>
               </button>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-      <Sessions selectedDay={selectedDay} setPlayedAudios={setPlayedAudios} playedAudios={playedAudios} sessions={sessions} />
+      <Sessions selectedMonth={selectedMonth} setPlayedAudios={setPlayedAudios} playedAudios={playedAudios} sessions={sessions} />
     </div>
   );
 };
