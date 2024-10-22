@@ -23,6 +23,7 @@ import DailyAudios from "./pages/UserAudios/DailyAudios";
 import SignUpPage from "./pages/Login/SignUpPage";
 import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
+import AllUsers from "./pages/allUsers/AllUsers";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -89,15 +90,25 @@ const router = createBrowserRouter([
         path: "/payment",
         element: (
           <ProtectedRoute>
-            <Payment />
+            <PPurchesProtectorRoute>
+              <Payment />
+            </PPurchesProtectorRoute>
           </ProtectedRoute>
         ),
       },
+
+      
+
+
       // {
       //   path: "/orderConfirmation",
       //   element: <OrderConfirmation />,
       // },
     ],
+  },
+  {
+    path: "/all-user",
+    element: <AllUsers />,
   },
   {
     path: "/signup",
@@ -127,8 +138,8 @@ const router = createBrowserRouter([
   {
     path: "/daily-audios",
     element: <ProtectedRoute>
-              <DailyAudios />
-             </ProtectedRoute>
+      <DailyAudios />
+    </ProtectedRoute>
   },
 ]);
 

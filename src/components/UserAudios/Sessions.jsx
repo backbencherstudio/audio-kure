@@ -14,7 +14,7 @@ import SessionAudioPlay from './SessionAudioPlay';
 import { FaPlay } from 'react-icons/fa';
 import CustomAudioPlayer from './CustomAudioPlayer';
 
-const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
+const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [sessionImage, setSessionImage] = useState(null);
 
@@ -43,17 +43,17 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
   const handleAudioSelect = (audioSrc) => {
     setCurrentAudio(audioSrc);
     setSessionImage(sessionImg);
-    markAudioAsPlayed(selectedDay, audioSrc);
+    markAudioAsPlayed(selectedMonth, audioSrc);
   };
 
-  const currentSession = sessions.find((session) => session.id === selectedDay);
+  const currentSession = sessions.find((session) => session.id === selectedMonth);
   
 
   return (
     <div className="border-t mt-5 border-[#2f2861]">
       <div className="max-w-7xl mx-4 md:mx-auto my-8">
         <div className="text-3xl font-semibold my-8">
-          Your cure session for Day {selectedDay}
+          Your cure session for Month {selectedMonth}
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 my-4">
@@ -68,7 +68,7 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
                 />
                 <div className="absolute inset-0 flex flex-col justify-end items-center bg-gradient-to-t from-black to-transparent p-4">
                   <div className="text-white text-3xl font-bold mb-2">
-                    Session {selectedDay}
+                    Session {selectedMonth}
                   </div>
                   <div className="text-white text-xl font-semibold mb-2">
                     {currentSession.title}
@@ -95,7 +95,6 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
               </div>
             )}
           </div>
-
           {/* Right Side - Always Visible Audio List */}
           <div className="flex flex-col">
             <SessionAudioPlay
@@ -103,7 +102,7 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
               setCurrentAudio={handleAudioSelect}
               playedAudios={playedAudios}
               setSessionImage={setSessionImage}
-              selectedDay={selectedDay}
+              selectedMonth={selectedMonth}
               // markAudioAsPlayed={markAudioAsPlayed}
             />
           </div>
