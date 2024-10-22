@@ -17,7 +17,7 @@ import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
 import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 import { verifyToken } from "../utils/verifyToken";
 import { useEffect } from "react";
-
+import heroImage from './../assets/hero.jpg'
 function HomePage() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
@@ -120,11 +120,7 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center">
-              <img
-                className="rounded-xl "
-                alt=""
-                src="https://www.wellmeright.com/blog/content/images/size/w2000/2024/03/Quantum-Healing-Hypnosis-Benefits.jpg"
-              />
+            <img className="rounded-xl " alt="" src={heroImage} />
             </div>
           </div>
           <Footer />
