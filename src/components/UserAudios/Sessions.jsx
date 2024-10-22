@@ -1,53 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import sessionImg from '../../assets/images/cure_session.png';
-// import audio1 from '../../assets/audios/audio1.mp3';
-// import audio2 from '../../assets/audios/audio2.mp3';
-// import audio3 from '../../assets/audios/audio3.mp3';
-// import audio4 from '../../assets/audios/audio4.mp3';
-// import audio5 from '../../assets/audios/audio5.mp3';
-// import audio6 from '../../assets/audios/audio6.mp3';
-// import audio7 from '../../assets/audios/audio7.mp3';
-// import audio8 from '../../assets/audios/audio8.mp3';
-// import audio9 from '../../assets/audios/audio9.mp3';
-// import audio10 from '../../assets/audios/audio10.mp3';
 import SessionAudioPlay from './SessionAudioPlay';
 import { FaPlay } from 'react-icons/fa';
 import CustomAudioPlayer from './CustomAudioPlayer';
+import data from "../../../public/sessions.json"; // Assuming data is imported here
 
 const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [sessionImage, setSessionImage] = useState(null);
-
+  const [audioUnlockStates, setAudioUnlockStates] = useState({});
 
   useEffect(() => {
     const savedPlayedAudios = JSON.parse(localStorage.getItem("playedAudios")) || {};
     setPlayedAudios(savedPlayedAudios);
+    initializeUnlockStates(savedPlayedAudios);
   }, []);
 
-  const markAudioAsPlayed = (day, audioSrc) => {
+  const initializeUnlockStates = (savedPlayedAudios) => {
+    const initialUnlockStates = {};
+    Object.keys(data).forEach(category => {
+      initialUnlockStates[category] = {};
+      Object.keys(data[category]).forEach(subCategory => {
+        const audios = data[category][subCategory];
+        initialUnlockStates[category][subCategory] = audios.map((_, index) => {
+          // Unlock the first audio if it has been played
+          return savedPlayedAudios[category]?.[subCategory]?.includes(index) || index === 0;
+        });
+      });
+    });
+    setAudioUnlockStates(initialUnlockStates);
+  };
+
+  const markAudioAsPlayed = (category, subCategory, audioIndex) => {
     setPlayedAudios((prev) => {
+      const categoryData = prev[category] || {};
+      const subCategoryData = categoryData[subCategory] || [];
+      
       // Ensure that the audio is not added again if it has already been played
-      const alreadyPlayed = prev[day] && prev[day].includes(audioSrc);
-      if (!alreadyPlayed) {
+      if (!subCategoryData.includes(audioIndex)) {
         const updatedPlayedAudios = {
           ...prev,
-          [day]: prev[day] ? [...prev[day], audioSrc] : [audioSrc]
+          [category]: {
+            ...categoryData,
+            [subCategory]: [...subCategoryData, audioIndex],
+          },
         };
         localStorage.setItem("playedAudios", JSON.stringify(updatedPlayedAudios));
         return updatedPlayedAudios;
       }
       return prev; // Return the previous state if audio is already played
     });
+
+    // Unlock the next audio in the sub-category
+    setAudioUnlockStates((prevStates) => {
+      const nextIndex = audioIndex + 1; // Use audioIndex to determine next audio
+      return {
+        ...prevStates,
+        [category]: {
+          ...prevStates[category],
+          [subCategory]: prevStates[category][subCategory].map((state, index) => {
+            return index === nextIndex ? true : state; // Unlock the next audio
+          }),
+        },
+      };
+    });
   };
 
-  const handleAudioSelect = (audioSrc) => {
-    setCurrentAudio(audioSrc);
+  const handleAudioSelect = (category, subCategory, audio) => {
+    setCurrentAudio(audio.audio);
     setSessionImage(sessionImg);
-    markAudioAsPlayed(selectedMonth, audioSrc);
+    markAudioAsPlayed(category, subCategory, audio.id); // Pass audio.id directly as index
   };
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
-  
 
   return (
     <div className="border-t mt-5 border-[#2f2861]">
@@ -85,7 +110,7 @@ const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) =>
                     <button
                       className="flex gap-2 items-center bg-slate-400 p-2 rounded-3xl justify-center w-full"
                       onClick={() =>
-                        handleAudioSelect(currentSession.audios[0])
+                        handleAudioSelect(currentSession.audios[0].category, currentSession.audios[0].subCategory, currentSession.audios[0])
                       }
                     >
                       <FaPlay /> Play The Audios
@@ -103,7 +128,7 @@ const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) =>
               playedAudios={playedAudios}
               setSessionImage={setSessionImage}
               selectedMonth={selectedMonth}
-              // markAudioAsPlayed={markAudioAsPlayed}
+              audioUnlockStates={audioUnlockStates} // Pass unlock states
             />
           </div>
         </div>
