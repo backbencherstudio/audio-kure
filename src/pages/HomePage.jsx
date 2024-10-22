@@ -53,7 +53,7 @@ function HomePage() {
       <div className="container z-50 mx-auto bg-transparent ">
         <div className="  flex  justify-between items-center">
           <Logo />
-          <div>
+          {/* <div>
             {currentUser ? (
               <button
                 onClick={() => {
@@ -65,7 +65,7 @@ function HomePage() {
             ) : (
               <Link to={"/login"}>Log In</Link>
             )}
-          </div>
+          </div> */}
         </div>
 
         <div className="container   mx-auto px-4">
