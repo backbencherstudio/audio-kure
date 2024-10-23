@@ -52,8 +52,6 @@ const authApi = baseApi.injectEndpoints({
 
     updateAudioData: builder.mutation({
       query: (audioData) => {   
-        console.log(audioData);
-        
         return {
           url: "/auth/audio",
           method: "PATCH",

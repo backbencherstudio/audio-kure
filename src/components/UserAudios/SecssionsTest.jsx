@@ -8,7 +8,7 @@ import authApi from '../../redux/fetures/auth/authApi';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
 
-const Sessions = ({ selectedMonth, sessions }) => {
+const TestSessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
@@ -24,8 +24,40 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
 
-  // Set to track updated audio IDs
-  const updatedAudioIds = new Set();
+  // const handleAudioSelect = async (audio) => {
+
+  //   if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
+  //     setCurrentAudio(null);
+  //     setPlayingAudio({ id: null, category: null });
+  //   } else {
+  //     setCurrentAudio(audio);
+  //     setPlayingAudio({ id: audio.id, category: audio.category });
+  //     setSessionImage(sessionImg);
+
+  //     const audioData = {
+  //       email: currentUser?.email,
+  //       [`${audio.category}Id`]: audio.id === self?.length ? "end" : audio.id,
+  //       category: audio.category,
+  //     };
+
+  //     console.log("selfAudioId ", selfAudioId);
+  //     console.log("audio.id ", audio.id);
+
+
+  //     if (selfAudioId < audio.id && selfAudioId !== "end") {
+  //       const res = await updateAudioData(audioData);
+  //       console.log(res?.data?.success);
+  //     }
+
+  //     if (egoAudioId < audio.id && selfAudioId === "end") {
+  //       const res = await updateAudioData(audioData);
+  //       console.log(res?.data?.success);
+  //     }
+
+
+  //   }
+  // };
+
 
   const handleAudioSelect = async (audio) => {
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
@@ -36,33 +68,44 @@ const Sessions = ({ selectedMonth, sessions }) => {
       setPlayingAudio({ id: audio.id, category: audio.category });
       setSessionImage(sessionImg);
 
-      // Define the audioData to be used in updates
-      const audioData = {
-        email: currentUser?.email,
-        [`${audio.category}Id`]: audio.id === (audio.category === "self" ? self?.length : ego?.length) ? "end" : audio.id,
-        category: audio.category,
-      };
+      if (selfAudioId < audio.id) {
+        const audioData = {
+          email: currentUser?.email,
+          [`${audio.category}Id`]: audio.id === self?.length ? "end" : audio.id,
+          category: audio.category,
+        };
 
-      // Update Self Audio
-      if (selfAudioId < audio.id && selfAudioId !== "end") {
-        if (!updatedAudioIds.has(audio.id)) {
+        if (selfAudioId === "end") {
+          return
+        } else {
           const res = await updateAudioData(audioData);
           console.log("Self Audio Update Success: ", res?.data?.success);
-          updatedAudioIds.add(audio.id); // Mark as updated
+          return
         }
-        return;
       }
 
-      // Update Ego Audio
       if (selfAudioId === "end" && egoAudioId < audio.id) {
-        if (!updatedAudioIds.has(audio.id)) {
-          const res = await updateAudioData(audioData);
-          console.log("Ego Audio Update Success: ", res?.data?.success);
-          updatedAudioIds.add(audio.id); // Mark as updated
-        }
+
+        const audioData = {
+          email: currentUser?.email,
+          [`${audio.category}Id`]: audio.id === ego?.length ? "end" : audio.id,
+          category: audio.category,
+        };
+
+        // console.log({egoAudioId});
+        // console.log({"audio.id" : audio.id});
+        console.log({audioData});
+        
+
+        const res = await updateAudioData(audioData);
+        console.log("Ego Audio Update Success: ", res?.data?.success);
       }
+
     }
   };
+
+
+
 
   const handleAudioEnd = () => {
     setCurrentAudio(null);
@@ -189,7 +232,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
         </div>
       </div>
     </div>
+
   );
 };
 
-export default Sessions;
+export default TestSessions;
