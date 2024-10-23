@@ -185,12 +185,14 @@ const CureSessions = ({ currentUser }) => {
                     {selectedMonth === monthItem.month ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
                   </div>
                 </div>
-              </button>
+              </button>              
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
+
       <Sessions selectedMonth={selectedMonth} setPlayedAudios={setPlayedAudios} playedAudios={playedAudios} sessions={sessions} />
+
     </div>
   );
 };

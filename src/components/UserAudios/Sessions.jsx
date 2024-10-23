@@ -1,78 +1,109 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import sessionImg from '../../assets/images/cure_session.png';
-import SessionAudioPlay from './SessionAudioPlay';
-import { FaPlay } from 'react-icons/fa';
+import { FaPlay, FaPause, FaLock } from 'react-icons/fa'; // Added FaLock for push icon
 import CustomAudioPlayer from './CustomAudioPlayer';
-import data from "../../../public/sessions.json"; // Assuming data is imported here
+import data from "../../../public/sessions.json";
+import authApi from '../../redux/fetures/auth/authApi';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
+// import { toast } from 'react-toastify';
 
-const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) => {
+const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
-  const [sessionImage, setSessionImage] = useState(null);
-  const [audioUnlockStates, setAudioUnlockStates] = useState({});
+  const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
+  const [sessionImage, setSessionImage] = useState(sessionImg);
+  const [updateAudioData] = authApi.useUpdateAudioDataMutation();
+  const currentUser = useSelector(selectCurrentUser);
 
-  useEffect(() => {
-    const savedPlayedAudios = JSON.parse(localStorage.getItem("playedAudios")) || {};
-    setPlayedAudios(savedPlayedAudios);
-    initializeUnlockStates(savedPlayedAudios);
-  }, []);
+  const { data: userData } = authApi.useGetSingleUserQuery(currentUser?.email);
+  const selfAudioId = userData?.data?.selfId; 
 
-  const initializeUnlockStates = (savedPlayedAudios) => {
-    const initialUnlockStates = {};
-    Object.keys(data).forEach(category => {
-      initialUnlockStates[category] = {};
-      Object.keys(data[category]).forEach(subCategory => {
-        const audios = data[category][subCategory];
-        initialUnlockStates[category][subCategory] = audios.map((_, index) => {
-          // Unlock the first audio if it has been played
-          return savedPlayedAudios[category]?.[subCategory]?.includes(index) || index === 0;
-        });
-      });
-    });
-    setAudioUnlockStates(initialUnlockStates);
-  };
-
-  const markAudioAsPlayed = (category, subCategory, audioIndex) => {
-    setPlayedAudios((prev) => {
-      const categoryData = prev[category] || {};
-      const subCategoryData = categoryData[subCategory] || [];
-      
-      // Ensure that the audio is not added again if it has already been played
-      if (!subCategoryData.includes(audioIndex)) {
-        const updatedPlayedAudios = {
-          ...prev,
-          [category]: {
-            ...categoryData,
-            [subCategory]: [...subCategoryData, audioIndex],
-          },
-        };
-        localStorage.setItem("playedAudios", JSON.stringify(updatedPlayedAudios));
-        return updatedPlayedAudios;
-      }
-      return prev; // Return the previous state if audio is already played
-    });
-
-    // Unlock the next audio in the sub-category
-    setAudioUnlockStates((prevStates) => {
-      const nextIndex = audioIndex + 1; // Use audioIndex to determine next audio
-      return {
-        ...prevStates,
-        [category]: {
-          ...prevStates[category],
-          [subCategory]: prevStates[category][subCategory].map((state, index) => {
-            return index === nextIndex ? true : state; // Unlock the next audio
-          }),
-        },
-      };
-    });
-  };
-
-  const handleAudioSelect = (category, subCategory, audio) => {
-    setCurrentAudio(audio.audio);
-    setSessionImage(sessionImg);
-    markAudioAsPlayed(category, subCategory, audio.id); // Pass audio.id directly as index
-  };
+  const self = data?.emotional?.self;
+  const ego = data?.emotional?.ego;
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
+
+  const canAccessEgo = self?.length === selfAudioId && userData?.data?.category[0] === "self";
+
+  const AccessEgo = ego?.length === selfAudioId && userData?.data?.category[0] === "ego";
+
+  const handleAudioSelect = async (audio) => {
+
+    console.log({audio});
+    
+
+    // if (audio.category === "ego" && !canAccessEgo) {
+    //   toast.warning("You need to finish all Self audios before accessing Ego audios.");
+    //   return;
+    // }
+
+    // if (audio.id > selfAudioId + 1) {
+    //   console.log("You cannot play this audio yet.");
+    //   return;
+    // }
+
+    if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
+      setCurrentAudio(null);
+      setPlayingAudio({ id: null, category: null });
+    } else {
+      setCurrentAudio(audio);
+      setPlayingAudio({ id: audio.id, category: audio.category });
+      setSessionImage(sessionImg);
+      const audioData = {
+        email: currentUser?.email,
+       selfId: audio.id,
+        category: audio.category,
+      };
+
+      await updateAudioData(audioData);
+      // if (selfAudioId + 1 === audio.id) {
+      //   await updateAudioData(audioData);
+      // }
+    }
+  };
+
+  // const handleAudioSelect = async (audio) => {
+  //   // Check if the selected audio is in the Ego category and if it can be accessed
+  //   if (audio.category === "ego") {
+  //     if (!canAccessEgo) {
+  //       toast.warning("You need to finish all Self audios before accessing Ego audios.");
+  //       return; // Exit early if Ego audios are not accessible
+  //     }
+  //   }
+  
+  //   // Check if the audio ID is available to play
+  //   if (audio.id > selfAudioId + 1) {
+  //     console.log("You cannot play this audio yet.");
+  //     toast.warning("This audio is not yet available.");
+  //     return; // Exit early if the audio is not available
+  //   }
+  
+  //   // Proceed with playing the audio if checks are passed
+  //   if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
+  //     setCurrentAudio(null);
+  //     setPlayingAudio({ id: null, category: null });
+  //   } else {
+  //     setCurrentAudio(audio);
+  //     setPlayingAudio({ id: audio.id, category: audio.category });
+  //     setSessionImage(sessionImg);
+  //     const audioData = {
+  //       email: currentUser?.email,
+  //       audioId: audio.id,
+  //       category: audio.category,
+  //     };
+  
+  //     if (selfAudioId + 1 === audio.id) {
+  //       await updateAudioData(audioData);
+  //     }
+  //   }
+  // };
+
+  
+  const handleAudioEnd = () => {
+    setCurrentAudio(null);
+    setPlayingAudio({ id: null, category: null });
+  };
 
   return (
     <div className="border-t mt-5 border-[#2f2861]">
@@ -82,12 +113,11 @@ const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) =>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 my-4">
-          {/* Left Side - Session Card with Player */}
           <div className="flex flex-col gap-4">
             {currentSession && (
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
                 <img
-                  src={currentSession.image}
+                  src={sessionImage}
                   alt="session"
                   className="opacity-70 w-full"
                 />
@@ -99,18 +129,18 @@ const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) =>
                     {currentSession.title}
                   </div>
                   <div className="text-white mb-4 text-center font-semibold">
-                    Description for {currentSession.title} goes here.
+                    Description for <span className='text-xl font-semibold text-red-500'>{currentAudio?.name}</span> goes here.
                   </div>
                   {currentAudio ? (
                     <CustomAudioPlayer
-                      audioSrc={currentAudio}
-                      onAudioEnd={() => setCurrentAudio(null)}
+                      audioSrc={currentAudio.audio}
+                      onAudioEnd={handleAudioEnd}
                     />
                   ) : (
                     <button
                       className="flex gap-2 items-center bg-slate-400 p-2 rounded-3xl justify-center w-full"
                       onClick={() =>
-                        handleAudioSelect(currentSession.audios[0].category, currentSession.audios[0].subCategory, currentSession.audios[0])
+                        handleAudioSelect(currentSession.audios[0])
                       }
                     >
                       <FaPlay /> Play The Audios
@@ -120,16 +150,63 @@ const Sessions = ({ selectedMonth, setPlayedAudios, playedAudios, sessions }) =>
               </div>
             )}
           </div>
-          {/* Right Side - Always Visible Audio List */}
-          <div className="flex flex-col">
-            <SessionAudioPlay
-              sessions={sessions}
-              setCurrentAudio={handleAudioSelect}
-              playedAudios={playedAudios}
-              setSessionImage={setSessionImage}
-              selectedMonth={selectedMonth}
-              audioUnlockStates={audioUnlockStates} // Pass unlock states
-            />
+
+          <div className="grid grid-cols-2 gap-10">
+            {/* Self Section */}
+            <div className="">
+              <h2>Self</h2>
+              <div>
+                {self?.map((item) => (
+                  <div key={item.id}>
+                    <button
+                      className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${
+                        playingAudio.category === item.category && item.id === playingAudio.id
+                          ? 'bg-blue-500' : 'bg-transparent'
+                      }`}
+                      onClick={() => handleAudioSelect(item)}
+                      disabled={item.id > selfAudioId + 1} 
+                    >
+                      {item.id > selfAudioId + 1 ? (
+                        <FaLock /> 
+                      ) : playingAudio.id === item.id && playingAudio.category === item.category ? (
+                        <FaPause /> 
+                      ) : (
+                        <FaPlay /> 
+                      )}
+                      {item.name}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Ego Section */}
+            <div className="">
+              <h2>Ego</h2>
+              <div>
+                {ego?.map((item) => (
+                  <div key={item.id}>
+                    <button
+                      className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${
+                        playingAudio.category === item.category && item.id === playingAudio.id
+                          ? 'bg-transparent' : 'bg-transparent'
+                      }`}
+                      onClick={() => handleAudioSelect(item)}
+                      disabled={item.id > selfAudioId + 1 || !canAccessEgo} 
+                    >
+                      {item.id > selfAudioId + 1 || !canAccessEgo ? (
+                        <FaLock />
+                      ) : playingAudio.id === item.id && playingAudio.category === item.category ? (
+                        <FaPause /> 
+                      ) : (
+                        <FaPlay /> 
+                      )}
+                      {item.name}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

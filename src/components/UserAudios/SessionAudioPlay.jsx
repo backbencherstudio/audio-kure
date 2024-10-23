@@ -79,6 +79,7 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
             {/* Render sub-categories if a category is selected */}
             {selectedCategory && (
                 <div className="mb-8 flex justify-between gap-4">
+
                     {Object.keys(data[selectedCategory]).map((subCategory) => (
                         <div key={subCategory}>
                             <button
@@ -88,10 +89,11 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
                                 {subCategory.charAt(0).toUpperCase() + subCategory.slice(1)}
                             </button>
 
-                            {/* Render audios under selected sub-category */}
                             {selectedSubCategory === subCategory && renderAudios()}
                         </div>
                     ))}
+
+                    
                 </div>
             )}
         </div>
