@@ -24,7 +24,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
 
-  // Set to track updated audio IDs
   const updatedAudioIds = new Set();
 
   const handleAudioSelect = async (audio) => {
@@ -36,29 +35,26 @@ const Sessions = ({ selectedMonth, sessions }) => {
       setPlayingAudio({ id: audio.id, category: audio.category });
       setSessionImage(sessionImg);
 
-      // Define the audioData to be used in updates
       const audioData = {
         email: currentUser?.email,
         [`${audio.category}Id`]: audio.id === (audio.category === "self" ? self?.length : ego?.length) ? "end" : audio.id,
         category: audio.category,
       };
 
-      // Update Self Audio
       if (selfAudioId < audio.id && selfAudioId !== "end") {
         if (!updatedAudioIds.has(audio.id)) {
           const res = await updateAudioData(audioData);
           console.log("Self Audio Update Success: ", res?.data?.success);
-          updatedAudioIds.add(audio.id); // Mark as updated
+          updatedAudioIds.add(audio.id); 
         }
         return;
       }
 
-      // Update Ego Audio
       if (selfAudioId === "end" && egoAudioId < audio.id) {
         if (!updatedAudioIds.has(audio.id)) {
           const res = await updateAudioData(audioData);
           console.log("Ego Audio Update Success: ", res?.data?.success);
-          updatedAudioIds.add(audio.id); // Mark as updated
+          updatedAudioIds.add(audio.id); 
         }
       }
     }
