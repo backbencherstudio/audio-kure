@@ -101,10 +101,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
-      
-
-
       // {
       //   path: "/orderConfirmation",
       //   element: <OrderConfirmation />,
