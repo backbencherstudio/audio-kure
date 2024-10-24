@@ -167,6 +167,7 @@ const Vault = () => {
                                 onLoadedMetadata={handleDurationChange}
                                 controls
                                 className="w-96 m-2 mx-auto "
+                                controlsList="nodownload"
                             />
 
 

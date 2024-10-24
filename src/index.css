@@ -115,6 +115,6 @@ img {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #c0c0c0;
+  background-color: #cd03f583;
   border-radius: 10px;
 }
