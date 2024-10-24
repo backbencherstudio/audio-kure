@@ -119,7 +119,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
         <div className="heading-div text-3xl font-semibold my-8">
           Your cure session for Month {selectedMonth}
-          {count ? <span className='inline-block ml-2'>
+          {count ? 
+          <span className='inline-block ml-2'>
             <span className=' inline-block ' >& You achieve
             </span>
 
@@ -132,7 +133,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
           </span> : ""}
 
           {
-            count && (
+            count >= 1 && (
               <ProgressBar
                 className="mt-2"
                 completed={(count / maxValue) * 100}  
