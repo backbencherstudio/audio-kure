@@ -102,14 +102,24 @@ const Vault = () => {
         setDuration(audioRef.current.duration);
     };
 
-    const handleSeek = (event) => {
-        const newTime = event.target.value;
-        audioRef.current.currentTime = newTime;
-        setCurrentTime(newTime);
-    };
+    
 
     return (
-        <div className="">
+        <div>
+             <div className="area"> {/* Fixed area covering full viewport */}
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
             <div className="max-w-7xl mx-auto">
                 <div className="mb-6 sm:mb-8">
                     <Logo />

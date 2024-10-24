@@ -60,6 +60,12 @@
                 "name": "Bullying",
                 "audio": "../src/assets/audios/audio4.mp3",
                 "category": "self"
+            },
+            {
+                "id": 11,
+                "name": "Bullying 2",
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "self"
             }
         ],
         "ego": [
