@@ -17,13 +17,11 @@ const SignUpPage = () => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user && user.email) {
-          setEmail(user.email);
-      }
-  }, []); 
-
-
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.email) {
+      setEmail(user.email);
+    }
+  }, []);
 
   const {
     register,
@@ -70,28 +68,47 @@ const SignUpPage = () => {
     }
   };
 
+  // const verifyOtp = async (otp) => {
+  //   const verifyData = { email: userEmail, otp };
+  //   const res = await verifyOTP(verifyData);
+
+  //   if (res?.error?.status === 400) {
+  //     toast.error(res?.error?.data.message);
+  //     setOpen(false)
+  //   }
+
+
+  //   if (res?.data?.success) {
+  //     toast.success("Registration Successfull");
+  //     setOpen(false);
+  //     navigate("/login");
+  //   } else {
+  //     toast.error(res?.data?.message);
+  //   }
+  // };
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+
   const verifyOtp = async (otp) => {
     const verifyData = { email: userEmail, otp };
     const res = await verifyOTP(verifyData);
 
     if (res?.error?.status === 400) {
       toast.error(res?.error?.data.message);
+      setOpen(false);
     }
 
-    console.log(res);
-
     if (res?.data?.success) {
-      toast.success("Registration Successfull");
+      toast.success("Registration Successful");
       setOpen(false);
+      setOtp(new Array(6).fill("")); 
       navigate("/login");
     } else {
       toast.error(res?.data?.message);
+      setOtp(new Array(6).fill(""));
     }
   };
-
   // ======================================================== fill up OTP function Start
 
-  const [otp, setOtp] = useState(new Array(6).fill(""));
 
   const inputRefs = useRef([]);
 

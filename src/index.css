@@ -7,7 +7,7 @@
 }
 
 
-.button {
+.AudioPlayButton {
   background-color: var(--first-color);
   background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);

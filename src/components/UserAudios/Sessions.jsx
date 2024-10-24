@@ -160,8 +160,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
             <div className='grid grid-cols-2 gap-10 mb-5' >
 
-              <button onClick={() => { setToggleCategory("emotional") }} className={`button rounded-md ${toggleCategory === "emotional" ? "text-yellow-300 " : "text-white"} font-bold text-[20px]`}>Emotion</button>
-              <button onClick={() => { setToggleCategory("physical") }} className={`button rounded-md ${toggleCategory === "emotional" ? "text-white" : "text-yellow-300"} font-bold text-[20px]`}>Physical</button>
+              <button onClick={() => { setToggleCategory("emotional") }} className={`AudioPlayButton rounded-md ${toggleCategory === "emotional" ? "text-white " : "text-black"} font-bold text-[20px]`}>Emotion</button>
+              <button onClick={() => { setToggleCategory("physical") }} className={`AudioPlayButton rounded-md ${toggleCategory === "emotional" ? "text-black" : "text-white"} font-bold text-[20px]`}>Physical</button>
 
             </div>
 
@@ -294,7 +294,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
               {/* miend Section */}
               <div>
-                <h2 className='font-semibold mb-1 '>Miend ...</h2>
+                <h2 className='font-semibold mb-1 '>Mind ...</h2>
                 <div>
                   {miend?.map((item) => (
                     <div key={item.id} className='mb-2'>
