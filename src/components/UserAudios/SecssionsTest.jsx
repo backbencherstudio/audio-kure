@@ -8,7 +8,7 @@ import authApi from '../../redux/fetures/auth/authApi';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
 
-const TestSessions = ({ selectedMonth, sessions }) => {
+const SessionsTest = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
@@ -18,14 +18,96 @@ const TestSessions = ({ selectedMonth, sessions }) => {
   const { data: userData } = authApi.useGetSingleUserQuery(currentUser?.email);
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
   const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
+  const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
+  const mindAudioId = userData?.data?.mindId === "end" ? "end" : parseInt(userData?.data?.mindId);
 
   const self = data?.emotional?.self;
   const ego = data?.emotional?.ego;
+  const body = data?.physical?.body;
+  const miend = data?.physical?.mind;
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
+  const updatedAudioIds = new Set();
+  // console.log(userData?.data.userType);
 
-  // const handleAudioSelect = async (audio) => {
+  const [toggleCategory, setToggleCategory] = useState(userData?.data?.userType)
 
+
+  const handleAudioSelect = async (audio) => {
+
+    if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
+      setCurrentAudio(null);
+      setPlayingAudio({ id: null, category: null });
+    } else {
+      setCurrentAudio(audio);
+      setPlayingAudio({ id: audio.id, category: audio.category });
+      setSessionImage(sessionImg);
+
+      const audioData = {
+        email: currentUser?.email,
+        [`${audio.category}Id`]: audio.id === (audio.category === "self" ? self?.length : ego?.length) ? "end" : audio.id,
+        category: audio.category,
+      };
+      console.log(audioData);
+
+      if (selfAudioId < audio.id && selfAudioId !== "end") {
+        if (!updatedAudioIds.has(audio.id)) {
+          const res = await updateAudioData(audioData);
+          console.log("Self Audio Update Success: ", res?.data?.success);
+          updatedAudioIds.add(audio.id);
+        }
+        return;
+      }
+
+      if (selfAudioId === "end" && egoAudioId < audio.id) {
+        if (!updatedAudioIds.has(audio.id)) {
+          const res = await updateAudioData(audioData);
+          console.log("Ego Audio Update Success: ", res?.data?.success);
+          updatedAudioIds.add(audio.id);
+        }
+      }
+    }
+  };
+
+  const handlePhysicalAudioSelect = async (audio) => {
+
+    if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
+      setCurrentAudio(null);
+      setPlayingAudio({ id: null, category: null });
+    } else {
+      setCurrentAudio(audio);
+      setPlayingAudio({ id: audio.id, category: audio.category });
+      setSessionImage(sessionImg);
+
+      const audioData = {
+        email: currentUser?.email,
+        [`${audio.category}Id`]: audio.id === (audio.category === "body" ? body?.length : miend?.length) ? "end" : audio.id,
+        category: audio.category,
+      };
+
+      console.log(audioData);
+
+      if (bodyAudioId < audio.id && bodyAudioId !== "end") {
+        if (!updatedAudioIds.has(audio.id)) {
+          const res = await updateAudioData(audioData);
+          console.log("Self Audio Update Success: ", res?.data?.success);
+          updatedAudioIds.add(audio.id);
+        }
+        return;
+      }
+
+      if (bodyAudioId === "end" && mindAudioId < audio.id) {
+        if (!updatedAudioIds.has(audio.id)) {
+          const res = await updateAudioData(audioData);
+          console.log("Ego Audio Update Success: ", res?.data?.success);
+          updatedAudioIds.add(audio.id);
+        }
+      }
+    }
+  };
+
+
+  //   const handleAudioSelect = async (audio) => {
   //   if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
   //     setCurrentAudio(null);
   //     setPlayingAudio({ id: null, category: null });
@@ -36,75 +118,54 @@ const TestSessions = ({ selectedMonth, sessions }) => {
 
   //     const audioData = {
   //       email: currentUser?.email,
-  //       [`${audio.category}Id`]: audio.id === self?.length ? "end" : audio.id,
+  //       [`${audio.category}Id`]: 
+  //         audio.id === (audio.category === "self" ? self?.length :
+  //                       audio.category === "ego" ? ego?.length :
+  //                       audio.category === "body" ? body?.length :
+  //                       miend?.length) ? "end" : audio.id,
   //       category: audio.category,
   //     };
 
-  //     console.log("selfAudioId ", selfAudioId);
-  //     console.log("audio.id ", audio.id);
-
-
-  //     if (selfAudioId < audio.id && selfAudioId !== "end") {
-  //       const res = await updateAudioData(audioData);
-  //       console.log(res?.data?.success);
+  //     // Handle Self Audio Update
+  //     if (selfAudioId < audio.id && selfAudioId !== "end" && audio.category === "self") {
+  //       if (!updatedAudioIds.has(audio.id)) {
+  //         const res = await updateAudioData(audioData);
+  //         console.log("Self Audio Update Success: ", res?.data?.success);
+  //         updatedAudioIds.add(audio.id);
+  //       }
+  //       return;
   //     }
 
-  //     if (egoAudioId < audio.id && selfAudioId === "end") {
-  //       const res = await updateAudioData(audioData);
-  //       console.log(res?.data?.success);
+  //     // Handle Ego Audio Update
+  //     if (selfAudioId === "end" && egoAudioId < audio.id && audio.category === "ego") {
+  //       if (!updatedAudioIds.has(audio.id)) {
+  //         const res = await updateAudioData(audioData);
+  //         console.log("Ego Audio Update Success: ", res?.data?.success);
+  //         updatedAudioIds.add(audio.id);
+  //       }
+  //       return;
   //     }
 
+  //     // Handle Body Audio Update
+  //     if (egoAudioId === "end" && bodyAudioId < audio.id && audio.category === "body") {
+  //       if (!updatedAudioIds.has(audio.id)) {
+  //         const res = await updateAudioData(audioData);
+  //         console.log("Body Audio Update Success: ", res?.data?.success);
+  //         updatedAudioIds.add(audio.id);
+  //       }
+  //       return;
+  //     }
 
+  //     // Handle Miend Audio Update
+  //     if (bodyAudioId === "end" && miendAudioId < audio.id && audio.category === "miend") {
+  //       if (!updatedAudioIds.has(audio.id)) {
+  //         const res = await updateAudioData(audioData);
+  //         console.log("Miend Audio Update Success: ", res?.data?.success);
+  //         updatedAudioIds.add(audio.id);
+  //       }
+  //     }
   //   }
   // };
-
-
-  const handleAudioSelect = async (audio) => {
-    if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
-      setCurrentAudio(null);
-      setPlayingAudio({ id: null, category: null });
-    } else {
-      setCurrentAudio(audio);
-      setPlayingAudio({ id: audio.id, category: audio.category });
-      setSessionImage(sessionImg);
-
-      if (selfAudioId < audio.id) {
-        const audioData = {
-          email: currentUser?.email,
-          [`${audio.category}Id`]: audio.id === self?.length ? "end" : audio.id,
-          category: audio.category,
-        };
-
-        if (selfAudioId === "end") {
-          return
-        } else {
-          const res = await updateAudioData(audioData);
-          console.log("Self Audio Update Success: ", res?.data?.success);
-          return
-        }
-      }
-
-      if (selfAudioId === "end" && egoAudioId < audio.id) {
-
-        const audioData = {
-          email: currentUser?.email,
-          [`${audio.category}Id`]: audio.id === ego?.length ? "end" : audio.id,
-          category: audio.category,
-        };
-
-        // console.log({egoAudioId});
-        // console.log({"audio.id" : audio.id});
-        console.log({audioData});
-        
-
-        const res = await updateAudioData(audioData);
-        console.log("Ego Audio Update Success: ", res?.data?.success);
-      }
-
-    }
-  };
-
-
 
 
   const handleAudioEnd = () => {
@@ -120,6 +181,7 @@ const TestSessions = ({ selectedMonth, sessions }) => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 my-4">
+
           <div className="flex flex-col gap-4">
             {currentSession && (
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
@@ -160,80 +222,170 @@ const TestSessions = ({ selectedMonth, sessions }) => {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-10">
-            {/* Self Section */}
-            <div>
-              <h2>Self</h2>
+          <div>
+
+            <div className='grid grid-cols-2 gap-10 mb-5' >
+
+              <button onClick={()=>{setToggleCategory("emotional")}}  className={`button rounded-md ${toggleCategory === "emotional" ? "text-yellow-300 " : "text-white"} font-bold text-[20px]`}>Emotion</button>
+              <button onClick={()=>{setToggleCategory("physical")}}  className={`button rounded-md ${toggleCategory === "emotional" ? "text-white" : "text-yellow-300"} font-bold text-[20px]`}>Physical</button>
+
+            </div>
+
+            {/* ====================================================  emotional ========================================= */}
+            <div className={`grid grid-cols-2 gap-10 ${toggleCategory === "emotional" ? "block" : "hidden"} `}>
+
+              {/* Self Section */}
               <div>
-                {self?.map((item) => (
-                  <div key={item.id}>
-                    <button
-                      className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
-                        item.id === playingAudio.id
-                        ? 'bg-blue-500'
-                        : 'bg-transparent'
-                        }`}
-                      onClick={() => handleAudioSelect(item)}
-                      disabled={item.id > selfAudioId + 1}
-                    >
+                <h2>Self</h2>
+                <div>
+                  {self?.map((item) => (
+                    <div key={item.id}>
+                      <button
+                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
+                          item.id === playingAudio.id
+                          ? 'bg-blue-500'
+                          : 'bg-transparent'
+                          }`}
+                        onClick={() => handleAudioSelect(item)}
+                        disabled={item.id > selfAudioId + 1}
+                      >
 
-                      {item.id > selfAudioId + 1 ? (
-                        <FaLock />
-                      ) : playingAudio.id === item.id &&
-                        playingAudio.category === item.category ? (
-                        <FaPause />
-                      ) : (
-                        <FaPlay />
-                      )}
+                        {item.id > selfAudioId + 1 ? (
+                          <FaLock />
+                        ) : playingAudio.id === item.id &&
+                          playingAudio.category === item.category ? (
+                          <FaPause />
+                        ) : (
+                          <FaPlay />
+                        )}
 
-                      {item.name}
-                    </button>
-                  </div>
-                ))}
+                        {item.name}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Ego Section */}
+              <div>
+                <h2>Ego</h2>
+                <div>
+                  {ego?.map((item) => (
+                    <div key={item.id}>
+                      <button
+                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
+                          item.id === playingAudio.id
+                          ? 'bg-blue-500'
+                          : 'bg-transparent'
+                          }`}
+                        onClick={() => handleAudioSelect(item)}
+                        disabled={
+                          item.id > egoAudioId + 1 || selfAudioId !== 'end'
+                        }
+                      >
+
+                        {item.id > egoAudioId + 1 || selfAudioId !== "end" ? (
+                          <FaLock />
+                        ) : playingAudio.id === item.id &&
+                          playingAudio.category === item.category ? (
+                          <FaPause />
+                        ) : (
+                          <FaPlay />
+                        )}
+
+                        {item.name}
+
+                      </button>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* userData?.data.userType */}
+            {/* ====================================================  physical ========================================= */}
+            <div className={`grid grid-cols-2 gap-10 ${toggleCategory === "emotional" ? "hidden" : "block"} `}>
+
+              {/* body Section */}
+              <div>
+                <h2>body</h2>
+                <div>
+                  {body?.map((item) => (
+                    <div key={item.id}>
+                      <button
+                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
+                          item.id === playingAudio.id
+                          ? 'bg-blue-500'
+                          : 'bg-transparent'
+                          }`}
+                        onClick={() => handlePhysicalAudioSelect(item)}
+                        disabled={item.id > bodyAudioId + 1}
+                      >
+
+                        {item.id > bodyAudioId + 1 ? (
+                          <FaLock />
+                        ) : playingAudio.id === item.id &&
+                          playingAudio.category === item.category ? (
+                          <FaPause />
+                        ) : (
+                          <FaPlay />
+                        )}
+
+                        {item.name}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* miend Section */}
+              <div>
+                <h2>miend</h2>
+                <div>
+                  {miend?.map((item) => (
+                    <div key={item.id}>
+                      <button
+                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
+                          item.id === playingAudio.id
+                          ? 'bg-blue-500'
+                          : 'bg-transparent'
+                          }`}
+                        onClick={() => handlePhysicalAudioSelect(item)}
+                        disabled={
+                          item.id > mindAudioId + 1 || bodyAudioId !== 'end'
+                        }
+                      >
+
+                        {item.id > mindAudioId + 1 || bodyAudioId !== "end" ? (
+                          <FaLock />
+                        ) : playingAudio.id === item.id &&
+                          playingAudio.category === item.category ? (
+                          <FaPause />
+                        ) : (
+                          <FaPlay />
+                        )}
+
+                        {item.name}
+
+                      </button>
+
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Ego Section */}
-            <div>
-              <h2>Ego</h2>
-              <div>
-                {ego?.map((item) => (
-                  <div key={item.id}>
-                    <button
-                      className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
-                        item.id === playingAudio.id
-                        ? 'bg-blue-500'
-                        : 'bg-transparent'
-                        }`}
-                      onClick={() => handleAudioSelect(item)}
-                      disabled={
-                        item.id > egoAudioId + 1 || selfAudioId !== 'end'
-                      }
-                    >
 
-                      {item.id > egoAudioId + 1 || selfAudioId !== "end" ? (
-                        <FaLock />
-                      ) : playingAudio.id === item.id &&
-                        playingAudio.category === item.category ? (
-                        <FaPause />
-                      ) : (
-                        <FaPlay />
-                      )}
 
-                      {item.name}
 
-                    </button>
-
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
     </div>
-
   );
 };
 
-export default TestSessions;
+export default SessionsTest;

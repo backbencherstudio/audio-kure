@@ -6,6 +6,15 @@
   font-family: "Reddit Sans", sans-serif;
 }
 
+
+.button {
+  background-color: var(--first-color);
+  background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 2.2rem;
+  transition: 0.4s;
+}
+
 .merriweather {
   font-family: "Merriweather", serif !important;
 }
