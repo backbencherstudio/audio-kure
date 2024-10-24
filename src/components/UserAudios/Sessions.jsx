@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
 import goldCoin from "./../../assets/goldCoin.png"
 import "./Sessions.css"
+import ProgressBar from '@ramonak/react-progress-bar';
 
 const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -31,6 +32,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const miend = data?.physical?.mind;
 
   const count = (selfAudioId === "end" ? self.length : selfAudioId) + (egoAudioId === "end" ? ego.length : egoAudioId) + (bodyAudioId === "end" ? body.length : bodyAudioId) + (mindAudioId === "end" ? miend.length : mindAudioId)
+
+  const maxValue = self.length + ego.length + body.length + miend.length
 
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
@@ -122,11 +125,30 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
             <span className='animation-text text-[44px] font-extrabold mx-2' >{count}</span>
             <span className='animation-text text-[44px] font-extrabold'>
-              <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin
+              <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin{count === 1 ? "" : "s"}
             </span>
 
 
           </span> : ""}
+
+          {
+            count && (
+              <ProgressBar
+                className="mt-2"
+                completed={(count / maxValue) * 100}  
+                // completed={(10 / maxValue) * 100}  
+                labelColor="transparent"
+                labelAlignment="center"
+                borderRadius="0px 10px 10px 0px"
+                height="8px"
+                bgColor="#C4AFFF"
+                baseBgColor="#2D2C2C"
+              />
+            )
+          }
+
+
+
         </div>
 
 
@@ -202,7 +224,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                         {item.id > selfAudioId + 1 ? (
                           <div className='bg-red-500 size-8 flex justify-center items-center rounded-full' >
-                             <FaLock />
+                            <FaLock />
                           </div>
                         ) : playingAudio.id === item.id &&
                           playingAudio.category === item.category ? (
