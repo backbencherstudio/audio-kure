@@ -9,7 +9,7 @@ const authApi = baseApi.injectEndpoints({
             method: "GET",
         }
       },
-      providesTags: ["audio", "user"], // Add a tag for user
+      providesTags: ["audio", "user"], 
     }),
 
     registerUser: builder.mutation({

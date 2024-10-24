@@ -7,6 +7,8 @@ import data from "../../../public/sessions.json";
 import authApi from '../../redux/fetures/auth/authApi';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
+import goldCoin from "./../../assets/goldCoin.png"
+import "./Sessions.css"
 
 const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -27,6 +29,12 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const ego = data?.emotional?.ego;
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
+
+  const count = (selfAudioId === "end" ? self.length : selfAudioId) + (egoAudioId === "end" ? ego.length : egoAudioId) + (bodyAudioId === "end" ? body.length : bodyAudioId) + (mindAudioId === "end" ? miend.length : mindAudioId)
+
+  // console.log({ total: count });
+
+
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
   const updatedAudioIds = new Set();
@@ -108,11 +116,24 @@ const Sessions = ({ selectedMonth, sessions }) => {
   };
 
   return (
-    <div className="border-t mt-5 border-[#2f2861]">
-      <div className="max-w-7xl mx-4 md:mx-auto my-8">
-        <div className="text-3xl font-semibold my-8">
+    <div className="session-main-dev border-t mt-5 border-[#2f2861]">
+      <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
+
+        <div className="heading-div text-3xl font-semibold my-8">
           Your cure session for Month {selectedMonth}
+          {count ? <span className='inline-block ml-2'>
+            <span className=' inline-block ' >& You achieve
+            </span>
+
+            <span className='animation-text text-[44px] font-extrabold mx-2' >{count}</span>
+            <span className='animation-text text-[44px] font-extrabold'>
+              <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin
+            </span>
+
+
+          </span> : ""}
         </div>
+
 
         <div className="grid md:grid-cols-2 gap-8 my-4">
 
@@ -160,8 +181,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
             <div className='grid grid-cols-2 gap-10 mb-5' >
 
-              <button onClick={() => { setToggleCategory("emotional") }} className={`button rounded-md ${toggleCategory === "emotional" ? "text-yellow-300 " : "text-white"} font-bold text-[20px]`}>Emotion</button>
-              <button onClick={() => { setToggleCategory("physical") }} className={`button rounded-md ${toggleCategory === "emotional" ? "text-white" : "text-yellow-300"} font-bold text-[20px]`}>Physical</button>
+              <button onClick={() => { setToggleCategory("emotional") }} className={`AudioPlayButton rounded-md ${toggleCategory === "emotional" ? "text-white " : "text-black"} font-bold text-[20px]`}>Emotion</button>
+              <button onClick={() => { setToggleCategory("physical") }} className={`AudioPlayButton rounded-md ${toggleCategory === "emotional" ? "text-black" : "text-white"} font-bold text-[20px]`}>Physical</button>
 
             </div>
 
@@ -294,7 +315,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
               {/* miend Section */}
               <div>
-                <h2 className='font-semibold mb-1 '>Miend ...</h2>
+                <h2 className='font-semibold mb-1 '>Mind ...</h2>
                 <div>
                   {miend?.map((item) => (
                     <div key={item.id} className='mb-2'>

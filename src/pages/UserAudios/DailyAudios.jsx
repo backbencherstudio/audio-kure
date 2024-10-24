@@ -16,7 +16,7 @@ const DailyAudios = () => {
 
   const { data, error, isLoading, refetch } = authApi.useGetSingleUserQuery(currentEmail, {
     skip: !currentEmail,
-  });  
+  });
 
   useEffect(() => {
     if (currentEmail) {
@@ -83,7 +83,7 @@ const DailyAudios = () => {
       {data?.data ? (
         <CureSessions currentUser={data?.data} />
       ) : (
-        !isLoading && <p>No data available</p>
+        !isLoading && <p></p>
       )}
 
       {error && <p>Error loading user data: {error.message}</p>}
