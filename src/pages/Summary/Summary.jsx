@@ -11,7 +11,7 @@ const WeightLossChart = () => {
         { name: 'Week 2', weight: 63, others: 64 },
         { name: 'Week 4', weight: 60, others: 58 },
         { name: 'Week 8', weight: 59, others: 66 },
-        { name: 'Week 8', weight: 58, others: 68 },
+        { name: 'Week 9', weight: 58, others: 68 },
     ];
     const answers = JSON.parse(localStorage.getItem("answers")) || [];
     const counts = {
