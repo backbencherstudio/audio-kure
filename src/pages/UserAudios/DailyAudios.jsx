@@ -76,10 +76,10 @@ const DailyAudios = () => {
         </div>
       </div>
 
-      {/* Loader for data fetching */}
-      {isLoading && <p>Loading user data...</p>}
+      {isLoading && <div className="w-full h-[100vh] flex justify-center items-center " >
+        <p className="text-center text-2xl " >Loading Data...</p>
+      </div> }
 
-      {/* Show CureSessions only when data is available */}
       {data?.data ? (
         <CureSessions currentUser={data?.data} />
       ) : (
