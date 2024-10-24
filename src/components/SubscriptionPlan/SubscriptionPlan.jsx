@@ -208,7 +208,7 @@ const SubscriptionPlan = () => {
                     id={plan.id}
                     duration={plan.duration}
                     originalPrice={plan.originalPrice}
-                    discountedPrice={plan.currentPrice}
+                    discountedPrice={plan.discountedPrice}
                     perDay={plan.perDay}
                     originalPerDay={plan.originalPerDay}
                     isSelected={selectedPlan === plan.id}
