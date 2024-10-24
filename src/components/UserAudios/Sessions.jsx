@@ -32,14 +32,9 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const count = (selfAudioId === "end" ? self.length : selfAudioId) + (egoAudioId === "end" ? ego.length : egoAudioId) + (bodyAudioId === "end" ? body.length : bodyAudioId) + (mindAudioId === "end" ? miend.length : mindAudioId)
 
-  // console.log({ total: count });
-
-
 
   const currentSession = sessions.find((session) => session.id === selectedMonth);
   const updatedAudioIds = new Set();
-
-
 
   const handleAudioSelect = async (audio) => {
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
@@ -206,8 +201,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       >
 
                         {item.id > selfAudioId + 1 ? (
-                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
-                            <FaLock />
+                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full' >
+                             <FaLock />
                           </div>
                         ) : playingAudio.id === item.id &&
                           playingAudio.category === item.category ? (

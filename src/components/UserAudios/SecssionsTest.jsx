@@ -7,15 +7,19 @@ import data from "../../../public/sessions.json";
 import authApi from '../../redux/fetures/auth/authApi';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
+import goldCoin from "./../../assets/goldCoin.png"
+import "./Sessions.css"
 
-const SessionsTest = ({ selectedMonth, sessions }) => {
+const TestSessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
   const [updateAudioData] = authApi.useUpdateAudioDataMutation();
-  const currentUser = useSelector(selectCurrentUser);
 
+  const currentUser = useSelector(selectCurrentUser);
   const { data: userData } = authApi.useGetSingleUserQuery(currentUser?.email);
+  const [toggleCategory, setToggleCategory] = useState(userData?.data?.userType)
+
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
   const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
   const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
@@ -26,15 +30,18 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
 
+  const count = (selfAudioId === "end" ? self.length : selfAudioId) + (egoAudioId === "end" ? ego.length : egoAudioId) + (bodyAudioId === "end" ? body.length : bodyAudioId) + (mindAudioId === "end" ? miend.length : mindAudioId)
+
+  // console.log({ total: count });
+
+
+
   const currentSession = sessions.find((session) => session.id === selectedMonth);
   const updatedAudioIds = new Set();
-  // console.log(userData?.data.userType);
 
-  const [toggleCategory, setToggleCategory] = useState(userData?.data?.userType)
 
 
   const handleAudioSelect = async (audio) => {
-
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
       setCurrentAudio(null);
       setPlayingAudio({ id: null, category: null });
@@ -48,7 +55,6 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
         [`${audio.category}Id`]: audio.id === (audio.category === "self" ? self?.length : ego?.length) ? "end" : audio.id,
         category: audio.category,
       };
-      console.log(audioData);
 
       if (selfAudioId < audio.id && selfAudioId !== "end") {
         if (!updatedAudioIds.has(audio.id)) {
@@ -70,7 +76,6 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   };
 
   const handlePhysicalAudioSelect = async (audio) => {
-
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
       setCurrentAudio(null);
       setPlayingAudio({ id: null, category: null });
@@ -84,8 +89,6 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
         [`${audio.category}Id`]: audio.id === (audio.category === "body" ? body?.length : miend?.length) ? "end" : audio.id,
         category: audio.category,
       };
-
-      console.log(audioData);
 
       if (bodyAudioId < audio.id && bodyAudioId !== "end") {
         if (!updatedAudioIds.has(audio.id)) {
@@ -107,78 +110,30 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   };
 
 
-  //   const handleAudioSelect = async (audio) => {
-  //   if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
-  //     setCurrentAudio(null);
-  //     setPlayingAudio({ id: null, category: null });
-  //   } else {
-  //     setCurrentAudio(audio);
-  //     setPlayingAudio({ id: audio.id, category: audio.category });
-  //     setSessionImage(sessionImg);
-
-  //     const audioData = {
-  //       email: currentUser?.email,
-  //       [`${audio.category}Id`]: 
-  //         audio.id === (audio.category === "self" ? self?.length :
-  //                       audio.category === "ego" ? ego?.length :
-  //                       audio.category === "body" ? body?.length :
-  //                       miend?.length) ? "end" : audio.id,
-  //       category: audio.category,
-  //     };
-
-  //     // Handle Self Audio Update
-  //     if (selfAudioId < audio.id && selfAudioId !== "end" && audio.category === "self") {
-  //       if (!updatedAudioIds.has(audio.id)) {
-  //         const res = await updateAudioData(audioData);
-  //         console.log("Self Audio Update Success: ", res?.data?.success);
-  //         updatedAudioIds.add(audio.id);
-  //       }
-  //       return;
-  //     }
-
-  //     // Handle Ego Audio Update
-  //     if (selfAudioId === "end" && egoAudioId < audio.id && audio.category === "ego") {
-  //       if (!updatedAudioIds.has(audio.id)) {
-  //         const res = await updateAudioData(audioData);
-  //         console.log("Ego Audio Update Success: ", res?.data?.success);
-  //         updatedAudioIds.add(audio.id);
-  //       }
-  //       return;
-  //     }
-
-  //     // Handle Body Audio Update
-  //     if (egoAudioId === "end" && bodyAudioId < audio.id && audio.category === "body") {
-  //       if (!updatedAudioIds.has(audio.id)) {
-  //         const res = await updateAudioData(audioData);
-  //         console.log("Body Audio Update Success: ", res?.data?.success);
-  //         updatedAudioIds.add(audio.id);
-  //       }
-  //       return;
-  //     }
-
-  //     // Handle Miend Audio Update
-  //     if (bodyAudioId === "end" && miendAudioId < audio.id && audio.category === "miend") {
-  //       if (!updatedAudioIds.has(audio.id)) {
-  //         const res = await updateAudioData(audioData);
-  //         console.log("Miend Audio Update Success: ", res?.data?.success);
-  //         updatedAudioIds.add(audio.id);
-  //       }
-  //     }
-  //   }
-  // };
-
-
   const handleAudioEnd = () => {
     setCurrentAudio(null);
     setPlayingAudio({ id: null, category: null });
   };
 
   return (
-    <div className="border-t mt-5 border-[#2f2861]">
-      <div className="max-w-7xl mx-4 md:mx-auto my-8">
-        <div className="text-3xl font-semibold my-8">
+    <div className="session-main-dev border-t mt-5 border-[#2f2861]">
+      <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
+
+        <div className="heading-div text-3xl font-semibold my-8">
           Your cure session for Month {selectedMonth}
+          {count ? <span className='inline-block ml-2'>
+            <span className=' inline-block ' >& You achieve
+            </span>
+
+            <span className='animation-text text-[44px] font-extrabold mx-2' >{count}</span>
+            <span className='animation-text text-[44px] font-extrabold'>
+              <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin
+            </span>
+
+
+          </span> : ""}
         </div>
+
 
         <div className="grid md:grid-cols-2 gap-8 my-4">
 
@@ -226,8 +181,8 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
             <div className='grid grid-cols-2 gap-10 mb-5' >
 
-              <button onClick={()=>{setToggleCategory("emotional")}}  className={`button rounded-md ${toggleCategory === "emotional" ? "text-yellow-300 " : "text-white"} font-bold text-[20px]`}>Emotion</button>
-              <button onClick={()=>{setToggleCategory("physical")}}  className={`button rounded-md ${toggleCategory === "emotional" ? "text-white" : "text-yellow-300"} font-bold text-[20px]`}>Physical</button>
+              <button onClick={() => { setToggleCategory("emotional") }} className={`AudioPlayButton rounded-md ${toggleCategory === "emotional" ? "text-white " : "text-black"} font-bold text-[20px]`}>Emotion</button>
+              <button onClick={() => { setToggleCategory("physical") }} className={`AudioPlayButton rounded-md ${toggleCategory === "emotional" ? "text-black" : "text-white"} font-bold text-[20px]`}>Physical</button>
 
             </div>
 
@@ -236,10 +191,10 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
               {/* Self Section */}
               <div>
-                <h2>Self</h2>
+                <h2 className='font-semibold mb-1 ' >Self ...</h2>
                 <div>
                   {self?.map((item) => (
-                    <div key={item.id}>
+                    <div key={item.id} className='mb-2' >
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
                           item.id === playingAudio.id
@@ -251,12 +206,18 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
                       >
 
                         {item.id > selfAudioId + 1 ? (
-                          <FaLock />
+                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
+                            <FaLock />
+                          </div>
                         ) : playingAudio.id === item.id &&
                           playingAudio.category === item.category ? (
-                          <FaPause />
+                          <div className='bg-green-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPause />
+                          </div>
                         ) : (
-                          <FaPlay />
+                          <div className='bg-sky-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPlay />
+                          </div>
                         )}
 
                         {item.name}
@@ -268,10 +229,10 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
               {/* Ego Section */}
               <div>
-                <h2>Ego</h2>
+                <h2 className='font-semibold mb-1 '>Ego ...</h2>
                 <div>
                   {ego?.map((item) => (
-                    <div key={item.id}>
+                    <div key={item.id} className='mb-2'>
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
                           item.id === playingAudio.id
@@ -285,12 +246,18 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
                       >
 
                         {item.id > egoAudioId + 1 || selfAudioId !== "end" ? (
-                          <FaLock />
+                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
+                            <FaLock />
+                          </div>
                         ) : playingAudio.id === item.id &&
                           playingAudio.category === item.category ? (
-                          <FaPause />
+                          <div className='bg-green-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPause />
+                          </div>
                         ) : (
-                          <FaPlay />
+                          <div className='bg-sky-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPlay />
+                          </div>
                         )}
 
                         {item.name}
@@ -310,10 +277,10 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
               {/* body Section */}
               <div>
-                <h2>body</h2>
+                <h2 className='font-semibold mb-1 '>Body ...</h2>
                 <div>
                   {body?.map((item) => (
-                    <div key={item.id}>
+                    <div key={item.id} className='mb-2'>
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
                           item.id === playingAudio.id
@@ -325,12 +292,18 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
                       >
 
                         {item.id > bodyAudioId + 1 ? (
-                          <FaLock />
+                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
+                            <FaLock />
+                          </div>
                         ) : playingAudio.id === item.id &&
                           playingAudio.category === item.category ? (
-                          <FaPause />
+                          <div className='bg-green-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPause />
+                          </div>
                         ) : (
-                          <FaPlay />
+                          <div className='bg-sky-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPlay />
+                          </div>
                         )}
 
                         {item.name}
@@ -342,10 +315,10 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
               {/* miend Section */}
               <div>
-                <h2>miend</h2>
+                <h2 className='font-semibold mb-1 '>Mind ...</h2>
                 <div>
                   {miend?.map((item) => (
-                    <div key={item.id}>
+                    <div key={item.id} className='mb-2'>
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
                           item.id === playingAudio.id
@@ -359,12 +332,18 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
                       >
 
                         {item.id > mindAudioId + 1 || bodyAudioId !== "end" ? (
-                          <FaLock />
+                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
+                            <FaLock />
+                          </div>
                         ) : playingAudio.id === item.id &&
                           playingAudio.category === item.category ? (
-                          <FaPause />
+                          <div className='bg-green-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPause />
+                          </div>
                         ) : (
-                          <FaPlay />
+                          <div className='bg-sky-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPlay />
+                          </div>
                         )}
 
                         {item.name}
@@ -388,4 +367,4 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   );
 };
 
-export default SessionsTest;
+export default TestSessions;
