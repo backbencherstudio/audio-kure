@@ -25,6 +25,7 @@ import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
+import Vault from "./pages/Vault/Vault";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
       {
         path: "/physicalPage",
         element: <Physical />,
+      },
+      {
+        path: "/vault",
+        element: <Vault />,
       },
       {
         path: "/payment",
