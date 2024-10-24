@@ -30,8 +30,6 @@ const WeightLossChart = () => {
     const userType =
         counts.physical > counts.emotional ? "physical" : "emotional";
     const code = JSON.parse(localStorage.getItem("user"))?.code;
-    localStorage.setItem("userType", userType);
-    const userCondition = userType;
     return (
         <div className='container mx-auto '>
             <Logo />
@@ -109,8 +107,8 @@ const WeightLossChart = () => {
                     </div>
                 </div>
             </div>
-            <WeightLossPlan userCondition={userCondition} code={code} />
-            <ExpertProfileSection  />
+            <WeightLossPlan  code={code} />
+            <ExpertProfileSection />
         </div>
     );
 };
