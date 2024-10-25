@@ -33,6 +33,7 @@ const SignUpPage = () => {
 
   const password = watch("password", "");
   const onSubmit = async (data) => {
+    console.log(data);
     if (data.password !== data.confirmPassword) {
       toast.error("password not matched");
       return;
@@ -100,7 +101,7 @@ const SignUpPage = () => {
     if (res?.data?.success) {
       toast.success("Registration Successful");
       setOpen(false);
-      setOtp(new Array(6).fill("")); 
+      setOtp(new Array(6).fill(""));
       navigate("/login");
     } else {
       toast.error(res?.data?.message);
@@ -188,7 +189,7 @@ const SignUpPage = () => {
             </label>
             <input
               {...register("email", {
-                required: "Email is required",
+                // required: "Email is required",
                 pattern: {
                   value: /^\S+@\S+$/i,
                   message: "Invalid email address",
@@ -197,8 +198,6 @@ const SignUpPage = () => {
               type="email"
               className={inputStyle}
               placeholder="Enter your email"
-              defaultValue={email}
-              readOnly
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic">
