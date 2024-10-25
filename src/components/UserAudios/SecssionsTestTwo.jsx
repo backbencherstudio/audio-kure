@@ -11,7 +11,7 @@ import goldCoin from "./../../assets/goldCoin.png"
 import "./Sessions.css"
 import ProgressBar from '@ramonak/react-progress-bar';
 
-const Sessions = ({ selectedMonth, sessions }) => {
+const SessionsTestTwo = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
@@ -34,13 +34,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
 
-  const array1 = userData?.data?.selectedBodyAudios
-  const array2 = userData?.data?.selectedMindAudios
-
-  const isHide = array1?.length > 0 || array2?.length > 0
-
-  console.log(isHide);
-  
+  console.log(userData?.data?.selectedMindAudios);
+  console.log(userData?.data?.selectedBodyAudios);
 
 
 
@@ -88,7 +83,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
   };
 
   const handlePhysicalAudioSelect = async (audio) => {
-
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
       setCurrentAudio(null);
       setPlayingAudio({ id: null, category: null });
@@ -103,25 +97,22 @@ const Sessions = ({ selectedMonth, sessions }) => {
         category: audio.category,
       };
 
-      // if (array1.includes(audio.id) && bodyAudioId !== "end") {
-      //   if (!updatedAudioIds.has(audio.id)) {
-      //     const res = await updateAudioData(audioData);
-      //     console.log("Self Audio Update Success: ", res?.data?.success);
-      //     updatedAudioIds.add(audio.id);
-      //   }
-      //   return;
-      // }
+      if (bodyAudioId < audio.id && bodyAudioId !== "end") {
+        if (!updatedAudioIds.has(audio.id)) {
+          const res = await updateAudioData(audioData);
+          console.log("Self Audio Update Success: ", res?.data?.success);
+          updatedAudioIds.add(audio.id);
+        }
+        return;
+      }
 
-      const res = await updateAudioData(audioData);
-
-      // if (array2.includes(audio.id) && bodyAudioId === "end") {
-      //   if (!updatedAudioIds.has(audio.id)) {
-      //     const res = await updateAudioData(audioData);
-      //     console.log("Ego Audio Update Success: ", res?.data?.success);
-      //     updatedAudioIds.add(audio.id);
-      //   }
-      // }
-
+      if (bodyAudioId === "end" && mindAudioId < audio.id) {
+        if (!updatedAudioIds.has(audio.id)) {
+          const res = await updateAudioData(audioData);
+          console.log("Ego Audio Update Success: ", res?.data?.success);
+          updatedAudioIds.add(audio.id);
+        }
+      }
     }
   };
 
@@ -157,7 +148,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
     console.log(res);
 
   }
-
 
 
   return (
@@ -257,12 +247,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
 
               {selectedMindItem.length === 0 || selectedBodyItem.length === 0 ? (
-                <h2 className={`AudioPlayButton text-center rounded-md w-full mt-5 ${isHide && "hidden" } `} >At First Select Your Audio</h2>
+                <h2 className='AudioPlayButton text-center rounded-md w-full mt-5' >At First Select Your Audio</h2>
               ) :
                 <button onClick={() => finalSelectionFunction()} className={`AudioPlayButton text-center rounded-md w-full mt-5 `}> Set Your Selected Audio </button>
               }
-
-
 
 
             </div>
@@ -362,6 +350,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
               {/* body Section */}
               <div>
+
                 <h2 className='font-semibold mb-1 '>Body ...</h2>
                 <div>
 
@@ -381,35 +370,76 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                   {/* ================================= Main audio ================================= */}
 
+                  {/* {userData?.data?.selectedBodyAudios.length > 0 && body?.map((item) => (
+                    <div key={item.id} className='mb-2'>
+                      <button
+                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
+                          item.id === playingAudio.id
+                          ? 'bg-blue-500'
+                          : 'bg-transparent'
+                          }`}
+                        onClick={() => handlePhysicalAudioSelect(item)}
+                        disabled={item.id > bodyAudioId + 1}
+                      >
+
+                        {item.id > bodyAudioId + 1 ? (
+                          <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
+                            <FaLock />
+                          </div>
+                        ) : playingAudio.id === item.id &&
+                          playingAudio.category === item.category ? (
+                          <div className='bg-green-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPause />
+                          </div>
+                        ) : (
+                          <div className='bg-sky-500 size-8 flex justify-center items-center rounded-full'>
+                            <FaPlay />
+                          </div>
+                        )}
+
+                        {item.name}
+                      </button>
+                    </div>
+                  ))} */}
+
                   {userData?.data?.selectedBodyAudios.length > 0 && body?.map((item) => {
                     const isSelected = userData.data.selectedBodyAudios.includes(item.id);
+                    
                     return (
-                      isSelected && (
-                        <div key={item.id} className="mb-2">
+                      isSelected && ( 
+                        <div key={item.id} className='mb-2'>
                           <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
+                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
+                              item.id === playingAudio.id
                               ? 'bg-blue-500'
                               : 'bg-transparent'
                               }`}
                             onClick={() => handlePhysicalAudioSelect(item)}
+                            disabled={item.id > bodyAudioId + 1}
                           >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
+                            {item.id > bodyAudioId + 1 ? (
+                              <div className='bg-red-500 size-8 flex justify-center items-center rounded-full ' >
+                                <FaLock />
+                              </div>
+                            ) : playingAudio.id === item.id &&
+                              playingAudio.category === item.category ? (
+                              <div className='bg-green-500 size-8 flex justify-center items-center rounded-full'>
                                 <FaPause />
                               </div>
                             ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
+                              <div className='bg-sky-500 size-8 flex justify-center items-center rounded-full'>
                                 <FaPlay />
                               </div>
                             )}
 
-                             {item.name}
-                            
+                            {item.name}
                           </button>
                         </div>
                       )
                     );
                   })}
+
+
 
                 </div>
 
@@ -436,7 +466,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                   {/* ================================= Main audio ================================= */}
 
-                  {/* {userData?.data?.selectedMindAudios.length > 0 && miend?.map((item) => (
+                  {userData?.data?.selectedMindAudios.length > 0 && miend?.map((item) => (
                     <div key={item.id} className='mb-2'>
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category &&
@@ -470,37 +500,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       </button>
 
                     </div>
-                  ))} */}
-
-                  {userData?.data?.selectedMindAudios.length > 0 && miend?.map((item, index) => {
-                    const isSelected = userData.data.selectedMindAudios.includes(item.id);
-                    return (
-                      isSelected && (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            Index={index + 1} Id={item.id} last={userData?.data?.lastBodyId}
-                          </button>
-                        </div>
-                      )
-                    );
-                  })}
-
+                  ))}
                 </div>
               </div>
 
@@ -517,4 +517,4 @@ const Sessions = ({ selectedMonth, sessions }) => {
   );
 };
 
-export default Sessions;
+export default SessionsTestTwo;
