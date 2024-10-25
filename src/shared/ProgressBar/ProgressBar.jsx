@@ -35,7 +35,7 @@ const ProgressBars = ({ value, navigate, page }) => {
             </span>
           </Link>
         </div>
-        <div className="font-bold">{page} of 6</div>
+        <div className="font-bold">{page} of 7</div>
       </div>
       <ProgressBar
         className=""

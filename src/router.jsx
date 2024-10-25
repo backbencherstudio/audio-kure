@@ -26,6 +26,7 @@ import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
 import Vault from "./pages/Vault/Vault";
+import Weight from "./pages/Weight/Weight";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "analysis",
         element: <Analyzing />,
+      },
+      {
+        path: "weight",
+        element: <Weight />,
       },
       {
         path: "body",
