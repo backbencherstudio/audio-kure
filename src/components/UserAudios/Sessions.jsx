@@ -185,13 +185,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   ) : (
                     <button
                       className="flex gap-2 items-center bg-slate-400 p-2 rounded-3xl justify-center w-full"
-<<<<<<< HEAD
-                      // onClick={() =>
-                      //   handleAudioSelect(currentSession.audios[0].category, currentSession.audios[0].subCategory, currentSession.audios[0])
-                      // }
-=======
                       onClick={() => handleAudioSelect(currentSession.audios[0])}
->>>>>>> c79b035de0b921d2f23f2e623bc3a76c800145e3
                     >
                       <FaPlay /> Play The Audios
                     </button>
@@ -200,18 +194,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
               </div>
             )}
           </div>
-<<<<<<< HEAD
-          {/* Right Side - Always Visible Audio List */}
-          <div className="flex flex-col">
-            <SessionAudioPlay
-              data={data}
-              setCurrentAudio={handleAudioSelect}
-              playedAudios={playedAudios}
-              setSessionImage={setSessionImage}
-              selectedMonth={selectedMonth}
-              audioUnlockStates={audioUnlockStates} // Pass unlock states
-            />
-=======
 
           <div>
 
@@ -395,7 +377,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
 
 
->>>>>>> c79b035de0b921d2f23f2e623bc3a76c800145e3
           </div>
 
         </div>
