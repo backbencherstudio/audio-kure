@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ThirdPage = () => {
   return (
     <div>
-      <ProgressBars page={6} value={100}></ProgressBars>
+      <ProgressBars page={6} value={95}></ProgressBars>
       <div className=" flex flex-col-reverse lg:flex-row lg:mt-20 mt-10     gap-10  w-full h-fit   items-center justify-center text-gray-800 p-5   rounded-md">
         <div className="text-white max-w-lg flex flex-col gap-3">
           <h2 className="lg:text-4xl md:text-4xl text-2xl   merriweather">
@@ -49,7 +49,7 @@ const ThirdPage = () => {
           </p>
           <Link
             className="  btnGrad text-center font-medium text-xl lg:py-4 py-3 rounded-3xl text-white px-4  "
-            to={"/email"}
+            to={"/weight"}
           >
             Got it
           </Link>
