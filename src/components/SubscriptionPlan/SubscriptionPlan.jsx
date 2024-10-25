@@ -168,10 +168,7 @@ const SubscriptionPlan = () => {
     physical: 0,
     emotional: 0,
   };
-  const userType =
-    counts.physical > counts.emotional ? "physical" : "emotional";
-  localStorage.setItem("userType", userType);
-  const userCondition = userType;
+  const usertype = localStorage.getItem('userType')
 
   return (
     <div className="text-white">
@@ -190,7 +187,7 @@ const SubscriptionPlan = () => {
           >
             Congratulations! you are{" "}
             <span className="text-[#8A5EFF] merriweather capitalize">
-              {userCondition}
+              {usertype}
             </span>{" "}
             suggestible
           </h1>
@@ -208,7 +205,7 @@ const SubscriptionPlan = () => {
                     id={plan.id}
                     duration={plan.duration}
                     originalPrice={plan.originalPrice}
-                    discountedPrice={plan.currentPrice}
+                    discountedPrice={plan.discountedPrice}
                     perDay={plan.perDay}
                     originalPerDay={plan.originalPerDay}
                     isSelected={selectedPlan === plan.id}

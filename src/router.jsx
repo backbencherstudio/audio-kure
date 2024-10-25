@@ -24,6 +24,8 @@ import SignUpPage from "./pages/Login/SignUpPage";
 import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
+import Summary from "./pages/Summary/Summary";
+import Vault from "./pages/Vault/Vault";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -83,6 +85,10 @@ const router = createBrowserRouter([
         element: <WelcomePage />,
       },
       {
+        path: "summary",
+        element: <Summary />,
+      },
+      {
         path: "/physicalPage",
         element: <Physical />,
       },
@@ -97,15 +103,13 @@ const router = createBrowserRouter([
         ),
       },
 
-
-
-
       // {
       //   path: "/orderConfirmation",
       //   element: <OrderConfirmation />,
       // },
     ],
   },
+
   {
     path: "/all-user",
     element: <AllUsers />,
@@ -139,7 +143,14 @@ const router = createBrowserRouter([
     path: "/daily-audios",
     element:
       <ProtectedRoute>
-        <DailyAudios />,
+        <DailyAudios />
+      </ProtectedRoute>
+  },
+  {
+    path: "/vault",
+    element:
+      <ProtectedRoute>
+        <Vault />
       </ProtectedRoute>
   },
 ]);

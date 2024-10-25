@@ -4,816 +4,226 @@
             {
                 "id": 1,
                 "name": "Lack of Confidence",
-                "audio": "../src/assets/audios/audio1.mp3"
+                "audio": "../src/assets/audios/audio.mp3",
+                "category": "self"
             },
             {
                 "id": 2,
                 "name": "Self-Image",
-                "audio": "../src/assets/audios/audio2.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "self"
             },
             {
                 "id": 3,
                 "name": "Guilt",
-                "audio": "Guilt.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "self"
             },
             {
                 "id": 4,
                 "name": "Grief",
-                "audio": "Grief.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "self"
             },
             {
                 "id": 5,
                 "name": "I Am Enough",
-                "audio": "I Am Enough.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "self"
             },
             {
                 "id": 6,
                 "name": "Not Good Enough",
-                "audio": "Not Good Enough.mp3"
+                "audio": "../src/assets/audios/audio5.mp3",
+                "category": "self"
             },
             {
                 "id": 7,
                 "name": "Stubborn",
-                "audio": "Stubborn.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "self"
             },
             {
                 "id": 8,
                 "name": "Self-Criticism",
-                "audio": "Self-Criticism.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "self"
             },
             {
                 "id": 9,
                 "name": "Self-Defeating Behaviors",
-                "audio": "Self-Defeating Behaviors.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "self"
             },
             {
                 "id": 10,
                 "name": "Bullying",
-                "audio": "Bullying.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "self"
             },
             {
                 "id": 11,
-                "name": "Death or Loss",
-                "audio": "Death or Loss.mp3"
-            },
-            {
-                "id": 12,
-                "name": "Fear of Failure",
-                "audio": "Fear of Failure.mp3"
-            },
-            {
-                "id": 13,
-                "name": "Self-Esteem",
-                "audio": "Self-Esteem.mp3"
-            },
-            {
-                "id": 14,
-                "name": "Self-Expression",
-                "audio": "Self-Expression.mp3"
-            },
-            {
-                "id": 15,
-                "name": "Self-Forgiveness",
-                "audio": "Self-Forgiveness.mp3"
-            },
-            {
-                "id": 16,
-                "name": "Self-Awareness",
-                "audio": "Self-Awareness.mp3"
-            },
-            {
-                "id": 17,
-                "name": "Self-Actualization",
-                "audio": "Self-Actualization.mp3"
-            },
-            {
-                "id": 18,
-                "name": "Self-Blame",
-                "audio": "Self-Blame.mp3"
-            },
-            {
-                "id": 19,
-                "name": "Self-Confidence",
-                "audio": "Self-Confidence.mp3"
-            },
-            {
-                "id": 20,
-                "name": "Fear of School",
-                "audio": "Fear of School.mp3"
-            },
-            {
-                "id": 21,
-                "name": "Fear of Success",
-                "audio": "Fear of Success.mp3"
-            },
-            {
-                "id": 22,
-                "name": "Fear of Water",
-                "audio": "Fear of Water.mp3"
-            },
-            {
-                "id": 23,
-                "name": "Find Hidden Talents",
-                "audio": "Find Hidden Talents.mp3"
-            },
-            {
-                "id": 24,
-                "name": "Forgiveness",
-                "audio": "Forgiveness.mp3"
-            },
-            {
-                "id": 25,
-                "name": "Frustration",
-                "audio": "Frustration.mp3"
-            },
-            {
-                "id": 26,
-                "name": "Freedom",
-                "audio": "Freedom.mp3"
-            },
-            {
-                "id": 27,
-                "name": "Giving Up",
-                "audio": "Giving Up.mp3"
-            },
-            {
-                "id": 28,
-                "name": "Grinding Jaw/Teeth",
-                "audio": "Grinding Jaw.mp3"
-            },
-            {
-                "id": 29,
-                "name": "Gratitude",
-                "audio": "Gratitude.mp3"
-            },
-            {
-                "id": 30,
-                "name": "Hair Twisting",
-                "audio": "Hair Twisting.mp3"
-            },
-            {
-                "id": 31,
-                "name": "Surrender",
-                "audio": "Surrender.mp3"
-            },
-            {
-                "id": 32,
-                "name": "Trust",
-                "audio": "Trust.mp3"
-            },
-            {
-                "id": 33,
-                "name": "Hopelessness",
-                "audio": "Hopelessness.mp3"
-            },
-            {
-                "id": 34,
-                "name": "Hypochondria",
-                "audio": "Hypochondria.mp3"
-            },
-            {
-                "id": 35,
-                "name": "Hostility",
-                "audio": "Hostility.mp3"
-            },
-            {
-                "id": 36,
-                "name": "Hoarding",
-                "audio": "Hoarding.mp3"
-            },
-            {
-                "id": 37,
-                "name": "Hypertension",
-                "audio": "Hypertension.mp3"
-            },
-            {
-                "id": 38,
-                "name": "Hypno-birthing",
-                "audio": "Hypno-birthing.mp3"
-            },
-            {
-                "id": 39,
-                "name": "Indecision",
-                "audio": "Indecision.mp3"
-            },
-            {
-                "id": 40,
-                "name": "Inferiority",
-                "audio": "Inferiority.mp3"
-            },
-            {
-                "id": 41,
-                "name": "Inhibition",
-                "audio": "Inhibition.mp3"
-            },
-            {
-                "id": 42,
-                "name": "Insecurity",
-                "audio": "Insecurity.mp3"
-            },
-            {
-                "id": 43,
-                "name": "Irrational",
-                "audio": "Irrational.mp3"
-            },
-            {
-                "id": 44,
-                "name": "Irrational Thoughts",
-                "audio": "Irrational Thoughts.mp3"
-            },
-            {
-                "id": 45,
-                "name": "Jealousy",
-                "audio": "Jealousy.mp3"
-            },
-            {
-                "id": 46,
-                "name": "Lack of Joy",
-                "audio": "Lack of Joy.mp3"
-            },
-            {
-                "id": 47,
-                "name": "Lack of Ambition",
-                "audio": "Lack of Ambition.mp3"
-            },
-            {
-                "id": 48,
-                "name": "Lack of Self-Confidence",
-                "audio": "Lack of Self-Confidence.mp3"
-            },
-            {
-                "id": 49,
-                "name": "Lack of Freedom",
-                "audio": "Lack of Freedom.mp3"
-            },
-            {
-                "id": 50,
-                "name": "Lack of Enthusiasm",
-                "audio": "Lack of Enthusiasm.mp3"
-            },
-            {
-                "id": 51,
-                "name": "Abandonment",
-                "audio": "Abandonment.mp3"
-            },
-            {
-                "id": 52,
-                "name": "Sadness",
-                "audio": "Sadness.mp3"
-            },
-            {
-                "id": 53,
-                "name": "Passive-Aggressive",
-                "audio": "Passive-Aggressive.mp3"
-            },
-            {
-                "id": 54,
-                "name": "Quantum Transformation 1: Past Life Regression 1",
-                "audio": "Past Life Regression 1.mp3"
-            },
-            {
-                "id": 55,
-                "name": "Quantum Transformation 2: Past Life Regression 2",
-                "audio": "Past Life Regression 2.mp3"
-            },
-            {
-                "id": 56,
-                "name": "Quantum Transformation 3: Past Life Regression 3",
-                "audio": "Past Life Regression 3.mp3"
+                "name": "Bullying 2",
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "self"
             }
         ],
         "ego": [
             {
                 "id": 1,
                 "name": "Fear of Losing Control",
-                "audio": "Fear of Losing Control.mp3"
+                "audio": "../src/assets/audios/audio.mp3",
+                "category": "ego"
             },
             {
                 "id": 2,
                 "name": "Stuck",
-                "audio": "Stuck.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "ego"
             },
             {
                 "id": 3,
                 "name": "Concentration",
-                "audio": "Concentration.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "ego"
             },
             {
                 "id": 4,
                 "name": "Fear of Doing Mistakes",
-                "audio": "Fear of Doing Mistakes.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "ego"
             },
             {
                 "id": 5,
                 "name": "Creativity",
-                "audio": "Creativity.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "ego"
             },
             {
                 "id": 6,
                 "name": "Sabotage",
-                "audio": "Sabotage.mp3"
+                "audio": "../src/assets/audios/audio5.mp3",
+                "category": "ego"
             },
             {
                 "id": 7,
                 "name": "Self-Control",
-                "audio": "Self-Control.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "ego"
             },
             {
                 "id": 8,
                 "name": "Confused",
-                "audio": "Confused.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "ego"
             },
             {
                 "id": 9,
                 "name": "Anger",
-                "audio": "Anger.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "ego"
             },
             {
                 "id": 10,
                 "name": "Attention-Deficit Disorder (ADD)",
-                "audio": "ADD.mp3"
-            },
-            {
-                "id": 11,
-                "name": "Attention, Deficit/Hyperactivity Disorder (ADHD)",
-                "audio": "ADHD.mp3"
-            },
-            {
-                "id": 12,
-                "name": "Gambling",
-                "audio": "Gambling.mp3"
-            },
-            {
-                "id": 13,
-                "name": "Lack of Initiative",
-                "audio": "Lack of Initiative.mp3"
-            },
-            {
-                "id": 14,
-                "name": "Biofeedback",
-                "audio": "Biofeedback.mp3"
-            },
-            {
-                "id": 15,
-                "name": "Breakthrough",
-                "audio": "Breakthrough.mp3"
-            },
-            {
-                "id": 16,
-                "name": "Self-Mastery",
-                "audio": "Self-Mastery.mp3"
-            },
-            {
-                "id": 17,
-                "name": "Let Go of Anger",
-                "audio": "Let Go of Anger.mp3"
-            },
-            {
-                "id": 18,
-                "name": "Lower Blood Pressure",
-                "audio": "Lower Blood Pressure.mp3"
-            },
-            {
-                "id": 19,
-                "name": "Manifestation",
-                "audio": "Manifestation.mp3"
-            },
-            {
-                "id": 20,
-                "name": "Medication Side Effects",
-                "audio": "Medication Side Effects.mp3"
-            },
-            {
-                "id": 21,
-                "name": "Memory",
-                "audio": "Memory.mp3"
-            },
-            {
-                "id": 22,
-                "name": "Me Time",
-                "audio": "Me Time.mp3"
-            },
-            {
-                "id": 23,
-                "name": "Mindfulness",
-                "audio": "Mindfulness.mp3"
-            },
-            {
-                "id": 24,
-                "name": "Mistrust",
-                "audio": "Mistrust.mp3"
-            },
-            {
-                "id": 25,
-                "name": "Moodiness",
-                "audio": "Moodiness.mp3"
-            },
-            {
-                "id": 26,
-                "name": "Obsessive-Compulsive Disorder (OCD)",
-                "audio": "OCD.mp3"
-            },
-            {
-                "id": 27,
-                "name": "Overwhelm",
-                "audio": "Overwhelm.mp3"
-            },
-            {
-                "id": 28,
-                "name": "Procrastination",
-                "audio": "Procrastination.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "ego"
             }
         ]
-
     },
     "physical": {
         "body": [
             {
                 "id": 1,
                 "name": "Chronic Pain",
-                "audio": "Chronic Pain.mp3"
+                "audio": "../src/assets/audios/audio.mp3",
+                "category": "body"
             },
             {
                 "id": 2,
                 "name": "Weight Loss",
-                "audio": "Weight Loss.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "body"
             },
             {
                 "id": 3,
                 "name": "Lack of Sleep",
-                "audio": "Lack of Sleep.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "body"
             },
             {
                 "id": 4,
                 "name": "Insomnia",
-                "audio": "Insomnia.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "body"
             },
             {
                 "id": 5,
                 "name": "Sleep Difficulty",
-                "audio": "Sleep Difficulty.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "body"
             },
             {
                 "id": 6,
                 "name": "Bruxism",
-                "audio": "Bruxism.mp3"
+                "audio": "../src/assets/audios/audio5.mp3",
+                "category": "body"
             },
             {
                 "id": 7,
                 "name": "Teeth Grinding",
-                "audio": "Teeth Grinding.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "body"
             },
             {
                 "id": 8,
                 "name": "Temptation",
-                "audio": "Temptation.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "body"
             },
             {
                 "id": 9,
                 "name": "Thumb Sucking",
-                "audio": "Thumb Sucking.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "body"
             },
             {
                 "id": 10,
                 "name": "Tinnitus",
-                "audio": "Tinnitus.mp3"
-            },
-            {
-                "id": 11,
-                "name": "Tics",
-                "audio": "Tics.mp3"
-            },
-            {
-                "id": 12,
-                "name": "Healthy Living",
-                "audio": "Healthy Living.mp3"
-            },
-            {
-                "id": 13,
-                "name": "Finger Picking",
-                "audio": "Finger Picking.mp3"
-            },
-            {
-                "id": 14,
-                "name": "Skin Picking",
-                "audio": "Skin Picking.mp3"
-            },
-            {
-                "id": 15,
-                "name": "Fear of Flying",
-                "audio": "Fear of Flying.mp3"
-            },
-            {
-                "id": 16,
-                "name": "Fear of Heights",
-                "audio": "Fear of Heights.mp3"
-            },
-            {
-                "id": 17,
-                "name": "Irritable Bowel Syndrome (IBS)",
-                "audio": "IBS.mp3"
-            },
-            {
-                "id": 18,
-                "name": "Skin Problems",
-                "audio": "Skin Problems.mp3"
-            },
-            {
-                "id": 19,
-                "name": "Smoking Cigarettes/Vaping",
-                "audio": "Smoking.mp3"
-            },
-            {
-                "id": 20,
-                "name": "Gagging",
-                "audio": "Gagging.mp3"
-            },
-            {
-                "id": 21,
-                "name": "Cramps",
-                "audio": "Cramps.mp3"
-            },
-            {
-                "id": 22,
-                "name": "Substance Abuse/Addictions",
-                "audio": "Substance Abuse.mp3"
-            },
-            {
-                "id": 23,
-                "name": "Age Regression",
-                "audio": "Age Regression.mp3"
-            },
-            {
-                "id": 24,
-                "name": "Aggression",
-                "audio": "Aggression.mp3"
-            },
-            {
-                "id": 25,
-                "name": "Fear of Surgery/Anesthesia",
-                "audio": "Fear of Surgery.mp3"
-            },
-            {
-                "id": 26,
-                "name": "Trauma/Abuse",
-                "audio": "Trauma Abuse.mp3"
-            },
-            {
-                "id": 27,
-                "name": "Victimization",
-                "audio": "Victimization.mp3"
-            },
-            {
-                "id": 28,
-                "name": "Bed Wetting",
-                "audio": "Bed Wetting.mp3"
-            },
-            {
-                "id": 29,
-                "name": "Breathing Issues",
-                "audio": "Breathing Issues.mp3"
-            },
-            {
-                "id": 30,
-                "name": "Assertiveness",
-                "audio": "Assertiveness.mp3"
-            },
-            {
-                "id": 31,
-                "name": "Assist Healing",
-                "audio": "Assist Healing.mp3"
-            },
-            {
-                "id": 32,
-                "name": "Nail Biting",
-                "audio": "Nail Biting.mp3"
-            },
-            {
-                "id": 33,
-                "name": "Cancer Care",
-                "audio": "Cancer Care.mp3"
-            },
-            {
-                "id": 34,
-                "name": "Vaping",
-                "audio": "Vaping.mp3"
-            },
-            {
-                "id": 35,
-                "name": "Headache",
-                "audio": "Headache.mp3"
-            },
-            {
-                "id": 36,
-                "name": "Sports Performance",
-                "audio": "Sports Performance.mp3"
-            },
-            {
-                "id": 37,
-                "name": "Relax",
-                "audio": "Relax.mp3"
-            },
-            {
-                "id": 38,
-                "name": "Lack of Exercise",
-                "audio": "Lack of Exercise.mp3"
-            },
-            {
-                "id": 39,
-                "name": "Immune System",
-                "audio": "Immune System.mp3"
-            },
-            {
-                "id": 40,
-                "name": "Impotency",
-                "audio": "Impotency.mp3"
-            },
-            {
-                "id": 41,
-                "name": "Improve Physical Wellness",
-                "audio": "Improve Physical Wellness.mp3"
-            },
-            {
-                "id": 42,
-                "name": "Fear of New Food",
-                "audio": "Fear of New Food.mp3"
-            },
-            {
-                "id": 43,
-                "name": "Fear of Bees/Wasp",
-                "audio": "Fear of Bees.mp3"
-            },
-            {
-                "id": 44,
-                "name": "Restlessness",
-                "audio": "Restlessness.mp3"
-            },
-            {
-                "id": 45,
-                "name": "Relaxation",
-                "audio": "Relaxation.mp3"
-            },
-            {
-                "id": 46,
-                "name": "Picky Eating Habit",
-                "audio": "Picky Eating Habit.mp3"
-            },
-            {
-                "id": 47,
-                "name": "Post-surgical Anxiety",
-                "audio": "Post-surgical Anxiety.mp3"
-            },
-            {
-                "id": 48,
-                "name": "Pre-surgical Anxiety",
-                "audio": "Pre-surgical Anxiety.mp3"
-            },
-            {
-                "id": 49,
-                "name": "Overeating",
-                "audio": "Overeating.mp3"
-            },
-            {
-                "id": 50,
-                "name": "Self Esteem",
-                "audio": "Self Esteem.mp3"
-            },
-            {
-                "id": 51,
-                "name": "Intimacy Issues",
-                "audio": "Intimacy Issues.mp3"
-            },
-            {
-                "id": 52,
-                "name": "Sexual Identity",
-                "audio": "Sexual Identity.mp3"
-            },
-            {
-                "id": 53,
-                "name": "Body Image",
-                "audio": "Body Image.mp3"
-            },
-            {
-                "id": 54,
-                "name": "Compassion",
-                "audio": "Compassion.mp3"
-            },
-            {
-                "id": 55,
-                "name": "Fatigue",
-                "audio": "Fatigue.mp3"
-            },
-            {
-                "id": 56,
-                "name": "Eating Disorder",
-                "audio": "Eating Disorder.mp3"
-            },
-            {
-                "id": 57,
-                "name": "Grief and Loss",
-                "audio": "Grief and Loss.mp3"
-            },
-            {
-                "id": 58,
-                "name": "Gender Identity",
-                "audio": "Gender Identity.mp3"
-            },
-            {
-                "id": 59,
-                "name": "Highly Sensitive Person",
-                "audio": "Highly Sensitive Person.mp3"
-            },
-            {
-                "id": 60,
-                "name": "Hoarding",
-                "audio": "Hoarding.mp3"
-            },
-            {
-                "id": 61,
-                "name": "Life Coaching",
-                "audio": "Life Coaching.mp3"
-            },
-            {
-                "id": 62,
-                "name": "LGBTQ Issues",
-                "audio": "LGBTQ Issues.mp3"
-            },
-            {
-                "id": 63,
-                "name": "Internet Addiction",
-                "audio": "Internet Addiction.mp3"
-            },
-            {
-                "id": 64,
-                "name": "Obesity",
-                "audio": "Obesity.mp3"
-            },
-            {
-                "id": 65,
-                "name": "Obsessive-Compulsive Disorder",
-                "audio": "OCD.mp3"
-            },
-            {
-                "id": 66,
-                "name": "Pet Bereavement",
-                "audio": "Pet Bereavement.mp3"
-            },
-            {
-                "id": 67,
-                "name": "Separation Anxiety",
-                "audio": "Separation Anxiety.mp3"
-            },
-            {
-                "id": 68,
-                "name": "Seasonal Affective Disorder",
-                "audio": "SAD.mp3"
-            },
-            {
-                "id": 69,
-                "name": "Addiction Recovery",
-                "audio": "Addiction Recovery.mp3"
-            },
-            {
-                "id": 70,
-                "name": "Personal Growth",
-                "audio": "Personal Growth.mp3"
-            },
-            {
-                "id": 71,
-                "name": "Phobia",
-                "audio": "Phobia.mp3"
-            },
-            {
-                "id": 72,
-                "name": "Life Transition",
-                "audio": "Life Transition.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "body"
             }
         ],
         "mind": [
             {
                 "id": 1,
                 "name": "Anxiety",
-                "audio": "Anxiety.mp3"
+                "audio": "../src/assets/audios/audio.mp3",
+                "category": "mind"
             },
             {
                 "id": 2,
                 "name": "Attention Deficit Disorder",
-                "audio": "ADD.mp3"
+                "audio": "../src/assets/audios/audio1.mp3",
+                "category": "mind"
             },
             {
                 "id": 3,
                 "name": "Anger",
-                "audio": "Anger.mp3"
+                "audio": "../src/assets/audios/audio2.mp3",
+                "category": "mind"
             },
             {
                 "id": 4,
                 "name": "ADD - Children",
-                "audio": "ADD Children.mp3"
+                "audio": "../src/assets/audios/audio3.mp3",
+                "category": "mind"
             },
             {
                 "id": 5,
                 "name": "Adult Survivors of Child Abuse",
-                "audio": "Survivors Child Abuse.mp3"
+                "audio": "../src/assets/audios/audio4.mp3",
+                "category": "mind"
             }
         ]
     }
