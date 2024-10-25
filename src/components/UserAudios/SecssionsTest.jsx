@@ -32,14 +32,8 @@ const TestSessions = ({ selectedMonth, sessions }) => {
 
   const count = (selfAudioId === "end" ? self.length : selfAudioId) + (egoAudioId === "end" ? ego.length : egoAudioId) + (bodyAudioId === "end" ? body.length : bodyAudioId) + (mindAudioId === "end" ? miend.length : mindAudioId)
 
-  // console.log({ total: count });
-
-
-
   const currentSession = sessions.find((session) => session.id === selectedMonth);
   const updatedAudioIds = new Set();
-
-
 
   const handleAudioSelect = async (audio) => {
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {

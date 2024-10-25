@@ -137,7 +137,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
               <ProgressBar
                 className="mt-2"
                 completed={(count / maxValue) * 100}  
-                // completed={(10 / maxValue) * 100}  
                 labelColor="transparent"
                 labelAlignment="center"
                 borderRadius="0px 10px 10px 0px"

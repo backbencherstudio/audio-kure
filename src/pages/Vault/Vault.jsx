@@ -176,7 +176,7 @@ const Vault = () => {
                                 onTimeUpdate={handleTimeUpdate}
                                 onLoadedMetadata={handleDurationChange}
                                 controls
-                                className="w-96 m-2 mx-auto "
+                                className="w-full max-w-lg m-2 mx-auto bg-gray-200 rounded-lg shadow-md"
                                 controlsList="nodownload"
                             />
 
