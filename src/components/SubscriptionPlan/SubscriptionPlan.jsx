@@ -179,19 +179,19 @@ const SubscriptionPlan = () => {
       </div>
       <CountDownTimer onCountdownEnd={handleCountdownEnd} />
       <div className="container mx-auto mt-5">
-        {/* <PlanDescription /> */}
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
             className="text-[1.75rem]  md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
           >
             Congratulations! you are{" "}
-            <span className="text-[#8A5EFF] merriweather capitalize">
+            <span className="s-text merriweather capitalize">
               {usertype}
             </span>{" "}
             suggestible
           </h1>
         </div>
+        <PlanDescription />
         <div className="md:flex gap-6 px-4">
           <div className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
