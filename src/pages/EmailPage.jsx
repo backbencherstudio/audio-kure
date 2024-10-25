@@ -43,7 +43,7 @@ function EmailPage() {
 
   return (
     <div className="">
-      <div className="container mx-auto">
+    <div className="container mx-auto">
         <Logo />
       </div>
       <div className="mx-auto max-w-[1400px] ">
