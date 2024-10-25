@@ -1,14 +1,12 @@
-import React from 'react';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import './customPlayerCss.css'; // Optional custom CSS for styling
+// import './customPlayerCss.css'; 
 
 const CustomAudioPlayer = ({ audioSrc, onAudioEnd, audioId, categoryName, onAudioPlay }) => {
 
-  // Function to handle audio play event
   const handlePlay = () => {
     if (onAudioPlay) {
-      onAudioPlay(audioId, categoryName, audioSrc); // Pass the audio ID and category to the parent
+      onAudioPlay(audioId, categoryName, audioSrc); 
     }
   };
 
@@ -16,8 +14,8 @@ const CustomAudioPlayer = ({ audioSrc, onAudioEnd, audioId, categoryName, onAudi
     <AudioPlayer
       src={audioSrc}
       autoPlay
-      onPlay={handlePlay}  // Capture the play event
-      onEnded={onAudioEnd} // Capture the end event
+      onPlay={handlePlay} 
+      onEnded={onAudioEnd}
       showSkipControls={false}
       showJumpControls={false}
       customAdditionalControls={[]}
