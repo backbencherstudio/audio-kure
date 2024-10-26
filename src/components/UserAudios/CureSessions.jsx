@@ -25,7 +25,6 @@ const CureSessions = ({ currentUser }) => {
   const [playedAudios, setPlayedAudios] = useState({});
   const user = true; // Example, set to true to allow interaction
 
-  console.log('sessionData', sessionData)
 
   // const dispatch = useAppDispatch();
   // const navigate = useNavigate();
