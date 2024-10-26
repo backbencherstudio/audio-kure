@@ -28,7 +28,7 @@ const PaymentPlan = ({
   isSelected,
   onSelect,
 }) => (
-  <div  
+  <div
     className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6text-gray-900"
       }`}
     onClick={() => onSelect(id)}
@@ -162,6 +162,7 @@ const SubscriptionPlan = () => {
           plan: selectedPlan,
           price: selectedPlanDetails.currentPrice,
           originalPrice: selectedPlanDetails.originalPrice,
+          duration: selectedPlanDetails.duration
         };
         console.log(plan);
         localStorage.setItem("plan", JSON.stringify(plan));
