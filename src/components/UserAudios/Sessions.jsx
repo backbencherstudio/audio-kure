@@ -17,6 +17,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
+  const [updateData, setUpdatedData] = useState(null)
   const [updateAudioData] = authApi.useUpdateAudioDataMutation();
   const [listeningTime, setListeningTime] = useState(0)
   const [audioDuration, setAudioDuration] = useState(0);
@@ -44,6 +45,20 @@ const Sessions = ({ selectedMonth, sessions }) => {
     return <p>Loading ...</p>
   }
 
+
+  useEffect(() => {
+    const performUpdate = async () => {
+      const res = await updateAudioData(updateData);
+      console.log(res);
+      
+    };
+
+    if (listeningTime === audioDuration && audioDuration !== 0) {
+      performUpdate();
+    }
+  }, [listeningTime, audioDuration, updateData, updateAudioData]);
+
+
   const [hiddedButton, setHiddenButton] = useState(true)
   const isHide = (array1?.length > 0 && array2?.length > 0) || (array3?.length > 0 && array4?.length > 0)
 
@@ -56,46 +71,16 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const counterValue = count * 100;
   const maxValue = self?.length + ego?.length + body?.length + miend?.length
 
+  console.log(count);
+  console.log(counterValue);
+
+
 
   const currentSession = sessions.find((session) => session?.id === selectedMonth);
-  const updatedAudioIds = new Set();
 
-  const handleAudioSelect = async (audio) => {
-    if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
-      setCurrentAudio(null);
-      setPlayingAudio({ id: null, category: null });
-    } else {
-      setCurrentAudio(audio);
-      setPlayingAudio({ id: audio.id, category: audio.category });
-      setSessionImage(sessionImg);
 
-      const audioData = {
-        email: currentUser?.email,
-        [`${audio.category}Id`]: audio.id === (audio.category === "self" ? self?.length : ego?.length) ? "end" : audio.id,
-        category: audio.category,
-      };
-
-      if (selfAudioId < audio.id && selfAudioId !== "end") {
-        if (!updatedAudioIds.has(audio.id)) {
-          const res = await updateAudioData(audioData);
-          console.log("Self Audio Update Success: ", res?.data?.success);
-          updatedAudioIds.add(audio.id);
-        }
-        return;
-      }
-
-      if (selfAudioId === "end" && egoAudioId < audio.id) {
-        if (!updatedAudioIds.has(audio.id)) {
-          const res = await updateAudioData(audioData);
-          console.log("Ego Audio Update Success: ", res?.data?.success);
-          updatedAudioIds.add(audio.id);
-        }
-      }
-    }
-  };
 
   const handlePhysicalAudioSelect = async (audio) => {
-
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
       setCurrentAudio(null);
       setPlayingAudio({ id: null, category: null });
@@ -109,25 +94,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
         [`${audio.category}Id`]: audio.id === (audio.category === "body" ? body?.length : miend?.length) ? "end" : audio.id,
         category: audio.category,
       };
-
-      // if (array1.includes(audio.id) && bodyAudioId !== "end") {
-      //   if (!updatedAudioIds.has(audio.id)) {
-      //     const res = await updateAudioData(audioData);
-      //     console.log("Self Audio Update Success: ", res?.data?.success);
-      //     updatedAudioIds.add(audio.id);
-      //   }
-      //   return;
-      // }
-
-      const res = await updateAudioData(audioData);
-
-      // if (array2.includes(audio.id) && bodyAudioId === "end") {
-      //   if (!updatedAudioIds.has(audio.id)) {
-      //     const res = await updateAudioData(audioData);
-      //     console.log("Ego Audio Update Success: ", res?.data?.success);
-      //     updatedAudioIds.add(audio.id);
-      //   }
-      // }
+      setUpdatedData(audioData)
+      // const res = await updateAudioData(audioData);
 
     }
   };
@@ -184,6 +152,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
+
+        <h2 className='mx-2' > A T = {audioDuration}</h2>
+        <h2 className='mx-2' > L T = {listeningTime}</h2>
+
 
         <div className="heading-div text-3xl font-semibold my-8">
           Your  cure session for Month {selectedMonth}
@@ -254,12 +226,13 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       setAudioDuration={setAudioDuration}
                     />
                   ) : (
-                    <button
+                    <div
                       className="flex gap-2 items-center bg-slate-400 p-2 rounded-3xl justify-center w-full"
-                      onClick={() => handleAudioSelect(currentSession.audios[0])}
+                    // onClick={() => handleAudioSelect(currentSession.audios[0])}
                     >
-                      <FaPlay /> Play The Audios
-                    </button>
+                      {/* <FaPlay /> */}
+                      Play The Audios
+                    </div>
                   )}
                 </div>
               </div>
@@ -281,11 +254,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   <div className={`AudioPlayButton text-center rounded-md w-full ${toggleCategory === "emotional" ? "text-black hidden" : "text-white block"} font-bold text-[20px]`}>Physical</div>
                 </div>
               }
-
-
-
-              {/* <div className={`AudioPlayButton text-center rounded-md w-full ${toggleCategory === "emotional" ? "text-white block " : "text-black hidden"} font-bold text-[20px]`}>Emotion</div>
-              <div className={`AudioPlayButton text-center rounded-md w-full ${toggleCategory === "emotional" ? "text-black hidden" : "text-white block"} font-bold text-[20px]`}>Physical</div> */}
 
               {/* ${hiddedButton && "hidden"} */}
 
@@ -316,7 +284,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
             {/* ====================================================  emotional ========================================= */}
             <div className={`grid grid-cols-2 gap-10 ${toggleCategory === "emotional" ? "block" : "hidden"} `}>
-              {/* <div className={`grid grid-cols-2 gap-10  `}> */}
 
               {/* Self Section */}
               <div>
@@ -336,37 +303,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       </button>
                     </div>
                   ))}
-
-
-                  {/* {userData?.data?.selectedSelfAudios.length > 0 && self?.map((item) => {
-                    const isSelected = userData.data.selectedSelfAudios.includes(item.id);
-                    return (
-                      isSelected && (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            {item.name}
-
-                          </button>
-                        </div>
-                      )
-                    );
-                  })} */}
 
                   {(parseInt(userData?.data?.plan) === 365 ? self : self.filter(item => userData?.data?.selectedSelfAudios?.includes(item.id)))
                     .map((item) => {
@@ -417,35 +353,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
                     </div>
                   ))}
 
-                  {/* {userData?.data?.selectedEgoAudios.length > 0 && ego?.map((item) => {
-                    const isSelected = userData.data.selectedEgoAudios.includes(item.id);
-                    return (
-                      isSelected && (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            {item.name}
-
-                          </button>
-                        </div>
-                      )
-                    );
-                  })} */}
 
                   {(parseInt(userData?.data?.plan) === 365 ? ego : ego.filter(item => userData?.data?.selectedEgoAudios?.includes(item.id)))
                     .map((item) => {
@@ -505,35 +412,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                   {/* ================================= Main Body audio ================================= */}
 
-                  {/* {userData?.data?.selectedBodyAudios.length > 0 && body?.map((item) => {
-                    const isSelected = userData.data.selectedBodyAudios.includes(item.id);
-                    return (
-                      isSelected && (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            {item.name}
-
-                          </button>
-                        </div>
-                      )
-                    );
-                  })} */}
 
                   {(parseInt(userData?.data?.plan) === 365 ? body : body.filter(item => userData?.data?.selectedBodyAudios?.includes(item.id)))
                     .map((item) => {
@@ -589,35 +467,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                   {/* ================================= Main Mind audio ================================= */}
 
-                  {/* {userData?.data?.selectedMindAudios.length > 0 && miend?.map((item) => {
-                    const isSelected = userData.data.selectedMindAudios.includes(item.id);
-                    return (
-                      isSelected && (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            {item.name}
-                          </button>
-                        </div>
-                      )
-                    );
-                  })} */}
-
                   {(parseInt(userData?.data?.plan) === 365 ? miend : miend.filter(item => userData?.data?.selectedMindAudios?.includes(item.id)))
                     .map((item) => {
                       return (
@@ -644,17 +493,11 @@ const Sessions = ({ selectedMonth, sessions }) => {
                         </div>
                       );
                     })}
-
-
                 </div>
+
               </div>
-
             </div>
-
-
-
           </div>
-
         </div>
       </div>
     </div>
