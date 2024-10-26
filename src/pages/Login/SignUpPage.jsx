@@ -160,9 +160,10 @@ const SignUpPage = () => {
         </ul>
       </div>
       <div className="md:w-[25%] ">
+      <h2 className="text-3xl text-center mb-6 ">Create an account </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="backdrop-blur-md backdrop-brightness-200 shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="backdrop-blur-sm bg-white/10 border border-white/20 shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
 

@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
 import PlanDescription from "../PlanDescription/PlanDescription";
+import Ads from "../Ads/Ads";
 
 const PaymentPlan = ({
   id,
@@ -28,8 +29,8 @@ const PaymentPlan = ({
   isSelected,
   onSelect,
 }) => (
-  <div  
-    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6text-gray-900"
+  <div
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900"
       }`}
     onClick={() => onSelect(id)}
   >
@@ -87,7 +88,7 @@ const PaymentPlan = ({
       </div>
     </div>
     {isPopular && (
-      <div className="absolute top-0 left-0 right-0 bg-[#5817E9] text-white text-center text-xs py-2.5 rounded-t-xl">
+      <div className="absolute top-0 left-0 right-0 p-bg text-gray-800 text-center text-xs py-2.5 rounded-t-xl">
         MOST POPULAR
       </div>
     )}
@@ -162,6 +163,7 @@ const SubscriptionPlan = () => {
           plan: selectedPlan,
           price: selectedPlanDetails.currentPrice,
           originalPrice: selectedPlanDetails.originalPrice,
+          duration: selectedPlanDetails.duration
         };
         console.log(plan);
         localStorage.setItem("plan", JSON.stringify(plan));
@@ -231,18 +233,18 @@ const SubscriptionPlan = () => {
                   />
                 ))}
               </div>
-              <p className="text-base text-[#bec4d2] font-medium mb-10">
+              {/* <p className="text-base text-[#bec4d2] font-medium mb-10">
                 By clicking Get my plan, I agree to pay ${selectedPrice || 0}{" "}
                 for my plan and that if I do not cancel before the end of the
                 1-week introductory plan, Kure will automatically charge my
                 payment method the regular price $30.99 every 1-month thereafter
                 until I cancel. I can cancel online by visiting the subscription
                 page in my account on the website.
-              </p>
+              </p> */}
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-l from-[#34cbbf] via-[#4675ff] to-[#8a5eff] text-white font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
+                className="w-full btnGrad font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
               >
                 Get my plan
               </button>
@@ -289,11 +291,11 @@ const SubscriptionPlan = () => {
               </li>
             </ul>
             <div>
-              <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-10">
+              <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-20">
                 If you select the 3-month plan:
               </h1>
-              <div className="bg-[#07001C] border border-zinc-600 p-4 rounded-3xl">
-                <div className="md:flex gap-4 ">
+              <div className="bg-[#07001C]/20 border border-zinc-600 p-4 rounded-3xl">
+                <div className="md:flex items-center gap-4 ">
                   <div className="flex md:block justify-center mb-5 md:mb-0">
                     <img
                       src={gift_big}
@@ -316,25 +318,8 @@ const SubscriptionPlan = () => {
             </div>
           </div>
         </div>
-        <div className="px-0 md:px-4">
-          <div className="bg-[#07001C] border border-zinc-600 p-4 rounded-3xl mx-4 md:mx-0 mt-5 md:mt-10">
-            <div className="md:flex items-center gap-4">
-              <div className="flex md:block justify-center mb-5 md:mb-0">
-                <img src={refund} alt="refund-image" className="w-32" />
-              </div>
-              <div className="text-center md:text-left space-y-2">
-                <h1 className="text-2xl font-bold merriweather mt-1 ">
-                  Risk-free guarantee
-                </h1>
-                <p className="text-[14px]">
-                  No results? Reach out to our customer support and we can
-                  cancel your subscription at any time without additional
-                  charges.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+
+        <Ads />
         <GoogleReviews />
       </div>
       <div className="container mx-auto px-4">
