@@ -49,14 +49,15 @@ const Sessions = ({ selectedMonth, sessions }) => {
   useEffect(() => {
     const performUpdate = async () => {
       const res = await updateAudioData(updateData);
-      console.log(res);
-      
+      if(res.data.success){
+        toast.success("You achive 100 coin")        
+      } 
     };
 
-    if (listeningTime === audioDuration && audioDuration !== 0) {
+    if (listeningTime === audioDuration) {
       performUpdate();
     }
-  }, [listeningTime, audioDuration, updateData, updateAudioData]);
+  }, [listeningTime, audioDuration]);
 
 
   const [hiddedButton, setHiddenButton] = useState(true)
@@ -152,10 +153,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
-
-        <h2 className='mx-2' > A T = {audioDuration}</h2>
-        <h2 className='mx-2' > L T = {listeningTime}</h2>
-
 
         <div className="heading-div text-3xl font-semibold my-8">
           Your  cure session for Month {selectedMonth}

@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 // Client secret not ready. Please try again.
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
-  // baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://kure-server.vercel.app/api/v1",
+  // baseUrl: "https://kure-server.vercel.app/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -21,16 +21,16 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
     
   if (result?.error?.status === 403) {
-    toast.error(`${result?.error?.data.message}`);
+    // toast.error(`${result?.error?.data.message}`);
   }
   if (result?.error?.status === 404) {
-    toast.error(`${result?.error?.data.message}`);
+    // toast.error(`${result?.error?.data.message}`);
   }
 
 
   if (result?.error?.status === 401) {
     console.log("sending refresh token");
-    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
+    const res = await fetch("https://kure-server.vercel.app/api/v1/auth/refresh-token", {
       method: "POST",
       credentials: "include",
     });
