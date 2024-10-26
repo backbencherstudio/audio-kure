@@ -131,7 +131,7 @@ const CureSessions = ({ currentUser }) => {
   const totalMonths = getTotalMonths(currentUser?.createdAt, currentUser?.expiresDate);
   const monthsData = Array.from({ length: totalMonths }, (_, index) => ({ month: index + 1 }));
   const calculatedMonths = monthsData.slice(0, -1);
-  console.log('calculatedMonths', calculatedMonths)
+  
   return (
     <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
       <div className='max-w-7xl mx-4 md:mx-auto'>
