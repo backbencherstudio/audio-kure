@@ -1,64 +1,39 @@
 import { FaCheck } from "react-icons/fa";
-import img from "./../../assets/images/info_3_main.png";
+import img from "./../../assets/images/hypno4u.jpg";
 import ProgressBars from "../../shared/ProgressBar/ProgressBar";
 import { Link } from "react-router-dom";
 const ThirdPage = () => {
   return (
     <div>
-      <ProgressBars page={6} value={95}></ProgressBars>
-      <div className=" flex flex-col-reverse lg:flex-row lg:mt-20 mt-10     gap-10  w-full h-fit   items-center justify-center text-gray-800 p-5   rounded-md">
+      <ProgressBars page={6} value={100}></ProgressBars>
+      <div className=" flex flex-col-reverse md:flex-row lg:flex-row lg:mt-20 mt-10     gap-10  w-full h-fit   items-center justify-center text-gray-800 p-5   rounded-md">
         <div className="text-white max-w-lg flex flex-col gap-3">
-          <h2 className="lg:text-4xl md:text-4xl text-2xl   merriweather">
-            How Will Kure Help You?
+          <h2 className="lg:text-4xl md:text-3xl text-2xl   merriweather">
+            Life is dynamic, and so is HYPNO 4 U.
           </h2>
           <p className="  max-w-lg">
-            Our personalized hypnosis sessions will remove key reasons behind
-            your weight gain.
+            Think of HYPNO 4 U as a streaming service for your mind—you're in control of over 200 audios to choose from every day. Just pick what you’re in the mood for today and heal while you sleep! It couldn't be easier than that!
           </p>
 
           <div className="space-y-4">
-            <div className="flex items-center">
-              <FaCheck className="text-teal-500 w-4 h-4 mr-2" />
-              <span>No more food cravings</span>
-            </div>
-            <div className="flex items-center">
-              <FaCheck className="text-teal-500 w-4 h-4 mr-2" />
-              <span>Blocked bad eating habits</span>
-            </div>
-            <div className="flex items-center">
-              <FaCheck className="text-teal-500 w-4 h-4 mr-2" />
-              <span>Remove limiting beliefs</span>
-            </div>
-            <div className="flex items-center">
-              <FaCheck className="text-teal-500 w-4 h-4 mr-2" />
-              <span>Repair your gut & brain connection</span>
-            </div>
+            <h1 className="text-lg font-bold">How can you benefit from choosing HYPNO 4 U?</h1>
+            <ul className="space-y-4 list-disc ml-10">
+              <li className="text-gray-300"><span className="font-semibold t-text">Personalized Sessions:</span> Each hypnotherapy session is tailored to fit your unique needs.</li>
+              <li className="text-gray-300"><span className="font-semibold t-text">You're in Control:</span> Take charge of your life with customized plans.</li>
+              <li className="text-gray-300"><span className="font-semibold t-text">Goal Setting:</span> Define clear goals before you begin your journey.</li>
+              <li className="text-gray-300"><span className="font-semibold t-text">Progress Tracking:</span> Use proven, science-backed tools to monitor your progress.</li>
+            </ul>
           </div>
 
           <p className=" ">
-            Simply open the Kure app and listen to a soothing hypnosis session
-            before bedtime.
-          </p>
-          <p className="font-bold text-purple-300/95">
-            It’s almost like losing weight while sleeping.
-          </p>
-          <p>
-            Medical research studies and Kure user data suggests that hypnosis
-            is perfectly safe and allows you to achieve better and lasting
-            weight loss results*.
+            Plus, get rewarded and unlock the VAULT, “where all the secrets reside”!
           </p>
           <Link
-            className="  btnGrad text-center font-medium text-xl lg:py-4 py-3 rounded-3xl text-white px-4  "
-            to={"/weight"}
+            className="  btnGrad text-center font-medium text-xl lg:py-4 py-3 rounded-xl text-white px-4  "
+            to={"/email"}
           >
             Got it
           </Link>
-          <p className="mt-2 text-sm">
-            <span className="text-purple-300/95 font-medium underline">
-              *Source: Journal of Integrative Medicine Volume 19, Issue 1,
-              January 2021, Pages 1-5.
-            </span>
-          </p>
         </div>
         <div>
           <img className="lg:max-h-[570px] rounded-2xl" src={img} alt="" />

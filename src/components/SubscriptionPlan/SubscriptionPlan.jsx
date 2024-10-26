@@ -28,8 +28,8 @@ const PaymentPlan = ({
   isSelected,
   onSelect,
 }) => (
-  <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
+  <div  
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6text-gray-900"
       }`}
     onClick={() => onSelect(id)}
   >
@@ -111,6 +111,14 @@ const SubscriptionPlan = () => {
   const getAdjustedPlans = (type) => {
     const basePlans = [
       {
+        id: "7",
+        duration: "7 Days",
+        originalPrice: "99",
+        discountedPrice: "55",
+        perDay: "1.47",
+        originalPerDay: "$2.73",
+      },
+      {
         id: "365",
         duration: "Annual",
         originalPrice: "994",
@@ -119,6 +127,14 @@ const SubscriptionPlan = () => {
         originalPerDay: "$2.73",
         isPopular: true,
         hasGift: true
+      },
+      {
+        id: "30",
+        duration: "30 Days",
+        originalPrice: "66",
+        discountedPrice: "22",
+        perDay: "1.47",
+        originalPerDay: "$2.73",
       },
     ];
 
@@ -179,19 +195,19 @@ const SubscriptionPlan = () => {
       </div>
       <CountDownTimer onCountdownEnd={handleCountdownEnd} />
       <div className="container mx-auto mt-5">
-        {/* <PlanDescription /> */}
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
             className="text-[1.75rem]  md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
           >
             Congratulations! you are{" "}
-            <span className="text-[#8A5EFF] merriweather capitalize">
+            <span className="s-text merriweather capitalize">
               {usertype}
             </span>{" "}
             suggestible
           </h1>
         </div>
+        <PlanDescription />
         <div className="md:flex gap-6 px-4">
           <div className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">

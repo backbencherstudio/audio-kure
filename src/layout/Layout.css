@@ -5,7 +5,8 @@
     width: 100vw; 
     height: 100vh; 
     z-index: -10; 
-    background: linear-gradient(to top right,  #2F004D, #08011f);
+    /* background: linear-gradient(to top right,  #006666fd, #EEB5B4); */
+    background: linear-gradient(to top right,  #14b8a5d2, #f43f5dbd);
     background-size: cover; 
     background-position: center;  
   }
