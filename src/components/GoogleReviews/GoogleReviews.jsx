@@ -17,7 +17,7 @@ const GoogleReviews = () => {
         FetchReviews()
     }, [])
     return (
-        <div className='py-20 px-4'>
+        <div className='py-20 px-4 xl:px-12'>
             <h1 className='text-center merriweather text-4xl md:text-5xl font-semibold mb-10'>Why <span className='s-text merriweather'>Customer</span> love <span className='s-text merriweather'>Hypno 4 u</span> app</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {

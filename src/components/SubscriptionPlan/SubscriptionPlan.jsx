@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MdOutlineCheck } from "react-icons/md";
 import gift from "./../../assets/images/gift.png";
 import gift_big from "./../../assets/images/free_gift_big.png";
@@ -100,6 +100,7 @@ const SubscriptionPlan = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [plans, setPlans] = useState([]);
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
+  const paymentPlanRef = useRef(null);
   const navigate = useNavigate();
   useEffect(() => {
     const type = localStorage.getItem("type");
@@ -114,10 +115,10 @@ const SubscriptionPlan = () => {
       {
         id: "7",
         duration: "7 Days",
-        originalPrice: "99",
-        discountedPrice: "55",
-        perDay: "1.47",
-        originalPerDay: "$2.73",
+        originalPrice: "99.98",
+        discountedPrice: "49.99",
+        perDay: "7.14",
+        originalPerDay: "$14.28",
       },
       {
         id: "365",
@@ -132,10 +133,10 @@ const SubscriptionPlan = () => {
       {
         id: "30",
         duration: "30 Days",
-        originalPrice: "66",
-        discountedPrice: "22",
-        perDay: "1.47",
-        originalPerDay: "$2.73",
+        originalPrice: "299.98",
+        discountedPrice: "149.99",
+        perDay: "4.99",
+        originalPerDay: "$9.9",
       },
     ];
 
@@ -190,12 +191,12 @@ const SubscriptionPlan = () => {
 
   return (
     <div className="text-white">
+      <CountDownTimer onCountdownEnd={handleCountdownEnd} />
       <div className="">
         <nav className="container mx-auto   ">
           <Logo />
         </nav>
       </div>
-      <CountDownTimer onCountdownEnd={handleCountdownEnd} />
       <div className="container mx-auto mt-5">
         <div>
           <h1
@@ -210,7 +211,7 @@ const SubscriptionPlan = () => {
           </h1>
         </div>
         <PlanDescription />
-        <div className="md:flex gap-6 px-4">
+        <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
           <div className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
               Select your plan:
@@ -233,15 +234,6 @@ const SubscriptionPlan = () => {
                   />
                 ))}
               </div>
-              {/* <p className="text-base text-[#bec4d2] font-medium mb-10">
-                By clicking Get my plan, I agree to pay ${selectedPrice || 0}{" "}
-                for my plan and that if I do not cancel before the end of the
-                1-week introductory plan, Kure will automatically charge my
-                payment method the regular price $30.99 every 1-month thereafter
-                until I cancel. I can cancel online by visiting the subscription
-                page in my account on the website.
-              </p> */}
-
               <button
                 type="submit"
                 className="w-full btnGrad font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
@@ -255,11 +247,12 @@ const SubscriptionPlan = () => {
               <img src={safe_payment} alt="safe-payment" />
             </form>
           </div>
-          <div className="md:w-1/2">
-            <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
-              All plans include:
-            </h2>
+          <div className="md:w-1/2 flex flex-col justify-between">
+
             <ul className="space-y-5">
+              <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
+                All plans include:
+              </h2>
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Digital
                 app created by experts in hypnosis, neuroscience and food
@@ -291,8 +284,8 @@ const SubscriptionPlan = () => {
               </li>
             </ul>
             <div>
-              <h1 className="text-[1.125rem] text-white font-semibold mb-4 mt-20">
-                If you select the 3-month plan:
+              <h1 className="text-[1.125rem] text-white font-semibold mb-4">
+                If you select the Annual plan:
               </h1>
               <div className="bg-[#07001C]/20 border border-zinc-600 p-4 rounded-3xl">
                 <div className="md:flex items-center gap-4 ">
@@ -308,7 +301,7 @@ const SubscriptionPlan = () => {
                       Secret gift
                     </h1>
                     <p className="text-[14px]">
-                      The Kure team wants to support your relationship with food
+                      The Hypno 4 u team wants to support your relationship with food
                       and your transformation, so we've prepared a surprise for
                       you!
                     </p>
@@ -319,7 +312,7 @@ const SubscriptionPlan = () => {
           </div>
         </div>
 
-        <Ads />
+        <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
         <GoogleReviews />
       </div>
       <div className="container mx-auto px-4">
