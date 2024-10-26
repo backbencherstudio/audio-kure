@@ -1,6 +1,6 @@
-import { TextField, Alert, CircularProgress } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Logo from "../../shared/Logo";
 import authApi from "../../redux/fetures/auth/authApi";
 import { verifyToken } from "../../utils/verifyToken";
@@ -8,45 +8,45 @@ import { setUser } from "../../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm({
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  });
+
   const [errorMsg, setErrorMsg] = useState(null);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [login] = authApi.useLoginMutation();
   const dispatch = useAppDispatch();
+
+  const currentDate = new Date();
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
   };
 
-  const currentDate = new Date();
-  const handleLogin = async () => {
+  const onSubmit = async (data) => {
     setErrorMsg(null);
-    setLoading(true);
 
-    if (!email || !password) {
+    if (!data.email || !data.password) {
       setErrorMsg("All fields are required.");
-      setLoading(false);
       return;
     }
 
-    if (!validateEmail(email)) {
+    if (!validateEmail(data.email)) {
       setErrorMsg("Invalid email format.");
-      setLoading(false);
       return;
     }
 
-    if (password.length < 6) {
+    if (data.password.length < 6) {
       setErrorMsg("Password must be at least 6 characters long.");
-      setLoading(false);
       return;
     }
 
     try {
-      const userInfo = { email, password };
-      const response = await login(userInfo).unwrap();
+      const response = await login(data).unwrap();
       const token = response.data.accessToken;
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
@@ -56,22 +56,13 @@ function LoginPage() {
       if (response?.success) {
         if (currentDate < expiresDate) {
           navigate("/daily-audios");
-          setLoading(false);
           return;
         }
-        setLoading(false);
         navigate("/payment");
       }
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
-      setLoading(false);
-    }
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleLogin();
     }
   };
 
@@ -100,45 +91,35 @@ function LoginPage() {
             <div className="text-center">
               <h2 className="text-4xl text-center ">Log In</h2>
               <p className="mt-4 mb-16 font-[230] text-[15px]">
-                Let’s get started on your journey to wellness!
+                Let's get started on your journey to wellness!
               </p>
             </div>
 
             {errorMsg && (
-              <Alert severity="error" className="mb-4">
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 {errorMsg}
-              </Alert>
+              </div>
             )}
-            <div className="backdrop-blur-md backdrop-brightness-200 shadow-md px-8 pb-5 pt-5 rounded-lg">
+            <form onSubmit={handleSubmit(onSubmit)} className="backdrop-blur-sm bg-white/10 p-6 border border-white/20 shadow-md px-8 pb-5 pt-5 rounded-lg">
               <label className="block mt-5 text-white text-sm mb-2">
                 Email<span className="text-red-500 text-xs">*</span>
               </label>
-              <TextField
-                size="small"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="w-full text-sm bg-white/20 text-white rounded-md"
-                InputProps={{
-                  style: { color: "white" },
-                }}
+              <input
+                type="email"
+                {...register("email")}
+                className="w-full text-sm bg-white/20 text-white rounded-md p-2 border border-white/20 focus:outline-none"
               />
+
               <label className="block mt-5 text-white text-sm mb-2">
                 Password<span className="text-red-500 text-xs">*</span>
               </label>
-              <TextField
-                size="small"
+              <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="w-full text-sm bg-white/20 text-white rounded-md"
-                InputProps={{
-                  style: { color: "white" },
-                }}
+                {...register("password")}
+                className="w-full text-sm bg-white/20 text-white rounded-md p-2 border border-white/20 focus:outline-none"
               />
 
-              <p className=" mt-3 font-semibold ">
+              <p className="mt-3 font-semibold">
                 {" "}
                 If you are not registrad go to{" "}
                 <Link to="/signup" className="text-blue-600">
@@ -147,23 +128,18 @@ function LoginPage() {
                 </Link>{" "}
               </p>
 
-              <div
+              <button
+                type="submit"
+                disabled={isSubmitting}
                 className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
-                onClick={handleLogin}
               >
-                {loading ? (
-                  <CircularProgress
-                    style={{
-                      color: "white",
-                      width: "20px",
-                      height: "20px",
-                    }}
-                  />
+                {isSubmitting ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   "Log in"
                 )}
-              </div>
-            </div>
+              </button>
+            </form>
           </div>
         </div>
       </div>

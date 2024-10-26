@@ -19,3 +19,9 @@
 .swiper-slide {
   width: auto;
 }
+
+@media (min-width: 1024px) {
+  .swiper-wrapper {
+    pointer-events: none;
+  }
+}

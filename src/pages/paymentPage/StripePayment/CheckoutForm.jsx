@@ -107,7 +107,7 @@ const CheckoutForm = () => {
                 fontSize: '16px',
                 color: 'white',
                 '::placeholder': {
-                    color: '#aab7c4',
+                    color: 'white',
                 },
             },
             invalid: {
@@ -159,7 +159,7 @@ const CheckoutForm = () => {
                     />
                     {cardError && <div className="error-message">{cardError}</div>}
 
-                    <div className="expiry-cvc-container">
+                    <div className="expiry-cvc-container grid grid-cols-2 gap-5">
                         <div className="expiry">
                             <label>Expiry (MM/YY)</label>
                             <CardExpiryElement
@@ -184,7 +184,7 @@ const CheckoutForm = () => {
                     <label>Name on card</label>
                     <input
                         type="text"
-                        className="name-input text-black border mb-5 w-full  px-1 py-1 rounded-md"
+                        className="name-input bg-transparent focus:outline-none  border mb-5 w-full  px-1 py-1.5 rounded-md placeholder:text-white"
                         placeholder="Full name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -193,7 +193,7 @@ const CheckoutForm = () => {
 
                 {error && <div className="error-message">{error}</div>}
 
-                <button type="submit" disabled={processing} className="submit-button">
+                <button type="submit" disabled={processing} className="submit-button btnGrad text-gray-500">
                     {processing ? 'Processing...' : 'Submit Secure Payment'}
                 </button>
             </form>

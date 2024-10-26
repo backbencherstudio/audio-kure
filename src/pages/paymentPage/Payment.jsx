@@ -98,7 +98,7 @@ const Payment = () => {
       <div className="">     {/* <img src={logo} alt="logo" className="w-16" /> */}
         <Logo />
       </div>
-      <div className="backdrop-blur-md backdrop-brightness-200 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
+      <div className="backdrop-blur-sm bg-black/10  border border-white/20 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
 
         <div className="md:w-2/5">
           <h1 className=" text-xl font-medium mb-6 pb-6 border-b">Order summary</h1>
@@ -201,7 +201,7 @@ const Payment = () => {
               </label>
 
               {paymentMethod === "credit" && (
-                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[500px]" : "h-0"
+                <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[450px]" : "h-0"
                   } mt-4 p-4 rounded-md`}>
                   <StripeButtonComponent />
                 </div>
