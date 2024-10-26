@@ -1,4 +1,4 @@
-
+/* 
 .button {
   position: relative;
   background-color: var(--first-color);
@@ -91,4 +91,4 @@
 
 .button:hover .button__sphere {
   transform: translate(-14px, 20px) scale(1.1);
-}
+} */

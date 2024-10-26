@@ -36,7 +36,7 @@ function HomePage() {
       dispatch(logOut());
     }
   }, [])
- 
+
 
 
   // const handleLOgout = () => {
@@ -70,30 +70,24 @@ function HomePage() {
           </div> */}
         </div>
 
-        <div className="container   mx-auto px-4">
+        <div className="container  mx-auto px-4">
           <div className="flex flex-col-reverse lg:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
-            <div className="flex-1">
-              <h2 className="text-3xl   text-white    merriweather font-bold leading-snug">
-                Forget everything you know about hypnosis and embark on a
-                healing journey with just 5 simple questions that will transform
-                your life forever!
+            <div className="w-full lg:w-1/2 space-y-6">
+              <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-4xl text-white merriweather font-bold leading-tight">
+                Forget everything about hypnosis and start a life-changing journey with just 5 powerful questions!
               </h2>
-              <p className="mt-2 lg:max-w-[520.611px]">
-                The following questions may seem unusual, but they are designed
-                to help pinpoint your brain's thinking patterns and behaviors.
-                This will allow us to determine the most effective hypnosis
-                techniques specifically tailored for you.
-              </p>
-              <p className="mt-2 lg:max-w-[520.611px]">
-                Based on your personality type, unlock access to over 100
-                personalized hypnosis sessions. Break through mental barriers,
-                empower yourself, and repair the mind-body connection with a
-                customized hypnotherapy program designed just for you.
-              </p>
-              <p className=" mt-5 text-3xl font-medium mb-5">
+              <div className="space-y-4">
+                <p className="text-sm md:text-base">
+                  These unique questions reveal your brain's thinking patterns, helping us select the best hypnosis techniques for you.
+                </p>
+                <p className="text-sm md:text-base">
+                  Unlock 100+ personalized hypnosis sessions tailored to your personality. Break mental barriers, empower yourself, and restore mind-body harmony with a custom hypnotherapy program.
+                </p>
+              </div>
+              <p className="text-xl md:text-2xl lg:text-xl xl:text-3xl font-medium xl:mb-6">
                 What is your top priority in life?
               </p>
-              <div className="flex flex-col items-center lg:flex-row justify-between gap-12 mb-10 w-full">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
                 <Link
                   onClick={() => handleAnswerSelect("physical")}
                   className="w-full"
@@ -110,7 +104,7 @@ function HomePage() {
                 </Link>
               </div>
 
-              <div className="flex ">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
                 <img className="h-[40px] w-[136px]" src={home_members} alt="" />
                 <div className="ml-5">
                   <img className="h-4" alt="" src={star} />
@@ -122,7 +116,7 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center">
-            <img className="rounded-xl " alt="" src={heroImage} />
+              <img className="rounded-xl " alt="" src={heroImage} />
             </div>
           </div>
           <Footer />
