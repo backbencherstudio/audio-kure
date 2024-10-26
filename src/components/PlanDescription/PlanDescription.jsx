@@ -3,7 +3,7 @@ import AudioNames from '../AudioNames/AudioNames';
 
 const PlanDescription = () => {
     return (
-        <div className="p-4 md:p-12 ">
+        <div className="p-4 xl:p-12 ">
             <div className="space-y-16">
                 {/* Header */}
                 <div className="text-center space-y-6">
