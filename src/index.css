@@ -18,8 +18,33 @@
 .merriweather {
   font-family: "Merriweather", serif !important;
 }
+
+.p-bg {
+  @apply bg-[#EEB5B4]
+}
+
+.s-bg {
+  @apply bg-[#BFE5BE]
+}
+
+.t-bg {
+  @apply bg-[#EFD0B3]
+}
+
+.p-text {
+  @apply text-[#EEB5B4]
+}
+
+.s-text {
+  @apply text-[#BFE5BE]
+}
+
+.t-text {
+  @apply text-[#EFD0B3]
+}
+
 .btnGrad {
-  background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
+  background: linear-gradient(90deg, #EEB5B4 0%, #BFE5BE 50%, #EFD0B3 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -35,25 +60,33 @@ img {
 .unique-hover-coin .icon {
   position: absolute;
   font-size: 1.5rem;
-  opacity: 1; /* Keep visible */
-  transform: translateY(0); /* Start at original position */
+  opacity: 1;
+  /* Keep visible */
+  transform: translateY(0);
+  /* Start at original position */
 }
 
 /* Hover effect for continuous bubbling */
 .unique-hover-heart:hover .icon,
 .unique-hover-coin:hover .icon {
-  animation: bubble 0.8s infinite; /* Trigger animation on hover */
+  animation: bubble 0.8s infinite;
+  /* Trigger animation on hover */
 }
 
 @keyframes bubble {
   0% {
-    transform: translateY(0) scale(1); /* Original position and size */
+    transform: translateY(0) scale(1);
+    /* Original position and size */
   }
+
   50% {
-    transform: translateY(-20px) scale(1.2); /* Move up and scale up */
+    transform: translateY(-20px) scale(1.2);
+    /* Move up and scale up */
   }
+
   100% {
-    transform: translateY(0) scale(1); /* Move back down and original size */
+    transform: translateY(0) scale(1);
+    /* Move back down and original size */
   }
 }
 
@@ -62,18 +95,22 @@ img {
   top: -20px;
   left: 10%;
 }
+
 .unique-hover-heart .icon:nth-child(2) {
   top: -15px;
   left: 25%;
 }
+
 .unique-hover-heart .icon:nth-child(3) {
   top: -10px;
   left: 40%;
 }
+
 .unique-hover-heart .icon:nth-child(4) {
   top: -15px;
   right: 10%;
 }
+
 .unique-hover-heart .icon:nth-child(5) {
   top: -20px;
   right: 25%;
@@ -84,18 +121,22 @@ img {
   top: -20px;
   left: 10%;
 }
+
 .unique-hover-coin .icon:nth-child(2) {
   top: -15px;
   left: 25%;
 }
+
 .unique-hover-coin .icon:nth-child(3) {
   top: -10px;
   left: 40%;
 }
+
 .unique-hover-coin .icon:nth-child(4) {
   top: -15px;
   right: 10%;
 }
+
 .unique-hover-coin .icon:nth-child(5) {
   top: -20px;
   right: 25%;
@@ -103,7 +144,7 @@ img {
 
 .custom-scroll {
   /* scrollbar-width: thin; */
-  scrollbar-color: #c0c0c0 ;
+  scrollbar-color: #c0c0c0;
 }
 
 .custom-scroll::-webkit-scrollbar {
