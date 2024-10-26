@@ -254,7 +254,7 @@ const AudioNames = () => {
     };
 
     return (
-        <div className="p-4">
+        <div className="p-4 xl:p-6">
             <h1 className='text-4xl font-bold text-white text-center mb-6'>List of 200 Audios</h1>
             {/* Main Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
