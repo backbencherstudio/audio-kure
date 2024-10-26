@@ -8,6 +8,13 @@ const Body = () => {
     <div>
       <ProgressBars page={5} value={85} />
       <div className="flex flex-col-reverse container items-center  justify-between lg:px-40 p-5 lg:py-20   lg:flex-row w-full mx-auto  rounded-lg  ">
+        <div className="relative  flex-1 flex items-center justify-center h-full">
+          <img
+            src={img}
+            alt="Kure App"
+            className=" max-h-[550.812px] my-4 rounded-2xl"
+          />
+        </div>
         <div className="mb-4 max-w-[540px] flex-1 flex flex-col h-full gap-3  justify-between">
           <p className="text-2xl font-semibold merriweather">
             Imagination is more important than knowledge” - Albert Einstein 1929
@@ -47,13 +54,7 @@ const Body = () => {
             Got it
           </Link>
         </div>
-        <div className="relative  flex-1 flex items-center justify-center h-full">
-          <img
-            src={img}
-            alt="Kure App"
-            className=" max-h-[550.812px] my-4 rounded-2xl"
-          />
-        </div>
+
       </div>
     </div>
   );

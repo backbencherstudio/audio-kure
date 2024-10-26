@@ -28,8 +28,8 @@ const PaymentPlan = ({
   isSelected,
   onSelect,
 }) => (
-  <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "bg-white text-gray-900" : "bg-white text-gray-900"
+  <div  
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6text-gray-900"
       }`}
     onClick={() => onSelect(id)}
   >
@@ -111,6 +111,14 @@ const SubscriptionPlan = () => {
   const getAdjustedPlans = (type) => {
     const basePlans = [
       {
+        id: "7",
+        duration: "7 Days",
+        originalPrice: "99",
+        discountedPrice: "55",
+        perDay: "1.47",
+        originalPerDay: "$2.73",
+      },
+      {
         id: "365",
         duration: "Annual",
         originalPrice: "994",
@@ -119,6 +127,14 @@ const SubscriptionPlan = () => {
         originalPerDay: "$2.73",
         isPopular: true,
         hasGift: true
+      },
+      {
+        id: "30",
+        duration: "30 Days",
+        originalPrice: "66",
+        discountedPrice: "22",
+        perDay: "1.47",
+        originalPerDay: "$2.73",
       },
     ];
 
