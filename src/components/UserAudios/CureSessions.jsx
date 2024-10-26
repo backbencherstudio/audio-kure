@@ -137,7 +137,7 @@ const CureSessions = ({ currentUser }) => {
       <div className='max-w-7xl mx-4 md:mx-auto'>
         <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser?.name}!</div>
         <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
-        {calculatedMonths.length === 12 && (
+        {calculatedMonths?.length === 12 && (
           <Swiper
             spaceBetween={20}
             slidesPerView={3}
