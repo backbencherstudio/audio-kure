@@ -1,11 +1,10 @@
 import  { useState } from 'react';
 import playButton from '../../assets/images/play_button.png';
-import data from "../../../public/sessions.json";
 
-const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sessions, audioUnlockStates }) => {
+const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, data, audioUnlockStates }) => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
-
+    
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
         setSelectedSubCategory(null);
@@ -14,6 +13,9 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
     const handleSubCategorySelect = (subCategory) => {
         setSelectedSubCategory(subCategory);
     };
+    
+    console.log('audioUnlockStates', audioUnlockStates)
+    // if (data?.[category]?.[subCategory] )
 
     const renderAudios = () => {
         if (!selectedCategory || !selectedSubCategory) return null;
