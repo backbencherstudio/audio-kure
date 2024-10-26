@@ -17,13 +17,11 @@ const SignUpPage = () => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (user && user.email) {
-          setEmail(user.email);
-      }
-  }, []); 
-
-
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.email) {
+      setEmail(user.email);
+    }
+  }, []);
 
   const {
     register,
@@ -35,6 +33,7 @@ const SignUpPage = () => {
 
   const password = watch("password", "");
   const onSubmit = async (data) => {
+    console.log(data);
     if (data.password !== data.confirmPassword) {
       toast.error("password not matched");
       return;
@@ -70,28 +69,47 @@ const SignUpPage = () => {
     }
   };
 
+  // const verifyOtp = async (otp) => {
+  //   const verifyData = { email: userEmail, otp };
+  //   const res = await verifyOTP(verifyData);
+
+  //   if (res?.error?.status === 400) {
+  //     toast.error(res?.error?.data.message);
+  //     setOpen(false)
+  //   }
+
+
+  //   if (res?.data?.success) {
+  //     toast.success("Registration Successfull");
+  //     setOpen(false);
+  //     navigate("/login");
+  //   } else {
+  //     toast.error(res?.data?.message);
+  //   }
+  // };
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+
   const verifyOtp = async (otp) => {
     const verifyData = { email: userEmail, otp };
     const res = await verifyOTP(verifyData);
 
     if (res?.error?.status === 400) {
       toast.error(res?.error?.data.message);
+      setOpen(false);
     }
 
-    console.log(res);
-
     if (res?.data?.success) {
-      toast.success("Registration Successfull");
+      toast.success("Registration Successful");
       setOpen(false);
+      setOtp(new Array(6).fill(""));
       navigate("/login");
     } else {
       toast.error(res?.data?.message);
+      setOtp(new Array(6).fill(""));
     }
   };
-
   // ======================================================== fill up OTP function Start
 
-  const [otp, setOtp] = useState(new Array(6).fill(""));
 
   const inputRefs = useRef([]);
 
@@ -171,7 +189,7 @@ const SignUpPage = () => {
             </label>
             <input
               {...register("email", {
-                required: "Email is required",
+                // required: "Email is required",
                 pattern: {
                   value: /^\S+@\S+$/i,
                   message: "Invalid email address",
@@ -180,8 +198,6 @@ const SignUpPage = () => {
               type="email"
               className={inputStyle}
               placeholder="Enter your email"
-              defaultValue={email}
-              readOnly
             />
             {errors.email && (
               <p className="text-red-500 text-xs italic">

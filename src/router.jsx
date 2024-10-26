@@ -25,13 +25,15 @@ import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
+import Vault from "./pages/Vault/Vault";
+import Weight from "./pages/Weight/Weight";
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <PPurchesProtectorRoute>
         <Layout />
-       </PPurchesProtectorRoute>
+      </PPurchesProtectorRoute>
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         path: "",
         element: (
           // <PPurchesProtectorRoute>
-            <HomePage />
+          <HomePage />
           // </PPurchesProtectorRoute>
         ),
       },
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "analysis",
         element: <Analyzing />,
+      },
+      {
+        path: "weight",
+        element: <Weight />,
       },
       {
         path: "body",
@@ -102,15 +108,13 @@ const router = createBrowserRouter([
         ),
       },
 
-      
-
-
       // {
       //   path: "/orderConfirmation",
       //   element: <OrderConfirmation />,
       // },
     ],
   },
+
   {
     path: "/all-user",
     element: <AllUsers />,
@@ -145,6 +149,13 @@ const router = createBrowserRouter([
     element:
       <ProtectedRoute>
         <DailyAudios />
+      </ProtectedRoute>
+  },
+  {
+    path: "/vault",
+    element:
+      <ProtectedRoute>
+        <Vault />
       </ProtectedRoute>
   },
 ]);

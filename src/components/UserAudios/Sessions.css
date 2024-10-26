@@ -1,0 +1,8 @@
+.session-main-dev .session-second-child .heading-div .animation-text{
+    background-image: url("../../assets/fire.gif");
+    background-size: cover;
+    background-position: center;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;  
+}

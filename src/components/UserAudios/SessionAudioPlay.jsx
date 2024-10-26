@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import playButton from '../../assets/images/play_button.png';
 import data from "../../../public/sessions.json";
 
@@ -8,7 +8,7 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
 
     const handleCategorySelect = (category) => {
         setSelectedCategory(category);
-        setSelectedSubCategory(null); // Reset sub-category selection
+        setSelectedSubCategory(null);
     };
 
     const handleSubCategorySelect = (subCategory) => {
@@ -23,7 +23,7 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
             <ul className='mt-4'>
                 {audios.map((audio, index) => (
                     <li
-                        key={audio.id} // Use audio.id as key
+                        key={audio.id} 
                         className={`flex gap-8 justify-between backdrop-blur-md backdrop-brightness-200 p-4 px-8 rounded-2xl mb-4`}
                     >
                         <div className='flex gap-4'>
@@ -42,10 +42,10 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
                             onClick={() => {
                                 if (audioUnlockStates[selectedCategory][selectedSubCategory][index]) {
                                     setCurrentAudio(selectedCategory, selectedSubCategory, audio);
-                                    setSessionImage(playButton); // Update as needed
+                                    setSessionImage(playButton);
                                 }
                             }}
-                            disabled={!audioUnlockStates[selectedCategory][selectedSubCategory][index]} // Disable button if locked
+                            disabled={!audioUnlockStates[selectedCategory][selectedSubCategory][index]} 
                         >
                             <div className='p-1 grid items-center'>
                                 <img
@@ -63,7 +63,6 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
 
     return (
         <div>
-            {/* Render category buttons */}
             <div className="flex gap-4 mb-4">
                 {Object.keys(data).map((category) => (
                     <button
@@ -76,9 +75,9 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
                 ))}
             </div>
 
-            {/* Render sub-categories if a category is selected */}
             {selectedCategory && (
                 <div className="mb-8 flex justify-between gap-4">
+
                     {Object.keys(data[selectedCategory]).map((subCategory) => (
                         <div key={subCategory}>
                             <button
@@ -88,10 +87,11 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, sess
                                 {subCategory.charAt(0).toUpperCase() + subCategory.slice(1)}
                             </button>
 
-                            {/* Render audios under selected sub-category */}
                             {selectedSubCategory === subCategory && renderAudios()}
                         </div>
                     ))}
+
+                    
                 </div>
             )}
         </div>

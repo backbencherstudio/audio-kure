@@ -30,7 +30,7 @@ const WeightLossPlan = () => {
     ];
 
     return (
-        <div className=" p-4 mt-20 xl:mt-56">
+        <div className=" p-4 mt-20 xl:mt-32">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <h1 className="merriweather lg:w-2/3 mx-auto text-4xl md:text-5xl text-white text-center mb-16 ">

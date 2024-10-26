@@ -1,9 +1,7 @@
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
-  
   endpoints: (builder) => ({
-
     getSingleUser: builder.query({
       query: (email) => {
         return {        
@@ -11,6 +9,7 @@ const authApi = baseApi.injectEndpoints({
             method: "GET",
         }
       },
+      providesTags: ["audio", "user"], 
     }),
 
     registerUser: builder.mutation({
@@ -18,7 +17,7 @@ const authApi = baseApi.injectEndpoints({
         return {        
             url: "/auth/create-user",
             method: "POST",
-            body: {user},
+            body: { user },
         }
       },
     }),
@@ -46,12 +45,21 @@ const authApi = baseApi.injectEndpoints({
         return {
           url: "/auth/purchasePlan",
           method: "PATCH",
-          body: {purchasePlan},
+          body: { purchasePlan },
         }
       },
     }),
 
-
+    updateAudioData: builder.mutation({
+      query: (audioData) => {   
+        return {
+          url: "/auth/audio",
+          method: "PATCH",
+          body: { audioData },
+        }
+      },
+      invalidatesTags: ["audio", "user"], // Invalidate both audio and user tags
+    }),
   }),
 });
 
