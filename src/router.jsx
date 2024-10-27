@@ -7,8 +7,6 @@ import ThirdPage from "./pages/Questions/FourthPage";
 import SubscriptionPlan from "./components/SubscriptionPlan/SubscriptionPlan";
 import WelcomePage from "./pages/Welcome/WelcomePage";
 import EmailPage from "./pages/EmailPage";
-import AudioLayout from "./pages/Audios/Audios";
-import Doctors from "./pages/Audios/MainComponents/Doctors/Doctors";
 import Body from "./pages/Questions/Body";
 // import SignUpPage from "./pages/Login/SignupPage";
 import LoginPage from "./pages/Login/LoginPage";
@@ -17,7 +15,6 @@ import QuestionPage3 from "./pages/Questions/QuestionPage3";
 import QuestionPage4 from "./pages/Questions/QuestionPage4";
 import QuestionPage5 from "./pages/Questions/QuestionPage5";
 import Payment from "./pages/paymentPage/Payment";
-import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescriptions";
 import Physical from "./pages/Physical/Physical";
 import DailyAudios from "./pages/UserAudios/DailyAudios";
 import SignUpPage from "./pages/Login/SignUpPage";
@@ -107,28 +104,12 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
-  // ============================================>>>> just for testing
-  {
-    path: "/audios",
-    element: <AudioLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "",
-        element: <Doctors />,
-      },
-      {
-        path: "/audios/dr/:id",
-        element: <AudioDescriptions></AudioDescriptions>,
-      },
-    ],
-  },
-  // ============================================>>>> just for testing
+
   {
     path: "/daily-audios",
     element: <ProtectedRoute>
-              <DailyAudios />
-             </ProtectedRoute>
+      <DailyAudios />
+    </ProtectedRoute>
   },
 ]);
 

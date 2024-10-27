@@ -150,7 +150,7 @@ const CureSessions = ({ currentUser }) => {
         >
           {calculatedDays.map((dayItem, index) => (
             <SwiperSlide key={index} className='!mr-7 md:!mr-auto'>
-              <button 
+              <button
                 className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedDay === dayItem.day ? 'bg-[#130e2b]' : ''}`}
                 style={isDayUnlocked(dayItem.day) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
                 onClick={() => handleDaySelection(dayItem.day)}
@@ -159,7 +159,7 @@ const CureSessions = ({ currentUser }) => {
                 <div className='text-slate-300'>Day</div>
                 <div className='grid justify-center text-slate-300'>{dayItem.day}</div>
                 <div className={`border ${selectedDay === dayItem.day ? 'p-[5px]' : 'p-[13px]'} rounded-full border-[#2f2861]`}>
-                  {selectedDay === dayItem.day ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
+                  {selectedDay === dayItem.day ? <div className='bg-cyan-400 p-2 rounded-full'></div> : ''}
                 </div>
               </button>
             </SwiperSlide>

@@ -47,7 +47,7 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
   };
 
   const currentSession = sessions.find((session) => session.id === selectedDay);
-  
+
 
   return (
     <div className="border-t mt-5 border-[#2f2861]">
@@ -61,11 +61,14 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
           <div className="flex flex-col gap-4">
             {currentSession && (
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
-                <img
-                  src={currentSession.image}
-                  alt="session"
-                  className="opacity-70 w-full"
-                />
+                <div className='relative '>
+                  <div className="absolute h-full w-full bg-black/15"></div>
+                  <img
+                    src={currentSession.image}
+                    alt="session"
+                    className="  w-full"
+                  />
+                </div>
                 <div className="absolute inset-0 flex flex-col justify-end items-center bg-gradient-to-t from-black to-transparent p-4">
                   <div className="text-white text-3xl font-bold mb-2">
                     Session {selectedDay}
@@ -104,7 +107,7 @@ const Sessions = ({ selectedDay, setPlayedAudios, playedAudios, sessions }) => {
               playedAudios={playedAudios}
               setSessionImage={setSessionImage}
               selectedDay={selectedDay}
-              // markAudioAsPlayed={markAudioAsPlayed}
+            // markAudioAsPlayed={markAudioAsPlayed}
             />
           </div>
         </div>

@@ -17,7 +17,7 @@ const DailyAudios = () => {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  
+
   const handleLOgout = () => {
     dispatch(logOut());
     localStorage.removeItem("layout");
@@ -25,8 +25,22 @@ const DailyAudios = () => {
   };
 
   return (
-    <div className="area overflow-y-scroll">
-      <div className="max-w-7xl mx-auto">
+    <div className="  overflow-y-scroll">
+      <div className="area">
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div className="max-w-7xl mx-auto z-50">
         <div className="relative">
           <div className="grid justify-end my-4 mx-4">
             <button onClick={handleDropdown}>
@@ -60,7 +74,7 @@ const DailyAudios = () => {
         </div>
       </div>
 
-      
+
       <CureSessions currentUser={currentUser} />
     </div>
   );
