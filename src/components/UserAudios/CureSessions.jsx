@@ -139,19 +139,19 @@ const CureSessions = ({ currentUser }) => {
         <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
         {calculatedMonths.length === 12 && (
           <Swiper
-            spaceBetween={20}
+            spaceBetween={0}
             slidesPerView={3}
             slidesPerGroup={1}
             breakpoints={{
-              640: { slidesPerView: 4, spaceBetween: 5, slidesPerGroup: 1 },
-              768: { slidesPerView: 6, spaceBetween: 5, slidesPerGroup: 1 },
+              640: { slidesPerView: 3, spaceBetween: 0, slidesPerGroup: 1 },
+              768: { slidesPerView: 3, spaceBetween: 0, slidesPerGroup: 1 },
               1024: { slidesPerView: 8, spaceBetween: 5, slidesPerGroup: 1 },
               1280: { slidesPerView: 10, spaceBetween: 5, slidesPerGroup: 1 },
             }}
             className="months-slider"
           >
             {calculatedMonths.map((monthItem, index) => (
-              <SwiperSlide key={index} className=' !w-[90px] !mr-7 md:!mr-auto'>
+              <SwiperSlide key={index} className=' !w-[108px] !mr-7 md:!mr-auto'>
                 <button 
                   className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedMonth === monthItem.month ? 'bg-[#130e2b]' : ''}`}
                   style={isMonthUnlocked(monthItem.month) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
