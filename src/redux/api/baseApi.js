@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../fetures/auth/authSlice";
-import { toast } from "react-toastify";
 
 // Client secret not ready. Please try again.
 

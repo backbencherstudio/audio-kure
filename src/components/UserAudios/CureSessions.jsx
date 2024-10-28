@@ -136,7 +136,7 @@ const CureSessions = ({ currentUser }) => {
     <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
       <div className='max-w-7xl mx-4 md:mx-auto'>
         <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser?.name}!</div>
-        <p className='text-[#b0a3f8] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
+        <p className='text-[#f1f1f3] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
         {calculatedMonths?.length === 12 && (
           <Swiper
             spaceBetween={20}

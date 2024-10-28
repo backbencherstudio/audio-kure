@@ -71,7 +71,7 @@ function HomePage() {
         </div>
 
         <div className="container  mx-auto px-4">
-          <div className="flex flex-col-reverse lg:flex-row items-center justify-center mt-10 gap-20 lg:px-20 px-5">
+          <div className="flex flex-col-reverse lg:flex-row-reverse items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="w-full lg:w-1/2 space-y-6">
               <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-4xl text-white merriweather font-bold leading-tight">
                 Forget everything about hypnosis and start a life-changing journey with just 5 powerful questions!

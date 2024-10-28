@@ -7,11 +7,14 @@ import CustomAudioPlayer from './CustomAudioPlayer';
 import data from "../../../public/sessions.json";
 import authApi from '../../redux/fetures/auth/authApi';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
+import { logOut, selectCurrentUser, useCurrentToken } from '../../redux/fetures/auth/authSlice';
 import goldCoin from "./../../assets/goldCoin.png"
 import "./Sessions.css"
 import ProgressBar from '@ramonak/react-progress-bar';
 import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import gift_big from "./../../assets/images/free_gift_big.png";
+import { useNavigate } from 'react-router-dom';
 
 const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -40,22 +43,43 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const array2 = userData?.data?.selectedMindAudios
   const array3 = userData?.data?.selectedEgoAudios
   const array4 = userData?.data?.selectedSelfAudios
+  const [warningShown, setWarningShown] = useState(false);
+
+  const plan = userData?.data?.plan
 
   if (isLoading) {
     return <p>Loading ...</p>
   }
+  const dispatch = useAppDispatch();
+  const token = useAppSelector(useCurrentToken);
+
+  const expiresDate = new Date(userData?.data?.expiresDate);
+  const currentData = new Date();
+
+  useEffect(() => {
+    if (token && currentData >= expiresDate) {
+      dispatch(logOut());
+    }
+  }, [])
+
 
 
   useEffect(() => {
     const performUpdate = async () => {
       const res = await updateAudioData(updateData);
-      if(res.data.success){
-        toast.success("You achive 100 coin")        
-      } 
+      if (res.data.success) {
+        toast.success("You achieved 100 coins");
+      }
     };
+
+    if (listeningTime !== audioDuration && !warningShown) {
+      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping.");
+      setWarningShown(true);
+    }
 
     if (listeningTime === audioDuration) {
       performUpdate();
+      setWarningShown(false);
     }
   }, [listeningTime, audioDuration]);
 
@@ -72,13 +96,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const counterValue = count * 100;
   const maxValue = self?.length + ego?.length + body?.length + miend?.length
 
-  console.log(count);
-  console.log(counterValue);
-
-
-
   const currentSession = sessions.find((session) => session?.id === selectedMonth);
-
 
 
   const handlePhysicalAudioSelect = async (audio) => {
@@ -113,7 +131,23 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const [selectedSelfItems, setSelectedSelfAudios] = useState([]);
   const [selectedEgoItems, setSelectedEgoAudios] = useState([]);
 
-  const PhysicalAudioSelectHandler = (item) => {
+  const totalBodyMindSelections = selectedBodyItem.length + selectedMindItem.length;
+  const totalSelfEgoSelections = selectedSelfItems.length + selectedEgoItems.length;
+
+
+
+  const AudioSelectHandler = (item) => {
+
+    if (parseInt(plan) === 7 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
+      toast.error("You Can Select Maximum 2 Content");
+      return
+    }
+
+    if (parseInt(plan) === 30 && (totalBodyMindSelections >= 15 || totalSelfEgoSelections >= 15)) {
+      toast.error("You Can Select Maximum 15 Content");
+      return
+    }
+
     if (item.category === 'body') {
       setSelectedBodyItem((prev) =>
         prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
@@ -149,26 +183,108 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
   }
 
+  const navigation = useNavigate()
+
+  const valutFunction = (coin, label) => {
+    const levels = { one: 1000, two: 3000, three: 8000, four: 13000, five: 20000 };
+    if (levels[label] !== undefined) {
+      if (coin < levels[label]) {
+        toast.warning(
+          `To unlock this gift, you need at least ${levels[label].toLocaleString()} coins. Keep up the dedication and reach your goal!`,
+          {
+            style: { width: "450px" },
+            position: "top-center",
+          }
+        );
+      } else {
+        navigation("/vault");
+      }
+    } else {
+      console.error("Invalid label provided.");
+    }
+  };
+
+
+
+
 
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
 
+        {/* {parseInt(plan) === 365 && */}
+
         <div className="heading-div text-3xl font-semibold my-8">
           Your  cure session for Month {selectedMonth}
 
           {count ?
-            <span className='inline-block ml-2'>
-              <span className=' inline-block ' >& You achieve
-              </span>
+            <div className='inline-block ml-2  '>
+              <div className='flex justify-between'>
 
-              <span className='animation-text text-[44px] font-extrabold mx-2' >{counterValue}</span>
-              <span className='animation-text text-[44px] font-extrabold'>
-                <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin{count === 1 ? "" : "s"}
-              </span>
+                <div>
+                  <span className=' inline-block ' >& You achieve
+                  </span>
+
+                  <span className='animation-text text-[44px] font-extrabold mx-2' >{counterValue}</span>
+                  <span className='animation-text text-[44px] font-extrabold'>
+                    <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin{count === 1 ? "" : "s"}
+                  </span>
+                </div>
+
+                <div className='inline-block flex'>
+
+                  <button onClick={() => { valutFunction(counterValue, "one") }} className={`ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
 
 
-            </span> : ""}
+                </div>
+              </div>
+
+              {
+                parseInt(plan) !== 365 &&
+                <span className='text-xs ml-2 font-bold '>You can use this coin when you perces Anual Plan </span>
+              }
+
+
+
+            </div> : ""}
 
           {
             count >= 1 && (
@@ -185,9 +301,9 @@ const Sessions = ({ selectedMonth, sessions }) => {
             )
           }
 
-
-
         </div>
+
+        {/* } */}
 
 
         <div className="grid md:grid-cols-2 gap-8 my-4">
@@ -234,6 +350,29 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 </div>
               </div>
             )}
+
+            {/* <div className="bg-[#07001C]/20 border border-zinc-600 p-4 rounded-3xl">
+              <div className="md:flex items-center gap-4 ">
+                <div className="flex md:block justify-center mb-5 md:mb-0">
+                  <img
+                    src={gift_big}
+                    alt="gift-image"
+                    className="w-32 md:w-full"
+                  />
+                </div>
+                <div className="text-center md:text-left space-y-2">
+                  <h1 className="text-2xl font-bold merriweather mt-1 ">
+                    Secret gift
+                  </h1>
+                  <p className="text-[14px]">
+                    The Hypno 4 u team wants to support your relationship with food
+                    and your transformation, so we've prepared a surprise for
+                    you!
+                  </p>
+                </div>
+              </div>
+            </div> */}
+
           </div>
 
           <div>
@@ -293,7 +432,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedSelfItems?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
                           }`}
-                        onClick={() => PhysicalAudioSelectHandler(item)}
+                        onClick={() => AudioSelectHandler(item)}
                       >
                         <FaLock />
                         {item.name}
@@ -342,7 +481,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedEgoItems?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
                           }`}
-                        onClick={() => PhysicalAudioSelectHandler(item)}
+                        onClick={() => AudioSelectHandler(item)}
                       >
                         <FaLock />
                         {item.name}
@@ -399,7 +538,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedBodyItem?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
                           }`}
-                        onClick={() => PhysicalAudioSelectHandler(item)}
+                        onClick={() => AudioSelectHandler(item)}
                       >
                         <FaLock />
                         {item.name}
@@ -454,7 +593,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedMindItem?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
                           }`}
-                        onClick={() => PhysicalAudioSelectHandler(item)}
+                        onClick={() => AudioSelectHandler(item)}
                       >
                         <FaLock />
                         {item.name}
