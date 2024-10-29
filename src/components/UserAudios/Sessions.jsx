@@ -79,7 +79,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
     };
 
     if (listeningTime !== audioDuration && !warningShown) {
-      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping cooooooooooooolllllllllll");
+      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping ");
       setWarningShown(true);
     }
 
@@ -100,6 +100,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
   const counterValue = count * 100;
+
   const maxValue = self?.length + ego?.length + body?.length + miend?.length
 
   const currentSession = sessions.find((session) => session?.id === selectedMonth);
@@ -239,50 +240,57 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   </span>
                 </div>
 
-                <div className='inline-block flex'>
+                {
+                  parseInt(plan) === 365 &&
 
-                  <button onClick={() => { valutFunction(counterValue, "one") }} className={`ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10`}
-                    />
-                  </button>
+                  <div className='inline-block flex'>
 
-                  <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10`}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "one") }} className={`ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10`}
+                      />
+                    </button>
 
-                  <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10`}
+                      />
+                    </button>
 
-                  <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10 `}
+                      />
+                    </button>
 
-                  <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10 `}
+                      />
+                    </button>
+
+                    <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10 `}
+                      />
+                    </button>
 
 
-                </div>
+                  </div>
+
+                }
+
+
               </div>
 
               {
@@ -643,6 +651,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
             </div>
 
           </div>
+
+
         </div>
       </div>
     </div>
