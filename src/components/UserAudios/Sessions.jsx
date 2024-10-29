@@ -79,7 +79,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
     };
 
     if (listeningTime !== audioDuration && !warningShown) {
-      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping.");
+      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping cooooooooooooolllllllllll");
       setWarningShown(true);
     }
 
