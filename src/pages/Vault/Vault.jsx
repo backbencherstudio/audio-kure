@@ -40,6 +40,9 @@ const Vault = () => {
     const counterValue = parseInt(count) * 100;
     const plan = parseFloat(userData?.data?.plan)
 
+    console.log(counterValue);
+
+
 
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
