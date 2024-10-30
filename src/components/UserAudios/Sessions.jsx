@@ -67,8 +67,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
   }, [])
 
-
-
   useEffect(() => {
     const performUpdate = async () => {
       const res = await updateAudioData(updateData);
@@ -78,7 +76,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
     };
 
     if (listeningTime !== audioDuration && !warningShown) {
-      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping ");
+      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping ssssssssssssss");
       setWarningShown(true);
     }
 
