@@ -46,9 +46,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
     } else {    
       api.dispatch(logOut());
     }
-  }
-
-  
+  }    
   return result;
 };
 

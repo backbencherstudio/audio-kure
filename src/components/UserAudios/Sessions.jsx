@@ -27,7 +27,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const currentUser = useSelector(selectCurrentUser);
   const { data: userData, isLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
-  const [toggleCategory, setToggleCategory] = useState(userData?.data?.userType)
+  const [toggleCategory, setToggleCategory] = useState("")
 
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
   const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
@@ -38,6 +38,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const ego = data?.emotional?.ego;
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
+
 
   const array1 = userData?.data?.selectedBodyAudios
   const array2 = userData?.data?.selectedMindAudios
@@ -57,6 +58,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const currentData = new Date();
 
   useEffect(() => {
+    setToggleCategory(userData?.data?.userType)
+  }, [userData?.data])
+
+  useEffect(() => {
     if (token && currentData >= expiresDate) {
       dispatch(logOut());
     }
@@ -73,7 +78,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
     };
 
     if (listeningTime !== audioDuration && !warningShown) {
-      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping.");
+      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping ");
       setWarningShown(true);
     }
 
@@ -94,6 +99,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
   const counterValue = count * 100;
+
   const maxValue = self?.length + ego?.length + body?.length + miend?.length
 
   const currentSession = sessions.find((session) => session?.id === selectedMonth);
@@ -114,8 +120,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
         category: audio.category,
       };
       setUpdatedData(audioData)
-      // const res = await updateAudioData(audioData);
-
     }
   };
 
@@ -169,6 +173,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
   };
 
+
   const finalSelectionFunction = async () => {
     const selectedAudios = {
       email: currentUser?.email,
@@ -206,8 +211,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
 
 
-
-
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
@@ -215,14 +218,19 @@ const Sessions = ({ selectedMonth, sessions }) => {
         {/* {parseInt(plan) === 365 && */}
 
         <div className="heading-div text-3xl font-semibold my-8">
-          Your  cure session for Month {selectedMonth}
+          {
+            parseInt(plan) === 365 &&
+            <p>
+              Your  cure session for Month {selectedMonth} &
+            </p>
+          }
 
           {count ?
             <div className='inline-block ml-2  '>
               <div className='flex justify-between'>
 
                 <div>
-                  <span className=' inline-block ' >& You achieve
+                  <span className=' inline-block ' > You achieve
                   </span>
 
                   <span className='animation-text text-[44px] font-extrabold mx-2' >{counterValue}</span>
@@ -231,50 +239,57 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   </span>
                 </div>
 
-                <div className='inline-block flex'>
+                {
+                  parseInt(plan) === 365 &&
 
-                  <button onClick={() => { valutFunction(counterValue, "one") }} className={`ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                  <div className='inline-block flex'>
 
-                  <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "one") }} className={`ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10`}
+                      />
+                    </button>
 
-                  <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10`}
+                      />
+                    </button>
 
-                  <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10 `}
+                      />
+                    </button>
 
-                  <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
-                  </button>
+                    <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10 `}
+                      />
+                    </button>
+
+                    <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
+                      <img
+                        src={gift_big}
+                        alt="gift-image"
+                        className={`size-10 `}
+                      />
+                    </button>
 
 
-                </div>
+                  </div>
+
+                }
+
+
               </div>
 
               {
@@ -569,12 +584,12 @@ const Sessions = ({ selectedMonth, sessions }) => {
                                 <FaPlay />
                               </div>
                             )}
-
                             {item.name}
                           </button>
                         </div>
                       );
                     })}
+
 
 
                 </div>
@@ -633,7 +648,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
               </div>
             </div>
+
           </div>
+
+
         </div>
       </div>
     </div>
