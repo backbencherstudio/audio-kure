@@ -38,7 +38,6 @@ const CheckoutForm = () => {
     useEffect(() => {
         if (amount > 0) {
             axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
-                // axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
                 .then(res => {                    
                     setClientSecret(res?.data?.data?.clientSecret);
                 })
@@ -47,8 +46,6 @@ const CheckoutForm = () => {
                 });
         }
     }, [amount]);
-
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();

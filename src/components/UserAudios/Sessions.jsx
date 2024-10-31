@@ -27,6 +27,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const currentUser = useSelector(selectCurrentUser);
   const { data: userData, isLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
+  const [logOutUpdate] = authApi.useLogOutUpdateMutation()
   const [toggleCategory, setToggleCategory] = useState("")
 
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
@@ -61,8 +62,14 @@ const Sessions = ({ selectedMonth, sessions }) => {
     setToggleCategory(userData?.data?.userType)
   }, [userData?.data])
 
+
+  const logOutFun = async () => {
+    await logOutUpdate(currentUser?.email)
+  }
+
   useEffect(() => {
     if (token && currentData >= expiresDate) {
+      logOutFun()
       dispatch(logOut());
     }
   }, [])
@@ -219,7 +226,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
           {
             parseInt(plan) === 365 &&
             <p>
-              Your  cure session for Month {selectedMonth} &
+              Your  cure session for Month {selectedMonth} 
             </p>
           }
 
@@ -228,7 +235,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
               <div className='flex justify-between'>
 
                 <div>
-                  <span className=' inline-block ' > You achieve
+                  <span className=' inline-block ' > & You achieve
                   </span>
 
                   <span className='animation-text text-[44px] font-extrabold mx-2' >{counterValue}</span>
@@ -363,28 +370,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 </div>
               </div>
             )}
-
-            {/* <div className="bg-[#07001C]/20 border border-zinc-600 p-4 rounded-3xl">
-              <div className="md:flex items-center gap-4 ">
-                <div className="flex md:block justify-center mb-5 md:mb-0">
-                  <img
-                    src={gift_big}
-                    alt="gift-image"
-                    className="w-32 md:w-full"
-                  />
-                </div>
-                <div className="text-center md:text-left space-y-2">
-                  <h1 className="text-2xl font-bold merriweather mt-1 ">
-                    Secret gift
-                  </h1>
-                  <p className="text-[14px]">
-                    The Hypno 4 u team wants to support your relationship with food
-                    and your transformation, so we've prepared a surprise for
-                    you!
-                  </p>
-                </div>
-              </div>
-            </div> */}
 
           </div>
 

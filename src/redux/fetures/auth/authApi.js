@@ -58,7 +58,18 @@ const authApi = baseApi.injectEndpoints({
           body: { audioData },
         }
       },
-      invalidatesTags: ["audio", "user"], // Invalidate both audio and user tags
+      invalidatesTags: ["audio", "user"], 
+    }),
+
+    logOutUpdate: builder.mutation({
+      query: (email) => {  
+        return {
+          url: "/auth/log-out-update",
+          method: "PATCH",
+          body: { email },
+        }
+      },
+      invalidatesTags: ["audio", "user"], 
     }),
   }),
 });
