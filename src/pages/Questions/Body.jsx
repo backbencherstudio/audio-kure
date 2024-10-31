@@ -17,35 +17,19 @@ const Body = () => {
         </div>
         <div className="mb-4 max-w-[540px] flex-1 flex flex-col h-full gap-3  justify-between">
           <p className="text-2xl font-semibold merriweather">
-            Imagination is more important than knowledge” - Albert Einstein 1929
+            1929, Albert Einstein said: "Imagination is more important than knowledge.
           </p>
           <p className=" text-base">
-            Ever heard the saying{" "}
-            <span className="font-bold p-text">
-              “It’s all in your head?”
-            </span>{" "}
-            or{" "}
-            <span className="font-bold p-text">
-              “Your Gut is your second brain”?
-            </span>
+            24 studies showed self-hypnosis audio recordings are as beneficial for sleep as in-person sessions. - National Library of Medicine
           </p>
           <p className=" text-base">
-            Dr. David Spiegel of Stanford University Research shows that self-hypnosis can be as effective as in-person hypnotherapy.
+            Mayo Clinic supports hypnosis as effective for managing stress and anxiety.
           </p>
           <p className=" text-base t-text">
-            The American Psychological Association recognizes hypnosis as a valuable treatment for issues like sleep improvement and smoking cessation.
+            Stanford University, Dr. David Spiegel "confirms self-hypnosis can be as effective as in-person hypnotherapy.
           </p>
           <p className=" text-base">
-            Mayo Clinic report supports hypnosis use for stress and anxiety relief.
-          </p>
-          <p className=" text-base">
-            A 2018 review of 24 studies highlighted self-hypnosis via audio recordings as beneficial for sleep concerns, similar to in-person sessions.
-          </p>
-          <p className=" text-base">
-            Each month, over 44,000 users start their journey with HYPNO 4 U, successfully rebalancing their mind-body connection by eliminating negative thought patterns and overcoming subconscious barriers
-          </p>
-          <p className=" text-base">
-            "I was amazed at how effective HYPNO 4 U self-hypnosis is!" - Elena, HYPNO 4 U user since 2024.
+            American Psychological Association (APA) supports hypnosis for sleep improvement and smoking cessation.
           </p>
           <Link
             to={"/let's go"}

@@ -26,7 +26,7 @@ const ThirdPage = () => {
           </div>
 
           <p className=" ">
-            Plus, get rewarded and unlock the VAULT, “where all the secrets reside”!
+            Plus, get rewarded and unlock the <span className="font-extrabold">VAULT</span>, “where all the secrets reside”!
           </p>
           <Link
             className="  btnGrad text-center font-medium text-xl lg:py-4 py-3 rounded-xl text-white px-4  "

@@ -182,7 +182,7 @@ const Vault = () => {
                             </div>
 
                             <div className='flex  flex-col  justify-between'>
-                                <div className="p-4 space-y-4 h-1/2">
+                                <div className="p-4 space-y-4 h-[500px] overflow-auto custom-scroll ">
                                     {audioDropdowns.map((dropdown) => (
                                         <div key={dropdown.id} className="relative">
                                             <div

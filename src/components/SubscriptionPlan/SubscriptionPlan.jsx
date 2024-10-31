@@ -293,7 +293,7 @@ const SubscriptionPlan = () => {
                     <img
                       src={gift_big}
                       alt="gift-image"
-                      className="w-32 md:w-full"
+                      className="w-32 md:w-56"
                     />
                   </div>
                   <div className="text-center md:text-left space-y-2">
@@ -301,9 +301,7 @@ const SubscriptionPlan = () => {
                       Secret gift
                     </h1>
                     <p className="text-[14px]">
-                      The Hypno 4 u team wants to support your relationship with food
-                      and your transformation, so we've prepared a surprise for
-                      you!
+                    The HYPNO 4 U team is excited to support your transformation journey, and we have a special surprise just for you!
                     </p>
                   </div>
                 </div>

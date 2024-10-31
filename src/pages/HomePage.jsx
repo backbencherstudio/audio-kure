@@ -70,23 +70,26 @@ function HomePage() {
           </div> */}
         </div>
 
-        <div className="container  mx-auto px-4">
+        <div className="container mx-auto">
           <div className="flex flex-col-reverse lg:flex-row-reverse items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="w-full lg:w-1/2 space-y-6">
-              <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-4xl text-white merriweather font-bold leading-tight">
-                Forget everything about hypnosis and start a life-changing journey with just 5 powerful questions!
+              <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
+                Double the Impact: Just 2 Self-Hypnosis Sessions Equal 8 Traditional Treatments! (Source: VA.gov):
               </h2>
               <div className="space-y-4">
-                <p className="text-sm md:text-base">
-                  These unique questions reveal your brain's thinking patterns, helping us select the best hypnosis techniques for you.
+                <p className="text-sm md:text-base lg:text-xl">
+                  4,000+ Hours of Custom Audio Hypnosis & Meditation
                 </p>
-                <p className="text-sm md:text-base">
-                  Unlock 100+ personalized hypnosis sessions tailored to your personality. Break mental barriers, empower yourself, and restore mind-body harmony with a custom hypnotherapy program.
+                <p className="text-sm md:text-base lg:text-xl">
+                  New Audios Added Continuously
+                </p>
+                <p className="text-sm md:text-base lg:text-xl">
+                5 Simple Questions for Personalization
+                </p>
+                <p className="text-sm md:text-base lg:text-xl">
+                Tailored Audios for Anxiety, Pain, Weight Loss, Confidence, Trauma, Sports, & More
                 </p>
               </div>
-              <p className="text-xl md:text-2xl lg:text-xl xl:text-3xl font-medium xl:mb-6">
-                What is your top priority in life?
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
                 <Link
                   onClick={() => handleAnswerSelect("physical")}
