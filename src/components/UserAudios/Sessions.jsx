@@ -40,6 +40,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
 
+  
+
 
   const array1 = userData?.data?.selectedBodyAudios
   const array2 = userData?.data?.selectedMindAudios
@@ -48,6 +50,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const [warningShown, setWarningShown] = useState(false);
 
   const plan = userData?.data?.plan
+
+  const progressBarCounter = parseInt(plan);
+  const barCounter = progressBarCounter === 7 ? 2 :  progressBarCounter === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
+
 
   if (isLoading) {
     return <p>Loading ...</p>
@@ -104,11 +110,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
   const counterValue = count * 100;
-
   const maxValue = self?.length + ego?.length + body?.length + miend?.length
-
   const currentSession = sessions.find((session) => session?.id === selectedMonth);
-
 
   const handlePhysicalAudioSelect = async (audio) => {
     if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
@@ -128,12 +131,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
   };
 
-
   const handleAudioEnd = () => {
     setCurrentAudio(null);
     setPlayingAudio({ id: null, category: null });
   };
-
 
   const [selectedBodyItem, setSelectedBodyItem] = useState([]);
   const [selectedMindItem, setSelectedMindItem] = useState([]);
@@ -143,20 +144,16 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const totalBodyMindSelections = selectedBodyItem.length + selectedMindItem.length;
   const totalSelfEgoSelections = selectedSelfItems.length + selectedEgoItems.length;
 
-
-
   const AudioSelectHandler = (item) => {
 
     if (parseInt(plan) === 7 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
       toast.error("You Can Select Maximum 2 Content");
       return
     }
-
     if (parseInt(plan) === 30 && (totalBodyMindSelections >= 15 || totalSelfEgoSelections >= 15)) {
       toast.error("You Can Select Maximum 15 Content");
       return
     }
-
     if (item.category === 'body') {
       setSelectedBodyItem((prev) =>
         prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
@@ -214,19 +211,15 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
   };
 
-
-
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
-
-        {/* {parseInt(plan) === 365 && */}
 
         <div className="heading-div text-3xl font-semibold my-8">
           {
             parseInt(plan) === 365 &&
             <p>
-              Your  cure session for Month {selectedMonth} 
+              Your  cure session for Month {selectedMonth}
             </p>
           }
 
@@ -240,7 +233,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                   <span className='animation-text text-[44px] font-extrabold mx-2' >{counterValue}</span>
                   <span className='animation-text text-[44px] font-extrabold'>
-                    <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coin{count === 1 ? "" : "s"}
+                    <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coins
                   </span>
                 </div>
 
@@ -288,29 +281,20 @@ const Sessions = ({ selectedMonth, sessions }) => {
                         className={`size-10 `}
                       />
                     </button>
-
-
                   </div>
-
                 }
-
-
               </div>
-
               {
                 parseInt(plan) !== 365 &&
                 <span className='text-xs ml-2 font-bold '>You can use this coin when you perces Anual Plan </span>
               }
-
-
-
             </div> : ""}
-
           {
             count >= 1 && (
               <ProgressBar
                 className="mt-2"
-                completed={(count / maxValue) * 100}
+                // completed={(count / maxValue) * 100}
+                completed={(count / barCounter) * 100}
                 labelColor="transparent"
                 labelAlignment="center"
                 borderRadius="0px 10px 10px 0px"
@@ -322,12 +306,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
           }
 
         </div>
-
-        {/* } */}
-
-
         <div className="grid md:grid-cols-2 gap-8 my-4">
-
           <div className="flex flex-col gap-4">
             {currentSession && (
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
@@ -361,9 +340,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   ) : (
                     <div
                       className="flex gap-2 items-center bg-slate-400 p-2 rounded-3xl justify-center w-full"
-                    // onClick={() => handleAudioSelect(currentSession.audios[0])}
                     >
-                      {/* <FaPlay /> */}
                       Play The Audios
                     </div>
                   )}
@@ -388,9 +365,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   <div className={`AudioPlayButton text-center rounded-md w-full ${toggleCategory === "emotional" ? "text-black hidden" : "text-white block"} font-bold text-[20px]`}>Physical</div>
                 </div>
               }
-
-              {/* ${hiddedButton && "hidden"} */}
-
               {
                 parseInt(userData?.data?.plan) !== 365 && <div>
                   {hiddedButton !== true && (
