@@ -226,7 +226,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
           {
             parseInt(plan) === 365 &&
             <p>
-              Your  cure session for Monthhhhhhh {selectedMonth} 
+              Your  cure session for Month {selectedMonth} 
             </p>
           }
 
