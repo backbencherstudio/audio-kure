@@ -5,7 +5,6 @@ import { logOut, setUser } from "../fetures/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://kure-server.vercel.app/api/v1",
-  // baseUrl: "https://kure-server.vercel.app/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -46,9 +45,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
     } else {    
       api.dispatch(logOut());
     }
-  }
-
-  
+  }    
   return result;
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { IoMusicalNotes, IoPause } from "react-icons/io5";
 import Logo from '../../shared/Logo';
 import hypno from './../../assets/hypno.jpg';
@@ -17,6 +17,7 @@ import { logOut, selectCurrentUser } from '../../redux/fetures/auth/authSlice';
 import authApi from '../../redux/fetures/auth/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
+import data from "../../../public/sessions.json";
 
 const Vault = () => {
     const navigate = useNavigate()
@@ -30,9 +31,18 @@ const Vault = () => {
     const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
     const mindAudioId = userData?.data?.mindId === "end" ? "end" : parseInt(userData?.data?.mindId);
 
+    const self = data?.emotional?.self;
+    const ego = data?.emotional?.ego;
+    const body = data?.physical?.body;
+    const miend = data?.physical?.mind;
+
     const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
-    const counterValue = count * 100;
-    const plan = userData?.data?.plan
+    const counterValue = parseInt(count) * 100;
+    const plan = parseFloat(userData?.data?.plan)
+
+    console.log(counterValue);
+
+
 
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
@@ -115,12 +125,18 @@ const Vault = () => {
     };
 
     const handleTimeUpdate = () => {
-        setCurrentTime(audioRef.current.currentTime);
+        // setCurrentTime(audioRef.current.currentTime);
     };
 
     const handleDurationChange = () => {
-        setDuration(audioRef.current.duration);
+        // setDuration(audioRef.current.duration);
     };
+
+    if (!counterValue) {
+        return <div className='w-full h-[100vh] flex justify-center items-center ' >
+            <p className='text-black text-center text-2xl font-semibold ' >Loading...</p>
+        </div>
+    }
 
     if (counterValue < 1000 || plan !== 365) {
         navigate("/login")

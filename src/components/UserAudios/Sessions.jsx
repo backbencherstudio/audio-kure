@@ -59,7 +59,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   useEffect(() => {
     setToggleCategory(userData?.data?.userType)
-
   }, [userData?.data])
 
   useEffect(() => {
@@ -67,8 +66,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
       dispatch(logOut());
     }
   }, [])
-
-
 
   useEffect(() => {
     const performUpdate = async () => {
