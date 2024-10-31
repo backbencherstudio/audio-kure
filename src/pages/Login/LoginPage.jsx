@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -17,7 +18,7 @@ function LoginPage() {
 
   const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
-  const [login] = authApi.useLoginMutation();
+  const [login, {isLoading}] = authApi.useLoginMutation();
   const dispatch = useAppDispatch();
 
   const currentDate = new Date();
@@ -28,6 +29,7 @@ function LoginPage() {
   };
 
   const onSubmit = async (data) => {
+    
     setErrorMsg(null);
 
     if (!data.email || !data.password) {
@@ -64,6 +66,7 @@ function LoginPage() {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
     }
+    
   };
 
   return (
@@ -133,13 +136,15 @@ function LoginPage() {
                 disabled={isSubmitting}
                 className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
               >
-                {isSubmitting ? (
+                {isSubmitting || isLoading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   "Log in"
                 )}
               </button>
+
             </form>
+
           </div>
         </div>
       </div>

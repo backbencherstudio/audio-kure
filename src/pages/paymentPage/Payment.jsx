@@ -33,8 +33,7 @@ const Payment = () => {
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/payment",
-        // "http://localhost:5000/api/v1/payment",
+        "https://kure-server.vercel.app/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -65,8 +64,7 @@ const Payment = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/v1/payment/execute-payment",
-        // "http://localhost:5000/api/v1/payment/execute-payment",
+        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
@@ -84,9 +82,9 @@ const Payment = () => {
   useEffect(() => {
     if (paymentMethod === "paypal") {
       setIsPayPalVisible(true);
-      setIsCreditVisible(false);  // Hide Credit section
+      setIsCreditVisible(false); 
     } else if (paymentMethod === "credit") {
-      setIsPayPalVisible(false);  // Hide PayPal section
+      setIsPayPalVisible(false); 
       setIsCreditVisible(true);
     } else {
       setIsPayPalVisible(false);
@@ -96,7 +94,7 @@ const Payment = () => {
 
   return (
     <div className=" min-h-[95vh] container mx-auto">
-      <div className="">     {/* <img src={logo} alt="logo" className="w-16" /> */}
+      <div className="">    
         <Logo />
       </div>
       <div className="backdrop-blur-sm bg-black/10  border border-white/20 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
@@ -164,8 +162,12 @@ const Payment = () => {
                   <PayPalScriptProvider
                     options={{
                       "client-id":
-                        "AeMnBMlrboT2yZ77Ny1Zuwm-UnhJeeMzvE1D1ana1ZetUAzPfo7C-Px41iR4FijH5SN1FHEYrGokg3G2",
+                        "AUHCLLlrN0fUteHTIYiBX7ZOoduVvF0mp4QSDUQOf_m2GohS_kVr6z8CbTJgOMnGNyMAiLsx_EWf8l5C",
                     }}
+                    // options={{
+                    //   "client-id":
+                    //     "AeMnBMlrboT2yZ77Ny1Zuwm-UnhJeeMzvE1D1ana1ZetUAzPfo7C-Px41iR4FijH5SN1FHEYrGokg3G2",
+                    // }}
                   >
                     <PayPalButtonComponent
                       amount={amount}
