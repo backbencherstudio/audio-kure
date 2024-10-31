@@ -157,12 +157,12 @@ img {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background-color: #cd03f583;
+  background-color: #38a08683;
   border-radius: 10px;
 }
 
 .audio-player-container:hover {
-  box-shadow: 0 4px 20px rgba(0, 128, 128, 0.6);
+  box-shadow: 0 4px 20px rgba(49, 122, 122, 0.6);
   transition: box-shadow 0.3s ease;
 }
 .audio-player-container audio {
