@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../fetures/auth/authSlice";
 
-// Client secret not ready. Please try again.
-
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://kure-server.vercel.app/api/v1",
   credentials: "include",

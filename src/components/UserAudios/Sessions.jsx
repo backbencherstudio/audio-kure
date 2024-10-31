@@ -110,7 +110,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
   const counterValue = count * 100;
-  const maxValue = self?.length + ego?.length + body?.length + miend?.length
+  // const maxValue = self?.length + ego?.length + body?.length + miend?.length
   const currentSession = sessions.find((session) => session?.id === selectedMonth);
 
   const handlePhysicalAudioSelect = async (audio) => {
