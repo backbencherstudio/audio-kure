@@ -18,12 +18,14 @@ import authApi from '../../redux/fetures/auth/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import data from "../../../public/sessions.json";
+import { IoIosMusicalNotes } from "react-icons/io";
 
 const Vault = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
+    const [openDropdown, setOpenDropdown] = useState(1);
 
     // Get current user and data
     const currentUser = useSelector(selectCurrentUser);
@@ -53,7 +55,7 @@ const Vault = () => {
         {
             id: 1,
             title: "Beginner Level",
-            threshold: 100,
+            threshold: 1000,
             audios: [
                 { id: 1, title: "Summer Breeze", audioSrc: audio1 },
                 { id: 2, title: "Midnight Jazz", audioSrc: audio2 }
@@ -62,7 +64,7 @@ const Vault = () => {
         {
             id: 2,
             title: "Intermediate Level",
-            threshold: 5000,
+            threshold: 2000,
             audios: [
                 { id: 3, title: "Ocean Waves", audioSrc: audio3 },
                 { id: 4, title: "City Lights", audioSrc: audio4 }
@@ -71,7 +73,7 @@ const Vault = () => {
         {
             id: 3,
             title: "Advanced Level",
-            threshold: 30000,
+            threshold: 8000,
             audios: [
                 { id: 5, title: "Mountain Echo", audioSrc: audio5 },
                 { id: 6, title: "Desert Wind", audioSrc: audio6 }
@@ -80,7 +82,7 @@ const Vault = () => {
         {
             id: 4,
             title: "Expert Level",
-            threshold: 40000,
+            threshold: 13000,
             audios: [
                 { id: 7, title: "Forest Rain", audioSrc: audio7 },
                 { id: 8, title: "Starry Night", audioSrc: audio8 }
@@ -89,7 +91,7 @@ const Vault = () => {
         {
             id: 5,
             title: "Master Level",
-            threshold: 500000,
+            threshold: 200000,
             audios: [
                 { id: 9, title: "Morning Sun", audioSrc: audio9 },
                 { id: 10, title: "Evening Calm", audioSrc: audio10 },
@@ -136,7 +138,9 @@ const Vault = () => {
         dispatch(logOut());
         return null;
     }
-
+    const toggleDropdown = (id) => {
+        setOpenDropdown((prev) => (prev === id ? null : id));
+    }
     return (
         <div>
             <div className="area">
@@ -157,7 +161,7 @@ const Vault = () => {
                 <div className="mb-6">
                     <Logo />
                 </div>
-                <div className="flex flex-col lg:flex-row gap-6 rounded-lg overflow-hidden backdrop-blur-md backdrop-brightness-200">
+                <div className="flex flex-col lg:flex-row gap-6 rounded-lg overflow-hidden backdrop-blur-md bg-white/20">
                     <div className="lg:w-1/2">
                         <div className="relative aspect-square lg:aspect-auto lg:h-full">
                             <img
@@ -172,49 +176,55 @@ const Vault = () => {
                             <div className="border-b border-zinc-700 p-4">
                                 <h3 className="text-xl font-semibold flex items-center text-zinc-100">
                                     <IoMusicalNotes className="mr-2 text-yellow-500 text-2xl" />
-                                    Spatial Audio Files
+                                    Special Audio Files
                                     <span className="ml-auto text-sm">Progress: {counterValue}</span>
                                 </h3>
                             </div>
 
-                            <div className="p-4 space-y-4">
-                                {audioDropdowns.map((dropdown) => (
-                                    <div key={dropdown.id} className="relative">
-                                        <select
-                                            className={`w-full p-3 rounded-lg bg-zinc-700 text-zinc-100 appearance-none
-                                                ${counterValue >= dropdown.threshold
-                                                    ? 'hover:bg-zinc-600 cursor-pointer'
-                                                    : 'opacity-50 cursor-not-allowed'}`}
-                                            onChange={(e) => handleAudioSelect(e, dropdown)}
-                                            disabled={counterValue < dropdown.threshold}
-                                            value={playingId && dropdown.audios.some(a => a.id === playingId) ? playingId : ""}
-                                        >
-                                            <option value="">
-                                                {counterValue >= dropdown.threshold
-                                                    ? `${dropdown.title} - Select Audio`
-                                                    : `${dropdown.title} (Unlocks at ${dropdown.threshold})`}
-                                            </option>
-                                            {dropdown.audios.map((audio) => (
-                                                <option key={audio.id} value={audio.id}>
-                                                    {audio.title} {playingId === audio.id ? '(Playing)' : ''}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {playingId && dropdown.audios.some(a => a.id === playingId) && (
-                                            <div className="absolute right-10 top-1/2 transform -translate-y-1/2">
-                                                <IoPause className="text-blue-400 text-xl" />
+                            <div className='flex  flex-col  justify-between'>
+                                <div className="p-4 space-y-4 h-1/2">
+                                    {audioDropdowns.map((dropdown) => (
+                                        <div key={dropdown.id} className="relative">
+                                            <div
+                                                className={`w-full p-6 flex items-center justify-between rounded-lg bg-zinc-700 text-zinc-100 cursor-pointer ${counterValue >= dropdown.threshold ? 'hover:bg-zinc-600' : 'opacity-50 cursor-'}`}
+                                                onClick={() => counterValue >= dropdown.threshold && toggleDropdown(dropdown.id)}
+                                            >
+                                                <span>
+                                                    {counterValue >= dropdown.threshold
+                                                        ? `${dropdown.title} - Select Audio`
+                                                        : `${dropdown.title} (Unlocks at ${dropdown.threshold})`}
+                                                </span>
+                                                {/* Playing Icon */}
+                                                {playingId && dropdown.audios.some(a => a.id === playingId) && (
+                                                    <div>
+                                                        <IoPause className="text-teal-400 text-xl" />
+                                                    </div>
+                                                )}
                                             </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
 
-                            <audio
-                                ref={audioRef}
-                                controls
-                                className="w-full max-w-lg m-4 mx-auto bg-gray-200 rounded-lg shadow-md"
-                                controlsList="nodownload"
-                            />
+                                            {openDropdown === dropdown.id && (
+                                                <div className="mt-2 bg-zinc-800 p-4 rounded-lg space-y-2">
+                                                    {dropdown.audios.map((audio) => (
+                                                        <button
+                                                            key={audio.id}
+                                                            onClick={() => handleAudioSelect({ target: { value: audio.id } }, dropdown)}
+                                                            className={`flex items-center gap-5 w-full text-left p-2 rounded transition-colors duration-200 ${playingId === audio.id ? 'bg-teal-500 text-white' : 'bg-zinc-700 text-zinc-100 hover:bg-zinc-600'}`}
+                                                        ><IoIosMusicalNotes />
+                                                            {audio.title} {playingId === audio.id ? '(Playing)' : ''}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                <audio
+                                    ref={audioRef}
+                                    controls
+                                    className="w-full max-w-lg m-4 mx-auto"
+                                    controlsList="nodownload"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

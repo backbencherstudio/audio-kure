@@ -160,3 +160,12 @@ img {
   background-color: #cd03f583;
   border-radius: 10px;
 }
+
+.audio-player-container:hover {
+  box-shadow: 0 4px 20px rgba(0, 128, 128, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+.audio-player-container audio {
+  background-color: #374151; /* Dark gray */
+  color: #ffffff; /* White text */
+}
