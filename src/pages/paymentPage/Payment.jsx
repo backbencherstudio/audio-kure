@@ -28,12 +28,13 @@ const Payment = () => {
   }, [])
 
   const amount = parseFloat(planData?.parsedPlan?.price);
+  const duration = planData?.parsedPlan?.duration;
 
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment",
-        // "https://kure-server.vercel.app/api/v1/payment",
+        "http://localhost:5000/api/v1/payment",
+        // "http://localhost:5000/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -64,8 +65,8 @@ const Payment = () => {
 
     try {
       await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
-        // "https://kure-server.vercel.app/api/v1/payment/execute-payment",
+        "http://localhost:5000/api/v1/payment/execute-payment",
+        // "http://localhost:5000/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
@@ -113,8 +114,8 @@ const Payment = () => {
                 />
               </div>
               <div className="space-y-2">
-                <h3 className="text-sm font-medium">Annual plan</h3>
-                <p className="text-xs text-green-300 text-center">{`${amount === 994 ? '-' : 'Discount 49.7%'}`}</p>
+                <h3 className="text-sm font-medium">{duration}</h3>
+                <p className="text-xs text-green-300 text-center">{`${amount === 994 && 149.99 && 99.98 ? '-' : 'Discount 50%'}`}</p>
               </div>
             </div>
             {/* Price */}

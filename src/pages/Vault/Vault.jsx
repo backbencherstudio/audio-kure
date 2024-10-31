@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { IoMusicalNotes, IoPause } from "react-icons/io5";
 import Logo from '../../shared/Logo';
 import hypno from './../../assets/hypno.jpg';
@@ -12,8 +12,38 @@ import audio7 from './../../assets/audios/audio7.mp3';
 import audio8 from './../../assets/audios/audio8.mp3';
 import audio9 from './../../assets/audios/audio9.mp3';
 import audio10 from './../../assets/audios/audio10.mp3';
+import { useSelector } from 'react-redux';
+import { logOut, selectCurrentUser } from '../../redux/fetures/auth/authSlice';
+import authApi from '../../redux/fetures/auth/authApi';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/hooks';
+import data from "../../../public/sessions.json";
 
 const Vault = () => {
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+
+    const currentUser = useSelector(selectCurrentUser);
+    const { data: userData } = authApi.useGetSingleUserQuery(currentUser?.email);
+
+    const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
+    const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
+    const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
+    const mindAudioId = userData?.data?.mindId === "end" ? "end" : parseInt(userData?.data?.mindId);
+
+    const self = data?.emotional?.self;
+    const ego = data?.emotional?.ego;
+    const body = data?.physical?.body;
+    const miend = data?.physical?.mind;
+
+    const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
+    const counterValue = parseInt(count) * 100;
+    const plan = parseFloat(userData?.data?.plan)
+
+    console.log(counterValue);
+
+
+
     const [playingId, setPlayingId] = useState(null);
     const audioRef = useRef(null);
     const audioFiles = [
@@ -95,31 +125,41 @@ const Vault = () => {
     };
 
     const handleTimeUpdate = () => {
-        setCurrentTime(audioRef.current.currentTime);
+        // setCurrentTime(audioRef.current.currentTime);
     };
 
     const handleDurationChange = () => {
-        setDuration(audioRef.current.duration);
+        // setDuration(audioRef.current.duration);
     };
 
-    
+    if (!counterValue) {
+        return <div className='w-full h-[100vh] flex justify-center items-center ' >
+            <p className='text-black text-center text-2xl font-semibold ' >Loading...</p>
+        </div>
+    }
+
+    if (counterValue < 1000 || plan !== 365) {
+        navigate("/login")
+        dispatch(logOut());
+    }
+
 
     return (
         <div>
-             <div className="area"> {/* Fixed area covering full viewport */}
-        <ul className="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </div>
+            <div className="area"> {/* Fixed area covering full viewport */}
+                <ul className="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
             <div className="max-w-7xl mx-auto">
                 <div className="mb-6 sm:mb-8">
                     <Logo />
@@ -139,7 +179,7 @@ const Vault = () => {
                             <div className="border-b border-zinc-700">
                                 <h3 className="text-lg sm:text-xl font-semibold p-4 flex items-center text-zinc-100">
                                     <IoMusicalNotes className="mr-2 text-yellow-500 text-xl sm:text-2xl" />
-                                    Spatial Audio Files
+                                    Spatial Audio Files  {counterValue}
                                 </h3>
                             </div>
 
@@ -165,7 +205,7 @@ const Vault = () => {
                                                     {audio.title}
                                                 </h4>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 ))}

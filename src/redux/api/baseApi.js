@@ -1,12 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../fetures/auth/authSlice";
-import { toast } from "react-toastify";
 
 // Client secret not ready. Please try again.
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://kure-server.vercel.app/api/v1",
-  // baseUrl: "https://kure-server.vercel.app/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -21,10 +19,10 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
     
   if (result?.error?.status === 403) {
-    toast.error(`${result?.error?.data.message}`);
+    // toast.error(`${result?.error?.data.message}`);
   }
   if (result?.error?.status === 404) {
-    toast.error(`${result?.error?.data.message}`);
+    // toast.error(`${result?.error?.data.message}`);
   }
 
 
@@ -47,9 +45,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
     } else {    
       api.dispatch(logOut());
     }
-  }
-
-  
+  }    
   return result;
 };
 
