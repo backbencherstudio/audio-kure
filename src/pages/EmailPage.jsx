@@ -57,8 +57,7 @@ function EmailPage() {
                 Unlock access to a personalized program by entering your email
               </p>
               <p className="text-[#5a5d64]">
-                Join the Healer community who have hit their target weight, with
-                a success rate of over 90%.
+              Join the HYPNO 4 U community of achievers who have reached their goals in life, boasting a success rate of over 90%.
               </p>
               <input
                 className="w-full focus:bg-[#6e363652] max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#EEB5B4] placeholder:text-white"
