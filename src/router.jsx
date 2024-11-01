@@ -27,6 +27,7 @@ import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
 import Vault from "./pages/Vault/Vault";
 import Weight from "./pages/Weight/Weight";
+import WithdrawForm from "./pages/WithdrawForm/WithdrawForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -158,6 +159,10 @@ const router = createBrowserRouter([
         <Vault />
       </ProtectedRoute>
   },
+  {
+    path : "/withdrawForm",
+    element : <WithdrawForm/>
+  }
 ]);
 
 export default router;

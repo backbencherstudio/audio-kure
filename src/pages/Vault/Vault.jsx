@@ -64,7 +64,7 @@ const Vault = () => {
         {
             id: 2,
             title: "Intermediate Level",
-            threshold: 2000,
+            threshold: 3000,
             audios: [
                 { id: 3, title: "Ocean Waves", audioSrc: audio3 },
                 { id: 4, title: "City Lights", audioSrc: audio4 }

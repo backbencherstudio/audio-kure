@@ -33,7 +33,7 @@ const Payment = () => {
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment",
+        "http://localhost:5000/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -45,7 +45,6 @@ const Payment = () => {
   const handleApproveOrder = async (data) => {
 
     if (await data?.facilitatorAccessToken) {
-
       const persisData = {
         plan: planData?.parsedPlan.plan,
         price: planData?.parsedPlan.price,
@@ -59,12 +58,10 @@ const Payment = () => {
         navigate("/daily-audios")
       }
       toast.success("Payment successful");
-
     }
-
     try {
       await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
+        "http://localhost:5000/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
@@ -164,10 +161,6 @@ const Payment = () => {
                       "client-id":
                         "AUHCLLlrN0fUteHTIYiBX7ZOoduVvF0mp4QSDUQOf_m2GohS_kVr6z8CbTJgOMnGNyMAiLsx_EWf8l5C",
                     }}
-                    // options={{
-                    //   "client-id":
-                    //     "AeMnBMlrboT2yZ77Ny1Zuwm-UnhJeeMzvE1D1ana1ZetUAzPfo7C-Px41iR4FijH5SN1FHEYrGokg3G2",
-                    // }}
                   >
                     <PayPalButtonComponent
                       amount={amount}
