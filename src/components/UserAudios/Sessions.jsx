@@ -40,7 +40,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
 
-  
+
 
 
   const array1 = userData?.data?.selectedBodyAudios
@@ -52,7 +52,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const plan = userData?.data?.plan
 
   const progressBarCounter = parseInt(plan);
-  const barCounter = progressBarCounter === 7 ? 2 :  progressBarCounter === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
+  const barCounter = progressBarCounter === 7 ? 2 : progressBarCounter === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
 
 
   if (isLoading) {
@@ -212,27 +212,27 @@ const Sessions = ({ selectedMonth, sessions }) => {
   };
 
   return (
-    <div className="session-main-dev border-t mt-5 border-[#2f2861]">
-      <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8">
+    <div className="session-main-dev border-t mt-5 border-[#2f2861] ">
+      <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0 ">
 
-        <div className="heading-div text-3xl font-semibold my-8">
+        <div className="heading-div text-3xl  font-semibold my-8">
           {
             parseInt(plan) === 365 &&
-            <p>
+            <p className='text-xl md:text-3xl' >
               Your  cure session for Month {selectedMonth}
             </p>
           }
 
           {count ?
-            <div className='inline-block ml-2  '>
+            <div className='inline-block'>
               <div className='flex justify-between'>
 
                 <div>
-                  <span className=' inline-block ' > & You achieve
+                  <span className=' inline-block text-xl md:text-3xl ' > & You achieve
                   </span>
 
-                  <span className='animation-text text-[44px] font-extrabold mx-2' >{counterValue}</span>
-                  <span className='animation-text text-[44px] font-extrabold'>
+                  <span className='animation-text md:text-[44px] font-extrabold' >{counterValue}</span>
+                  <span className='animation-text md:text-[44px] font-extrabold'>
                     <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coins
                   </span>
                 </div>
@@ -240,9 +240,9 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 {
                   parseInt(plan) === 365 &&
 
-                  <div className='inline-block flex'>
+                  <div className='inline-block flex '>
 
-                    <button onClick={() => { valutFunction(counterValue, "one") }} className={`ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                    <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
                       <img
                         src={gift_big}
                         alt="gift-image"
@@ -289,11 +289,11 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 <span className='text-xs ml-2 font-bold '>You can use this coin when you perces Anual Plan </span>
               }
             </div> : ""}
+
           {
             count >= 1 && (
               <ProgressBar
                 className="mt-2"
-                // completed={(count / maxValue) * 100}
                 completed={(count / barCounter) * 100}
                 labelColor="transparent"
                 labelAlignment="center"
@@ -306,8 +306,13 @@ const Sessions = ({ selectedMonth, sessions }) => {
           }
 
         </div>
-        <div className="grid md:grid-cols-2 gap-8 my-4">
-          <div className="flex flex-col gap-4">
+
+
+
+        <div className="grid xl:grid-cols-2 gap-8 my-4">
+
+          <div className="flex flex-col gap-4 md:w-[70%] xl:w-[100%] mx-auto ">
+
             {currentSession && (
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
                 <img
@@ -433,7 +438,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
                               </div>
                             )}
 
-                            {item.name}
+                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
+                            <span className='hidden md:block' >{item.name}</span>
                           </button>
                         </div>
                       );
@@ -483,7 +489,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
                               </div>
                             )}
 
-                            {item.name}
+                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
+                            <span className='hidden md:block' >{item.name}</span>
                           </button>
                         </div>
                       );
@@ -496,7 +503,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
             </div>
 
             {/* ====================================================  physical ========================================= */}
-            <div className={`grid grid-cols-2 gap-10 ${toggleCategory === "emotional" ? "hidden" : "block"} `}>
+            <div className={`grid grid-cols-2 gap-2 md:gap-10 ${toggleCategory === "emotional" ? "hidden" : "block"} `}>
               {/* <div className={`grid grid-cols-2 gap-10 `}> */}
 
               {/* body Section */}
@@ -541,7 +548,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
                                 <FaPlay />
                               </div>
                             )}
-                            {item.name}
+                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
+                            <span className='hidden md:block' >{item.name}</span>
                           </button>
                         </div>
                       );
@@ -596,7 +604,9 @@ const Sessions = ({ selectedMonth, sessions }) => {
                               </div>
                             )}
 
-                            {item.name}
+                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
+                            <span className='hidden md:block' >{item.name}</span>
+
                           </button>
                         </div>
                       );

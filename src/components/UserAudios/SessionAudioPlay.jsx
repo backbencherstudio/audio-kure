@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import  { useState } from 'react';
 import playButton from '../../assets/images/play_button.png';
 

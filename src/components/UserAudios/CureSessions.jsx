@@ -133,10 +133,10 @@ const CureSessions = ({ currentUser }) => {
   const calculatedMonths = monthsData.slice(0, -1);
   
   return (
-    <div className={`${user === false && 'cursor-not-allowed opacity-50'}`}>
+    <div className={`${user === false && 'cursor-not-allowed opacity-50'} lg:mx-4`}>
       <div className='max-w-7xl mx-4 md:mx-auto'>
         <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser?.name}!</div>
-        <p className='text-[#f1f1f3] my-2 md:my-4'>You are deeply capable of reaching 199 lb</p>
+        <p className='text-[#f1f1f3] my-2 md:my-4'>You are enough, go Heal!.</p>
         {calculatedMonths?.length === 12 && (
           <Swiper
             spaceBetween={20}
