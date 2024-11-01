@@ -249,38 +249,58 @@ const SubscriptionPlan = () => {
           </div>
           <div className="md:w-1/2 flex flex-col justify-between">
 
-            <ul className="space-y-5">
+            <ul className="space-y-2">
               <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
                 All plans include:
               </h2>
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Digital
-                app created by experts in hypnosis, neuroscience and food
-                addiction
+                Extensive Audio Library: 4,000+ hours of expert hypnosis sessions across various topics
               </li>
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
-                Introduction to hypnosis sessions
+                Goal-Oriented Programs: Customized paths for goals like weight loss, stress relief, and better sleep
               </li>
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
-                Personalized daily bedtime hypnotherapy sessions
+                Free Trial: Try HYPNO 4 U risk-free
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Special
-                21-day program for accelerated weight loss
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Personalized Onboarding: Guided platform tour to maximize every feature
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Full
-                24/7 Client support
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Exclusive New Content: Early access to innovative Quantum Medical HypnosisTM sessions
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Privacy
-                and security guarantee
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Flexible Subscription Options: Affordable plans with easy cancellation
               </li>
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
-                Progress tracking
+                Expertly Crafted Sessions: Developed by a Doctor in hypnosis, neuroscience, and Quantum Medicine
+              </li>
+              <li className="flex items-center text-base gap-2">
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                Introductory Hypnosis: Smooth, guided start
+              </li>
+              <li className="flex items-center text-base gap-2">
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                Daily Bedtime Hypnotherapy: Personalized sessions for nightly relaxation
+              </li>
+              <li className="flex items-center text-base gap-2">
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                Constant Content Updates: Regularly refreshed audio hypnosis and meditations
+              </li>
+              <li className="flex items-center text-base gap-2">
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                24/7 Support: Always-on client assistance
+              </li>
+              <li className="flex items-center text-base gap-2">
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                Privacy & Security: Guaranteed confidentiality
+              </li>
+              <li className="flex items-center text-base gap-2">
+                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                Milestone Badges ACCESS THE VAULT: Earn rewards as you reach achievements
               </li>
             </ul>
             <div>
@@ -293,7 +313,7 @@ const SubscriptionPlan = () => {
                     <img
                       src={gift_big}
                       alt="gift-image"
-                      className="w-32 md:w-56"
+                      className="w-28 "
                     />
                   </div>
                   <div className="text-center md:text-left space-y-2">
