@@ -33,7 +33,7 @@ const Payment = () => {
   const handleCreateOrder = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/payment",
+        "https://kure-server.vercel.app/api/v1/payment",
         { amount }
       );
       return data.forwardLink;
@@ -61,7 +61,7 @@ const Payment = () => {
     }
     try {
       await axios.post(
-        "http://localhost:5000/api/v1/payment/execute-payment",
+        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,

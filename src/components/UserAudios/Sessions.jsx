@@ -48,8 +48,8 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const plan = userData?.data?.plan
 
-  const progressBarCounter = parseInt(plan);
-  const barCounter = progressBarCounter === 7 ? 2 : progressBarCounter === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
+  const planNumber = parseInt(plan);
+  const barCounter = planNumber === 7 ? 2 : planNumber === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
 
 
   if (isLoading) {
@@ -225,7 +225,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
               <div className='flex justify-between'>
 
                 <div>
-                  <span className=' inline-block text-xl md:text-3xl ' > & You achieve
+                  <span className=' inline-block text-xl md:text-3xl ' >  You achieve
                   </span>
 
                   <span className='animation-text md:text-[44px] font-extrabold' >{counterValue}</span>
@@ -382,7 +382,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                           </button>
                         ) : (
                           <h2 className="AudioPlayButton text-center rounded-md w-full mt-5">
-                            At First Select Your Audio
+                            Initially, select maximum of <span className='text-xl font-bold text-red-500 ' >{planNumber === 7 ? 2 : 15}</span> audios from each side
                           </h2>
                         )}
                     </div>
