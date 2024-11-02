@@ -18,6 +18,7 @@ import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 import { verifyToken } from "../utils/verifyToken";
 import { useEffect } from "react";
 import heroImage from './../assets/hero.jpg'
+import BackgroundMusic from "../components/BackgroundMusic/BackgroundMusic";
 function HomePage() {
   // const currentUser = useSelector(selectCurrentUser);
   // const navigate = useNavigate();
@@ -52,6 +53,7 @@ function HomePage() {
 
   return (
     <div>
+      <BackgroundMusic/>
       <div className="container z-50 mx-auto bg-transparent ">
         <div className="  flex  justify-between items-center">
           <Logo />
