@@ -40,9 +40,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
 
-
-
-
   const array1 = userData?.data?.selectedBodyAudios
   const array2 = userData?.data?.selectedMindAudios
   const array3 = userData?.data?.selectedEgoAudios
@@ -449,7 +446,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
               </div>
 
-              {/* Ego Section */}
+              {/*================================== Ego Section===================================== */}
               <div>
                 <h2 className='font-semibold mb-1 '>Ego ...</h2>
                 <div>
@@ -504,7 +501,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
             {/* ====================================================  physical ========================================= */}
             <div className={`grid grid-cols-2 gap-2 md:gap-10 ${toggleCategory === "emotional" ? "hidden" : "block"} `}>
-              {/* <div className={`grid grid-cols-2 gap-10 `}> */}
 
               {/* body Section */}
               <div>
@@ -615,10 +611,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
               </div>
             </div>
-
           </div>
-
-
         </div>
       </div>
     </div>
