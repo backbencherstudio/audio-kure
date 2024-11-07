@@ -30,7 +30,7 @@ const CheckoutForm = () => {
         const userType = localStorage.getItem("userType")
         setPlanData({ parsedPlan, userType })
     }, [])
-  
+
     const amount = parseFloat(planData?.parsedPlan?.price);
 
 
@@ -38,7 +38,9 @@ const CheckoutForm = () => {
     useEffect(() => {
         if (amount > 0) {
             axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
-                .then(res => {                    
+                .then(res => {
+                    console.log(42, res?.data);
+
                     setClientSecret(res?.data?.data?.clientSecret);
                 })
                 .catch(error => {
@@ -78,6 +80,8 @@ const CheckoutForm = () => {
         if (error) {
             setError(error.message);
         } else if (paymentIntent.status === 'succeeded') {
+            console.log({ paymentIntent });
+
             if (paymentIntent?.id) {
                 const persisData = {
                     plan: planData?.parsedPlan.plan,
@@ -113,7 +117,6 @@ const CheckoutForm = () => {
         },
     };
 
-    // Error handling for Stripe input fields
     const handleCardChange = (event) => {
         if (event.error) {
             setCardError(event.error.message);

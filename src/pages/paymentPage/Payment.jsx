@@ -196,12 +196,16 @@ const Payment = () => {
                 </div>
               </label>
 
+
               {paymentMethod === "credit" && (
                 <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isCreditVisible ? "h-[450px]" : "h-0"
                   } mt-4 p-4 rounded-md`}>
                   <StripeButtonComponent />
                 </div>
               )}
+
+
+
             </div>
           </div>
         </div>

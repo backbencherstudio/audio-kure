@@ -223,12 +223,11 @@ const Sessions = ({ selectedMonth, sessions }) => {
           {count ?
             <div className='inline-block'>
               <div className='flex justify-between'>
-
                 <div>
                   <span className=' inline-block text-xl md:text-3xl ' >  You achieve
                   </span>
 
-                  <span className='animation-text md:text-[44px] font-extrabold' >{counterValue}</span>
+                  <span className='animation-text md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
                   <span className='animation-text md:text-[44px] font-extrabold'>
                     <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coins
                   </span>
@@ -236,7 +235,6 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                 {
                   parseInt(plan) === 365 &&
-
                   <div className='inline-block flex '>
 
                     <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
@@ -283,7 +281,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
               </div>
               {
                 parseInt(plan) !== 365 &&
-                <span className='text-xs ml-2 font-bold '>You can use this coin when you perces Anual Plan </span>
+                <span className='text-xs ml-0 font-bold '>You can use this coin when you purchaes Anual Plan </span>
               }
             </div> : ""}
 
@@ -436,7 +434,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                             )}
 
                             <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name}</span>
+                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
                           </button>
                         </div>
                       );
@@ -487,7 +485,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                             )}
 
                             <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name}</span>
+                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
                           </button>
                         </div>
                       );
@@ -545,19 +543,17 @@ const Sessions = ({ selectedMonth, sessions }) => {
                               </div>
                             )}
                             <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name}</span>
+                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
                           </button>
                         </div>
                       );
                     })}
 
-
-
                 </div>
 
               </div>
 
-              {/* miend Section */}
+              {/* =======================================miend Section================================= */}
               <div>
 
                 <h2 className='font-semibold mb-1 '>Mind ...</h2>
@@ -601,7 +597,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                             )}
 
                             <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name}</span>
+                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
 
                           </button>
                         </div>
@@ -610,7 +606,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 </div>
 
               </div>
+
             </div>
+
+
           </div>
         </div>
       </div>
