@@ -244,7 +244,7 @@ const SubscriptionPlan = () => {
               <p className="text-center text-xs my-4">
                 Guaranteed safe checkout
               </p>
-              <img src={safe_payment} alt="safe-payment" />
+              <img className="mx-auto w-[45%]" src={safe_payment} alt="safe-payment" />
             </form>
           </div>
           <div className="md:w-1/2 flex flex-col justify-between">

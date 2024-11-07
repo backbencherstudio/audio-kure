@@ -13,7 +13,7 @@ import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
 import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 import { verifyToken } from "../utils/verifyToken";
 import { useEffect } from "react";
-import heroImage from './../assets/hero.jpg'
+import heroImage from '../assets/images/Logo.png'
 import BackgroundMusic from "../components/BackgroundMusic/BackgroundMusic";
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -34,7 +34,6 @@ function HomePage() {
 
 
 
-
   const handleAnswerSelect = (selectedAnswer) => {
     const answer = [{ ans1: selectedAnswer }];
     localStorage.setItem("answers", JSON.stringify(answer));
@@ -45,10 +44,10 @@ function HomePage() {
       <div className="container z-50 mx-auto bg-transparent ">
         <div className="  flex  justify-between items-center">
           <Logo />
-
         </div>
 
         <div className="container mx-auto">
+
           <div className="flex flex-col-reverse lg:flex-row-reverse items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="w-full lg:w-1/2 space-y-6">
               <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
@@ -97,10 +96,14 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center relative">
-              <div className="absolute bottom-2">
+
+              <img className="rounded-xl " alt="" src={heroImage} />
+
+
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
                 <BackgroundMusic />
               </div>
-              <img className="rounded-xl " alt="" src={heroImage} />
+
             </div>
           </div>
           <Footer />

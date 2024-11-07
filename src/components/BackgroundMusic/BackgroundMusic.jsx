@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import  { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
-import WC from './../../assets/audios/wc.mp3'
+import WC from './../../assets/audios/introAudio/Intro - 14 sec.wav'
 
 const BackgroundMusic = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -8,7 +8,8 @@ const BackgroundMusic = () => {
     const audioRef = useRef(null);
 
     useEffect(() => {
-        audioRef.current = new Audio(WC);
+        audioRef.current = new Audio(WC)
+;
         audioRef.current.loop = true;
 
         return () => {
@@ -43,13 +44,12 @@ const BackgroundMusic = () => {
             {showPrompt && (
                 <div>
                     {/* <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"></div> */}
-                    <div className="w-96">
-                        <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg text-center">
-                            <h3 className="text-xl font-semibold mb-4">Welcome to Our Experience</h3>
-                            {/* <p className="mb-4">Click below to start the immersive background music</p> */}
+                    <div className="w-[250px] md:w-[300px] xl:w-[400px]">
+                        <div className="bg-white/10 backdrop-blur-md py-2 md:p-6 rounded-xl shadow-lg text-center">
+                            <h3 className="text-xl font-semibold mb-4  ">Experience a moment of calm</h3>
                             <button
                                 onClick={startMusic}
-                                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors duration-200"
+                                className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors duration-200 "
                             >
                                 Start now
                             </button>
@@ -61,18 +61,18 @@ const BackgroundMusic = () => {
             {!showPrompt && (
                 <button
                     onClick={togglePlay}
-                    className="fixed bottom-4 right-4 bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-colors duration-200 z-50"
+                    className=" bottom-4 right-4 bg-white/10 backdrop-blur-sm p-3 rounded-full hover:bg-white/20 transition-colors duration-200 z-50"
                     aria-label={isPlaying ? 'Mute background music' : 'Play background music'}
-                >
+                > 
                     {isPlaying ? (
                         <Volume2 className="w-6 h-6 text-white" />
-                    ) : (
+                    ) : ( 
                         <VolumeX className="w-6 h-6 text-white" />
                     )}
-                </button>
+                </button> 
             )}
         </>
-    );
+    ); 
 };
 
-export default BackgroundMusic;
+export default BackgroundMusic; 

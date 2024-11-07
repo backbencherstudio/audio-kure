@@ -7,6 +7,22 @@
 }
 
 
+.logo_style {
+  background-image: url("./assets/fire.gif");
+  background-size: cover;
+  background-position: center;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.togoTest_style {
+  background: linear-gradient(30deg, #f84821, #f7b21d, #75FF33, #f7421a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
 .AudioPlayButton {
   background-color: var(--first-color);
   background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%);
@@ -46,7 +62,7 @@
 .btnGrad {
   background: linear-gradient(90deg, #EEB5B4 0%, #BFE5BE 50%, #EFD0B3 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  color:#4e4e4e !important
+  color: #4e4e4e !important
 }
 
 img {
@@ -165,7 +181,10 @@ img {
   box-shadow: 0 4px 20px rgba(49, 122, 122, 0.6);
   transition: box-shadow 0.3s ease;
 }
+
 .audio-player-container audio {
-  background-color: #374151; /* Dark gray */
-  color: #ffffff; /* White text */
+  background-color: #374151;
+  /* Dark gray */
+  color: #ffffff;
+  /* White text */
 }

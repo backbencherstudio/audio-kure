@@ -41,7 +41,7 @@ const Analyzing = () => {
   );
 
   return (
-    <div className="flex  items-center justify-center  lg:mt-10 mx-5">
+    <div className="flex  items-center justify-center  lg:mt-10 mx-5 py-2">
       <div className=" backdrop-blur-md border rounded-md lg:w-1/3 p-2 lg:p-10">
 
         <h1 className="text-3xl my-3 mb-4">

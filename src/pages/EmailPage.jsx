@@ -42,7 +42,7 @@ function EmailPage() {
   };
 
   return (
-    <div className="">
+    <div className="mx-4">
     <div className="container mx-auto">
         <Logo />
       </div>
@@ -50,7 +50,7 @@ function EmailPage() {
         <div className="text-center">
           <div className="flex justify-center">
             <div className="lg:max-w-[550px] md:max-w-[500px] text-center">
-              <h1 className="text-4xl pt-20 font-serif">
+              <h1 className="text-4xl pt-5 md:pt-20 font-serif">
                 Your program is ready
               </h1>
               <p className="mt-3 text-[#5a5d64]">
@@ -60,7 +60,7 @@ function EmailPage() {
               Join the HYPNO 4 U community of achievers who have reached their goals in life, boasting a success rate of over 90%.
               </p>
               <input
-                className="w-full focus:bg-[#6e363652] max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#EEB5B4] placeholder:text-white"
+                className="w-full focus:bg-[#6e363652] md:max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#EEB5B4] placeholder:text-white"
                 type="text"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -105,10 +105,10 @@ function EmailPage() {
                   </label>
                 </div>
               </div>
-              <div className="w-[90%] mx-auto">
+              <div className="md:w-[90%] mx-auto">
                 <button
                   onClick={handleUnlock}
-                  className="btnGrad w-[450px] mx-auto font-bold rounded-2xl px-10 py-4 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center"
+                  className="btnGrad w-full md:w-[450px] mx-auto font-bold rounded-2xl py-4 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center"
                 >
                   <MdLockOpen
                     style={{

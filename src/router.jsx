@@ -157,7 +157,7 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Vault />
       </ProtectedRoute>
-  },
+  }
 ]);
 
 export default router;
