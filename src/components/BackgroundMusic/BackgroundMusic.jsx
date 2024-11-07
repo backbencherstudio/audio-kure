@@ -42,8 +42,8 @@ const BackgroundMusic = () => {
         <>
             {showPrompt && (
                 <div>
-                    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"></div>
-                    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+                    {/* <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"></div> */}
+                    <div className="w-96">
                         <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg text-center">
                             <h3 className="text-xl font-semibold mb-4">Welcome to Our Experience</h3>
                             {/* <p className="mb-4">Click below to start the immersive background music</p> */}

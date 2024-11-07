@@ -54,7 +54,7 @@ const Vault = () => {
     const audioDropdowns = [
         {
             id: 1,
-            title: "Beginner Level",
+            title: "Building Healthy Habits",
             threshold: 1000,
             audios: [
                 { id: 1, title: "Summer Breeze", audioSrc: audio1 },
@@ -63,7 +63,7 @@ const Vault = () => {
         },
         {
             id: 2,
-            title: "Intermediate Level",
+            title: " Strengthening the Habit",
             threshold: 2000,
             audios: [
                 { id: 3, title: "Ocean Waves", audioSrc: audio3 },
@@ -72,7 +72,7 @@ const Vault = () => {
         },
         {
             id: 3,
-            title: "Advanced Level",
+            title: "Expanding the Habit",
             threshold: 8000,
             audios: [
                 { id: 5, title: "Mountain Echo", audioSrc: audio5 },
@@ -81,7 +81,7 @@ const Vault = () => {
         },
         {
             id: 4,
-            title: "Expert Level",
+            title: "Mastering Consistency",
             threshold: 13000,
             audios: [
                 { id: 7, title: "Forest Rain", audioSrc: audio7 },
@@ -90,7 +90,7 @@ const Vault = () => {
         },
         {
             id: 5,
-            title: "Master Level",
+            title: "Transformation",
             threshold: 200000,
             audios: [
                 { id: 9, title: "Morning Sun", audioSrc: audio9 },

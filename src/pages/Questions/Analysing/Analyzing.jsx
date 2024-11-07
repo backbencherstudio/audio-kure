@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Analyzing.css";
 import Brain from "./Brain/BrainSVG";
@@ -67,14 +67,13 @@ const Analyzing = () => {
           ))}
         </div>
         <div className="testimonial">
-          <div className="stars">★★★★★</div>
-          <p>
-            "It's the easiest weight loss solution I've ever tried. Evening
-            sessions have greatly enhanced my sleep quality and significantly
-            reduced my stress."
+          <div className="stars">Why Choose H4U?</div>
+          <p className="space-y-2">
+            1. Set and Track Goals: Define your goals and monitor your progress. <br />
+            2. Rewards for Success: Earn free sessions as you achieve milestones. <br />
+            3. Targeted Sessions: Select sessions tailored to specific goals, like relaxation, sleep, or motivation. <br />
+            4. Easy to Use: Just pop on your headphones and start—no setup needed.
           </p>
-          <p className="author">- Laura K.</p>
-          <p className="verified">VERIFIED USER</p>
         </div>
       </div>
     </div>

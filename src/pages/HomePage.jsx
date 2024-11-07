@@ -2,14 +2,10 @@
 import { Link } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
 import home_members from "./../assets/images/home_members.png";
-// import home_hero_image from "./../assets/images/home_hero_image.png";
-// import home_hero_image from "https://www.wellmeright.com/blog/content/images/size/w2000/2024/03/Quantum-Healing-Hypnosis-Benefits.jpg";
 import Footer from "../shared/Footer";
 import Logo from "../shared/Logo";
-// import { useSelector } from "react-redux";
 import {
   logOut,
-  // selectCurrentUser,
   useCurrentToken,
 } from "../redux/fetures/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -20,8 +16,6 @@ import { useEffect } from "react";
 import heroImage from './../assets/hero.jpg'
 import BackgroundMusic from "../components/BackgroundMusic/BackgroundMusic";
 function HomePage() {
-  // const currentUser = useSelector(selectCurrentUser);
-  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const token = useAppSelector(useCurrentToken);
 
@@ -40,11 +34,6 @@ function HomePage() {
 
 
 
-  // const handleLOgout = () => {
-  //   dispatch(logOut());
-  //   localStorage.removeItem("layout");
-  //   navigate("/login");
-  // };
 
   const handleAnswerSelect = (selectedAnswer) => {
     const answer = [{ ans1: selectedAnswer }];
@@ -53,30 +42,17 @@ function HomePage() {
 
   return (
     <div>
-      <BackgroundMusic/>
       <div className="container z-50 mx-auto bg-transparent ">
         <div className="  flex  justify-between items-center">
           <Logo />
-          {/* <div>
-            {currentUser ? (
-              <button
-                onClick={() => {
-                  handleLOgout();
-                }}
-              >
-                Log Out
-              </button>
-            ) : (
-              <Link to={"/login"}>Log In</Link>
-            )}
-          </div> */}
+
         </div>
 
         <div className="container mx-auto">
           <div className="flex flex-col-reverse lg:flex-row-reverse items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="w-full lg:w-1/2 space-y-6">
               <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
-                Double the Impact: Just 2 Self-Hypnosis Sessions Equal 8 Traditional Treatments! (Source: VA.gov):
+                Double the Impact: 2 Self-Hypnosis Audio = 8 Traditional Treatments! (Source: VA.gov):
               </h2>
               <div className="space-y-4">
                 <p className="text-sm md:text-base lg:text-xl">
@@ -86,10 +62,10 @@ function HomePage() {
                   New Audios Added Continuously
                 </p>
                 <p className="text-sm md:text-base lg:text-xl">
-                5 Simple Questions for Personalization
+                  5 Simple Questions for Personalization
                 </p>
                 <p className="text-sm md:text-base lg:text-xl">
-                Tailored Audios for Anxiety, Pain, Weight Loss, Confidence, Trauma, Sports, & More
+                  Tailored Audios for Anxiety, Pain, Weight Loss, Confidence, Trauma, Sports, & More
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
@@ -120,7 +96,10 @@ function HomePage() {
               </div>
             </div>
 
-            <div className="flex-1 flex items-center justify-center">
+            <div className="flex-1 flex items-center justify-center relative">
+              <div className="absolute bottom-2">
+                <BackgroundMusic />
+              </div>
               <img className="rounded-xl " alt="" src={heroImage} />
             </div>
           </div>
