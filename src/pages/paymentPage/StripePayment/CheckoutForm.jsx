@@ -32,12 +32,13 @@ const CheckoutForm = () => {
     }, [])
 
     const amount = parseFloat(planData?.parsedPlan?.price);
+    // 25 ==   https://buy.stripe.com/test_9AQ02s1hJ5J68Jq000
 
 
 
     useEffect(() => {
         if (amount > 0) {
-            axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
+            axios.post('http://localhost:5000/api/v1/payment/create-payment-intent', { amount })
                 .then(res => {
                     console.log(42, res?.data);
 

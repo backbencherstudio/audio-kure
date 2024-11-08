@@ -27,23 +27,12 @@ const Payment = () => {
     setPlanData({ parsedPlan, userType })
   }, [])
 
+
   const amount = parseFloat(planData?.parsedPlan?.price);
   const duration = planData?.parsedPlan?.duration;
 
-  const handleCreateOrder = async () => {
-    try {
-      const { data } = await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment",
-        { amount }
-      );
-      return data.forwardLink;
-    } catch (error) {
-      console.error("Error creating PayPal order:", error);
-    }
-  };
 
   const handleApproveOrder = async (data) => {
-
     if (await data?.facilitatorAccessToken) {
       const persisData = {
         plan: planData?.parsedPlan.plan,
@@ -61,7 +50,7 @@ const Payment = () => {
     }
     try {
       await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
+        "http://localhost:5000/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
@@ -72,6 +61,9 @@ const Payment = () => {
     }
   };
 
+
+
+
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [isPayPalVisible, setIsPayPalVisible] = useState(false);
   const [isCreditVisible, setIsCreditVisible] = useState(false);
@@ -79,9 +71,9 @@ const Payment = () => {
   useEffect(() => {
     if (paymentMethod === "paypal") {
       setIsPayPalVisible(true);
-      setIsCreditVisible(false); 
+      setIsCreditVisible(false);
     } else if (paymentMethod === "credit") {
-      setIsPayPalVisible(false); 
+      setIsPayPalVisible(false);
       setIsCreditVisible(true);
     } else {
       setIsPayPalVisible(false);
@@ -91,7 +83,7 @@ const Payment = () => {
 
   return (
     <div className=" min-h-[95vh] container mx-auto">
-      <div className="">    
+      <div className="">
         <Logo />
       </div>
       <div className="backdrop-blur-sm bg-black/10  border border-white/20 max-w-[1000px] mx-auto  md:flex flex-row-reverse justify-between gap-10 p-4 md:p-10 rounded-2xl">
@@ -203,10 +195,8 @@ const Payment = () => {
                   <StripeButtonComponent />
                 </div>
               )}
-
-
-
             </div>
+
           </div>
         </div>
       </div>

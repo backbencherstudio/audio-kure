@@ -27,6 +27,8 @@ import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
 import Vault from "./pages/Vault/Vault";
 import Weight from "./pages/Weight/Weight";
+import SubPayment from "./pages/SubPayment/SubPayment";
+import Success from "./pages/SuccessPayment/Success";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -157,6 +159,14 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Vault />
       </ProtectedRoute>
+  },
+  {
+    path: "/subPayment",
+    element:<SubPayment />
+  },
+  {
+    path: "/success",
+    element:<Success />
   }
 ]);
 
