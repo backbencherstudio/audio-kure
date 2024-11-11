@@ -51,6 +51,20 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const planNumber = parseInt(plan);
   const barCounter = planNumber === 7 ? 2 : planNumber === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
 
+  // http://localhost:5000/success?session_id=cs_test_a1KTMxvB0WoqRBlqaGQO8ZvCPnA0TwwONBv6BNIPEPyXF7uaAPDRfX22kc
+
+  useEffect(() => {
+    fetch("http://localhost:5000/success?session_id=cs_test_a1KDjWeP1rkFnmTiMYyb0niIBD0fSH514VZA6QvLRIukhXf7O6KxXuBaL8")
+      .then(response => response.json() )
+      .then(data => {
+        console.log("Success:", data);
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+
+  }, [])
+
 
   if (isLoading) {
     return <p>Loading ...</p>

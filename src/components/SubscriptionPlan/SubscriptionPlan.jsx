@@ -29,6 +29,7 @@ const PaymentPlan = ({
   isSelected,
   onSelect,
 }) => (
+
   <div
     className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900"
       }`}
@@ -93,11 +94,11 @@ const PaymentPlan = ({
       </div>
     )}
   </div>
+
 );
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("365");
-  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("");
   const [plans, setPlans] = useState([]);
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const paymentPlanRef = useRef(null);
@@ -119,6 +120,16 @@ const SubscriptionPlan = () => {
         discountedPrice: "49.99",
         perDay: "7.14",
         originalPerDay: "$14.28",
+        href: "http://localhost:5000/subscribe?plan=Silver"
+      },
+      {
+        id: "30",
+        duration: "30 Days",
+        originalPrice: "299.98",
+        discountedPrice: "149.99",
+        perDay: "4.99",
+        originalPerDay: "$9.9",
+        href: "http://localhost:5000/subscribe?plan=Gold"
       },
       {
         id: "365",
@@ -128,16 +139,10 @@ const SubscriptionPlan = () => {
         perDay: "1.47",
         originalPerDay: "$2.73",
         isPopular: true,
-        hasGift: true
+        hasGift: true,
+        href: "http://localhost:5000/subscribe?plan=Dimond"
       },
-      {
-        id: "30",
-        duration: "30 Days",
-        originalPrice: "299.98",
-        discountedPrice: "149.99",
-        perDay: "4.99",
-        originalPerDay: "$9.9",
-      },
+
     ];
 
     return basePlans.map((plan) => ({
@@ -219,19 +224,21 @@ const SubscriptionPlan = () => {
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
-                  <PaymentPlan
-                    key={plan.id}
-                    id={plan.id}
-                    duration={plan.duration}
-                    originalPrice={plan.originalPrice}
-                    discountedPrice={plan.discountedPrice}
-                    perDay={plan.perDay}
-                    originalPerDay={plan.originalPerDay}
-                    isSelected={selectedPlan === plan.id}
-                    isPopular={plan.isPopular}
-                    hasGift={plan.hasGift}
-                    onSelect={handlePlanSelect}
-                  />
+                  <a  key={plan.id} href={plan.href}>
+                    <PaymentPlan
+                     
+                      id={plan.id}
+                      duration={plan.duration}
+                      originalPrice={plan.originalPrice}
+                      discountedPrice={plan.discountedPrice}
+                      perDay={plan.perDay}
+                      originalPerDay={plan.originalPerDay}
+                      isSelected={selectedPlan === plan.id}
+                      isPopular={plan.isPopular}
+                      hasGift={plan.hasGift}
+                      onSelect={handlePlanSelect}
+                    />
+                  </a>
                 ))}
               </div>
               <button
@@ -321,7 +328,7 @@ const SubscriptionPlan = () => {
                       Secret gift
                     </h1>
                     <p className="text-[14px]">
-                    The HYPNO 4 U team is excited to support your transformation journey, and we have a special surprise just for you!
+                      The HYPNO 4 U team is excited to support your transformation journey, and we have a special surprise just for you!
                     </p>
                   </div>
                 </div>
