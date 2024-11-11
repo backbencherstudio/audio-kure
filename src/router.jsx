@@ -33,9 +33,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PPurchesProtectorRoute>
+      // <PPurchesProtectorRoute>
         <Layout />
-      </PPurchesProtectorRoute>
+      // </PPurchesProtectorRoute>
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -103,9 +103,9 @@ const router = createBrowserRouter([
         path: "/payment",
         element: (
           <ProtectedRoute>
-            <PPurchesProtectorRoute>
+            {/* <PPurchesProtectorRoute> */}
               <Payment />
-            </PPurchesProtectorRoute>
+            {/* </PPurchesProtectorRoute> */}
           </ProtectedRoute>
         ),
       },
@@ -149,16 +149,16 @@ const router = createBrowserRouter([
   {
     path: "/daily-audios",
     element:
-      <ProtectedRoute>
+      // <ProtectedRoute>
         <DailyAudios />
-      </ProtectedRoute>
+      // </ProtectedRoute>
   },
   {
     path: "/vault",
     element:
-      <ProtectedRoute>
+      // <ProtectedRoute>
         <Vault />
-      </ProtectedRoute>
+      // </ProtectedRoute>
   },
   {
     path: "/subPayment",

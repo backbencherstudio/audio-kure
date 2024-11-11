@@ -14,7 +14,7 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import gift_big from "./../../assets/images/free_gift_big.png";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
@@ -29,6 +29,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const { data: userData, isLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
   const [logOutUpdate] = authApi.useLogOutUpdateMutation()
   const [toggleCategory, setToggleCategory] = useState("")
+  const [subscrieData, setSubscribeData] = useState(null)
 
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
   const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
@@ -51,19 +52,21 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const planNumber = parseInt(plan);
   const barCounter = planNumber === 7 ? 2 : planNumber === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
 
-  // http://localhost:5000/success?session_id=cs_test_a1KTMxvB0WoqRBlqaGQO8ZvCPnA0TwwONBv6BNIPEPyXF7uaAPDRfX22kc
+  const location = useLocation();
+  const sessionId = new URLSearchParams(location.search).get('session_id');
 
   useEffect(() => {
-    fetch("http://localhost:5000/success?session_id=cs_test_a1KDjWeP1rkFnmTiMYyb0niIBD0fSH514VZA6QvLRIukhXf7O6KxXuBaL8")
-      .then(response => response.json() )
-      .then(data => {
-        console.log("Success:", data);
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
-
-  }, [])
+    if (sessionId) {
+      fetch(`http://localhost:5000/success?session_id=${sessionId}`)
+        .then(response => response.json())
+        .then(data => {
+          setSubscribeData(data);
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    }
+  }, [sessionId]);
 
 
   if (isLoading) {
@@ -230,7 +233,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
           {
             parseInt(plan) === 365 &&
             <p className='text-xl md:text-3xl' >
-              Your  cure session for Month {selectedMonth}
+              Your  cure session for Month {selectedMonth} S Data = {subscrieData?.subscription_email} S =  {subscrieData?.status} P =  {subscrieData?.plan}
             </p>
           }
 
