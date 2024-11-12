@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Logo from "../../shared/Logo";
 import authApi from "../../redux/fetures/auth/authApi";
 import { verifyToken } from "../../utils/verifyToken";
-import { setUser } from "../../redux/fetures/auth/authSlice";
+import { selectCurrentUser, setUser } from "../../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { useSelector } from "react-redux";
 
 function LoginPage() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm({
@@ -18,10 +19,15 @@ function LoginPage() {
 
   const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
-  const [login, {isLoading}] = authApi.useLoginMutation();
+  const [login, { isLoading }] = authApi.useLoginMutation();
+  // const currentUser = useSelector(selectCurrentUser);
+  const [currentEmail, setCurrentEmail] = useState("")
+  const { data: userData, isLoading: currentLoading } = authApi.useGetSingleUserQuery(currentEmail);
+
   const dispatch = useAppDispatch();
 
-  const currentDate = new Date();
+  console.log(currentEmail);
+
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,7 +35,7 @@ function LoginPage() {
   };
 
   const onSubmit = async (data) => {
-    
+
     setErrorMsg(null);
 
     if (!data.email || !data.password) {
@@ -53,21 +59,26 @@ function LoginPage() {
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
 
-      const expiresDate = new Date(user?.expiresDate);
+      console.log(user);
 
-      if (response?.success) {
-        if (currentDate < expiresDate) {
-          navigate("/daily-audios");
-          return;
-        }
+
+      // setCurrentEmail(user?.email);     
+
+      if (!user?.sessionId) {
         navigate("/subscriptionplan");
+        return;
       }
+      else {
+        navigate("/daily-audios");
+      }
+
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
     }
-    
+
   };
+
 
   return (
     <div className="">
@@ -136,7 +147,7 @@ function LoginPage() {
                 disabled={isSubmitting}
                 className="btnGrad w-full font-bold rounded-xl mt-5 px-10 py-2 transition duration-300 transform hover:scale-105 hover:bg-yourHoverColor flex justify-center cursor-pointer"
               >
-                {isSubmitting || isLoading ? (
+                {isSubmitting || isLoading || currentLoading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   "Log in"
