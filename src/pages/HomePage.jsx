@@ -26,11 +26,11 @@ function HomePage() {
   const expiresDate = new Date(user?.expiresDate);
   const currentData = new Date();
 
-  useEffect(() => {
-    if (token && currentData > expiresDate) {
-      dispatch(logOut());
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (token && currentData > expiresDate) {
+  //     dispatch(logOut());
+  //   }
+  // }, [])
 
 
 

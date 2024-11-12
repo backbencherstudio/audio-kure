@@ -60,7 +60,7 @@ function LoginPage() {
           navigate("/daily-audios");
           return;
         }
-        navigate("/payment");
+        navigate("/subscriptionplan");
       }
     } catch (error) {
       console.error("Login error:", error);

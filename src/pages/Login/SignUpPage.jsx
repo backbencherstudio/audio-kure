@@ -14,14 +14,24 @@ const SignUpPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
+
+  const [planData, setPlanData] = useState({})
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.email) {
-      setEmail(user.email);
-    }
-  }, []);
+    const plan = localStorage.getItem("plan")
+    const parsedPlan = plan ? JSON.parse(plan) : null;
+    const userType = localStorage.getItem("userType")
+    setPlanData({ parsedPlan, userType })
+  }, [])
+
+
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   if (user && user.email) {
+  //     setEmail(user.email);
+  //   }
+  // }, []);
 
   const {
     register,
@@ -89,8 +99,12 @@ const SignUpPage = () => {
   // };
   const [otp, setOtp] = useState(new Array(6).fill(""));
 
+  // const persisData = {
+  //   userType: planData?.userType,
+  // }
+
   const verifyOtp = async (otp) => {
-    const verifyData = { email: userEmail, otp };
+    const verifyData = { email: userEmail, otp, userType: planData?.userType };
     const res = await verifyOTP(verifyData);
 
     if (res?.error?.status === 400) {

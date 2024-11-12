@@ -21,15 +21,22 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
   const [updateData, setUpdatedData] = useState(null)
-  const [updateAudioData] = authApi.useUpdateAudioDataMutation();
   const [listeningTime, setListeningTime] = useState(0)
   const [audioDuration, setAudioDuration] = useState(0);
+  const [updateAudioData] = authApi.useUpdateAudioDataMutation();
+  const [purchasePlan] = authApi.usePurchasePlanMutation();
 
   const currentUser = useSelector(selectCurrentUser);
   const { data: userData, isLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
   const [logOutUpdate] = authApi.useLogOutUpdateMutation()
   const [toggleCategory, setToggleCategory] = useState("")
   const [subscrieData, setSubscribeData] = useState(null)
+
+  console.log({ userData });
+  console.log(subscrieData);
+  console.log(currentUser?.email);
+
+
 
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
   const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
@@ -40,6 +47,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const ego = data?.emotional?.ego;
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
+
 
   const array1 = userData?.data?.selectedBodyAudios
   const array2 = userData?.data?.selectedMindAudios
@@ -66,7 +74,18 @@ const Sessions = ({ selectedMonth, sessions }) => {
           console.error("Error:", error);
         });
     }
-  }, [sessionId]);
+    const purchasePlanData = {
+      sessionId,
+      email: subscrieData?.email
+    }
+
+    if (subscrieData) {
+      purchasePlan(purchasePlanData)
+    }
+
+  }, []);
+
+
 
 
   if (isLoading) {
@@ -83,16 +102,16 @@ const Sessions = ({ selectedMonth, sessions }) => {
   }, [userData?.data])
 
 
-  const logOutFun = async () => {
-    await logOutUpdate(currentUser?.email)
-  }
+  // const logOutFun = async () => {
+  //   await logOutUpdate(currentUser?.email)
+  // }
 
-  useEffect(() => {
-    if (token && currentData >= expiresDate) {
-      logOutFun()
-      dispatch(logOut());
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (token && currentData >= expiresDate) {
+  //     logOutFun()
+  //     dispatch(logOut());
+  //   }
+  // }, [])
 
   useEffect(() => {
     const performUpdate = async () => {
@@ -229,11 +248,15 @@ const Sessions = ({ selectedMonth, sessions }) => {
     <div className="session-main-dev border-t mt-5 border-[#2f2861] ">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0 ">
 
+        <div>
+          S Data = {subscrieData?.subscription_email} S =  {subscrieData?.status} P =  {subscrieData?.plan}
+        </div>
+
         <div className="heading-div text-3xl  font-semibold my-8">
           {
             parseInt(plan) === 365 &&
             <p className='text-xl md:text-3xl' >
-              Your  cure session for Month {selectedMonth} S Data = {subscrieData?.subscription_email} S =  {subscrieData?.status} P =  {subscrieData?.plan}
+              Your  cure session for Month {selectedMonth}
             </p>
           }
 
@@ -629,6 +652,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
           </div>
         </div>
+
       </div>
     </div>
   );

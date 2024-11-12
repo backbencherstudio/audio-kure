@@ -188,10 +188,6 @@ const SubscriptionPlan = () => {
     }
   };
 
-  const counts = {
-    physical: 0,
-    emotional: 0,
-  };
   const usertype = localStorage.getItem('userType')
 
   return (
@@ -224,9 +220,8 @@ const SubscriptionPlan = () => {
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
-                  <a  key={plan.id} href={plan.href}>
-                    <PaymentPlan
-                     
+                  <a  key={plan.id} href={plan.href} className="block" >
+                    <PaymentPlan                     
                       id={plan.id}
                       duration={plan.duration}
                       originalPrice={plan.originalPrice}
@@ -236,17 +231,16 @@ const SubscriptionPlan = () => {
                       isSelected={selectedPlan === plan.id}
                       isPopular={plan.isPopular}
                       hasGift={plan.hasGift}
-                      onSelect={handlePlanSelect}
                     />
                   </a>
                 ))}
               </div>
-              <button
+              {/* <button
                 type="submit"
                 className="w-full btnGrad font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
               >
                 Get my plan
-              </button>
+              </button> */}
 
               <p className="text-center text-xs my-4">
                 Guaranteed safe checkout

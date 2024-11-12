@@ -14,6 +14,7 @@ import authApi from "../../redux/fetures/auth/authApi";
 import Logo from "../../shared/Logo";
 import { useNavigate } from "react-router-dom";
 
+
 const Payment = () => {
   const navigate = useNavigate()
   const currentUser = useSelector(selectCurrentUser);
@@ -32,7 +33,9 @@ const Payment = () => {
   const duration = planData?.parsedPlan?.duration;
 
 
+
   const handleApproveOrder = async (data) => {
+
     if (await data?.facilitatorAccessToken) {
       const persisData = {
         plan: planData?.parsedPlan.plan,
@@ -59,7 +62,10 @@ const Payment = () => {
     } catch (error) {
       console.error("Error approving PayPal order:", error);
     }
+
   };
+
+
 
 
 
