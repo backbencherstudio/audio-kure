@@ -217,11 +217,14 @@ const SubscriptionPlan = () => {
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
               Select your plan:
             </h2>
+
+            <a className="text-blue-600 bg-black p-2 " href="http://localhost:5000/subscribe?plan=test">1 day</a>
+
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
-                  <a  key={plan.id} href={plan.href} className="block" >
-                    <PaymentPlan                     
+                  <a key={plan.id} href={plan.href} className="block" >
+                    <PaymentPlan
                       id={plan.id}
                       duration={plan.duration}
                       originalPrice={plan.originalPrice}

@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import gift_big from "./../../assets/images/free_gift_big.png";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Sessions = ({ selectedMonth, sessions }) => {
+const SessionsTest = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
@@ -688,4 +688,4 @@ const Sessions = ({ selectedMonth, sessions }) => {
   );
 };
 
-export default Sessions;
+export default SessionsTest;
