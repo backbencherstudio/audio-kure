@@ -31,18 +31,14 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const [logOutUpdate] = authApi.useLogOutUpdateMutation()
   const [toggleCategory, setToggleCategory] = useState("")
   const [subscrieData, setSubscribeData] = useState(null)
-  const [usbDataLoading, setSubDataloading] = useState(false)
+  const [usbDataLoading, setSubDataloading] = useState(null)
   const navigation = useNavigate()
 
-
-
-  // console.log(userData?.data.sessionId );
-  // console.log({ subscrieData });
-  // console.log(currentUser?.email);
 
   if (isLoading) {
     return <p>Loading ...</p>
   }
+
 
 
 
@@ -80,75 +76,69 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   useEffect(() => {
     if (sessionId) {
-      setSubDataloading(true)
       fetch(`http://localhost:5000/success?session_id=${sessionId}`)
         .then(response => response.json())
         .then(data => {
           setSubscribeData(data);
-          setSubDataloading(false)
         })
         .catch(error => {
           console.error("Error:", error);
         });
     }
-
   }, []);
 
   useEffect(() => {
-    const purchasePlanData = {
-      sessionId,
-      email: subscrieData?.subscription_email
-    }
-    if (subscrieData && subscrieData?.subscription_email === currentUser?.email) {
-      purchasePlan(purchasePlanData)
-    }
-  }, [subscrieData])
+    const fetchPurchasePlan = async () => {
+      const purchasePlanData = {
+        sessionId,
+        email: subscrieData?.subscription_email,
+      };
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    setToggleCategory(userData?.data?.userType)
-  }, [userData?.data])
+      if (subscrieData && subscrieData?.subscription_email === currentUser?.email) {
+        try {
+          const res = await purchasePlan(purchasePlanData);
+          setSubDataloading(res);
+        } catch (error) {
+          console.error("Error fetching purchase plan:", error);
+        }
+      }
+    };
 
-  const logOutFun = async () => {
-    await logOutUpdate(currentUser?.email)
-  }
-  useEffect(() => {
-    if ((subscrieData && subscrieData?.status != "active") || (subscrieData && currentUser?.email != subscrieData?.subscription_email)) {
-      logOutFun()
-      dispatch(logOut());
-      navigation("/subscriptionplan")
-    }
-  }, [subscrieData])
-
-  // console.log(!userData?.data.sessionId);
-
-  // if (!userData?.data.sessionId) {
-  //   navigation("/subscriptionplan")
-  // }
+    fetchPurchasePlan();
+  }, [subscrieData]);
 
 
+  // const dispatch = useAppDispatch();
   // useEffect(() => {
-  //   if (!userData?.data.sessionId ) {
-  //     navigation("/subscriptionplan")
-  //   }
+  //   setToggleCategory(userData?.data?.userType)
   // }, [userData?.data])
 
+  // const logOutFun = async () => {
+  //   await logOutUpdate(currentUser?.email)
+  // }
 
+  useEffect(() => {
+    if ((subscrieData && subscrieData?.status != "active") || (subscrieData && currentUser?.email != subscrieData?.subscription_email)) {
+      // logOutFun()
+      // dispatch(logOut());
+      navigation("/subscriptionplan")
+    }
+  }, [usbDataLoading])  
 
   // useEffect(() => {
-  //   if ((subscrieData && subscrieData?.status != "active" || userData?.data?.sessionId === "" ) || (subscrieData && currentUser?.email != subscrieData?.subscription_email || userData?.data?.sessionId === "" )) {
-  //     logOutFun()
-  //     dispatch(logOut());
-  //     navigation("/subscriptionplan")
-  //   }
-  // }, [subscrieData])
-
-
+  //   const timer = setTimeout(() => {
+  //     console.log(userData?.data?.sessionId);      
+  //     if (userData?.data?.sessionId === "" ) {        
+  //       navigation("/login");
+  //     }
+  //   }, 1000);
+  //   return () => clearTimeout(timer);
+  // }, [userData]);
 
   useEffect(() => {
     const performUpdate = async () => {
       const res = await updateAudioData(updateData);
-      if (res.data.success) {
+      if (res?.data?.success) {
         toast.success("You achieved 100 coins");
       }
     };
