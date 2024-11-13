@@ -59,10 +59,10 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const array4 = userData?.data?.selectedSelfAudios
   const [warningShown, setWarningShown] = useState(false);
 
-  const plan = userData?.data?.plan
+  const plan = subscrieData?.plan
 
   const planNumber = parseInt(plan);
-  const barCounter = planNumber === 7 ? 2 : planNumber === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
+  const barCounter = planNumber === 25 ? 2 : planNumber === 45 ? 15 : self?.length + ego?.length + body?.length + miend?.length
 
   const location = useLocation();
 
@@ -73,7 +73,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
     sessionId = userData?.data.sessionId
   }
 
-
+  
   useEffect(() => {
     if (sessionId) {
       fetch(`http://localhost:5000/success?session_id=${sessionId}`)
@@ -201,11 +201,11 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const AudioSelectHandler = (item) => {
 
-    if (parseInt(plan) === 7 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
+    if (parseInt(plan) === 25 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
       toast.error("You Can Select Maximum 2 Content");
       return
     }
-    if (parseInt(plan) === 30 && (totalBodyMindSelections >= 15 || totalSelfEgoSelections >= 15)) {
+    if (parseInt(plan) === 45 && (totalBodyMindSelections >= 15 || totalSelfEgoSelections >= 15)) {
       toast.error("You Can Select Maximum 15 Content");
       return
     }
@@ -275,7 +275,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
         <div className="heading-div text-3xl  font-semibold my-8">
           {
-            parseInt(plan) === 365 &&
+            parseInt(plan) === 350 &&
             <p className='text-xl md:text-3xl' >
               Your  cure session for Month {selectedMonth}
             </p>
@@ -295,7 +295,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 </div>
 
                 {
-                  parseInt(plan) === 365 &&
+                  parseInt(plan) === 350 &&
                   <div className='inline-block flex '>
 
                     <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
@@ -341,7 +341,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 }
               </div>
               {
-                parseInt(plan) !== 365 &&
+                parseInt(plan) !== 350 &&
                 <span className='text-xs ml-0 font-bold '>You can use this coin when you purchaes Anual Plan </span>
               }
             </div> : ""}
@@ -415,7 +415,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
             <div className='mb-5' >
 
-              {parseInt(userData?.data?.plan) === 365 ?
+              {parseInt(plan) === 350 ?
                 <div className='grid grid-cols-2 gap-10' >
                   <button onClick={() => { setToggleCategory("emotional") }} className={` ${toggleCategory === "emotional" ? "text-white" : "text-black"} AudioPlayButton text-center rounded-md w-full  font-bold text-[20px]`}>Emotion</button>
                   <button onClick={() => { setToggleCategory("physical") }} className={` ${toggleCategory === "emotional" ? "text-black" : "text-white"} AudioPlayButton text-center rounded-md w-full  font-bold text-[20px]`}>Physical</button>
@@ -427,7 +427,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 </div>
               }
               {
-                parseInt(userData?.data?.plan) !== 365 && <div>
+                parseInt(plan) !== 350 && <div>
                   {hiddedButton !== true && (
                     <div>
                       {((selectedMindItem?.length > 0 && selectedBodyItem?.length > 0) ||
@@ -441,7 +441,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                           </button>
                         ) : (
                           <h2 className="AudioPlayButton text-center rounded-md w-full mt-5">
-                            Initially, select maximum of <span className='text-xl font-bold text-red-500 ' >{planNumber === 7 ? 2 : 15}</span> audios from each side
+                            Initially, select maximum of <span className='text-xl font-bold text-red-500 ' >{planNumber === 25 ? 2 : 15}</span> audios from each side
                           </h2>
                         )}
                     </div>
@@ -460,7 +460,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                 <div>
 
-                  {(userData?.data?.selectedSelfAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && self?.map((item) => (
+                  {(userData?.data?.selectedSelfAudios?.length === 0 && parseInt(plan) !== 350) && self?.map((item) => (
                     <div key={item.id} className="mb-2">
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedSelfItems?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
@@ -473,7 +473,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                     </div>
                   ))}
 
-                  {(parseInt(userData?.data?.plan) === 365 ? self : self.filter(item => userData?.data?.selectedSelfAudios?.includes(item.id)))
+                  {(parseInt(plan) === 350 ? self : self.filter(item => userData?.data?.selectedSelfAudios?.includes(item.id)))
                     .map((item) => {
                       return (
                         <div key={item.id} className="mb-2">
@@ -510,7 +510,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 <h2 className='font-semibold mb-1 '>Ego ...</h2>
                 <div>
 
-                  {(userData?.data?.selectedEgoAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && ego?.map((item) => (
+                  {(userData?.data?.selectedEgoAudios?.length === 0 && parseInt(plan) !== 350) && ego?.map((item) => (
                     <div key={item.id} className="mb-2">
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedEgoItems?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
@@ -524,7 +524,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   ))}
 
 
-                  {(parseInt(userData?.data?.plan) === 365 ? ego : ego.filter(item => userData?.data?.selectedEgoAudios?.includes(item.id)))
+                  {(parseInt(plan) === 350 ? ego : ego.filter(item => userData?.data?.selectedEgoAudios?.includes(item.id)))
                     .map((item) => {
                       return (
                         <div key={item.id} className="mb-2">
@@ -567,7 +567,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 <div>
 
                   {/* ================================= selected audio ================================= */}
-                  {(userData?.data?.selectedBodyAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && body?.map((item) => (
+                  {(userData?.data?.selectedBodyAudios?.length === 0 && parseInt(plan) !== 350) && body?.map((item) => (
                     <div key={item.id} className="mb-2">
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedBodyItem?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
@@ -583,7 +583,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                   {/* ================================= Main Body audio ================================= */}
 
 
-                  {(parseInt(userData?.data?.plan) === 365 ? body : body.filter(item => userData?.data?.selectedBodyAudios?.includes(item.id)))
+                  {(parseInt(plan) === 350 ? body : body.filter(item => userData?.data?.selectedBodyAudios?.includes(item.id)))
                     .map((item) => {
                       return (
                         <div key={item.id} className="mb-2">
@@ -621,7 +621,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
                 <div>
 
                   {/* ================================= selected audio ================================= */}
-                  {(userData?.data?.selectedMindAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && miend?.map((item) => (
+                  {(userData?.data?.selectedMindAudios?.length === 0 && parseInt(plan) !== 350) && miend?.map((item) => (
                     <div key={item.id} className="mb-2">
                       <button
                         className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedMindItem?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
@@ -636,7 +636,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
                   {/* ================================= Main Mind audio ================================= */}
 
-                  {(parseInt(userData?.data?.plan) === 365 ? miend : miend.filter(item => userData?.data?.selectedMindAudios?.includes(item.id)))
+                  {(parseInt(plan) === 350 ? miend : miend.filter(item => userData?.data?.selectedMindAudios?.includes(item.id)))
                     .map((item) => {
                       return (
                         <div key={item.id} className="mb-2">
