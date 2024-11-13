@@ -21,7 +21,6 @@ import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescription
 import Physical from "./pages/Physical/Physical";
 import DailyAudios from "./pages/UserAudios/DailyAudios";
 import SignUpPage from "./pages/Login/SignUpPage";
-import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
