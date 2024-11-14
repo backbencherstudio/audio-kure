@@ -136,6 +136,12 @@ function AdminAudios() {
                         variant="outlined"
                     />
 
+                    {uploadStatus ? (
+                        <p className={`mt-4 text-sm ${uploadStatus.includes('successful') ? 'text-green-600' : 'text-red-600'}`}>
+                            {uploadStatus}
+                        </p>
+                    ) : <p className='mt-4 text-sm' ></p> }
+
                     <button
                         onClick={handleFileUpload}
                         className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-blue-700 transition duration-300 ease-in-out"
@@ -143,11 +149,7 @@ function AdminAudios() {
                         Upload
                     </button>
 
-                    {uploadStatus && (
-                        <p className={`mt-4 text-sm ${uploadStatus.includes('successful') ? 'text-green-600' : 'text-red-600'}`}>
-                            {uploadStatus}
-                        </p>
-                    )}
+
                 </div>
             </div>
 
