@@ -1,23 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import { useState,  useRef } from 'react';
+import authApi from '../../redux/fetures/auth/authApi';
 
 function SubPayment() {
-    const [audioUrls, setAudioUrls] = useState([]);
+    const { data : audioUrls } = authApi.useAllAudioPathsQuery();
     const [listeningData, setListeningData] = useState({});
     const [currentAudioId, setCurrentAudioId] = useState(null);
     const intervals = useRef({});
 
-    useEffect(() => {
-        const fetchAudios = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/get-path-name');
-                setAudioUrls(response?.data?.result);
-            } catch (error) {
-                console.error('Error fetching audios:', error);
-            }
-        };
-        fetchAudios();
-    }, []);
 
     const startListeningInterval = (id, audio) => {
         if (intervals.current[id]) return; 
@@ -44,7 +33,7 @@ function SubPayment() {
         <div className="text-black">
             <h3>All Audios</h3>
             <div className="grid grid-cols-3 gap-4">
-                {audioUrls.map((audio, index) => (
+                {audioUrls?.result.map((audio, index) => (
                     <div key={index}>
                         <audio
                             controls
@@ -52,7 +41,7 @@ function SubPayment() {
                             onPause={() => clearListeningInterval(audio._id)}
                             onEnded={() => clearListeningInterval(audio._id)}
                         >
-                            <source src={audio.pathName} type="audio/mp3" />
+                            <source src={audio.audio} type="audio/mp3" />
                             Your browser does not support the audio element.
                         </audio>
                     </div>

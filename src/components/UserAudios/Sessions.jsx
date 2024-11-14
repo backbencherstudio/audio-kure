@@ -31,6 +31,9 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const [subscrieData, setSubscribeData] = useState(null)
   const [usbDataLoading, setSubDataloading] = useState(null)
   const navigation = useNavigate()
+  const { data: audioUrls , isLoading : dataLoading } = authApi.useAllAudioPathsQuery();
+
+
 
 
   if (isLoading) {
@@ -42,10 +45,29 @@ const Sessions = ({ selectedMonth, sessions }) => {
   const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
   const mindAudioId = userData?.data?.mindId === "end" ? "end" : parseInt(userData?.data?.mindId);
 
+  // const self = audioUrls?.self;
+  // const ego = audioUrls?.ego;
+  // const body = audioUrls?.body;
+  // const miend = audioUrls?.mind;
+
   const self = data?.emotional?.self;
   const ego = data?.emotional?.ego;
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
+
+  // console.log(58, audioUrls);
+  // console.log(59, audioUrls?.ego);
+  // console.log(60, audioUrls?.body);
+  // console.log(61, audioUrls?.mind);
+
+  // console.log("================================");
+
+  // console.log(65, self);
+  // console.log(66, ego);
+  // console.log(67, body);
+  // console.log(68, miend);
+
+
 
 
   const array1 = userData?.data?.selectedBodyAudios
@@ -172,6 +194,9 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   const AudioSelectHandler = (item) => {
 
+    console.log(item);
+    
+
     if (parseInt(plan) === 25 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
       toast.error("You Can Select Maximum 2 Content");
       return
@@ -182,23 +207,25 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
     if (item.category === 'body') {
       setSelectedBodyItem((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     } else if (item.category === "mind") {
       setSelectedMindItem((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     }
     else if (item.category === "ego") {
       setSelectedEgoAudios((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     }
     else if (item.category === "self") {
       setSelectedSelfAudios((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     }
+
+
   };
 
 
