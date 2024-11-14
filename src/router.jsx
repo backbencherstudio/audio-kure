@@ -28,12 +28,15 @@ import Vault from "./pages/Vault/Vault";
 import Weight from "./pages/Weight/Weight";
 import SubPayment from "./pages/SubPayment/SubPayment";
 import Success from "./pages/SuccessPayment/Success";
+import Admin from "./layout/admin/Admin";
+import UsersControl from "./pages/AdminPages/UserControls/UsersControl";
+import AdminAudios from "./pages/AdminPages/Audio/AdminAudios";
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       // <PPurchesProtectorRoute>
-        <Layout />
+      <Layout />
       // </PPurchesProtectorRoute>
     ),
     errorElement: <ErrorPage />,
@@ -103,7 +106,7 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             {/* <PPurchesProtectorRoute> */}
-              <Payment />
+            <Payment />
             {/* </PPurchesProtectorRoute> */}
           </ProtectedRoute>
         ),
@@ -149,23 +152,37 @@ const router = createBrowserRouter([
     path: "/daily-audios",
     element:
       // <ProtectedRoute>
-        <DailyAudios />
-      // </ProtectedRoute>
+      <DailyAudios />
+    // </ProtectedRoute>
   },
   {
     path: "/vault",
     element:
       // <ProtectedRoute>
-        <Vault />
-      // </ProtectedRoute>
+      <Vault />
+    // </ProtectedRoute>
   },
   {
     path: "/subPayment",
-    element:<SubPayment />
+    element: <SubPayment />
   },
   {
     path: "/success",
-    element:<Success />
+    element: <Success />
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    children: [
+      {
+        path: "users",
+        element: <UsersControl />
+      },
+      {
+        path: "audios",
+        element: <AdminAudios />
+      }
+    ]
   }
 ]);
 

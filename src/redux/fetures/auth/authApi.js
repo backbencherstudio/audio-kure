@@ -2,6 +2,17 @@ import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+
+    getALlUser: builder.query({
+      query: () => {
+        return {        
+            url: "/auth/allUsers",
+            method: "GET"
+        }
+      },
+      providesTags : ["user"],
+    }),
+
     getSingleUser: builder.query({
       query: (email) => {
         return {        
@@ -71,6 +82,17 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["audio", "user"], 
     }),
+    
+    sendEmail: builder.mutation({
+      query: (emailInfo) => {        
+        return {
+          url: "/auth/sendEmail",
+          method: "POST",
+          body: emailInfo,
+        }
+      },
+    }),
+
   }),
 });
 
