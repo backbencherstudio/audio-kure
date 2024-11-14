@@ -11,7 +11,7 @@ function SubPayment() {
         const fetchAudios = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/get-path-name');
-                setAudioUrls(response.data);
+                setAudioUrls(response?.data?.result);
             } catch (error) {
                 console.error('Error fetching audios:', error);
             }
