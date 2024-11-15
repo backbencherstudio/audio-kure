@@ -83,7 +83,11 @@ const Sessions = () => {
         <div>
           S Data = {subscribeData?.subscription_email} S = {subscribeData?.status} P = {subscribeData?.plan} C_id = {subscribeData?.customer_id}
 
-          <h2>Total Time : {totalDuration} :: Listining Time =  {listeningTime} </h2> 
+          <h2>Total Time : {totalDuration} :: Listining Time =  {listeningTime} </h2>
+
+          {
+            (totalDuration === listeningTime && totalDuration > 0) && <p> Done </p>
+          }
         </div>
 
         <div className='grid grid-cols-2 gap-10'>
@@ -152,15 +156,13 @@ const Sessions = () => {
                   {
                     userData?.data?.userType === "emotional" &&
 
-                    <div className='grid grid-cols-2 mt-3' >
+                    <div className='grid grid-cols-2 mt-3 gap-10' >
                       <div>
                         <h2>Self</h2>
                         {
                           self?.map((item, index) => (
-                            <div className='mt-2' key={item._id || index}>
-                              {/* <p>{item.name}</p> */}
-                              <audio controls src={item.audio}></audio>
-                              {/* <p>Category: {item.category}</p> */}
+                            <div className='mt-4' key={item._id || index}>
+                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
                             </div>
                           ))
                         }
@@ -169,10 +171,8 @@ const Sessions = () => {
                         <h2>Ego</h2>
                         {
                           ego?.map((item, index) => (
-                            <div className='mt-2' key={item._id || index}>
-                              {/* <p>{item.name}</p> */}
-                              <audio controls src={item.audio}></audio>
-                              {/* <p>Category: {item.category}</p> */}
+                            <div className='mt-4' key={item._id || index}>
+                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
                             </div>
                           ))
                         }

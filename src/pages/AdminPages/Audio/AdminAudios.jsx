@@ -162,58 +162,80 @@ function AdminAudios() {
 
                 <div>
                     <h2>Body</h2>
-                    {
-                        audioUrls?.body?.map(item => (
-                            <div key={item._id} className="mb-2">
-                                <audio controls>
-                                    <source src={item?.audio} type="audio/mp3" />
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </div>
-                        ))
-                    }
+
+                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                            {
+                                audioUrls?.body?.map((item, index) => (
+                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                        <span className='text-black mr-2' > {index + 1}</span>
+                                        <audio controls>
+                                            <source src={item?.audio} type="audio/mp3" />
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
                 </div>
                 <div>
-                <h2>Mind</h2>
+                    <h2>Mind</h2>
 
-                    {
-                        audioUrls?.mind?.map(item => (
-                            <div key={item._id} className="mb-2">
-                                <audio controls>
-                                    <source src={item?.audio} type="audio/mp3" />
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </div>
-                        ))
-                    }
+                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                            {
+                                audioUrls?.mind?.map((item, index) => (
+                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                        <span className='text-black mr-2' > {index + 1}</span>
+                                        <audio controls>
+                                            <source src={item?.audio} type="audio/mp3" />
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div>
-                <h2>Self</h2>
+                    <h2>Self</h2>
 
-                    {
-                        audioUrls?.self?.map(item => (
-                            <div key={item._id} className="mb-2">
-                                <audio controls>
-                                    <source src={item?.audio} type="audio/mp3" />
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </div>
-                        ))
-                    }
+                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                            {
+                                audioUrls?.self?.map((item, index) => (
+                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                        <span className='text-black mr-2' > {index + 1}</span>
+                                        <audio controls>
+                                            <source src={item?.audio} type="audio/mp3" />
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div>
-                <h2>Ego</h2>
+                    <h2>Ego</h2>
 
-                    {
-                        audioUrls?.ego?.map(item => (
-                            <div key={item._id} className="mb-2">
-                                <audio controls>
-                                    <source src={item?.audio} type="audio/mp3" />
-                                    Your browser does not support the audio element.
-                                </audio>
-                            </div>
-                        ))
-                    }
+                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                            {
+                                audioUrls?.ego?.map((item, index) => (
+                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                        <span className='text-black mr-2' > {index + 1}</span>
+                                        <audio controls>
+                                            <source src={item?.audio} type="audio/mp3" />
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
                 </div>
 
             </div>
