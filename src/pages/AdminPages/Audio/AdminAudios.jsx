@@ -174,7 +174,7 @@ function AdminAudios() {
                     }
                 </div>
                 <div>
-                <h2>Mine</h2>
+                <h2>Mind</h2>
 
                     {
                         audioUrls?.mind?.map(item => (
@@ -217,58 +217,6 @@ function AdminAudios() {
                 </div>
 
             </div>
-
-
-            {/* <div className="mt-10 grid grid-cols-4 gap-10">
-                <div>
-                    <h2>Body</h2>
-                    {body?.map((audioUrl, index) => (
-                        <div key={index} className="mb-2">
-                            <audio controls>
-                                <source src={audioUrl?.audio} type="audio/mp3" />
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    ))}
-                </div>
-
-                <div>
-                    <h2>Mind</h2>
-                    {mind?.map((audioUrl, index) => (
-                        <div key={index} className="mb-2">
-                            <audio controls>
-                                <source src={audioUrl?.audio} type="audio/mp3" />
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    ))}
-                </div>
-
-                <div>
-                    <h2>Self</h2>
-                    {self?.map((audioUrl, index) => (
-                        <div key={index} className="mb-2">
-                            <audio controls>
-                                <source src={audioUrl?.audio} type="audio/mp3" />
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    ))}
-                </div>
-
-                <div>
-                    <h2>Ego</h2>
-                    {ego?.map((audioUrl, index) => (
-                        <div key={index} className="mb-2">
-                            <audio controls>
-                                <source src={audioUrl?.audio} type="audio/mp3" />
-                                Your browser does not support the audio element.
-                            </audio>
-                        </div>
-                    ))}
-                </div>
-
-            </div> */}
 
 
         </div>
