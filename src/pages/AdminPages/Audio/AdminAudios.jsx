@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import authApi from '../../../redux/fetures/auth/authApi';
@@ -8,20 +8,25 @@ function AdminAudios() {
     const [uploadStatus, setUploadStatus] = useState('');
     const [status, setStatus] = useState('');
     const [categoryStatus, setCategoryStatus] = useState('');
-    const [audioUrls, setAudioUrls] = useState([]);
-    const { data, refetch } = authApi.useAllAudioPathsQuery();
+    const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
+    const { data: audioUrls, refetch } = authApi.useAllAudioPathsQuery({ showCategoryStatus });
     const [name, setAudioTitle] = useState("");
+
+
+
+    console.log(showCategoryStatus, audioUrls);
+
+
+
+
 
     const handleChange = (event) => {
         setStatus(event.target.value);
     };
+
     const handleCategoryChange = (event) => {
         setCategoryStatus(event.target.value);
     };
-
-    useEffect(() => {
-        setAudioUrls(data);
-    }, [data]);
 
     const handleFileChange = (e) => {
         setAudioFile(e.target.files[0]);
@@ -55,7 +60,7 @@ function AdminAudios() {
                 setStatus('');
                 setCategoryStatus('');
                 setUploadStatus('');
-                setAudioTitle(''); // Reset the title field here
+                setAudioTitle('');
             }
 
         } catch (error) {
@@ -75,12 +80,7 @@ function AdminAudios() {
                             type="file"
                             accept="audio/*"
                             onChange={handleFileChange}
-                            className="block w-full mb-5 text-sm text-gray-500 border rounded border-gray-400
-          file:mr-4 file:py-2 file:px-4
-          file:rounded-lg file:border-0
-          file:text-sm file:font-semibold
-          file:bg-blue-50 file:text-blue-700
-          hover:file:bg-blue-100 cursor-pointer"
+                            className="block w-full mb-5 text-sm text-gray-500 border rounded border-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
                         />
                     </label>
 
@@ -101,6 +101,7 @@ function AdminAudios() {
                             <MenuItem value="ego">Ego</MenuItem>
                             <MenuItem value="body">Body</MenuItem>
                             <MenuItem value="mind">Mind</MenuItem>
+                            <MenuItem value="vault">Vault</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -140,7 +141,7 @@ function AdminAudios() {
                         <p className={`mt-4 text-sm ${uploadStatus.includes('successful') ? 'text-green-600' : 'text-red-600'}`}>
                             {uploadStatus}
                         </p>
-                    ) : <p className='mt-4 text-sm' ></p> }
+                    ) : <p className='mt-4 text-sm' ></p>}
 
                     <button
                         onClick={handleFileUpload}
@@ -148,15 +149,80 @@ function AdminAudios() {
                     >
                         Upload
                     </button>
-
-
                 </div>
             </div>
 
-            <div className="mt-10 grid grid-cols-4 gap-10">
+
+            <div>
+                <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withMusic")}>With Music</button>
+                <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withOutMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withOutMusic")}>Without Music</button>
+            </div>
+
+            <div className='grid grid-cols-4 gap-10 mt-10' >
+
                 <div>
                     <h2>Body</h2>
-                    {audioUrls?.body?.map((audioUrl, index) => (
+                    {
+                        audioUrls?.body?.map(item => (
+                            <div key={item._id} className="mb-2">
+                                <audio controls>
+                                    <source src={item?.audio} type="audio/mp3" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div>
+                <h2>Mine</h2>
+
+                    {
+                        audioUrls?.mind?.map(item => (
+                            <div key={item._id} className="mb-2">
+                                <audio controls>
+                                    <source src={item?.audio} type="audio/mp3" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div>
+                <h2>Self</h2>
+
+                    {
+                        audioUrls?.self?.map(item => (
+                            <div key={item._id} className="mb-2">
+                                <audio controls>
+                                    <source src={item?.audio} type="audio/mp3" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div>
+                <h2>Ego</h2>
+
+                    {
+                        audioUrls?.ego?.map(item => (
+                            <div key={item._id} className="mb-2">
+                                <audio controls>
+                                    <source src={item?.audio} type="audio/mp3" />
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        ))
+                    }
+                </div>
+
+            </div>
+
+
+            {/* <div className="mt-10 grid grid-cols-4 gap-10">
+                <div>
+                    <h2>Body</h2>
+                    {body?.map((audioUrl, index) => (
                         <div key={index} className="mb-2">
                             <audio controls>
                                 <source src={audioUrl?.audio} type="audio/mp3" />
@@ -168,7 +234,7 @@ function AdminAudios() {
 
                 <div>
                     <h2>Mind</h2>
-                    {audioUrls?.mind?.map((audioUrl, index) => (
+                    {mind?.map((audioUrl, index) => (
                         <div key={index} className="mb-2">
                             <audio controls>
                                 <source src={audioUrl?.audio} type="audio/mp3" />
@@ -180,7 +246,7 @@ function AdminAudios() {
 
                 <div>
                     <h2>Self</h2>
-                    {audioUrls?.self?.map((audioUrl, index) => (
+                    {self?.map((audioUrl, index) => (
                         <div key={index} className="mb-2">
                             <audio controls>
                                 <source src={audioUrl?.audio} type="audio/mp3" />
@@ -192,7 +258,7 @@ function AdminAudios() {
 
                 <div>
                     <h2>Ego</h2>
-                    {audioUrls?.ego?.map((audioUrl, index) => (
+                    {ego?.map((audioUrl, index) => (
                         <div key={index} className="mb-2">
                             <audio controls>
                                 <source src={audioUrl?.audio} type="audio/mp3" />
@@ -201,7 +267,10 @@ function AdminAudios() {
                         </div>
                     ))}
                 </div>
-            </div>
+
+            </div> */}
+
+
         </div>
     );
 }

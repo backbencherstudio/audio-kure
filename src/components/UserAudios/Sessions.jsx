@@ -14,10 +14,16 @@ const Sessions = () => {
   const [subscribeData, setSubscribeData] = useState(null);
   const [usbDataLoading, setUsbDataLoading] = useState(null);
   const navigate = useNavigate();
-  const { data: audioUrls, isLoading: audioDataLoading } = authApi.useAllAudioPathsQuery();
+  const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic")
+  const { data: audioUrls, isLoading: audioDataLoading } = authApi.useAllAudioPathsQuery({showCategoryStatus});
 
   const location = useLocation();
   const sessionId = new URLSearchParams(location.search).get('session_id') || userData?.data?.sessionId;
+
+  const body = audioUrls?.body
+  const mind = audioUrls?.mind
+  const self = audioUrls?.self
+  const ego = audioUrls?.ego
 
   useEffect(() => {
     if (sessionId) {
@@ -57,7 +63,7 @@ const Sessions = () => {
   }, [usbDataLoading, subscribeData, currentUser?.email, navigate]);
 
   if (userDataLoading || audioDataLoading) {
-    return <p>Loading ...</p>;
+    return <p></p>;
   }
 
   const plan = subscribeData?.plan;
@@ -71,20 +77,98 @@ const Sessions = () => {
         </div>
 
         <div className='grid grid-cols-2'>
-          <div className='bg-green-300' > 
+          <div className='' >
             <img className='px-10' src="https://png.pngtree.com/thumb_back/fh260/background/20230516/pngtree-bright-pink-man-in-meditation-with-the-breath-of-fire-image_2569056.jpg" alt="" />
-             </div>
+          </div>
 
-          <div className='bg-red-300 ' >
+          <div className=''>
+            <div>
+              <h2 className='bg-blue-500 text-center py-2 rounded-full text-xl ' >{userData?.data?.userType}</h2>
+
+              <div className='grid grid-cols-2 gap-10 mt-5' >
+                <button className={` w-full border rounded-full px-4 py-2 mr-4 font-semibold duration-300  ${showCategoryStatus === "withMusic" ? "bg-green-200 text-black " : ""}`} onClick={() => setShowCategoryStatus("withMusic")} >with music</button>
+                <button className={` w-full border rounded-full px-4 py-2 mr-4 font-semibold duration-300  ${showCategoryStatus === "withMusic" ? "" : "bg-green-200 text-black"}`} onClick={() => setShowCategoryStatus("withOutMusic")} >with out music</button>
+              </div>
+            </div>
+
+
             {audioUrls?.result?.length > 0 ? (
 
-              audioUrls.result.map((item, index) => (
-                <div className='mt-2' key={item._id || index}>
-                  {/* <p>{item.name}</p> */}
-                  <audio controls src={item.audio}></audio>
-                  {/* <p>Category: {item.category}</p> */}
-                </div>
-              ))
+
+              <div className=' ' >
+
+                {/* ================================================= physical ============================================= */}
+
+                {
+                  userData?.data?.userType === "physical" &&
+
+                  <div className='grid grid-cols-2 mt-3' >
+                    <div>
+                      <h2>Body</h2>
+                      {
+                        body?.map((item, index) => (
+                          <div className='mt-2' key={item._id || index}>
+                            {/* <p>{item.name}</p> */}
+                            <audio controls src={item.audio}></audio>
+                            {/* <p>Category: {item.category}</p> */}
+                          </div>
+                        ))
+                      }
+                    </div>
+                    <div>
+                      <h2>Mind</h2>
+                      {
+                        mind?.map((item, index) => (
+                          <div className='mt-2' key={item._id || index}>
+                            {/* <p>{item.name}</p> */}
+                            <audio controls src={item.audio}></audio>
+                            {/* <p>Category: {item.category}</p> */}
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+
+                }
+
+                {/* ================================================= emotional ============================================= */}
+
+                {
+                  userData?.data?.userType === "emotional" &&
+
+                  <div className='grid grid-cols-2 mt-3' >
+                    <div>
+                      <h2>Self</h2>
+                      {
+                        self?.map((item, index) => (
+                          <div className='mt-2' key={item._id || index}>
+                            {/* <p>{item.name}</p> */}
+                            <audio controls src={item.audio}></audio>
+                            {/* <p>Category: {item.category}</p> */}
+                          </div>
+                        ))
+                      }
+                    </div>
+                    <div>
+                      <h2>Ego</h2>
+                      {
+                        ego?.map((item, index) => (
+                          <div className='mt-2' key={item._id || index}>
+                            {/* <p>{item.name}</p> */}
+                            <audio controls src={item.audio}></audio>
+                            {/* <p>Category: {item.category}</p> */}
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+
+                }
+
+
+
+              </div>
+
 
 
             ) : (

@@ -94,10 +94,12 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     allAudioPaths: builder.query({
-      query: () => {        
+      query: (categoryStatus) => { 
+              
         return {
-          url: "/get-path-name",
+          url: `/get-path-name`,
           method: "GET",
+          params : categoryStatus
         }
       },
     }),
