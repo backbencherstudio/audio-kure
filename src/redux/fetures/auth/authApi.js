@@ -59,6 +59,7 @@ const authApi = baseApi.injectEndpoints({
           body: { purchasePlan },
         }
       },
+      invalidatesTags : ["audios"]
     }),
 
     updateAudioData: builder.mutation({

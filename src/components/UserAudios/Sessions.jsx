@@ -143,6 +143,9 @@ const Sessions = () => {
   const allSelectedIdGetFun = async () => {
     const allId = selectedBodyId + "," + selectedMindId + "," + selectedSelfId + "," + selectedEgoId;
     const idArray = allId.split(",").filter((id) => id.trim() !== "");
+    if ((selectedBodyId.length === 0 || selectedMindId.length === 0) && (selectedSelfId.length === 0 || selectedEgoId.length === 0)) {
+      return toast.warning("Please select an audio file for both categories before proceeding.")
+    }
     const data = {
       email: currentUser?.email,
       idArray
@@ -200,7 +203,7 @@ const Sessions = () => {
                 <h2 className="bg-blue-500 text-center py-2 rounded-full text-xl">{userData?.data?.userType}</h2>
 
                 {
-                    selectedBodyitem?.length > 0 ||
+                  selectedBodyitem?.length > 0 ||
                     selectedMinditem?.length > 0 ||
                     selectedEgoitem?.length > 0 ||
                     selectedselfitem?.length > 0 ? "" :
@@ -223,36 +226,38 @@ const Sessions = () => {
                         without music
                       </button>
                     </div>
-
                 }
 
-
-
                 <div>
-                  <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added Your selected Audio</button>
+                  {
+                    selectedBodyitem?.length > 0 ||
+                      selectedMinditem?.length > 0 ||
+                      selectedEgoitem?.length > 0 ||
+                      selectedselfitem?.length > 0 ? "" :
+                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added Your selected Audio</button>
+                  }
                 </div>
 
               </div>
 
+              {/* =======================================     physical  ================================= */}
               {audioUrls?.result?.length > 0 ? (
                 <div>
                   {userData?.data?.userType === "physical" && (
 
-
                     <div className="grid grid-cols-2 mt-3 gap-10">
-
                       <div>
                         <h2>Body</h2>
 
                         {!selectedBodyitem && body?.map((item, index) => (
                           <div
                             key={item._id || index}
-                            className={`mt-4 p-2 rounded ${selectedBodyId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                            className={`mt-4 rounded ${selectedBodyId.includes(item._id) ? "bg-blue-300" : "bg-white"
                               }`}
                           >
                             <button
                               onClick={() => toggleBodyId(item._id)}
-                              className="w-full text-left text-black"
+                              className="w-full text-left text-black p-2"
                             >
                               {item?.name}
                             </button>
@@ -276,12 +281,12 @@ const Sessions = () => {
                         {!selectedMinditem && mind?.map((item, index) => (
                           <div
                             key={item._id || index}
-                            className={`mt-4 p-2 rounded ${selectedMindId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                            className={`mt-4 rounded ${selectedMindId.includes(item._id) ? "bg-blue-300" : "bg-white"
                               }`}
                           >
                             <button
                               onClick={() => toggleMindId(item._id)}
-                              className="w-full text-left text-black"
+                              className="w-full text-left text-black p-2"
                             >
                               {item?.name}
                             </button>
@@ -295,110 +300,67 @@ const Sessions = () => {
                             </div>
                           ))
                         }
-
-
-
                       </div>
-
-
-
-                      {/* {selectedBodyitem > 0 &&
-                        <div className='grid grid-cols-2 mt-3 gap-10' >
-                          <div>
-                            <h2>Body</h2>
-
-                            {
-                              body?.map((item, index) => (
-                                <div className='mt-4' key={item._id || index}>
-                                  <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
-                                </div>
-                              ))
-                            }
-
-                          </div>
-                          <div>
-                            <h2>Mind</h2>
-                            {
-                              mind?.map((item, index) => (
-                                <div className='mt-4' key={item._id || index}>
-                                  <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
-                                </div>
-                              ))
-                            }
-                          </div>
-                        </div>
-                      } */}
-
-
                     </div>
-
-
                   )}
 
                   {/* =======================================     emotional  ================================= */}
 
                   {userData?.data?.userType === "emotional" && (
                     <div className="grid grid-cols-2 mt-3 gap-10">
-
                       <div>
                         <h2>Self</h2>
-
-                        {self?.map((item, index) => (
+                        {!selectedselfitem && self?.map((item, index) => (
                           <div
                             key={item._id || index}
-                            className={`mt-4 p-2 rounded ${selectedSelfId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                            className={`mt-4  rounded ${selectedSelfId.includes(item._id) ? "bg-blue-300" : "bg-white"
                               }`}
                           >
                             <button
                               onClick={() => toggleSelfId(item._id)}
-                              className="w-full text-left text-black"
+                              className="w-full text-left text-black p-2"
                             >
                               {item?.name}
                             </button>
                           </div>
                         ))}
 
+                        {selectedselfitem?.length > 0 &&
+                          selectedselfitem?.map((item, index) => (
+                            <div className='mt-4' key={item._id || index}>
+                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                            </div>
+                          ))
+                        }
                       </div>
 
                       <div>
                         <h2>Ego</h2>
 
-                        {ego?.map((item, index) => (
+                        {!selectedEgoitem && ego?.map((item, index) => (
                           <div
                             key={item._id || index}
-                            className={`mt-4 p-2 rounded ${selectedEgoId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                            className={`mt-4  rounded ${selectedEgoId.includes(item._id) ? "bg-blue-300" : "bg-white"
                               }`}
                           >
                             <button
                               onClick={() => toggleEgoId(item._id)}
-                              className="w-full text-left text-black"
+                              className="w-full text-left text-black p-2"
                             >
                               {item?.name}
                             </button>
                           </div>
                         ))}
+
+                        {selectedEgoitem?.length > 0 &&
+                          selectedEgoitem?.map((item, index) => (
+                            <div className='mt-4' key={item._id || index}>
+                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                            </div>
+                          ))
+                        }
+
                       </div>
-
-
-                      {/* <div>
-                        <h2>Self</h2>
-                        {self?.map((item, index) => (
-                          <div className="mt-4" key={item._id || index}>
-                            <button>{item?.name}</button>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div>
-                        <h2>Ego</h2>
-                        {ego?.map((item, index) => (
-                          <div className="mt-4" key={item._id || index}>
-                            <button>{item?.name}</button>
-                          </div>
-                        ))}
-                      </div> */}
-
-
                     </div>
                   )}
                 </div>
