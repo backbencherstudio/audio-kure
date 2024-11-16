@@ -94,14 +94,26 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     allAudioPaths: builder.query({
-      query: (categoryStatus) => { 
-              
+      query: (categoryStatus) => {              
         return {
           url: `/get-path-name`,
           method: "GET",
           params : categoryStatus
         }
       },
+      providesTags : ["audios"],
+
+    }),
+
+    setSelectedAudios: builder.mutation({
+      query: (data) => {                 
+        return {
+          url: `/auth/selectedAudio`,
+          method: "PATCH",
+          body : data
+        }
+      },
+      invalidatesTags : ["audios"]
     }),
 
 
