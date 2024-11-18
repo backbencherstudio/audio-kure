@@ -10,7 +10,7 @@ import CountDownTimer from "../CountDownTimer/CountDownTimer";
 import GoogleReviews from "../GoogleReviews/GoogleReviews";
 import Footer from "../../shared/Footer";
 import Logo from "../../shared/Logo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
@@ -190,6 +190,18 @@ const SubscriptionPlan = () => {
 
   const usertype = localStorage.getItem('userType')
 
+  const [searchParams] = useSearchParams();
+  const section = searchParams.get("section");
+
+  useEffect(() => {
+    if (section) {
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [section]);
+
   return (
     <div className="text-white">
       <CountDownTimer onCountdownEnd={handleCountdownEnd} />
@@ -213,7 +225,7 @@ const SubscriptionPlan = () => {
         </div>
         <PlanDescription />
         <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
-          <div className="md:w-1/2 ">
+          <div id="subscription" className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
               Select your plan:
             </h2>
@@ -251,7 +263,8 @@ const SubscriptionPlan = () => {
               <img className="mx-auto w-[45%]" src={safe_payment} alt="safe-payment" />
             </form>
           </div>
-          <div className="md:w-1/2 flex flex-col justify-between">
+
+          <div  className="md:w-1/2 flex flex-col justify-between ">
 
             <ul className="space-y-2">
               <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
@@ -332,6 +345,7 @@ const SubscriptionPlan = () => {
               </div>
             </div>
           </div>
+
         </div>
 
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />

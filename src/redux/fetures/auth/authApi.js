@@ -23,6 +23,17 @@ const authApi = baseApi.injectEndpoints({
       providesTags: ["audio", "user"], 
     }),
 
+    userDelete: builder.mutation({
+      query: (email) => {
+        return {        
+            url: `/auth/userDelete`,
+            method: "PATCH",
+            body : {email}
+        }
+      },
+      providesTags: ["audio", "user"], 
+    }),
+
     registerUser: builder.mutation({
       query: (user) => {
         return {        

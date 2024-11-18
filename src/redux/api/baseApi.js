@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../fetures/auth/authSlice";
+// import { Navigate } from "react-router-dom";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api/v1",
@@ -13,8 +14,15 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
+
+
 const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+
+  // if(result?.meta?.response.statusText === "Unauthorized" ){
+  //       Navigate("/login")
+  // }
+  
     
   if (result?.error?.status === 403) {
     // toast.error(`${result?.error?.data.message}`);

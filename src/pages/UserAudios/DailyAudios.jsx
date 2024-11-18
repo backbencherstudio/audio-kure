@@ -18,6 +18,8 @@ const DailyAudios = () => {
     skip: !currentEmail,
   });
 
+   
+
   useEffect(() => {
     if (currentEmail) {
       refetch();

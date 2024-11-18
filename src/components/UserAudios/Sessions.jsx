@@ -11,8 +11,10 @@ import { toast } from "react-toastify";
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
+
   const currentUser = useSelector(selectCurrentUser);
   const { data: userData, isLoading: userDataLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
+  const [userDelete] = authApi.useUserDeleteMutation()
   const [subscribeData, setSubscribeData] = useState(null);
   const [usbDataLoading, setUsbDataLoading] = useState(null);
   const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
@@ -45,8 +47,8 @@ const Sessions = () => {
   const selectedEgoitem = audioUrls?.selectedEgoitem;
   const selectedselfitem = audioUrls?.selectedselfitem;
 
-  console.log(selectedBodyitem);
-  console.log(selectedMinditem);
+  const plan = subscribeData?.plan;
+  const planNumber = parseInt(plan);
 
 
   useEffect(() => {
@@ -78,12 +80,20 @@ const Sessions = () => {
   }, [subscribeData, currentUser?.email, sessionId, purchasePlan]);
 
   useEffect(() => {
-    if (
-      (subscribeData && subscribeData.status !== "active") ||
-      (subscribeData && currentUser?.email !== subscribeData.subscription_email)
-    ) {
-      navigate("/subscriptionplan");
+    const deleteFun = async () => {
+      if (
+        (subscribeData && subscribeData?.status !== "active") ||
+        (subscribeData && currentUser?.email !== subscribeData?.subscription_email)
+      ) {
+
+        const res = await userDelete(currentUser?.email)
+        if (res?.data?.success) {
+          navigate("/subscriptionplan");
+        }
+      }
     }
+    deleteFun()
+
   }, [usbDataLoading, subscribeData, currentUser?.email, navigate]);
 
 
@@ -95,7 +105,19 @@ const Sessions = () => {
   }
 
 
+
+  const allId = selectedBodyId + "," + selectedMindId + "," + selectedSelfId + "," + selectedEgoId;
+  const idArray = allId.split(",").filter((id) => id.trim() !== "");
+
   const toggleBodyId = (id) => {
+
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 2")
+    }
+
     setSelectedBodyId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -103,9 +125,18 @@ const Sessions = () => {
         return [...prevSelected, id];
       }
     });
+
   };
 
   const toggleMindId = (id) => {
+
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 2")
+    }
+
     setSelectedMindId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -116,6 +147,14 @@ const Sessions = () => {
   };
 
   const toggleSelfId = (id) => {
+
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 2")
+    }
+
     setSelectedSelfId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -126,6 +165,14 @@ const Sessions = () => {
   };
 
   const toggleEgoId = (id) => {
+
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 2")
+    }
+
     setSelectedEgoId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -135,14 +182,9 @@ const Sessions = () => {
     });
   };
 
-  // const allSelectedIdGetFun = () => {
-  //   const allId = selectedBodyId + selectedMindId + selectedSelfId + selectedEgoId
-  //   console.log(allId);
-  // }
+
 
   const allSelectedIdGetFun = async () => {
-    const allId = selectedBodyId + "," + selectedMindId + "," + selectedSelfId + "," + selectedEgoId;
-    const idArray = allId.split(",").filter((id) => id.trim() !== "");
     if ((selectedBodyId.length === 0 || selectedMindId.length === 0) && (selectedSelfId.length === 0 || selectedEgoId.length === 0)) {
       return toast.warning("Please select an audio file for both categories before proceeding.")
     }
@@ -150,17 +192,21 @@ const Sessions = () => {
       email: currentUser?.email,
       idArray
     }
-    await setSelectedAudios({ data });
+    const res = await setSelectedAudios({ data });
+    if (res?.data?.success) {
+      toast.success("Selected Your Audio Successfully")
+    }
   };
 
 
 
   if (userDataLoading || audioDataLoading) {
-    return <p>Loading...</p>;
+    return <div className="w-full h-[76vh] flex justify-center items-center " >
+      <p className="text-center text-2xl " >Loading Data...</p>
+    </div>;
   }
 
-  const plan = subscribeData?.plan;
-  const planNumber = parseInt(plan);
+
 
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
@@ -184,6 +230,7 @@ const Sessions = () => {
                   setListeningTime={setListeningTime}
                 />
               </div>
+
               <div>
                 <a
                   className="bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md mt-10 inline-block"
@@ -194,6 +241,19 @@ const Sessions = () => {
                   Cancel Plan
                 </a>
               </div>
+              <div>
+
+                If You Want To Change Your Plan
+
+                <button
+                  onClick={() => navigate("/subscriptionplan?section=subscription")}
+                  className="text-green-400 duration-300 font-semibold px-2 py-2 rounded-md text-md mt-5 inline-block"
+                >
+                  Click Here
+                </button>
+
+              </div>
+
             </div>
           </div>
 
@@ -215,7 +275,10 @@ const Sessions = () => {
                           }`}
                         onClick={() => categoryStatusChangeFun("withMusic")}
                       >
-                        with music
+                        {
+                          audioDataLoading ? "L.." :
+                            "with music"
+                        }
                       </button>
                       <button
                         disabled={showCategoryStatus === "withOutMusic"}
@@ -223,7 +286,10 @@ const Sessions = () => {
                           }`}
                         onClick={() => categoryStatusChangeFun("withOutMusic")}
                       >
-                        without music
+                        {
+                          audioDataLoading ? "L.." :
+                            "with out music"
+                        }
                       </button>
                     </div>
                 }
@@ -233,8 +299,10 @@ const Sessions = () => {
                     selectedBodyitem?.length > 0 ||
                       selectedMinditem?.length > 0 ||
                       selectedEgoitem?.length > 0 ||
-                      selectedselfitem?.length > 0 ? "" :
-                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added Your selected Audio</button>
+                      selectedselfitem?.length > 0 ||
+                      planNumber === 350
+                      ? "" :
+                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added  Your selected Audio</button>
                   }
                 </div>
 
@@ -249,57 +317,86 @@ const Sessions = () => {
                       <div>
                         <h2>Body</h2>
 
-                        {!selectedBodyitem && body?.map((item, index) => (
-                          <div
-                            key={item._id || index}
-                            className={`mt-4 rounded ${selectedBodyId.includes(item._id) ? "bg-blue-300" : "bg-white"
-                              }`}
-                          >
-                            <button
-                              onClick={() => toggleBodyId(item._id)}
-                              className="w-full text-left text-black p-2"
-                            >
-                              {item?.name}
-                            </button>
-                          </div>
-                        ))}
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                body?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                  </div>
+                                ))
+                              }
+                            </div> : <div>
+                              {!selectedBodyitem && body?.map((item, index) => (
+                                <div
+                                  key={item._id || index}
+                                  className={`mt-4 rounded ${selectedBodyId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                    }`}
+                                >
+                                  <button
+                                    onClick={() => toggleBodyId(item._id)}
+                                    className="w-full text-left text-black p-2"
+                                  >
+                                    {item?.name}
+                                  </button>
+                                </div>
+                              ))}
 
-                        {selectedBodyitem?.length > 0 &&
-                          selectedBodyitem?.map((item, index) => (
-                            <div className='mt-4' key={item._id || index}>
-                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                              {selectedBodyitem?.length > 0 &&
+                                selectedBodyitem?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                  </div>
+                                ))
+                              }
                             </div>
-                          ))
-                        }
 
+                          }
+                        </div>
                       </div>
 
                       <div>
                         <h2>Mind</h2>
 
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                mind?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                  </div>
+                                ))
+                              }
+                            </div> :
+                              <div>
+                                {!selectedMinditem && mind?.map((item, index) => (
+                                  <div
+                                    key={item._id || index}
+                                    className={`mt-4 rounded ${selectedMindId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                      }`}
+                                  >
+                                    <button
+                                      onClick={() => toggleMindId(item._id)}
+                                      className="w-full text-left text-black p-2"
+                                    >
+                                      {item?.name}
+                                    </button>
+                                  </div>
+                                ))}
 
-                        {!selectedMinditem && mind?.map((item, index) => (
-                          <div
-                            key={item._id || index}
-                            className={`mt-4 rounded ${selectedMindId.includes(item._id) ? "bg-blue-300" : "bg-white"
-                              }`}
-                          >
-                            <button
-                              onClick={() => toggleMindId(item._id)}
-                              className="w-full text-left text-black p-2"
-                            >
-                              {item?.name}
-                            </button>
-                          </div>
-                        ))}
+                                {selectedMinditem?.length > 0 &&
+                                  selectedMinditem?.map((item, index) => (
+                                    <div className='mt-4' key={item._id || index}>
+                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                        </div>
 
-                        {selectedMinditem?.length > 0 &&
-                          selectedMinditem?.map((item, index) => (
-                            <div className='mt-4' key={item._id || index}>
-                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
-                            </div>
-                          ))
-                        }
                       </div>
                     </div>
                   )}
@@ -310,55 +407,86 @@ const Sessions = () => {
                     <div className="grid grid-cols-2 mt-3 gap-10">
                       <div>
                         <h2>Self</h2>
-                        {!selectedselfitem && self?.map((item, index) => (
-                          <div
-                            key={item._id || index}
-                            className={`mt-4  rounded ${selectedSelfId.includes(item._id) ? "bg-blue-300" : "bg-white"
-                              }`}
-                          >
-                            <button
-                              onClick={() => toggleSelfId(item._id)}
-                              className="w-full text-left text-black p-2"
-                            >
-                              {item?.name}
-                            </button>
-                          </div>
-                        ))}
 
-                        {selectedselfitem?.length > 0 &&
-                          selectedselfitem?.map((item, index) => (
-                            <div className='mt-4' key={item._id || index}>
-                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
-                            </div>
-                          ))
-                        }
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                self?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                  </div>
+                                ))
+                              }
+                            </div> :
+                              <div>
+                                {!selectedselfitem && self?.map((item, index) => (
+                                  <div
+                                    key={item._id || index}
+                                    className={`mt-4  rounded ${selectedSelfId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                      }`}
+                                  >
+                                    <button
+                                      onClick={() => toggleSelfId(item._id)}
+                                      className="w-full text-left text-black p-2"
+                                    >
+                                      {item?.name}
+                                    </button>
+                                  </div>
+                                ))}
+
+                                {selectedselfitem?.length > 0 &&
+                                  selectedselfitem?.map((item, index) => (
+                                    <div className='mt-4' key={item._id || index}>
+                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                        </div>
                       </div>
 
                       <div>
                         <h2>Ego</h2>
 
-                        {!selectedEgoitem && ego?.map((item, index) => (
-                          <div
-                            key={item._id || index}
-                            className={`mt-4  rounded ${selectedEgoId.includes(item._id) ? "bg-blue-300" : "bg-white"
-                              }`}
-                          >
-                            <button
-                              onClick={() => toggleEgoId(item._id)}
-                              className="w-full text-left text-black p-2"
-                            >
-                              {item?.name}
-                            </button>
-                          </div>
-                        ))}
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                ego?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                  </div>
+                                ))
+                              }
+                            </div> :
+                              <div>
+                                {!selectedEgoitem && ego?.map((item, index) => (
+                                  <div
+                                    key={item._id || index}
+                                    className={`mt-4  rounded ${selectedEgoId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                      }`}
+                                  >
+                                    <button
+                                      onClick={() => toggleEgoId(item._id)}
+                                      className="w-full text-left text-black p-2"
+                                    >
+                                      {item?.name}
+                                    </button>
+                                  </div>
+                                ))}
 
-                        {selectedEgoitem?.length > 0 &&
-                          selectedEgoitem?.map((item, index) => (
-                            <div className='mt-4' key={item._id || index}>
-                              <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
-                            </div>
-                          ))
-                        }
+                                {selectedEgoitem?.length > 0 &&
+                                  selectedEgoitem?.map((item, index) => (
+                                    <div className='mt-4' key={item._id || index}>
+                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                        </div>
 
                       </div>
                     </div>
