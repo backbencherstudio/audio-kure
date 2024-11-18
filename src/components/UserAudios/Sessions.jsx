@@ -8,6 +8,7 @@ import "./Sessions.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import NewAudioPlayer from "./NewAudioPlayer";
 import { toast } from "react-toastify";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
@@ -53,9 +54,9 @@ const Sessions = () => {
 
 
   useEffect(() => {
-    if ( parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
+    if (parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
       console.log(totalDuration, listeningTime);
-      
+
       const updateCoin = async () => {
         const audioData = {
           email: currentUser?.email,
@@ -63,7 +64,7 @@ const Sessions = () => {
         const res = await updateAudioData(audioData)
         console.log(res);
       }
-      
+
       updateCoin()
     }
   }, [listeningTime])
@@ -215,16 +216,36 @@ const Sessions = () => {
     </div>;
   }
 
+  const count = parseInt(userData?.data.selfId)
+  const ProgressBarCount = (planNumber === 350 ? audioUrls.result?.length : userData?.data.selectedBodyAudios.length)
+
+
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
-        <div>
+        <div className="mb-5">
           S Data = {subscribeData?.subscription_email} S = {subscribeData?.status} P = {subscribeData?.plan} C_id ={" "}
           {subscribeData?.customer_id}
           <h2>
             Total Time : {totalDuration} :: Listening Time = {listeningTime}
           </h2>
           {totalDuration === listeningTime && totalDuration > 0 && <p>Done</p>}
+
+          {
+            count > 0 && <ProgressBar
+              className="mt-2"
+              completed={(count / ProgressBarCount) * 100}
+              labelColor="transparent"
+              labelAlignment="center"
+              borderRadius="0px 10px 10px 0px"
+              height="8px"
+              bgColor="#C4AFFF"
+              baseBgColor="#2D2C2C"
+            />
+          }
+
+
+
         </div>
 
         <div className="grid grid-cols-2 gap-10">
