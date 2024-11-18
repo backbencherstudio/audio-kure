@@ -19,6 +19,7 @@ const Sessions = () => {
   const [usbDataLoading, setUsbDataLoading] = useState(null);
   const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
   const { data: audioUrls, isLoading: audioDataLoading } = authApi.useAllAudioPathsQuery({ showCategoryStatus, email: currentUser?.email });
+  const [updateAudioData] = authApi.useUpdateAudioDataMutation();
 
   const [setSelectedAudios] = authApi.useSetSelectedAudiosMutation()
 
@@ -49,6 +50,24 @@ const Sessions = () => {
 
   const plan = subscribeData?.plan;
   const planNumber = parseInt(plan);
+
+
+  useEffect(() => {
+    if ( parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
+      console.log(totalDuration, listeningTime);
+      
+      const updateCoin = async () => {
+        const audioData = {
+          email: currentUser?.email,
+        };
+        const res = await updateAudioData(audioData)
+        console.log(res);
+      }
+      
+      updateCoin()
+    }
+  }, [listeningTime])
+
 
 
   useEffect(() => {
@@ -110,14 +129,12 @@ const Sessions = () => {
   const idArray = allId.split(",").filter((id) => id.trim() !== "");
 
   const toggleBodyId = (id) => {
-
     if (planNumber === 25 && idArray.length === 2) {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
       return toast.warning("you cant selecte more then 2")
     }
-
     setSelectedBodyId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -129,14 +146,12 @@ const Sessions = () => {
   };
 
   const toggleMindId = (id) => {
-
     if (planNumber === 25 && idArray.length === 2) {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
       return toast.warning("you cant selecte more then 2")
     }
-
     setSelectedMindId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -147,14 +162,12 @@ const Sessions = () => {
   };
 
   const toggleSelfId = (id) => {
-
     if (planNumber === 25 && idArray.length === 2) {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
       return toast.warning("you cant selecte more then 2")
     }
-
     setSelectedSelfId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -165,14 +178,12 @@ const Sessions = () => {
   };
 
   const toggleEgoId = (id) => {
-
     if (planNumber === 25 && idArray.length === 2) {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
       return toast.warning("you cant selecte more then 2")
     }
-
     setSelectedEgoId((prevSelected) => {
       if (prevSelected.includes(id)) {
         return prevSelected.filter((itemId) => itemId !== id);
@@ -198,15 +209,11 @@ const Sessions = () => {
     }
   };
 
-
-
   if (userDataLoading || audioDataLoading) {
     return <div className="w-full h-[76vh] flex justify-center items-center " >
       <p className="text-center text-2xl " >Loading Data...</p>
     </div>;
   }
-
-
 
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">

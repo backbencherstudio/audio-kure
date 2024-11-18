@@ -79,39 +79,15 @@ const SignUpPage = () => {
     }
   };
 
-  // const verifyOtp = async (otp) => {
-  //   const verifyData = { email: userEmail, otp };
-  //   const res = await verifyOTP(verifyData);
-
-  //   if (res?.error?.status === 400) {
-  //     toast.error(res?.error?.data.message);
-  //     setOpen(false)
-  //   }
-
-
-  //   if (res?.data?.success) {
-  //     toast.success("Registration Successfull");
-  //     setOpen(false);
-  //     navigate("/login");
-  //   } else {
-  //     toast.error(res?.data?.message);
-  //   }
-  // };
   const [otp, setOtp] = useState(new Array(6).fill(""));
-
-  // const persisData = {
-  //   userType: planData?.userType,
-  // }
 
   const verifyOtp = async (otp) => {
     const verifyData = { email: userEmail, otp, userType: planData?.userType };
-    const res = await verifyOTP(verifyData);
-
-    if (res?.error?.status === 400) {
-      toast.error(res?.error?.data.message);
+    const res = await verifyOTP(verifyData);   
+    if (res?.error?.status === 400 || res?.error?.originalStatus === 400 ) {
+      toast.error("OTP Not Match , Please Try Again");
       setOpen(false);
     }
-
     if (res?.data?.success) {
       toast.success("Registration Successful");
       setOpen(false);

@@ -133,7 +133,7 @@ const Vault = () => {
         );
     }
 
-    if (counterValue < 1000 || plan !== 365) {
+    if (counterValue < 1000 || plan !== 350) {
         navigate("/login");
         dispatch(logOut());
         return null;
