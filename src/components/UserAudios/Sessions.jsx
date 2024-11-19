@@ -222,13 +222,6 @@ const Sessions = () => {
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
         <div className="mb-5">
-          S Data = {subscribeData?.subscription_email} S = {subscribeData?.status} P = {subscribeData?.plan} C_id ={" "}
-          {subscribeData?.customer_id}
-          <h2>
-            Total Time : {totalDuration} :: Listening Time = {listeningTime}
-          </h2>
-          {totalDuration === listeningTime && totalDuration > 0 && <p>Done</p>}
-
           {
             count > 0 && <ProgressBar
               className="mt-2"
