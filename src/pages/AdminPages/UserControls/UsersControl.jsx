@@ -4,9 +4,11 @@ import ReactQuill from 'react-quill';
 import './AllUsersStyle.css';
 import { toast } from "react-toastify";
 import authApi from "../../../redux/fetures/auth/authApi";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const UsersControl = () => {
-    const { data, isLoading: userLoading } = authApi.useGetALlUserQuery();
+    const [status, setStatus] = useState('all');
+    const { data, isLoading: userLoading } = authApi.useGetALlUserQuery(status);
     const [sendEmail, { isLoading }] = authApi.useSendEmailMutation();
     const [value, setValue] = useState('');
     const [subject, setSubject] = useState("");
@@ -26,12 +28,8 @@ const UsersControl = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const data = { email: selectedEmails, subject, value };
-
         const res = await sendEmail(data);
-        console.log(res);
-        
         if (res?.data?.success) {
             toast.success(res?.data?.message);
             setValue('');
@@ -57,18 +55,46 @@ const UsersControl = () => {
         }
     };
 
+    const handleChange = (event) => {
+        setStatus(event.target.value);
+    };
+
     return (
         <div>
             <h2 className="text-center py-10 text-4xl">All Users</h2>
 
             <div className="grid grid-cols-5 w-[1356px] mx-auto gap-10">
                 <div className="col-span-2">
-                    <button
-                        onClick={handleSelectAll}
-                        className="border rounded px-3 py-1 mb-3 text-[17px] font-semibold"
-                    >
-                        {selectedEmails.length === data?.data.length ? 'Deselect All Users' : 'Select All Users'}
-                    </button>
+
+                    <div className="flex justify-between gap-10 " >
+
+
+                        <button
+                            onClick={handleSelectAll}
+                            className="border rounded px-3 py-[6px] mb-3 text-[17px] font-semibold w-full"
+                        >
+                            {selectedEmails.length === data?.data.length ? 'Deselect All Users' : 'Select All Users'}
+                        </button>
+
+                        <FormControl size="small" className='w-full mt-5 text-black'>
+                            <InputLabel className="text-black" id="demo-select-small-label">Status</InputLabel>
+                            <Select
+                                className='w-full'
+                                labelId="demo-select-small-label"
+                                id="demo-select-small"
+                                value={status}
+                                label="Status"
+                                onChange={handleChange}
+                            >
+                                
+                                <MenuItem value="all">All</MenuItem>
+                                <MenuItem value="subscriber">Subscriber</MenuItem>
+                                <MenuItem value="nonSubscriber">Non-Subscriber</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                    </div>
+
                     {
                         userLoading ? <p className="text-xl">Loading...</p> : (
                             <div>
@@ -79,7 +105,7 @@ const UsersControl = () => {
                                             key={item?._id}
                                             className={`mb-3 p-2 rounded cursor-pointer flex items-center ${selectedEmails.includes(item?.email) ? 'bg-green-200' : 'bg-gray-200'}`}
                                         >
-                                            <p className="mr-3">{ item.Id }</p>
+                                            <p className="mr-3">{item.Id}</p>
 
                                             <div>
                                                 <h2 className="font-semibold text-[14px]">{item.name}</h2>
@@ -119,6 +145,7 @@ const UsersControl = () => {
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     );

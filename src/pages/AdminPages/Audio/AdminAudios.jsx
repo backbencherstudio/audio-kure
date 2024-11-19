@@ -14,11 +14,6 @@ function AdminAudios() {
 
 
 
-    console.log(showCategoryStatus, audioUrls);
-
-
-
-
 
     const handleChange = (event) => {
         setStatus(event.target.value);

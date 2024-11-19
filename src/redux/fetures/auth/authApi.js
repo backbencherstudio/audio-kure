@@ -4,13 +4,14 @@ const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
 
     getALlUser: builder.query({
-      query: () => {
-        return {        
+      query: (status) => {
+        return {
             url: "/auth/allUsers",
-            method: "GET"
-        }
-      },
-      providesTags : ["user"],
+            method: "GET",
+            params: { status }, 
+        };
+    },
+    providesTags: ["user"],
     }),
 
     getSingleUser: builder.query({

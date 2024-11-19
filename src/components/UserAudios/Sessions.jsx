@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import NewAudioPlayer from "./NewAudioPlayer";
 import { toast } from "react-toastify";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { FaLock } from "react-icons/fa";
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
@@ -23,8 +24,6 @@ const Sessions = () => {
   const [updateAudioData] = authApi.useUpdateAudioDataMutation();
 
   const [setSelectedAudios] = authApi.useSetSelectedAudiosMutation()
-
-
 
   const [totalDuration, setTotalDuration] = useState(0);
   const [listeningTime, setListeningTime] = useState(0);
@@ -55,7 +54,6 @@ const Sessions = () => {
 
   useEffect(() => {
     if (parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
-      console.log(totalDuration, listeningTime);
 
       const updateCoin = async () => {
         const audioData = {
@@ -243,9 +241,6 @@ const Sessions = () => {
               baseBgColor="#2D2C2C"
             />
           }
-
-
-
         </div>
 
         <div className="grid grid-cols-2 gap-10">
@@ -351,7 +346,10 @@ const Sessions = () => {
                               {
                                 body?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
+                                      
+                                      {item.name}
+                                      </button>
                                   </div>
                                 ))
                               }
@@ -364,9 +362,10 @@ const Sessions = () => {
                                 >
                                   <button
                                     onClick={() => toggleBodyId(item._id)}
-                                    className="w-full text-left text-black p-2"
+                                    className="w-full text-left text-black p-2 flex items-center"
                                   >
-                                    {item?.name}
+                                    <FaLock className="mr-4" />
+                                    {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
                                   </button>
                                 </div>
                               ))}
@@ -407,9 +406,10 @@ const Sessions = () => {
                                   >
                                     <button
                                       onClick={() => toggleMindId(item._id)}
-                                      className="w-full text-left text-black p-2"
+                                      className="w-full text-left text-black p-2 flex items-center"
                                     >
-                                      {item?.name}
+                                      <FaLock className="mr-4" />
+                                      {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))}
@@ -442,7 +442,9 @@ const Sessions = () => {
                               {
                                 self?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
+                                      {item.name}
+                                    </button>
                                   </div>
                                 ))
                               }
@@ -456,9 +458,10 @@ const Sessions = () => {
                                   >
                                     <button
                                       onClick={() => toggleSelfId(item._id)}
-                                      className="w-full text-left text-black p-2"
+                                      className="w-full text-left text-black p-2 flex items-center"
                                     >
-                                      {item?.name}
+                                      <FaLock className="mr-4" />
+                                      {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))}
@@ -498,9 +501,10 @@ const Sessions = () => {
                                   >
                                     <button
                                       onClick={() => toggleEgoId(item._id)}
-                                      className="w-full text-left text-black p-2"
+                                      className="w-full text-left text-black p-2 flex items-center"
                                     >
-                                      {item?.name}
+                                      <FaLock className="mr-4" />
+                                      {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))}
