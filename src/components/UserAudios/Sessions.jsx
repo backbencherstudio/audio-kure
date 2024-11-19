@@ -348,7 +348,7 @@ const Sessions = () => {
                                   <div className='mt-4' key={item._id || index}>
                                     <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
                                       
-                                      {item.name}
+                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                       </button>
                                   </div>
                                 ))
@@ -365,7 +365,7 @@ const Sessions = () => {
                                     className="w-full text-left text-black p-2 flex items-center"
                                   >
                                     <FaLock className="mr-4" />
-                                    {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
+                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                   </button>
                                 </div>
                               ))}
@@ -373,7 +373,7 @@ const Sessions = () => {
                               {selectedBodyitem?.length > 0 &&
                                 selectedBodyitem?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
                                   </div>
                                 ))
                               }
@@ -392,7 +392,7 @@ const Sessions = () => {
                               {
                                 mind?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
                                   </div>
                                 ))
                               }
@@ -409,7 +409,7 @@ const Sessions = () => {
                                       className="w-full text-left text-black p-2 flex items-center"
                                     >
                                       <FaLock className="mr-4" />
-                                      {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))}
@@ -417,7 +417,7 @@ const Sessions = () => {
                                 {selectedMinditem?.length > 0 &&
                                   selectedMinditem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
-                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
                                     </div>
                                   ))
                                 }
@@ -443,7 +443,7 @@ const Sessions = () => {
                                 self?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
-                                      {item.name}
+                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))
@@ -461,7 +461,7 @@ const Sessions = () => {
                                       className="w-full text-left text-black p-2 flex items-center"
                                     >
                                       <FaLock className="mr-4" />
-                                      {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))}
@@ -469,7 +469,7 @@ const Sessions = () => {
                                 {selectedselfitem?.length > 0 &&
                                   selectedselfitem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
-                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
                                     </div>
                                   ))
                                 }
@@ -487,7 +487,7 @@ const Sessions = () => {
                               {
                                 ego?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
                                   </div>
                                 ))
                               }
@@ -504,7 +504,7 @@ const Sessions = () => {
                                       className="w-full text-left text-black p-2 flex items-center"
                                     >
                                       <FaLock className="mr-4" />
-                                      {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))}
@@ -512,7 +512,7 @@ const Sessions = () => {
                                 {selectedEgoitem?.length > 0 &&
                                   selectedEgoitem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
-                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >{item.name}</button>
+                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
                                     </div>
                                   ))
                                 }

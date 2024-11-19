@@ -90,6 +90,7 @@ const UsersControl = () => {
                                 <MenuItem value="all">All</MenuItem>
                                 <MenuItem value="subscriber">Subscriber</MenuItem>
                                 <MenuItem value="nonSubscriber">Non-Subscriber</MenuItem>
+                                <MenuItem value="inactive">In Active</MenuItem>
                             </Select>
                         </FormControl>
 
