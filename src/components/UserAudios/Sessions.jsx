@@ -10,6 +10,7 @@ import NewAudioPlayer from "./NewAudioPlayer";
 import { toast } from "react-toastify";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaLock } from "react-icons/fa";
+import gift_big from "./../../assets/images/free_gift_big.png";
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
@@ -51,6 +52,31 @@ const Sessions = () => {
   const plan = subscribeData?.plan;
   const planNumber = parseInt(plan);
 
+  const count = parseInt(userData?.data.selfId)
+  const counterValue = count * 100;
+  const ProgressBarCount = (planNumber === 350 ? audioUrls?.result?.length : userData?.data.selectedBodyAudios.length)
+
+  const navigation = useNavigate()
+
+  const valutFunction = (coin, label) => {
+    const levels = { one: 1000, two: 3000, three: 8000, four: 13000, five: 20000 };
+    if (levels[label] !== undefined) {
+      if (coin < levels[label]) {
+        toast.warning(
+          `To unlock this gift, you need at least ${levels[label].toLocaleString()} coins. Keep up the dedication and reach your goal!`,
+          {
+            style: { width: "450px" },
+            position: "top-center",
+          }
+        );
+      } else {
+        navigation("/vault");
+      }
+    } else {
+      console.error("Invalid label provided.");
+    }
+  };
+
 
   useEffect(() => {
     if (parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
@@ -66,8 +92,6 @@ const Sessions = () => {
       updateCoin()
     }
   }, [listeningTime])
-
-
 
   useEffect(() => {
     if (sessionId) {
@@ -121,8 +145,6 @@ const Sessions = () => {
     }
     setShowCategoryStatus(musicStatus)
   }
-
-
 
   const allId = selectedBodyId + "," + selectedMindId + "," + selectedSelfId + "," + selectedEgoId;
   const idArray = allId.split(",").filter((id) => id.trim() !== "");
@@ -192,8 +214,6 @@ const Sessions = () => {
     });
   };
 
-
-
   const allSelectedIdGetFun = async () => {
     if ((selectedBodyId.length === 0 || selectedMindId.length === 0) && (selectedSelfId.length === 0 || selectedEgoId.length === 0)) {
       return toast.warning("Please select an audio file for both categories before proceeding.")
@@ -214,27 +234,77 @@ const Sessions = () => {
     </div>;
   }
 
-  const count = parseInt(userData?.data.selfId)
-  const ProgressBarCount = (planNumber === 350 ? audioUrls.result?.length : userData?.data.selectedBodyAudios.length)
+
 
 
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
+
         <div className="mb-5">
+
           {
-            count > 0 && <ProgressBar
-              className="mt-2"
-              completed={(count / ProgressBarCount) * 100}
-              labelColor="transparent"
-              labelAlignment="center"
-              borderRadius="0px 10px 10px 0px"
-              height="8px"
-              bgColor="#C4AFFF"
-              baseBgColor="#2D2C2C"
-            />
+            count > 0 &&
+
+            <div>
+              <ProgressBar
+                className="mt-2"
+                completed={(count / ProgressBarCount) * 100}
+                labelColor="transparent"
+                labelAlignment="center"
+                borderRadius="0px 10px 10px 0px"
+                height="8px"
+                bgColor="#C4AFFF"
+                baseBgColor="#2D2C2C"
+              />
+
+              <div className='inline-block flex '>
+
+                <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                  <img
+                    src={gift_big}
+                    alt="gift-image"
+                    className={`size-10`}
+                  />
+                </button>
+
+                <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
+                  <img
+                    src={gift_big}
+                    alt="gift-image"
+                    className={`size-10`}
+                  />
+                </button>
+
+                <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
+                  <img
+                    src={gift_big}
+                    alt="gift-image"
+                    className={`size-10 `}
+                  />
+                </button>
+
+                <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
+                  <img
+                    src={gift_big}
+                    alt="gift-image"
+                    className={`size-10 `}
+                  />
+                </button>
+
+                <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
+                  <img
+                    src={gift_big}
+                    alt="gift-image"
+                    className={`size-10 `}
+                  />
+                </button>
+              </div>
+            </div>
           }
+
         </div>
+
 
         <div className="grid grid-cols-2 gap-10">
           <div>
@@ -340,9 +410,9 @@ const Sessions = () => {
                                 body?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
-                                      
-                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
-                                      </button>
+
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                    </button>
                                   </div>
                                 ))
                               }
@@ -436,7 +506,7 @@ const Sessions = () => {
                                 self?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
-                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                     </button>
                                   </div>
                                 ))

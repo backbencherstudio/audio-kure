@@ -117,6 +117,7 @@ function AdminAudios() {
                             </MenuItem>
                             <MenuItem value="withMusic">With Music</MenuItem>
                             <MenuItem value="withOutMusic">Without Music</MenuItem>
+                            <MenuItem value="valutMix ">Vault (Mix) </MenuItem>
                         </Select>
                     </FormControl>
 
@@ -124,7 +125,7 @@ function AdminAudios() {
 
                     <TextField
                         onChange={(e) => setAudioTitle(e.target.value)}
-                        value={name} // Bind TextField to name state
+                        value={name}
                         size='small'
                         className='w-full'
                         id="outlined-basic"
@@ -151,88 +152,115 @@ function AdminAudios() {
             <div>
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withMusic")}>With Music</button>
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withOutMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withOutMusic")}>Without Music</button>
+                <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "valutMix" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("valutMix")}>Vault</button>
             </div>
 
-            <div className='grid grid-cols-4 gap-10 mt-10' >
 
-                <div>
-                    <h2>Body</h2>
+            {
+                showCategoryStatus != "valutMix" ?
+                    <div className='grid grid-cols-4 gap-10 mt-10' >
 
-                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
-                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
-                            {
-                                audioUrls?.body?.map((item, index) => (
-                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                        <span className='text-black mr-2' > {index + 1}</span>
-                                        <audio controls>
-                                            <source src={item?.audio} type="audio/mp3" />
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    </div>
-                                ))
-                            }
+                        <div>
+                            <h2>Body</h2>
+
+                            <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                                <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                                    {
+                                        audioUrls?.body?.map((item, index) => (
+                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                                <span className='text-black mr-2' > {index + 1}</span>
+                                                <audio controls>
+                                                    <source src={item?.audio} type="audio/mp3" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <h2>Mind</h2>
+
+                            <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                                <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                                    {
+                                        audioUrls?.mind?.map((item, index) => (
+                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                                <span className='text-black mr-2' > {index + 1}</span>
+                                                <audio controls>
+                                                    <source src={item?.audio} type="audio/mp3" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h2>Self</h2>
+
+                            <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                                <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                                    {
+                                        audioUrls?.self?.map((item, index) => (
+                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                                <span className='text-black mr-2' > {index + 1}</span>
+                                                <audio controls>
+                                                    <source src={item?.audio} type="audio/mp3" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h2>Ego</h2>
+
+                            <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                                <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                                    {
+                                        audioUrls?.ego?.map((item, index) => (
+                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                                <span className='text-black mr-2' > {index + 1}</span>
+                                                <audio controls>
+                                                    <source src={item?.audio} type="audio/mp3" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    :
+                    <div className='mt-10'>
+                        <h2>Vault</h2>
+
+                        <div className='bg-slate-50 rounded-2xl overflow-hidden w-[25%] ' >
+                            <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+                                {
+                                    audioUrls?.vault?.map((item, index) => (
+                                        <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
+                                            <span className='text-black mr-2' > {index + 1}</span>
+                                            <audio controls>
+                                                <source src={item?.audio} type="audio/mp3" />
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        </div>
+                                    ))
+                                }
+                            </div>
                         </div>
                     </div>
-
-                </div>
-                <div>
-                    <h2>Mind</h2>
-
-                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
-                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
-                            {
-                                audioUrls?.mind?.map((item, index) => (
-                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                        <span className='text-black mr-2' > {index + 1}</span>
-                                        <audio controls>
-                                            <source src={item?.audio} type="audio/mp3" />
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h2>Self</h2>
-
-                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
-                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
-                            {
-                                audioUrls?.self?.map((item, index) => (
-                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                        <span className='text-black mr-2' > {index + 1}</span>
-                                        <audio controls>
-                                            <source src={item?.audio} type="audio/mp3" />
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <h2>Ego</h2>
-
-                    <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
-                        <div className='p-5 max-h-[600px] overflow-y-scroll ' >
-                            {
-                                audioUrls?.ego?.map((item, index) => (
-                                    <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                        <span className='text-black mr-2' > {index + 1}</span>
-                                        <audio controls>
-                                            <source src={item?.audio} type="audio/mp3" />
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     );
 }
