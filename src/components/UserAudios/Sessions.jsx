@@ -252,8 +252,8 @@ const Sessions = () => {
 
         <div className="mb-5">
 
-          {/* {
-            count > 0 && */}
+          {
+            count === 0 && <p className="text-green-700 text-[18px] font-semibold " > If you listen to all the audio tracks sequentially, from the first to the last, you will earn a reward of 100 coins. </p> }
 
           <div>
 
