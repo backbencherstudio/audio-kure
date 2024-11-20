@@ -14,7 +14,6 @@ import gift_big from "./../../assets/images/free_gift_big.png";
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
-
   const currentUser = useSelector(selectCurrentUser);
   const { data: userData, isLoading: userDataLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
   const [userDelete] = authApi.useUserDeleteMutation()
@@ -23,7 +22,6 @@ const Sessions = () => {
   const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
   const { data: audioUrls, isLoading: audioDataLoading } = authApi.useAllAudioPathsQuery({ showCategoryStatus, email: currentUser?.email });
   const [updateAudioData] = authApi.useUpdateAudioDataMutation();
-
   const [setSelectedAudios] = authApi.useSetSelectedAudiosMutation()
 
   const [totalDuration, setTotalDuration] = useState(0);
@@ -77,7 +75,6 @@ const Sessions = () => {
     }
   };
 
-
   useEffect(() => {
     if (parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
 
@@ -86,7 +83,12 @@ const Sessions = () => {
           email: currentUser?.email,
         };
         const res = await updateAudioData(audioData)
-        console.log(res);
+
+        if (res?.data?.success) {
+          setTotalDuration(0)
+          setListeningTime(0)
+          toast.success("Congratulations! You've earned 100 coins!");
+        };
       }
 
       updateCoin()
@@ -138,7 +140,6 @@ const Sessions = () => {
 
   }, [usbDataLoading, subscribeData, currentUser?.email, navigate]);
 
-
   const categoryStatusChangeFun = (musicStatus) => {
     if (selectedMindId.length >= 1 || selectedBodyId.length >= 1 || selectedEgoId.length >= 1 || selectedSelfId.length >= 1) {
       return toast.warning("You are currently unable to change your category.");
@@ -154,7 +155,7 @@ const Sessions = () => {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
-      return toast.warning("you cant selecte more then 2")
+      return toast.warning("you cant selecte more then 15")
     }
     setSelectedBodyId((prevSelected) => {
       if (prevSelected.includes(id)) {
@@ -163,7 +164,6 @@ const Sessions = () => {
         return [...prevSelected, id];
       }
     });
-
   };
 
   const toggleMindId = (id) => {
@@ -171,7 +171,7 @@ const Sessions = () => {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
-      return toast.warning("you cant selecte more then 2")
+      return toast.warning("you cant selecte more then 15")
     }
     setSelectedMindId((prevSelected) => {
       if (prevSelected.includes(id)) {
@@ -187,7 +187,7 @@ const Sessions = () => {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
-      return toast.warning("you cant selecte more then 2")
+      return toast.warning("you cant selecte more then 15")
     }
     setSelectedSelfId((prevSelected) => {
       if (prevSelected.includes(id)) {
@@ -203,7 +203,7 @@ const Sessions = () => {
       return toast.warning("you cant selecte more then 2")
     }
     if (planNumber === 45 && idArray.length === 15) {
-      return toast.warning("you cant selecte more then 2")
+      return toast.warning("you cant selecte more then 15")
     }
     setSelectedEgoId((prevSelected) => {
       if (prevSelected.includes(id)) {
@@ -216,7 +216,12 @@ const Sessions = () => {
 
   const allSelectedIdGetFun = async () => {
     if ((selectedBodyId.length === 0 || selectedMindId.length === 0) && (selectedSelfId.length === 0 || selectedEgoId.length === 0)) {
-      return toast.warning("Please select an audio file for both categories before proceeding.")
+      return toast.warning("Please select an audio file for both categories before proceeding.", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { width: "400px" }
+      })
     }
     const data = {
       email: currentUser?.email,
@@ -233,8 +238,6 @@ const Sessions = () => {
       <p className="text-center text-2xl " >Loading Data...</p>
     </div>;
   }
-
-
 
 
   return (
@@ -388,7 +391,9 @@ const Sessions = () => {
                       selectedselfitem?.length > 0 ||
                       planNumber === 350
                       ? "" :
-                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added  Your selected Audio</button>
+                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added  Your selected Audio Maximum
+                        <span className="w-[10px] inline-block ml-1" >{idArray?.length}/{planNumber === 25 ? 2 : 15}</span>
+                      </button>
                   }
                 </div>
 
@@ -410,7 +415,6 @@ const Sessions = () => {
                                 body?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
-
                                       {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                     </button>
                                   </div>
