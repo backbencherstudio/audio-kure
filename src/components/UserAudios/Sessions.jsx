@@ -11,6 +11,9 @@ import { toast } from "react-toastify";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaLock } from "react-icons/fa";
 import gift_big from "./../../assets/images/free_gift_big.png";
+import play from "./../../assets/play.gif"
+import push from "./../../assets/push.jpeg"
+import goldCoin from "./../../assets/goldCoin.png"
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
@@ -22,7 +25,8 @@ const Sessions = () => {
   const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
   const { data: audioUrls, isLoading: audioDataLoading } = authApi.useAllAudioPathsQuery({ showCategoryStatus, email: currentUser?.email });
   const [updateAudioData] = authApi.useUpdateAudioDataMutation();
-  const [setSelectedAudios] = authApi.useSetSelectedAudiosMutation()
+  const [setSelectedAudios] = authApi.useSetSelectedAudiosMutation();
+  const [playerId, setPlayerId] = useState("")
 
   const [totalDuration, setTotalDuration] = useState(0);
   const [listeningTime, setListeningTime] = useState(0);
@@ -240,27 +244,27 @@ const Sessions = () => {
   }
 
 
+
+
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
 
         <div className="mb-5">
 
-          {
-            count > 0 &&
+          {/* {
+            count > 0 && */}
 
-            <div>
-              <ProgressBar
-                className="mt-2"
-                completed={(count / ProgressBarCount) * 100}
-                labelColor="transparent"
-                labelAlignment="center"
-                borderRadius="0px 10px 10px 0px"
-                height="8px"
-                bgColor="#C4AFFF"
-                baseBgColor="#2D2C2C"
-              />
+          <div>
 
+            <div className="flex items-center">
+
+              <div className="flex items-center">
+                You Achive
+                <span className='animation-text md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
+                <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
+                <span className='animation-text md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
+              </div>
               <div className='inline-block flex '>
 
                 <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
@@ -304,7 +308,21 @@ const Sessions = () => {
                 </button>
               </div>
             </div>
-          }
+
+            <ProgressBar
+              className=""
+              completed={(count / ProgressBarCount) * 100}
+              labelColor="transparent"
+              labelAlignment="center"
+              borderRadius="0px 10px 10px 0px"
+              height="8px"
+              bgColor="#C4AFFF"
+              baseBgColor="#2D2C2C"
+            />
+
+
+
+          </div>
 
         </div>
 
@@ -399,9 +417,11 @@ const Sessions = () => {
 
               </div>
 
-              {/* =======================================     physical  ================================= */}
               {audioUrls?.result?.length > 0 ? (
                 <div>
+
+                  {/* =======================================     physical  ================================= */}
+
                   {userData?.data?.userType === "physical" && (
 
                     <div className="grid grid-cols-2 mt-3 gap-10">
@@ -414,8 +434,20 @@ const Sessions = () => {
                               {
                                 body?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
-                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
                                     </button>
                                   </div>
                                 ))
@@ -427,6 +459,7 @@ const Sessions = () => {
                                   className={`mt-4 rounded ${selectedBodyId.includes(item._id) ? "bg-blue-300" : "bg-white"
                                     }`}
                                 >
+
                                   <button
                                     onClick={() => toggleBodyId(item._id)}
                                     className="w-full text-left text-black p-2 flex items-center"
@@ -434,13 +467,30 @@ const Sessions = () => {
                                     <FaLock className="mr-4" />
                                     {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                   </button>
+
                                 </div>
                               ))}
 
                               {selectedBodyitem?.length > 0 &&
                                 selectedBodyitem?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
+
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
+
                                   </div>
                                 ))
                               }
@@ -459,7 +509,21 @@ const Sessions = () => {
                               {
                                 mind?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
                                   </div>
                                 ))
                               }
@@ -484,7 +548,21 @@ const Sessions = () => {
                                 {selectedMinditem?.length > 0 &&
                                   selectedMinditem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
-                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
+                                      <button
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                        onClick={() => setAudioUrl(item.audio)}
+                                        onMouseUp={() => setPlayerId(item._id)}
+                                      >
+                                        {
+                                          playerId === item._id ?
+                                            <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            :
+                                            <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                        }
+                                        <h2 className="text-left w-full" >
+                                          {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                        </h2>
+                                      </button>
                                     </div>
                                   ))
                                 }
@@ -509,9 +587,23 @@ const Sessions = () => {
                               {
                                 self?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} >
-                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
                                     </button>
+
                                   </div>
                                 ))
                               }
@@ -536,7 +628,21 @@ const Sessions = () => {
                                 {selectedselfitem?.length > 0 &&
                                   selectedselfitem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
-                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
+                                      <button
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                        onClick={() => setAudioUrl(item.audio)}
+                                        onMouseUp={() => setPlayerId(item._id)}
+                                      >
+                                        {
+                                          playerId === item._id ?
+                                            <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            :
+                                            <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                        }
+                                        <h2 className="text-left w-full" >
+                                          {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                        </h2>
+                                      </button>
                                     </div>
                                   ))
                                 }
@@ -554,7 +660,21 @@ const Sessions = () => {
                               {
                                 ego?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
-                                    <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
                                   </div>
                                 ))
                               }
@@ -579,7 +699,21 @@ const Sessions = () => {
                                 {selectedEgoitem?.length > 0 &&
                                   selectedEgoitem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
-                                      <button className='border border-blue-600 w-full py-2 rounded-lg font-semibold ' onClick={() => setAudioUrl(item.audio)} > {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}</button>
+                                      <button
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                        onClick={() => setAudioUrl(item.audio)}
+                                        onMouseUp={() => setPlayerId(item._id)}
+                                      >
+                                        {
+                                          playerId === item._id ?
+                                            <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            :
+                                            <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                        }
+                                        <h2 className="text-left w-full" >
+                                          {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                        </h2>
+                                      </button>
                                     </div>
                                   ))
                                 }
@@ -590,6 +724,7 @@ const Sessions = () => {
                       </div>
                     </div>
                   )}
+
                 </div>
               ) : (
                 <p>No audio files available.</p>
