@@ -47,7 +47,7 @@ const NewAudioPlayer = ({ audioUrl, setTotalDuration, setListeningTime }) => {
                     src="https://png.pngtree.com/thumb_back/fh260/background/20230516/pngtree-bright-pink-man-in-meditation-with-the-breath-of-fire-image_2569056.jpg"
                     alt="Meditation background"
                 />
-                <div className="absolute left-0 bottom-[50px] text-black w-full h-[50px] flex flex-col items-center justify-center">
+                <div className="absolute left-0 bottom-[50px] text-black w-full h-[50px] flex flex-col items-center justify-center px-2 lg:px-0 ">
                     <audio
                         ref={audioRef}
                         controls

@@ -115,8 +115,8 @@ const authApi = baseApi.injectEndpoints({
           params : categoryStatus
         }
       },
-      // providesTags : ["audios"],
-      invalidatesTags:["audios"]
+      providesTags : ["audios"],
+      // invalidatesTags:["audios"]
     }),
 
     updateAudioPaths: builder.mutation({
@@ -129,7 +129,7 @@ const authApi = baseApi.injectEndpoints({
           body : data
         }
       },
-      providesTags : ["audios"],
+      invalidatesTags : ["audios"],
     }),
 
     

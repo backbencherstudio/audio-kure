@@ -255,16 +255,18 @@ const Sessions = () => {
 
           {
             count > 0 &&
-            <div>
-              <div className="flex items-center">
+            <div className="" >
+
+              <div className="flex items-center flex-wrap">
+
                 <div className="flex items-center">
                   You Achive
-                  <span className='animation-text md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
+                  <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
                   <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
-                  <span className='animation-text md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
+                  <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
                 </div>
-                <div className='inline-block flex '>
 
+                <div className='inline-block flex '>
                   <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
                     <img
                       src={gift_big}
@@ -305,28 +307,33 @@ const Sessions = () => {
                     />
                   </button>
                 </div>
+
               </div>
+
               <ProgressBar
-                className=""
+                className="mt-2 lg:mt-0"
                 completed={(count / ProgressBarCount) * 100}
                 labelColor="transparent"
                 labelAlignment="center"
-                borderRadius="0px 10px 10px 0px"
+                borderRadius="10px"
                 height="8px"
                 bgColor="#C4AFFF"
                 baseBgColor="#2D2C2C"
               />
+
             </div>
           }
 
         </div>
 
 
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid lg:grid-cols-2 md:gap-10  ">
+
           <div>
-            <div className="w-[80%] mx-auto">
-              <div>
+            <div className="lg:w-[80%] mx-auto">
+              <div className="" >
                 <NewAudioPlayer
+
                   audioUrl={audioUrl}
                   setTotalDuration={setTotalDuration}
                   setListeningTime={setListeningTime}
@@ -361,7 +368,8 @@ const Sessions = () => {
 
           <div>
             <div className="shadow-2xl p-5 rounded-lg min-h-[300px]">
-              <div>
+
+              <div className="" >
                 <h2 className="bg-blue-500 text-center py-2 rounded-full text-xl">{userData?.data?.userType}</h2>
 
                 {
@@ -430,17 +438,17 @@ const Sessions = () => {
                                 body?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                       }
-                                      <h2 className="text-left w-full" >
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                       </h2>
                                     </button>
@@ -471,17 +479,17 @@ const Sessions = () => {
                                   <div className='mt-4' key={item._id || index}>
 
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                       }
-                                      <h2 className="text-left w-full" >
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                       </h2>
                                     </button>
@@ -505,17 +513,17 @@ const Sessions = () => {
                                 mind?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                       }
-                                      <h2 className="text-left w-full" >
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                       </h2>
                                     </button>
@@ -544,17 +552,17 @@ const Sessions = () => {
                                   selectedMinditem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
                                       <button
-                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                         onClick={() => setAudioUrl(item.audio)}
                                         onMouseUp={() => setPlayerId(item._id)}
                                       >
                                         {
                                           playerId === item._id ?
-                                            <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                             :
-                                            <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                         }
-                                        <h2 className="text-left w-full" >
+                                        <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                           {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                         </h2>
                                       </button>
@@ -584,17 +592,17 @@ const Sessions = () => {
                                   <div className='mt-4' key={item._id || index}>
 
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                       }
-                                      <h2 className="text-left w-full" >
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                       </h2>
                                     </button>
@@ -624,17 +632,17 @@ const Sessions = () => {
                                   selectedselfitem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
                                       <button
-                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                         onClick={() => setAudioUrl(item.audio)}
                                         onMouseUp={() => setPlayerId(item._id)}
                                       >
                                         {
                                           playerId === item._id ?
-                                            <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                             :
-                                            <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                         }
-                                        <h2 className="text-left w-full" >
+                                        <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                           {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                         </h2>
                                       </button>
@@ -656,17 +664,17 @@ const Sessions = () => {
                                 ego?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                       }
-                                      <h2 className="text-left w-full" >
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                       </h2>
                                     </button>
@@ -695,17 +703,17 @@ const Sessions = () => {
                                   selectedEgoitem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
                                       <button
-                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-2  '
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                         onClick={() => setAudioUrl(item.audio)}
                                         onMouseUp={() => setPlayerId(item._id)}
                                       >
                                         {
                                           playerId === item._id ?
-                                            <img className="size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                             :
-                                            <img className="size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
                                         }
-                                        <h2 className="text-left w-full" >
+                                        <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                           {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                         </h2>
                                       </button>
@@ -725,6 +733,7 @@ const Sessions = () => {
                 <p>No audio files available.</p>
               )}
             </div>
+
           </div>
         </div>
       </div>

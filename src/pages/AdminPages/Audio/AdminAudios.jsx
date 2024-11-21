@@ -104,10 +104,10 @@ function AdminAudios() {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            <MenuItem value="self">Self</MenuItem>
-                            <MenuItem value="ego">Ego</MenuItem>
                             <MenuItem value="body">Body</MenuItem>
                             <MenuItem value="mind">Mind</MenuItem>
+                            <MenuItem value="self">Self</MenuItem>
+                            <MenuItem value="ego">Ego</MenuItem>
                             <MenuItem value="vault">Vault</MenuItem>
                         </Select>
                     </FormControl>
@@ -160,25 +160,22 @@ function AdminAudios() {
                 </div>
             </div>
 
-
-            <div>
+            <div className='flex items-center' >
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withMusic")}>With Music</button>
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withOutMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withOutMusic")}>Without Music</button>
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "valutMix" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("valutMix")}>Vault</button>
+                {
+                    getId.length > 0 &&
+                    <button className='' onClick={() => setGetId("")} > <TiDeleteOutline className='text-[32px] text-red-500 ' /> </button>
+                }
             </div>
-
 
             {
                 showCategoryStatus != "valutMix" ?
                     <div className='grid grid-cols-4 gap-10 mt-10' >
 
                         <div>
-                            <h2 className='flex items-center' >Body
-                                {
-                                    getId.length > 0 &&
-                                    <button className='ml-2' onClick={() => setGetId("")} > <TiDeleteOutline className='text-2xl text-red-500 ' /> </button>
-                                }
-                            </h2>
+                            <h2  >Body  </h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -203,14 +200,17 @@ function AdminAudios() {
 
                         </div>
                         <div>
-                            <h2>Mind</h2>
+                            <h2>Mind </h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
                                     {
                                         audioUrls?.mind?.map((item, index) => (
-                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                                <span className='text-black mr-2' > {index + 1}</span>
+                                            <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                                                ${getId === item._id && "bg-green-200"} duration-300 `}>
+
+                                                <span className='text-black' > {index + 1}</span>
+                                                <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -228,8 +228,11 @@ function AdminAudios() {
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
                                     {
                                         audioUrls?.self?.map((item, index) => (
-                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                                <span className='text-black mr-2' > {index + 1}</span>
+                                            <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                                                ${getId === item._id && "bg-green-200"} duration-300 `}>
+
+                                                <span className='text-black' > {index + 1}</span>
+                                                <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -247,8 +250,11 @@ function AdminAudios() {
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
                                     {
                                         audioUrls?.ego?.map((item, index) => (
-                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                                <span className='text-black mr-2' > {index + 1}</span>
+                                            <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                                                ${getId === item._id && "bg-green-200"} duration-300 `}>
+
+                                                <span className='text-black' > {index + 1}</span>
+                                                <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -270,8 +276,11 @@ function AdminAudios() {
                             <div className='p-5 max-h-[600px] overflow-y-scroll ' >
                                 {
                                     audioUrls?.vault?.map((item, index) => (
-                                        <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                            <span className='text-black mr-2' > {index + 1}</span>
+                                        <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                                            ${getId === item._id && "bg-green-200"} duration-300 `}>
+
+                                            <span className='text-black' > {index + 1}</span>
+                                            <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
                                             <audio controls>
                                                 <source src={item?.audio} type="audio/mp3" />
                                                 Your browser does not support the audio element.
@@ -283,6 +292,7 @@ function AdminAudios() {
                         </div>
                     </div>
             }
+
         </div>
     );
 }
