@@ -21,6 +21,7 @@ function LoginPage() {
   const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
   const [login, { isLoading }] = authApi.useLoginMutation();
+  const [resetPassword, { isLoading: resetPasswordLoading }] = authApi.useResetPasswordMutation()
 
   const dispatch = useAppDispatch();
 
@@ -90,21 +91,29 @@ function LoginPage() {
   const [passPassword, setPassPassword] = useState("")
   const [confirmPass, setPassConfirm] = useState("")
 
-  const changePasswordFun = (e) => {
-    e.preventDefault(); 
-  
+  const changePasswordFun = async (e) => {
+    e.preventDefault();
+
     if (passPassword !== confirmPass) {
       toast.warning("Passwords do not match!");
       return;
-    }  
+    }
     const changePassData = {
       email: passEmail,
       password: passPassword,
     };
-  
-    console.log(changePassData);
+
+    const res = await resetPassword(changePassData);
+    if (res?.error?.originalStatus === 404) {
+      toast.error("User not found")
+    }
+    if (res?.data?.success) {
+      toast.success("Password Reset SuccessFully")
+      handleClose()
+    }
+    console.log(res);
   };
-  
+
 
 
   return (
@@ -218,7 +227,10 @@ function LoginPage() {
                   placeholder="Confirm Password"
                 />
                 <button className="mt-4 border px-5 py-1 rounded-full" type="submit">
-                  Submit
+                  {
+                    resetPasswordLoading ? "Loading..." : "Submit"
+                  }
+
                 </button>
               </form>
 
