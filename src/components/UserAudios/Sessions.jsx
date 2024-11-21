@@ -244,8 +244,6 @@ const Sessions = () => {
   }
 
 
-
-
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
@@ -253,76 +251,73 @@ const Sessions = () => {
         <div className="mb-5">
 
           {
-            count === 0 && <p className="text-green-700 text-[18px] font-semibold " > If you listen to all the audio tracks sequentially, from the first to the last, you will earn a reward of 100 coins. </p> }
+            count === 0 && <p className="text-green-700 text-[18px] font-semibold " > If you listen to all the audio tracks sequentially, from the first to the last, you will earn a reward of 100 coins. </p>}
 
-          <div>
-
-            <div className="flex items-center">
-
+          {
+            count > 0 &&
+            <div>
               <div className="flex items-center">
-                You Achive
-                <span className='animation-text md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
-                <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
-                <span className='animation-text md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
+                <div className="flex items-center">
+                  You Achive
+                  <span className='animation-text md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
+                  <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
+                  <span className='animation-text md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
+                </div>
+                <div className='inline-block flex '>
+
+                  <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10`}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10`}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+
+                  <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+                </div>
               </div>
-              <div className='inline-block flex '>
-
-                <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
-                  <img
-                    src={gift_big}
-                    alt="gift-image"
-                    className={`size-10`}
-                  />
-                </button>
-
-                <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
-                  <img
-                    src={gift_big}
-                    alt="gift-image"
-                    className={`size-10`}
-                  />
-                </button>
-
-                <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
-                  <img
-                    src={gift_big}
-                    alt="gift-image"
-                    className={`size-10 `}
-                  />
-                </button>
-
-                <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
-                  <img
-                    src={gift_big}
-                    alt="gift-image"
-                    className={`size-10 `}
-                  />
-                </button>
-
-                <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
-                  <img
-                    src={gift_big}
-                    alt="gift-image"
-                    className={`size-10 `}
-                  />
-                </button>
-              </div>
+              <ProgressBar
+                className=""
+                completed={(count / ProgressBarCount) * 100}
+                labelColor="transparent"
+                labelAlignment="center"
+                borderRadius="0px 10px 10px 0px"
+                height="8px"
+                bgColor="#C4AFFF"
+                baseBgColor="#2D2C2C"
+              />
             </div>
-
-            <ProgressBar
-              className=""
-              completed={(count / ProgressBarCount) * 100}
-              labelColor="transparent"
-              labelAlignment="center"
-              borderRadius="0px 10px 10px 0px"
-              height="8px"
-              bgColor="#C4AFFF"
-              baseBgColor="#2D2C2C"
-            />
-
-
-
-          </div>
+          }
 
         </div>
 

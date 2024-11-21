@@ -43,7 +43,6 @@ const SignUpPage = () => {
 
   const password = watch("password", "");
   const onSubmit = async (data) => {
-    console.log(data);
     if (data.password !== data.confirmPassword) {
       toast.error("password not matched");
       return;
@@ -52,6 +51,9 @@ const SignUpPage = () => {
     setUserEmail(data?.email);
 
     const res = await registerUser(data);
+
+    console.log(res);
+
     if (res?.data?.success) {
       toast("Check Your Email For Verify OTP");
       setOpen(true);
@@ -73,8 +75,9 @@ const SignUpPage = () => {
       toast.success(res?.data.message);
       return;
     }
-    if (res?.error?.status === 400) {
-      toast.error(res?.error.data.message);
+    if (res?.error?.originalStatus === 400) {
+      // toast.error(res?.error.data.message);
+      toast.error("User Already Exists");
       return;
     }
   };
@@ -83,8 +86,8 @@ const SignUpPage = () => {
 
   const verifyOtp = async (otp) => {
     const verifyData = { email: userEmail, otp, userType: planData?.userType };
-    const res = await verifyOTP(verifyData);   
-    if (res?.error?.status === 400 || res?.error?.originalStatus === 400 ) {
+    const res = await verifyOTP(verifyData);
+    if (res?.error?.status === 400 || res?.error?.originalStatus === 400) {
       toast.error("OTP Not Match , Please Try Again");
       setOpen(false);
     }
@@ -150,7 +153,7 @@ const SignUpPage = () => {
         </ul>
       </div>
       <div className="md:w-[25%] ">
-      <h2 className="text-3xl text-center mb-6 ">Create an account </h2>
+        <h2 className="text-3xl text-center mb-6 ">Create an account </h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="backdrop-blur-sm bg-white/10 border border-white/20 shadow-md rounded px-8 pt-6 pb-8 mb-4"

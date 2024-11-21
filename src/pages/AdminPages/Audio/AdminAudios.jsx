@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import authApi from '../../../redux/fetures/auth/authApi';
+import { CiEdit } from 'react-icons/ci';
+import { TiDeleteOutline } from 'react-icons/ti';
 
 function AdminAudios() {
     const [audioFile, setAudioFile] = useState(null);
@@ -10,9 +12,9 @@ function AdminAudios() {
     const [categoryStatus, setCategoryStatus] = useState('');
     const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
     const { data: audioUrls, refetch } = authApi.useAllAudioPathsQuery({ showCategoryStatus });
+    const [updateAudioPaths] = authApi.useUpdateAudioPathsMutation()
     const [name, setAudioTitle] = useState("");
-
-
+    const [getId, setGetId] = useState("")
 
 
     const handleChange = (event) => {
@@ -32,10 +34,8 @@ function AdminAudios() {
             alert('Please select a file to upload');
             return;
         }
-
         const formData = new FormData();
         formData.append('audio', audioFile);
-
         try {
             setUploadStatus('Uploading...');
             const response = await axios.post('http://localhost:5000/upload-audio', formData, {
@@ -43,19 +43,30 @@ function AdminAudios() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
             const newAudioUrl = `http://localhost:5000${response.data.filePath}`;
-
+            setUploadStatus('Update successful');
             if (newAudioUrl) {
-                setUploadStatus('Upload successful');
-                await axios.post('http://localhost:5000/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
 
-                refetch();
-                setAudioFile(null);
-                setStatus('');
-                setCategoryStatus('');
-                setUploadStatus('');
-                setAudioTitle('');
+                if (getId) {
+                    await updateAudioPaths({ audio: newAudioUrl, category: status, categoryStatus, name, getId })
+                    await window.location.reload()
+                    refetch();
+                    setAudioFile(null);
+                    setStatus('');
+                    setCategoryStatus('');
+                    setUploadStatus('');
+                    setAudioTitle('');
+
+                }
+                if (!getId) {
+                    await axios.post('http://localhost:5000/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
+                    refetch();
+                    setAudioFile(null);
+                    setStatus('');
+                    setCategoryStatus('');
+                    setUploadStatus('');
+                    setAudioTitle('');
+                }
             }
 
         } catch (error) {
@@ -64,12 +75,13 @@ function AdminAudios() {
         }
     };
 
+
     return (
         <div className="text-black">
             <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-10">
                 <h2 className="text-2xl font-semibold text-gray-700 mb-4 text-center">Upload Audio</h2>
 
-                <div className="flex flex-col items-center">
+                <div className={`flex flex-col items-center border rounded-lg ${getId && "border border-green-400 bg-green-50 "} p-2 duration-300 `}>
                     <label className="w-full">
                         <input
                             type="file"
@@ -161,19 +173,29 @@ function AdminAudios() {
                     <div className='grid grid-cols-4 gap-10 mt-10' >
 
                         <div>
-                            <h2>Body</h2>
+                            <h2 className='flex items-center' >Body
+                                {
+                                    getId.length > 0 &&
+                                    <button className='ml-2' onClick={() => setGetId("")} > <TiDeleteOutline className='text-2xl text-red-500 ' /> </button>
+                                }
+                            </h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
                                     {
                                         audioUrls?.body?.map((item, index) => (
-                                            <div key={item._id} className="mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1 ">
-                                                <span className='text-black mr-2' > {index + 1}</span>
+
+                                            <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                                             ${getId === item._id && "bg-green-200"} duration-300 `}>
+
+                                                <span className='text-black' > {index + 1}</span>
+                                                <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </div>
+
                                         ))
                                     }
                                 </div>
