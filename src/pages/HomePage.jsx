@@ -98,14 +98,10 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center relative">
-
               <img className="rounded-xl " alt="" src={heroImage} />
-
-
               <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
                 <BackgroundMusic />
               </div>
-
             </div>
           </div>
           <Footer />
