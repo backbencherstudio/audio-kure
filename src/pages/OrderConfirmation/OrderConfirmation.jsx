@@ -25,10 +25,10 @@ const OrderConfirmation = () => {
                         We've sent you a letter with the further instructions to your email:
                     </p>
                     <p className="text-gray-400 font-medium my-6">
-                        dr@besthealer.com
+                        dr@hypno4u.com
                     </p>
                     <p className="text-gray-300 text-sm">
-                        In case of any questions you can always contact our support <span className="bg-gradient-to-r from-white via-blue-500 to-teal-400 text-transparent bg-clip-text">info@healerapp.health</span>
+                        In case of any questions you can always contact our support <span className="bg-gradient-to-r from-white via-blue-500 to-teal-400 text-transparent bg-clip-text">info@hypno4uapp.health</span>
                     </p>
                 </div>
 

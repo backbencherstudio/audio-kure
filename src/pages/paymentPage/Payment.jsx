@@ -104,7 +104,7 @@ const Payment = () => {
               <div>
                 <img
                   src={logoPaypal}
-                  alt="healer Plan"
+                  alt="hypno4u Plan"
                   className="w-20 h-20 object-cover border rounded-md mr-4"
                 />
               </div>

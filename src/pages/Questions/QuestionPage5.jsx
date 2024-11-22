@@ -18,7 +18,7 @@ const QuestionPage5 = () => {
     }
 
     localStorage.setItem("answers", JSON.stringify(currentAnswers));
-    navigate("/body");
+    navigate("/email");
   };
 
   const question =
@@ -32,6 +32,7 @@ const QuestionPage5 = () => {
       answers={answers}
       handleAnswerSelect={handleAnswerSelect}
       page={4}
+      value={100}
       route="/question-4"
     />
   );

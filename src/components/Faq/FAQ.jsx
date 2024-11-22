@@ -9,7 +9,7 @@ const FAQ = () => {
     },
     {
       question: "How can I cancel my subscription?",
-      answer: "Cancelations are handled through Apple directly and can be requested using the instructions here. If you still have any questions on how to cancel your subscription, please get in touch with us at info@healer.health",
+      answer: "Cancelations are handled through Apple directly and can be requested using the instructions here. If you still have any questions on how to cancel your subscription, please get in touch with us at info@hypno4u.health",
     },
     {
       question: "Is it safe to use self-hypnosis?",

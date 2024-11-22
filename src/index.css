@@ -17,7 +17,8 @@
 }
 
 .togoTest_style {
-  background: linear-gradient(30deg, #f84821, #f7b21d, #75FF33, #f7421a);
+  /* background: linear-gradient(30deg, #f84821, #f7b21d, #75FF33, #f7421a); */
+  background: linear-gradient(30deg, #81FCEB, #EBAEFF, #F3C475, #81FCB9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

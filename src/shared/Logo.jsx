@@ -6,7 +6,7 @@ const Logo = () => {
       <Link className="flex items-center " to={"/"}>
         <img className="h-12 my-3 rounded-full " src={logo} alt="" />
         <span className="flex ml-1 font-extrabold text-2xl justify-center font-serif togoTest_style ">
-          HYPNO<span className="logo_style text-4xl " >4</span>U
+          HYPNO<span className="text-4xl " >4</span>U
         </span>
       </Link>
     </div>

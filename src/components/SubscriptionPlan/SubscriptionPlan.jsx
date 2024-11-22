@@ -248,11 +248,11 @@ const SubscriptionPlan = () => {
             </form>
           </div>
           <div className="md:w-1/2 flex flex-col justify-between">
-
+            <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
+              All plans include:
+            </h2>
             <ul className="space-y-2">
-              <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
-                All plans include:
-              </h2>
+
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Digital
                 Extensive Audio Library: 4,000+ hours of expert hypnosis sessions across various topics
@@ -321,7 +321,7 @@ const SubscriptionPlan = () => {
                       Secret gift
                     </h1>
                     <p className="text-[14px]">
-                    The HYPNO 4 U team is excited to support your transformation journey, and we have a special surprise just for you!
+                      The HYPNO 4 U team is excited to support your transformation journey, and we have a special surprise just for you!
                     </p>
                   </div>
                 </div>
