@@ -82,7 +82,7 @@ const PhysicalsPayment = () => {
                             <svg className="w-5 h-5 text-[#41E8DD] mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
-                            <p>Get Official Healer guidebook for an additional one-time payment of USD 9.99. Created by professionals and made for people who want to enjoy their life. It's you.</p>
+                            <p>Get Official Hypno 4 u guidebook for an additional one-time payment of USD 9.99. Created by professionals and made for people who want to enjoy their life. It's you.</p>
                         </div>
                     </div>
                 </div>

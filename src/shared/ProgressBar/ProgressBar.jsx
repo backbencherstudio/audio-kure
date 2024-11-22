@@ -30,12 +30,12 @@ const ProgressBars = ({ value, navigate, page }) => {
         <div>
           <Link className="flex justify-center" to={"/"}>
             <img className="h-12 my-3" src={logo} alt="" />
-            <span className="flex flex-col font-bold text-2xl justify-center font-serif">
-              healer
+            <span className="flex flex-col font-bold text-2xl justify-center font-serif uppercase">
+              Hypno4u
             </span>
           </Link>
         </div>
-        <div className="font-bold">{page} of 7</div>
+        <div className="font-bold">{page} of 4</div>
       </div>
       <ProgressBar
         className=""

@@ -53,10 +53,10 @@ function EmailPage() {
               <h1 className="text-4xl pt-5 md:pt-20 font-serif">
                 Your program is ready
               </h1>
-              <p className="mt-3 text-[#5a5d64]">
+              <p className="mt-3 text-[#bebebe]">
                 Unlock access to a personalized program by entering your email
               </p>
-              <p className="text-[#5a5d64]">
+              <p className="text-[#bebebe]">
               Join the HYPNO 4 U community of achievers who have reached their goals in life, boasting a success rate of over 90%.
               </p>
               <input
