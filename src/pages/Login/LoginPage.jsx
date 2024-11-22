@@ -114,8 +114,6 @@ function LoginPage() {
     console.log(res);
   };
 
-
-
   return (
     <div className="">
       <div className="area">
