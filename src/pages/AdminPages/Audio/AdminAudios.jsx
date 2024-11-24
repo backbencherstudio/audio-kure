@@ -172,7 +172,7 @@ function AdminAudios() {
 
             {
                 showCategoryStatus != "valutMix" ?
-                    <div className='grid grid-cols-4 gap-10 mt-10' >
+                    <div className='grid grid-cols-4 gap-10 my-10' >
 
                         <div>
                             <h2  >Body  </h2>
@@ -183,14 +183,20 @@ function AdminAudios() {
                                         audioUrls?.body?.map((item, index) => (
 
                                             <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
-                                             ${getId === item._id && "bg-green-200"} duration-300 `}>
+                                             ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
                                                 </audio>
+
+                                                <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                                </h2>
+
                                             </div>
 
                                         ))
@@ -207,7 +213,7 @@ function AdminAudios() {
                                     {
                                         audioUrls?.mind?.map((item, index) => (
                                             <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
-                                                ${getId === item._id && "bg-green-200"} duration-300 `}>
+                                                ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
@@ -215,6 +221,10 @@ function AdminAudios() {
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
                                                 </audio>
+
+                                                <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                                </h2>
                                             </div>
                                         ))
                                     }
@@ -229,7 +239,7 @@ function AdminAudios() {
                                     {
                                         audioUrls?.self?.map((item, index) => (
                                             <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
-                                                ${getId === item._id && "bg-green-200"} duration-300 `}>
+                                                ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
@@ -237,6 +247,10 @@ function AdminAudios() {
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
                                                 </audio>
+
+                                                <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                                </h2>
                                             </div>
                                         ))
                                     }
@@ -251,7 +265,7 @@ function AdminAudios() {
                                     {
                                         audioUrls?.ego?.map((item, index) => (
                                             <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
-                                                ${getId === item._id && "bg-green-200"} duration-300 `}>
+                                                ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
@@ -259,6 +273,10 @@ function AdminAudios() {
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
                                                 </audio>
+
+                                                <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                                </h2>
                                             </div>
                                         ))
                                     }
@@ -277,7 +295,7 @@ function AdminAudios() {
                                 {
                                     audioUrls?.vault?.map((item, index) => (
                                         <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
-                                            ${getId === item._id && "bg-green-200"} duration-300 `}>
+                                            ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
                                             <span className='text-black' > {index + 1}</span>
                                             <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
@@ -285,6 +303,10 @@ function AdminAudios() {
                                                 <source src={item?.audio} type="audio/mp3" />
                                                 Your browser does not support the audio element.
                                             </audio>
+
+                                            <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                            </h2>
                                         </div>
                                     ))
                                 }

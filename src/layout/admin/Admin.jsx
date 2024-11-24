@@ -15,7 +15,6 @@ const Admin = () => {
                 </div>
                 <div className="col-span-6 p-5 " > <Outlet /> </div>
             </div>
-
         </div>
     );
 };

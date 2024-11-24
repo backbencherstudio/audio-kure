@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill';
 import './AllUsersStyle.css';
 import { toast } from "react-toastify";
 import authApi from "../../../redux/fetures/auth/authApi";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const UsersControl = () => {
     const [status, setStatus] = useState('all');
@@ -28,6 +28,11 @@ const UsersControl = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(selectedEmails?.length === 0){
+            return toast.warning("At First Select User")
+        }
+
         const data = { email: selectedEmails, subject, value };
         const res = await sendEmail(data);
         if (res?.data?.success) {
@@ -138,9 +143,9 @@ const UsersControl = () => {
                         />
 
                         <div className="mt-3">
-                            <button type="submit" className="button w-[120px] flex items-center justify-center py-2 mb-10">
+                            <button  type="submit" className="button w-[120px] flex items-center justify-center py-2 mb-10">
                                 {
-                                    isLoading ? <span className="loading loading-dots loading-md"></span> : "Send"
+                                    isLoading ?   <CircularProgress />  : "Send"
                                 }
                             </button>
                         </div>
