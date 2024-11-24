@@ -5,12 +5,12 @@ const Layout = () => {
   return (
     <div className="flex flex-col min-h-screen"> {/* Set flex container with min height */}
       <div className="area"> {/* Fixed area covering full viewport */}
-        <ul className="circles"> 
+       <ul className="circles"> 
           <li></li>
           <li></li>
           <li></li>
           <li></li>
-          <li></li>
+          <li></ li>
           <li></li>
           <li></li>
           <li></li>
