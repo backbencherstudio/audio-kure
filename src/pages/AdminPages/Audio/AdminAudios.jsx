@@ -180,7 +180,7 @@ function AdminAudios() {
                     <div className='grid grid-cols-4 gap-10 my-10' >
 
                         <div>
-                            <h2  >Body  </h2>
+                            <h2 className='text-xl font-semibold'  >Body  </h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -211,7 +211,7 @@ function AdminAudios() {
 
                         </div>
                         <div>
-                            <h2>Mind </h2>
+                            <h2  className='text-xl font-semibold' >Mind </h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -237,7 +237,7 @@ function AdminAudios() {
                             </div>
                         </div>
                         <div>
-                            <h2>Self</h2>
+                            <h2  className='text-xl font-semibold' >Self</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -263,7 +263,7 @@ function AdminAudios() {
                             </div>
                         </div>
                         <div>
-                            <h2>Ego</h2>
+                            <h2  className='text-xl font-semibold' >Ego</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -295,7 +295,7 @@ function AdminAudios() {
                     <div className='mt-10  flex gap-10 '>
 
                         <div>
-                            <h2>Vault</h2>
+                            <h2  className='text-xl font-semibold' >Vault</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -324,7 +324,7 @@ function AdminAudios() {
                         </div>
 
                         <div>
-                            <h2>Intro</h2>
+                            <h2  className='text-xl font-semibold' >Intro</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden  ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
