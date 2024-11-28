@@ -5,6 +5,10 @@ import './AllUsersStyle.css';
 import { toast } from "react-toastify";
 import authApi from "../../../redux/fetures/auth/authApi";
 import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useSelector } from "react-redux";
+import { logOut, selectCurrentUser } from "../../../redux/fetures/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../../redux/hooks";
 
 const UsersControl = () => {
     const [status, setStatus] = useState('all');
@@ -13,6 +17,15 @@ const UsersControl = () => {
     const [value, setValue] = useState('');
     const [subject, setSubject] = useState("");
     const [selectedEmails, setSelectedEmails] = useState([]);
+    const currentUser = useSelector(selectCurrentUser);
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+
+
+    if (currentUser?.email != "bbsfullstack@gmail.com") {
+        dispatch(logOut());
+        return navigate("/login")
+    }
 
     const modules = {
         toolbar: [
@@ -29,7 +42,7 @@ const UsersControl = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(selectedEmails?.length === 0){
+        if (selectedEmails?.length === 0) {
             return toast.warning("At First Select User")
         }
 
@@ -91,7 +104,7 @@ const UsersControl = () => {
                                 label="Status"
                                 onChange={handleChange}
                             >
-                                
+
                                 <MenuItem value="all">All</MenuItem>
                                 <MenuItem value="subscriber">Subscriber</MenuItem>
                                 <MenuItem value="nonSubscriber">Non-Subscriber</MenuItem>
@@ -143,9 +156,9 @@ const UsersControl = () => {
                         />
 
                         <div className="mt-3">
-                            <button  type="submit" className="button w-[120px] flex items-center justify-center py-2 mb-10">
+                            <button type="submit" className="button w-[120px] flex items-center justify-center py-2 mb-10">
                                 {
-                                    isLoading ?   <CircularProgress />  : "Send"
+                                    isLoading ? <CircularProgress /> : "Send"
                                 }
                             </button>
                         </div>

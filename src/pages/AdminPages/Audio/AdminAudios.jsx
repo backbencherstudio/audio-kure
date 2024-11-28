@@ -4,6 +4,10 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/mater
 import authApi from '../../../redux/fetures/auth/authApi';
 import { CiEdit } from 'react-icons/ci';
 import { TiDeleteOutline } from 'react-icons/ti';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../redux/hooks';
+import { logOut, selectCurrentUser } from '../../../redux/fetures/auth/authSlice';
+import { useSelector } from 'react-redux';
 
 function AdminAudios() {
     const [audioFile, setAudioFile] = useState(null);
@@ -16,6 +20,15 @@ function AdminAudios() {
     const [name, setAudioTitle] = useState("");
     const [getId, setGetId] = useState("")
 
+    const currentUser = useSelector(selectCurrentUser);
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+
+
+    if (currentUser?.email != "bbsfullstack@gmail.com") {
+        dispatch(logOut());
+        return navigate("/login")
+    }
     
 
 
