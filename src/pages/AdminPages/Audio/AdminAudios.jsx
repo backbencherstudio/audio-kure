@@ -16,6 +16,8 @@ function AdminAudios() {
     const [name, setAudioTitle] = useState("");
     const [getId, setGetId] = useState("")
 
+    
+
 
     const handleChange = (event) => {
         setStatus(event.target.value);
@@ -47,6 +49,7 @@ function AdminAudios() {
             setUploadStatus('Update successful');
             if (newAudioUrl) {
 
+                // ================================== For Update Audio
                 if (getId) {
                     await updateAudioPaths({ audio: newAudioUrl, category: status, categoryStatus, name, getId })
                     await window.location.reload()
@@ -56,8 +59,8 @@ function AdminAudios() {
                     setCategoryStatus('');
                     setUploadStatus('');
                     setAudioTitle('');
-
                 }
+                // ================================== For New Audio Upload
                 if (!getId) {
                     await axios.post('http://localhost:5000/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
                     refetch();
@@ -109,6 +112,7 @@ function AdminAudios() {
                             <MenuItem value="self">Self</MenuItem>
                             <MenuItem value="ego">Ego</MenuItem>
                             <MenuItem value="vault">Vault</MenuItem>
+                            <MenuItem value="intro">Intro</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -130,6 +134,7 @@ function AdminAudios() {
                             <MenuItem value="withMusic">With Music</MenuItem>
                             <MenuItem value="withOutMusic">Without Music</MenuItem>
                             <MenuItem value="valutMix ">Vault (Mix) </MenuItem>
+                            <MenuItem value="introMix ">Intro (Mix) </MenuItem>
                         </Select>
                     </FormControl>
 
@@ -163,7 +168,7 @@ function AdminAudios() {
             <div className='flex items-center' >
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withMusic")}>With Music</button>
                 <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withOutMusic" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("withOutMusic")}>Without Music</button>
-                <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "valutMix" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("valutMix")}>Vault</button>
+                <button className={`border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "valutMix" ? "bg-green-200" : ""}`} onClick={() => setShowCategoryStatus("valutMix")}>Vault + Intro </button>
                 {
                     getId.length > 0 &&
                     <button className='' onClick={() => setGetId("")} > <TiDeleteOutline className='text-[32px] text-red-500 ' /> </button>
@@ -287,29 +292,63 @@ function AdminAudios() {
 
                     </div>
                     :
-                    <div className='mt-10'>
-                        <h2>Vault</h2>
+                    <div className='mt-10  flex gap-10 '>
 
-                        <div className='bg-slate-50 rounded-2xl overflow-hidden w-[25%] ' >
-                            <div className='p-5 max-h-[600px] overflow-y-scroll ' >
-                                {
-                                    audioUrls?.vault?.map((item, index) => (
-                                        <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                        <div>
+                            <h2>Vault</h2>
+
+                            <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
+                                <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+
+                                    {
+                                        audioUrls?.vault?.map((item, index) => (
+                                            <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
                                             ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
-                                            <span className='text-black' > {index + 1}</span>
-                                            <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
-                                            <audio controls>
-                                                <source src={item?.audio} type="audio/mp3" />
-                                                Your browser does not support the audio element.
-                                            </audio>
+                                                <span className='text-black' > {index + 1}</span>
+                                                <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <audio controls>
+                                                    <source src={item?.audio} type="audio/mp3" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
 
-                                            <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
-                                                {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
-                                            </h2>
-                                        </div>
-                                    ))
-                                }
+                                                <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                                </h2>
+                                            </div>
+                                        ))
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2>Intro</h2>
+
+                            <div className='bg-slate-50 rounded-2xl overflow-hidden  ' >
+                                <div className='p-5 max-h-[600px] overflow-y-scroll ' >
+
+                                    {
+                                        audioUrls?.intro?.map((item, index) => (
+                                            <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
+                                            ${getId === item._id && "bg-green-200"} duration-300 relative `}>
+
+                                                <span className='text-black' > {index + 1}</span>
+                                                <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <audio controls>
+                                                    <source src={item?.audio} type="audio/mp3" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+
+                                                <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
+                                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                                </h2>
+                                            </div>
+                                        ))
+                                    }
+
+                                </div>
                             </div>
                         </div>
                     </div>
