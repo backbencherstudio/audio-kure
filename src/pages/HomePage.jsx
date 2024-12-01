@@ -56,7 +56,7 @@ function HomePage() {
               Many Solutions to Many Problems
               </h2>
               <h3 className="text-xl font-bold merriweather">Your Personalized Hypnosis Program is at your fingertips</h3>
-              <p className="text-xl merriweather">Start by selecting one of the following</p>
+              <p className="text-xl merriweather">Start by selecting one of the following </p>
               <div className="space-y-4">
                 <p className="text-sm md:text-base lg:text-xl">
                   4,000+ Hours of Custom Audio Hypnosis & Meditation
