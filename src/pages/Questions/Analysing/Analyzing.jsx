@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Analyzing.css";
 import Brain from "./Brain/BrainSVG";
 import BrainSVG from "./Brain/BrainSVG";
+import iceburg from './../../../assets/ice.jpg'
 
 const Analyzing = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Analyzing = () => {
           return 100;
         }
       });
-    }, 200);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
@@ -42,15 +43,39 @@ const Analyzing = () => {
 
   return (
     <div className="flex  items-center justify-center  lg:mt-10 mx-5 py-2">
-      <div className=" backdrop-blur-md border rounded-md lg:w-1/3 p-2 lg:p-10">
+      <div className=" backdrop-blur-md rounded-md lg:w-1/2 p-2 lg:p-10">
 
-        <h1 className="text-3xl my-3 mb-4">
+        <h1 className="text-2xl my-3 mb-4 text-center">
 
           All set! Just a moment while we process your data...
         </h1>
-        <div className="h-52 my-5    ">
-
-          <BrainSVG />
+        <div className="my-5 relative flex justify-center  ">
+          <img src={iceburg} alt="ice" className="w-80 h-full"/>
+          <div className="absolute left-0 p-bg p-2 rounded-md">
+            <h1 className="text-xl uppercase">Conscious mind (5%)</h1>
+            <ul className="list-disc ml-5 text-sm">
+              <li>Logical Thinking</li>
+              <li>Will Power</li>
+              <li>Short Term Memory</li>
+              <li>Critical Thinking</li>
+            </ul>
+          </div>
+          <div className="absolute -right-11 bottom-0 s-bg p-2 rounded-md">
+            <h1 className="text-xl uppercase">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h1>
+            <ul className="list-disc ml-5 text-sm">
+              <li>Beliefs</li>
+              <li>Long Term Memory</li>
+              <li>Protective Reactions</li>
+              <li>Controls All Systems in the Bod</li>
+              <li>Programming</li>
+              <li>Emotions</li>
+              <li>Values</li>
+              <li>Intuition</li>
+              <li>Fears</li>
+              <li>Self-Image</li>
+            </ul>
+          </div>
+          {/* <BrainSVG /> */}
         </div>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${progress}%` }} />

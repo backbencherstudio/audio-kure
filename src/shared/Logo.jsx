@@ -1,13 +1,13 @@
-import logo from "../assets/images/Logo.png";
+import logo from "../assets/images/H4U LOGO.svg";
 import { Link } from "react-router-dom";
 const Logo = () => {
   return (
     <div className=" px-4 xl:px-0 ">
       <Link className="flex items-center " to={"/"}>
-        <img className="h-12 my-3 rounded-full " src={logo} alt="" />
-        <span className="flex ml-1 font-extrabold text-2xl justify-center font-serif togoTest_style ">
+        <img className=" my-3 h-16 rounded-md " src={logo} alt="" />
+        {/* <span className="flex ml-1 font-extrabold text-2xl justify-center font-serif togoTest_style ">
           HYPNO<span className="text-4xl " >4</span>U
-        </span>
+        </span> */}
       </Link>
     </div>
   );

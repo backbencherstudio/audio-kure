@@ -14,7 +14,7 @@ import LoveButton from "../components/Buttons/LoveButtons/LoveButton";
 import MoneyButton from "../components/Buttons/MoneyButtons/MoneyButtons";
 import { verifyToken } from "../utils/verifyToken";
 import { useEffect } from "react";
-import heroImage from '../assets/images/Logo.png'
+import heroImage from '../assets/images/QMH MAIN PIC.jpg'
 import BackgroundMusic from "../components/BackgroundMusic/BackgroundMusic";
 function HomePage() {
   const dispatch = useAppDispatch();
@@ -106,7 +106,7 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </div>
