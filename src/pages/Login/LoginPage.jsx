@@ -155,7 +155,7 @@ function LoginPage() {
               <input
                 type="email"
                 {...register("email")}
-                className="w-full text-sm bg-white/20 text-white rounded-md p-2 border border-white/20 focus:outline-none"
+                className="w-full text-sm bg-white/10 text-white rounded-md p-2 border border-white/20 focus:outline-none"
               />
 
               <label className="block mt-5 text-white text-sm mb-2">
@@ -164,7 +164,7 @@ function LoginPage() {
               <input
                 type="password"
                 {...register("password")}
-                className="w-full text-sm bg-white/20 text-white rounded-md p-2 border border-white/20 focus:outline-none"
+                className="w-full text-sm bg-white/10 text-white rounded-md p-2 border border-white/20 focus:outline-none"
               />
 
               <button
@@ -186,7 +186,7 @@ function LoginPage() {
               <p className="mt-2 font-semibold">
                 {" "}
                 If you are not registrad go to{" "}
-                <Link to="/signup" className="text-blue-600">
+                <Link to="/signup" className="text-blue-400">
                   {" "}
                   Registred{" "}
                 </Link>{" "}

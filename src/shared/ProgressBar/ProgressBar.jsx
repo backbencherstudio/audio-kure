@@ -1,6 +1,6 @@
 import React from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-import logo from "./../../assets/images/logo.png";
+import logo from "./../../assets/images/H4U LOGO.svg";
 import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -29,7 +29,7 @@ const ProgressBars = ({ value, navigate, page }) => {
         </div>
         <div>
           <Link className="flex justify-center" to={"/"}>
-            <img className="h-12 my-3" src={logo} alt="" />
+            <img className="h-12 m-3 rounded-md" src={logo} alt="" />
             <span className="flex flex-col font-bold text-2xl justify-center font-serif uppercase">
               Hypno4u
             </span>
@@ -45,7 +45,7 @@ const ProgressBars = ({ value, navigate, page }) => {
         borderRadius="0px 10px 10px 0px"
         height="8px"
         // bgColor="#C4AFFF"
-        bgColor="#BFE5BE"
+        bgColor="#c1a75a"
         baseBgColor="#2D2C2C"
       />
     </div>

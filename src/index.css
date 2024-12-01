@@ -42,7 +42,7 @@
 }
 
 .s-bg {
-  @apply bg-[#BFE5BE]
+  @apply bg-[#29313c]
 }
 
 .t-bg {
@@ -62,9 +62,9 @@
 }
 
 .btnGrad {
-  background: linear-gradient(90deg, #EEB5B4 0%, #BFE5BE 50%, #EFD0B3 100%);
+  background: linear-gradient(45deg, #7a7400, 30%, #59d7fe 50%, #29313c 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  color: #4e4e4e !important
+  /* color: #4e4e4e !important */
 }
 
 img {
@@ -189,4 +189,52 @@ img {
   /* Dark gray */
   color: #ffffff;
   /* White text */
+}
+
+/* Anime */
+
+/* Left to Right Animation */
+@keyframes slideLeftToRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.left-to-right {
+  animation: slideLeftToRight 0.5s ease-in-out forwards;
+}
+
+/* Right to Left Animation */
+@keyframes slideRightToLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.right-to-left {
+  animation: slideRightToLeft 0.5s ease-in-out forwards;
+}
+
+/* Arrow Animation */
+@keyframes arrow {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.arrow-animation {
+  animation: arrow 2s  forwards; 
 }

@@ -75,7 +75,7 @@ const PlanDescription = () => {
                     </div>
 
                     {/* 3-Month Plan */}
-                    <div className="space-y-6 group backdrop-blur-sm bg-white/10 py-6 rounded-lg border border-white/20">
+                    <div className="space-y-6 group backdrop-blur-sm bg-white/50 py-6 rounded-lg border border-white/20">
                         <AudioNames />
                     </div>
                 </div>

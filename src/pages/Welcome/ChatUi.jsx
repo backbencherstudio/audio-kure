@@ -33,7 +33,7 @@ const ChatUi = ({ code, userCondition }) => {
     console.log(messages);
 
     return (
-        <div className='lg:w-2/3 mx-2   min-h-[470px] border lg:mx-auto rounded-xl p-5 shadow-2xl shadow-white/50 backdrop-blur-xl flex flex-col justify-between'>
+        <div className='lg:w-2/3 mx-2   min-h-[470px] border lg:mx-auto rounded-xl p-5 shadow-2xl shadow-white/10 backdrop-blur-xl flex flex-col justify-between'>
             <div className='flex flex-col h-full'>
                 <div className='flex justify-between items-center px-5 py-1 rounded-md bg-gray-50/20 mb-4'>
                     <div className='flex gap-2'>
@@ -58,7 +58,7 @@ const ChatUi = ({ code, userCondition }) => {
                 </div>
             </div>
             {/* <Link to={`/subscriptionplan?code=${code}`} className='w-fit btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'> */}
-            <Link to={`/login`} className='w-fit btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'>
+            <Link to={`/login`} className='w-40 text-center btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'>
                 Let's Start
             </Link>
             

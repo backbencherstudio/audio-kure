@@ -4,6 +4,7 @@ import "./Analyzing.css";
 import Brain from "./Brain/BrainSVG";
 import BrainSVG from "./Brain/BrainSVG";
 import iceburg from './../../../assets/ice.jpg'
+import arrow from './../../../assets/images/arrow.png'
 
 const Analyzing = () => {
   const navigate = useNavigate();
@@ -49,9 +50,9 @@ const Analyzing = () => {
 
           All set! Just a moment while we process your data...
         </h1>
-        <div className="my-5 relative flex justify-center  ">
-          <img src={iceburg} alt="ice" className="w-80 h-full"/>
-          <div className="absolute left-0 p-bg p-2 rounded-md">
+        <div className="my-5 relative flex justify-center">
+          <img src={iceburg} alt="ice" className="w-80 h-full" />
+          <div className="absolute hidden lg:block top-2 -left-56 xl:-left-40 xl:top-10 2xl:-left-32 2xl:top-10 p-bg p-2 rounded-md right-to-left">
             <h1 className="text-xl uppercase">Conscious mind (5%)</h1>
             <ul className="list-disc ml-5 text-sm">
               <li>Logical Thinking</li>
@@ -60,7 +61,9 @@ const Analyzing = () => {
               <li>Critical Thinking</li>
             </ul>
           </div>
-          <div className="absolute -right-11 bottom-0 s-bg p-2 rounded-md">
+          <img src={arrow} alt="arrow" className="absolute hidden lg:block w-32 left-0 xl:w-32  xl:left-16 xl:-top-0 2xl:w-56 2xl:left-24 2xl:-top-16 rotate-[65deg] arrow-animation " />
+          <img src={arrow} alt="arrow" className="absolute hidden lg:block w-32 right-0 xl:w-32 xl:right-14  2xl:w-56 2xl:right-[132px] bottom-0 scale-x-[-1] scale-y-[-1] rotate-45 arrow-animation " />
+          <div className="absolute hidden lg:block bottom-0 -right-60 xl:-right-52 xl:bottom-0 2xl:-right-32 2xl:bottom-0 s-bg p-2 rounded-md left-to-right">
             <h1 className="text-xl uppercase">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h1>
             <ul className="list-disc ml-5 text-sm">
               <li>Beliefs</li>
@@ -75,6 +78,8 @@ const Analyzing = () => {
               <li>Self-Image</li>
             </ul>
           </div>
+          <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase top-2 left-0">Conscious mind (5%)</h2>
+          <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase bottom-2 right-0">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h2>
           {/* <BrainSVG /> */}
         </div>
         <div className="progress-bar-container">
