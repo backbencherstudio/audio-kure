@@ -1,191 +1,65 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
-import sessionImg from '../../assets/images/cure_session.png';
-import { FaPlay, FaPause, FaLock } from 'react-icons/fa';
-import CustomAudioPlayer from './CustomAudioPlayer';
-import data from "../../../public/sessions.json";
-import authApi from '../../redux/fetures/auth/authApi';
-import { useSelector } from 'react-redux';
-import { logOut, selectCurrentUser, useCurrentToken } from '../../redux/fetures/auth/authSlice';
-import goldCoin from "./../../assets/goldCoin.png"
-import "./Sessions.css"
-import ProgressBar from '@ramonak/react-progress-bar';
-import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useEffect, useState } from "react";
+import authApi from "../../redux/fetures/auth/authApi";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
+import "./Sessions.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import NewAudioPlayer from "./NewAudioPlayer";
+import { toast } from "react-toastify";
+import ProgressBar from "@ramonak/react-progress-bar";
+import { FaLock } from "react-icons/fa";
 import gift_big from "./../../assets/images/free_gift_big.png";
-import { useNavigate } from 'react-router-dom';
+import play from "./../../assets/play.gif"
+import push from "./../../assets/push.jpeg"
+import goldCoin from "./../../assets/goldCoin.png"
 
-const Sessions = ({ selectedMonth, sessions }) => {
-  const [currentAudio, setCurrentAudio] = useState(null);
-  const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
-  const [sessionImage, setSessionImage] = useState(sessionImg);
-  const [updateData, setUpdatedData] = useState(null)
-  const [updateAudioData] = authApi.useUpdateAudioDataMutation();
-  const [listeningTime, setListeningTime] = useState(0)
-  const [audioDuration, setAudioDuration] = useState(0);
-
+const Sessions = () => {
+  const [purchasePlan] = authApi.usePurchasePlanMutation();
   const currentUser = useSelector(selectCurrentUser);
-  const { data: userData, isLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
-  const [logOutUpdate] = authApi.useLogOutUpdateMutation()
-  const [toggleCategory, setToggleCategory] = useState("")
+  const { data: userData, isLoading: userDataLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
+  const [userDelete] = authApi.useUserDeleteMutation()
+  const [subscribeData, setSubscribeData] = useState(null);
+  const [usbDataLoading, setUsbDataLoading] = useState(null);
+  const [showCategoryStatus, setShowCategoryStatus] = useState("withMusic");
+  const { data: audioUrls, isLoading: audioDataLoading } = authApi.useAllAudioPathsQuery({ showCategoryStatus, email: currentUser?.email });
+  const [updateAudioData] = authApi.useUpdateAudioDataMutation();
+  const [setSelectedAudios] = authApi.useSetSelectedAudiosMutation();
+  const [playerId, setPlayerId] = useState("")
 
-  const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
-  const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
-  const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
-  const mindAudioId = userData?.data?.mindId === "end" ? "end" : parseInt(userData?.data?.mindId);
+  const [totalDuration, setTotalDuration] = useState(0);
+  const [listeningTime, setListeningTime] = useState(0);
+  const [audioUrl, setAudioUrl] = useState("");
+  const [selectedBodyId, setSelectedBodyId] = useState([]);
+  const [selectedMindId, setSelectedMindId] = useState([]);
+  const [selectedSelfId, setSelectedSelfId] = useState([]);
+  const [selectedEgoId, setSelectedEgoId] = useState([]);
 
-  const self = data?.emotional?.self;
-  const ego = data?.emotional?.ego;
-  const body = data?.physical?.body;
-  const miend = data?.physical?.mind;
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const array1 = userData?.data?.selectedBodyAudios
-  const array2 = userData?.data?.selectedMindAudios
-  const array3 = userData?.data?.selectedEgoAudios
-  const array4 = userData?.data?.selectedSelfAudios
-  const [warningShown, setWarningShown] = useState(false);
+  console.log({currentUser});
+  
 
-  const plan = userData?.data?.plan
+  const sessionId = new URLSearchParams(location.search).get("session_id") || userData?.data?.sessionId;
 
+  const body = audioUrls?.body;
+  const mind = audioUrls?.mind;
+  const self = audioUrls?.self;
+  const ego = audioUrls?.ego;
+
+  const selectedBodyitem = audioUrls?.selectedBodyitem;
+  const selectedMinditem = audioUrls?.selectedMinditem;
+  const selectedEgoitem = audioUrls?.selectedEgoitem;
+  const selectedselfitem = audioUrls?.selectedselfitem;
+
+  const plan = subscribeData?.plan;
   const planNumber = parseInt(plan);
-  const barCounter = planNumber === 7 ? 2 : planNumber === 30 ? 15 : self?.length + ego?.length + body?.length + miend?.length
 
-
-  if (isLoading) {
-    return <p>Loading ...</p>
-  }
-  const dispatch = useAppDispatch();
-  const token = useAppSelector(useCurrentToken);
-
-  const expiresDate = new Date(userData?.data?.expiresDate);
-  const currentData = new Date();
-
-  useEffect(() => {
-    setToggleCategory(userData?.data?.userType)
-  }, [userData?.data])
-
-
-  const logOutFun = async () => {
-    await logOutUpdate(currentUser?.email)
-  }
-
-  useEffect(() => {
-    if (token && currentData >= expiresDate) {
-      logOutFun()
-      dispatch(logOut());
-    }
-  }, [])
-
-  useEffect(() => {
-    const performUpdate = async () => {
-      const res = await updateAudioData(updateData);
-      if (res.data.success) {
-        toast.success("You achieved 100 coins");
-      }
-    };
-
-    if (listeningTime !== audioDuration && !warningShown) {
-      toast.warning("To earn the full 100 coins, please listen to the entire audio without skipping ");
-      setWarningShown(true);
-    }
-
-    if (listeningTime === audioDuration) {
-      performUpdate();
-      setWarningShown(false);
-    }
-  }, [listeningTime, audioDuration]);
-
-
-  const [hiddedButton, setHiddenButton] = useState(true)
-  const isHide = (array1?.length > 0 && array2?.length > 0) || (array3?.length > 0 && array4?.length > 0)
-
-  useEffect(() => {
-    setHiddenButton(isHide)
-  }, [isHide])
-
-
-  const count = (selfAudioId === "end" ? self?.length : selfAudioId) + (egoAudioId === "end" ? ego?.length : egoAudioId) + (bodyAudioId === "end" ? body?.length : bodyAudioId) + (mindAudioId === "end" ? miend?.length : mindAudioId)
+  const count = parseInt(userData?.data.selfId)
   const counterValue = count * 100;
-  // const maxValue = self?.length + ego?.length + body?.length + miend?.length
-  const currentSession = sessions.find((session) => session?.id === selectedMonth);
-
-  const handlePhysicalAudioSelect = async (audio) => {
-    if (playingAudio.id === audio.id && playingAudio.category === audio.category) {
-      setCurrentAudio(null);
-      setPlayingAudio({ id: null, category: null });
-    } else {
-      setCurrentAudio(audio);
-      setPlayingAudio({ id: audio.id, category: audio.category });
-      setSessionImage(sessionImg);
-
-      const audioData = {
-        email: currentUser?.email,
-        [`${audio.category}Id`]: audio.id === (audio.category === "body" ? body?.length : miend?.length) ? "end" : audio.id,
-        category: audio.category,
-      };
-      setUpdatedData(audioData)
-    }
-  };
-
-  const handleAudioEnd = () => {
-    setCurrentAudio(null);
-    setPlayingAudio({ id: null, category: null });
-  };
-
-  const [selectedBodyItem, setSelectedBodyItem] = useState([]);
-  const [selectedMindItem, setSelectedMindItem] = useState([]);
-  const [selectedSelfItems, setSelectedSelfAudios] = useState([]);
-  const [selectedEgoItems, setSelectedEgoAudios] = useState([]);
-
-  const totalBodyMindSelections = selectedBodyItem.length + selectedMindItem.length;
-  const totalSelfEgoSelections = selectedSelfItems.length + selectedEgoItems.length;
-
-  const AudioSelectHandler = (item) => {
-
-    if (parseInt(plan) === 7 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
-      toast.error("You Can Select Maximum 2 Content");
-      return
-    }
-    if (parseInt(plan) === 30 && (totalBodyMindSelections >= 15 || totalSelfEgoSelections >= 15)) {
-      toast.error("You Can Select Maximum 15 Content");
-      return
-    }
-    if (item.category === 'body') {
-      setSelectedBodyItem((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
-      );
-    } else if (item.category === "mind") {
-      setSelectedMindItem((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
-      );
-    }
-    else if (item.category === "ego") {
-      setSelectedEgoAudios((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
-      );
-    }
-    else if (item.category === "self") {
-      setSelectedSelfAudios((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
-      );
-    }
-  };
-
-
-  const finalSelectionFunction = async () => {
-    const selectedAudios = {
-      email: currentUser?.email,
-      selectedBodyAudios: selectedBodyItem,
-      selectedMindAudios: selectedMindItem,
-      selectedSelfAudios: selectedSelfItems,
-      selectedEgoAudios: selectedEgoItems
-    }
-    const res = await updateAudioData(selectedAudios);
-    if (res?.data?.success) {
-      toast.success("Audio Selected Successfully")
-    }
-  }
+  const ProgressBarCount = (planNumber === 350 ? audioUrls?.result?.length : userData?.data.selectedBodyAudios.length)
 
   const navigation = useNavigate()
 
@@ -208,407 +82,660 @@ const Sessions = ({ selectedMonth, sessions }) => {
     }
   };
 
+  useEffect(() => {
+    if (parseInt(totalDuration) > 0 && parseInt(totalDuration) === parseInt(listeningTime)) {
+
+      const updateCoin = async () => {
+        const audioData = {
+          email: currentUser?.email,
+        };
+        const res = await updateAudioData(audioData)
+
+        if (res?.data?.success) {
+          setTotalDuration(0)
+          setListeningTime(0)
+          toast.success("Congratulations! You've earned 100 coins!");
+        };
+      }
+
+      updateCoin()
+    }
+  }, [listeningTime])
+
+  useEffect(() => {
+    if (sessionId) {
+      fetch(`http://localhost:5000/success?session_id=${sessionId}`)
+        .then((response) => response.json())
+        .then((data) => setSubscribeData(data))
+        .catch((error) => console.error("Error:", error));
+    }
+  }, [sessionId]);
+
+  useEffect(() => {
+    const fetchPurchasePlan = async () => {
+      if (subscribeData?.subscription_email === currentUser?.email) {
+        try {
+          const purchasePlanData = {
+            sessionId,
+            email: subscribeData.subscription_email,
+          };
+          const res = await purchasePlan(purchasePlanData);
+          setUsbDataLoading(res);
+        } catch (error) {
+          console.error("Error fetching purchase plan:", error);
+        }
+      }
+    };
+
+    if (subscribeData) fetchPurchasePlan();
+  }, [subscribeData, currentUser?.email, sessionId, purchasePlan]);
+
+  useEffect(() => {
+    const deleteFun = async () => {
+      if (
+        (subscribeData && subscribeData?.status !== "active") ||
+        (subscribeData && currentUser?.email !== subscribeData?.subscription_email)
+      ) {
+
+        const res = await userDelete(currentUser?.email)
+        if (res?.data?.success) {
+          navigate("/subscriptionplan");
+        }
+      }
+    }
+    deleteFun()
+
+  }, [usbDataLoading, subscribeData, currentUser?.email, navigate]);
+
+  const categoryStatusChangeFun = (musicStatus) => {
+    if (selectedMindId.length >= 1 || selectedBodyId.length >= 1 || selectedEgoId.length >= 1 || selectedSelfId.length >= 1) {
+      return toast.warning("You are currently unable to change your category.");
+    }
+    setShowCategoryStatus(musicStatus)
+  }
+
+  const allId = selectedBodyId + "," + selectedMindId + "," + selectedSelfId + "," + selectedEgoId;
+  const idArray = allId.split(",").filter((id) => id.trim() !== "");
+
+  const toggleBodyId = (id) => {
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 15")
+    }
+    setSelectedBodyId((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        return prevSelected.filter((itemId) => itemId !== id);
+      } else {
+        return [...prevSelected, id];
+      }
+    });
+  };
+
+  const toggleMindId = (id) => {
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 15")
+    }
+    setSelectedMindId((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        return prevSelected.filter((itemId) => itemId !== id);
+      } else {
+        return [...prevSelected, id];
+      }
+    });
+  };
+
+  const toggleSelfId = (id) => {
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 15")
+    }
+    setSelectedSelfId((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        return prevSelected.filter((itemId) => itemId !== id);
+      } else {
+        return [...prevSelected, id];
+      }
+    });
+  };
+
+  const toggleEgoId = (id) => {
+    if (planNumber === 25 && idArray.length === 2) {
+      return toast.warning("you cant selecte more then 2")
+    }
+    if (planNumber === 45 && idArray.length === 15) {
+      return toast.warning("you cant selecte more then 15")
+    }
+    setSelectedEgoId((prevSelected) => {
+      if (prevSelected.includes(id)) {
+        return prevSelected.filter((itemId) => itemId !== id);
+      } else {
+        return [...prevSelected, id];
+      }
+    });
+  };
+
+  const allSelectedIdGetFun = async () => {
+    if ((selectedBodyId.length === 0 || selectedMindId.length === 0) && (selectedSelfId.length === 0 || selectedEgoId.length === 0)) {
+      return toast.warning("Please select an audio file for both categories before proceeding.", {
+        position: "top-center",
+        autoClose: 5000,
+        theme: "dark",
+        style: { width: "400px" }
+      })
+    }
+    const data = {
+      email: currentUser?.email,
+      idArray
+    }
+    const res = await setSelectedAudios({ data });
+    if (res?.data?.success) {
+      toast.success("Selected Your Audio Successfully")
+    }
+  };
+
+  if (userDataLoading || audioDataLoading) {
+    return <div className="w-full h-[76vh] flex justify-center items-center " >
+      <p className="text-center text-2xl " >Loading Data...</p>
+    </div>;
+  }
+
+
   return (
-    <div className="session-main-dev border-t mt-5 border-[#2f2861] ">
-      <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0 ">
+    <div className="session-main-dev border-t mt-5 border-[#2f2861]">
+      <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
 
-        <div className="heading-div text-3xl  font-semibold my-8">
+        <div className="mb-5">
+
           {
-            parseInt(plan) === 365 &&
-            <p className='text-xl md:text-3xl' >
-              Your  cure session for Month {selectedMonth}
-            </p>
-          }
+            count === 0 && <p className="text-green-700 text-[18px] font-semibold " > If you listen to all the audio tracks sequentially, from the first to the last, you will earn a reward of 100 coins. </p>}
 
-          {count ?
-            <div className='inline-block'>
-              <div className='flex justify-between'>
-                <div>
-                  <span className=' inline-block text-xl md:text-3xl ' >  You achieve
-                  </span>
+          {
+            count > 0 &&
+            <div className="" >
 
-                  <span className='animation-text md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
-                  <span className='animation-text md:text-[44px] font-extrabold'>
-                    <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" /> coins
-                  </span>
+              <div className="flex items-center flex-wrap">
+
+                <div className="flex items-center">
+                  You Achive
+                  <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
+                  <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
+                  <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
                 </div>
 
-                {
-                  parseInt(plan) === 365 &&
-                  <div className='inline-block flex '>
+                <div className='inline-block flex '>
+                  <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10`}
+                    />
+                  </button>
 
-                    <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
-                      <img
-                        src={gift_big}
-                        alt="gift-image"
-                        className={`size-10`}
-                      />
-                    </button>
+                  <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10`}
+                    />
+                  </button>
 
-                    <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
-                      <img
-                        src={gift_big}
-                        alt="gift-image"
-                        className={`size-10`}
-                      />
-                    </button>
+                  <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
 
-                    <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
-                      <img
-                        src={gift_big}
-                        alt="gift-image"
-                        className={`size-10 `}
-                      />
-                    </button>
+                  <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
 
-                    <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
-                      <img
-                        src={gift_big}
-                        alt="gift-image"
-                        className={`size-10 `}
-                      />
-                    </button>
+                  <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
+                    <img
+                      src={gift_big}
+                      alt="gift-image"
+                      className={`size-10 `}
+                    />
+                  </button>
+                </div>
 
-                    <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
-                      <img
-                        src={gift_big}
-                        alt="gift-image"
-                        className={`size-10 `}
-                      />
-                    </button>
-                  </div>
-                }
               </div>
-              {
-                parseInt(plan) !== 365 &&
-                <span className='text-xs ml-0 font-bold '>You can use this coin when you purchaes Anual Plan </span>
-              }
-            </div> : ""}
 
-          {
-            count >= 1 && (
               <ProgressBar
-                className="mt-2"
-                completed={(count / barCounter) * 100}
+                className="mt-2 lg:mt-0"
+                completed={(count / ProgressBarCount) * 100}
                 labelColor="transparent"
                 labelAlignment="center"
-                borderRadius="0px 10px 10px 0px"
+                borderRadius="10px"
                 height="8px"
                 bgColor="#C4AFFF"
                 baseBgColor="#2D2C2C"
               />
-            )
+
+            </div>
           }
 
         </div>
 
 
+        <div className="grid lg:grid-cols-2 md:gap-10  ">
 
-        <div className="grid xl:grid-cols-2 gap-8 my-4">
+          <div>
+            <div className="lg:w-[80%] mx-auto">
+              <div className="" >
+                <NewAudioPlayer
 
-          <div className="flex flex-col gap-4 md:w-[70%] xl:w-[100%] mx-auto ">
-
-            {currentSession && (
-              <div className="relative rounded-3xl overflow-hidden shadow-lg">
-                <img
-                  src={sessionImage}
-                  alt="session"
-                  className="opacity-70 w-full"
+                  audioUrl={audioUrl}
+                  setTotalDuration={setTotalDuration}
+                  setListeningTime={setListeningTime}
                 />
-                <div className="absolute inset-0 flex flex-col justify-end items-center bg-gradient-to-t from-black to-transparent p-4">
-                  <div className="text-white text-3xl font-bold mb-2">
-                    Session {selectedMonth}
-                  </div>
-                  <div className="text-white text-xl font-semibold mb-2">
-                    {currentSession.title}
-                  </div>
-                  <div className="text-white mb-4 text-center font-semibold">
-                    Description for{' '}
-                    <span className="text-xl font-semibold text-red-500">
-                      {currentAudio?.name}
-                    </span>{' '}
-                    goes here.
-                  </div>
-                  {currentAudio ? (
-                    <CustomAudioPlayer
-                      audioSrc={currentAudio.audio}
-                      onAudioEnd={handleAudioEnd}
-                      setListeningTime={setListeningTime}
-                      listeningTime={listeningTime}
-                      setAudioDuration={setAudioDuration}
-                    />
-                  ) : (
-                    <div
-                      className="flex gap-2 items-center bg-slate-400 p-2 rounded-3xl justify-center w-full"
-                    >
-                      Play The Audios
-                    </div>
-                  )}
-                </div>
               </div>
-            )}
 
+              <div>
+                <a
+                  className="bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md mt-10 inline-block"
+                  href={`http://localhost:5000/customers/${subscribeData?.customer_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Cancel Plan
+                </a>
+              </div>
+              <div>
+
+                If You Want To Change Your Plan
+
+                <button
+                  onClick={() => navigate("/subscriptionplan?section=subscription")}
+                  className="text-green-400 duration-300 font-semibold px-2 py-2 rounded-md text-md mt-5 inline-block"
+                >
+                  Click Here
+                </button>
+
+              </div>
+
+            </div>
           </div>
 
           <div>
+            <div className="shadow-2xl p-5 rounded-lg min-h-[300px]">
 
-            <div className='mb-5' >
+              <div className="" >
+                <h2 className="bg-blue-500 text-center py-2 rounded-full text-xl">{userData?.data?.userType}</h2>
 
-              {parseInt(userData?.data?.plan) === 365 ?
-                <div className='grid grid-cols-2 gap-10' >
-                  <button onClick={() => { setToggleCategory("emotional") }} className={` ${toggleCategory === "emotional" ? "text-white" : "text-black"} AudioPlayButton text-center rounded-md w-full  font-bold text-[20px]`}>Emotion</button>
-                  <button onClick={() => { setToggleCategory("physical") }} className={` ${toggleCategory === "emotional" ? "text-black" : "text-white"} AudioPlayButton text-center rounded-md w-full  font-bold text-[20px]`}>Physical</button>
-                </div>
-                :
+                {
+                  selectedBodyitem?.length > 0 ||
+                    selectedMinditem?.length > 0 ||
+                    selectedEgoitem?.length > 0 ||
+                    selectedselfitem?.length > 0 ? "" :
+
+                    <div className="grid grid-cols-2 gap-10 mt-5">
+                      <button
+                        disabled={showCategoryStatus === "withMusic"}
+                        className={`w-full border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withMusic" ? "bg-blue-500 text-black" : ""
+                          }`}
+                        onClick={() => categoryStatusChangeFun("withMusic")}
+                      >
+                        {
+                          audioDataLoading ? "L.." :
+                            "with music"
+                        }
+                      </button>
+                      <button
+                        disabled={showCategoryStatus === "withOutMusic"}
+                        className={`w-full border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus !== "withMusic" ? "bg-blue-500 text-black" : ""
+                          }`}
+                        onClick={() => categoryStatusChangeFun("withOutMusic")}
+                      >
+                        {
+                          audioDataLoading ? "L.." :
+                            "with out music"
+                        }
+                      </button>
+                    </div>
+                }
+
                 <div>
-                  <div className={`AudioPlayButton text-center rounded-md w-full ${toggleCategory === "emotional" ? "text-white block " : "text-black hidden"} font-bold text-[20px]`}>Emotion</div>
-                  <div className={`AudioPlayButton text-center rounded-md w-full ${toggleCategory === "emotional" ? "text-black hidden" : "text-white block"} font-bold text-[20px]`}>Physical</div>
+                  {
+                    selectedBodyitem?.length > 0 ||
+                      selectedMinditem?.length > 0 ||
+                      selectedEgoitem?.length > 0 ||
+                      selectedselfitem?.length > 0 ||
+                      planNumber === 350
+                      ? "" :
+                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added  Your selected Audio Maximum
+                        <span className="w-[10px] inline-block ml-1" >{idArray?.length}/{planNumber === 25 ? 2 : 15}</span>
+                      </button>
+                  }
                 </div>
-              }
-              {
-                parseInt(userData?.data?.plan) !== 365 && <div>
-                  {hiddedButton !== true && (
-                    <div>
-                      {((selectedMindItem?.length > 0 && selectedBodyItem?.length > 0) ||
-                        (selectedEgoItems?.length > 0 && selectedSelfItems?.length > 0))
-                        ? (
-                          <button
-                            onClick={() => finalSelectionFunction()}
-                            className="AudioPlayButton text-center rounded-md w-full mt-5"
-                          >
-                            Set Your Selected Audio
-                          </button>
-                        ) : (
-                          <h2 className="AudioPlayButton text-center rounded-md w-full mt-5">
-                            Initially, select maximum of <span className='text-xl font-bold text-red-500 ' >{planNumber === 7 ? 2 : 15}</span> audios from each side
-                          </h2>
-                        )}
+
+              </div>
+
+              {audioUrls?.result?.length > 0 ? (
+                <div>
+
+                  {/* =======================================     physical  ================================= */}
+
+                  {userData?.data?.userType === "physical" && (
+
+                    <div className="grid grid-cols-2 mt-3 gap-10">
+                      <div>
+                        <h2>Body</h2>
+
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                body?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
+                                  </div>
+                                ))
+                              }
+                            </div> : <div>
+                              {!selectedBodyitem && body?.map((item, index) => (
+                                <div
+                                  key={item._id || index}
+                                  className={`mt-4 rounded ${selectedBodyId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                    }`}
+                                >
+
+                                  <button
+                                    onClick={() => toggleBodyId(item._id)}
+                                    className="w-full text-left text-black p-2 flex items-center"
+                                  >
+                                    <FaLock className="mr-4" />
+                                    {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                  </button>
+
+                                </div>
+                              ))}
+
+                              {selectedBodyitem?.length > 0 &&
+                                selectedBodyitem?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
+
+                                  </div>
+                                ))
+                              }
+                            </div>
+
+                          }
+                        </div>
+                      </div>
+
+                      <div>
+                        <h2>Mind</h2>
+
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                mind?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
+                                  </div>
+                                ))
+                              }
+                            </div> :
+                              <div>
+                                {!selectedMinditem && mind?.map((item, index) => (
+                                  <div
+                                    key={item._id || index}
+                                    className={`mt-4 rounded ${selectedMindId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                      }`}
+                                  >
+                                    <button
+                                      onClick={() => toggleMindId(item._id)}
+                                      className="w-full text-left text-black p-2 flex items-center"
+                                    >
+                                      <FaLock className="mr-4" />
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                    </button>
+                                  </div>
+                                ))}
+
+                                {selectedMinditem?.length > 0 &&
+                                  selectedMinditem?.map((item, index) => (
+                                    <div className='mt-4' key={item._id || index}>
+                                      <button
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                        onClick={() => setAudioUrl(item.audio)}
+                                        onMouseUp={() => setPlayerId(item._id)}
+                                      >
+                                        {
+                                          playerId === item._id ?
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            :
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                        }
+                                        <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                          {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                        </h2>
+                                      </button>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                        </div>
+
+                      </div>
                     </div>
                   )}
+
+                  {/* =======================================     emotional  ================================= */}
+
+                  {userData?.data?.userType === "emotional" && (
+                    <div className="grid grid-cols-2 mt-3 gap-10">
+                      <div>
+                        <h2>Self</h2>
+
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                self?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
+
+                                  </div>
+                                ))
+                              }
+                            </div> :
+                              <div>
+                                {!selectedselfitem && self?.map((item, index) => (
+                                  <div
+                                    key={item._id || index}
+                                    className={`mt-4  rounded ${selectedSelfId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                      }`}
+                                  >
+                                    <button
+                                      onClick={() => toggleSelfId(item._id)}
+                                      className="w-full text-left text-black p-2 flex items-center"
+                                    >
+                                      <FaLock className="mr-4" />
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                    </button>
+                                  </div>
+                                ))}
+
+                                {selectedselfitem?.length > 0 &&
+                                  selectedselfitem?.map((item, index) => (
+                                    <div className='mt-4' key={item._id || index}>
+                                      <button
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                        onClick={() => setAudioUrl(item.audio)}
+                                        onMouseUp={() => setPlayerId(item._id)}
+                                      >
+                                        {
+                                          playerId === item._id ?
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            :
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                        }
+                                        <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                          {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                        </h2>
+                                      </button>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                        </div>
+                      </div>
+
+                      <div>
+                        <h2>Ego</h2>
+
+                        <div>
+                          {
+                            planNumber === 350 ? <div>
+                              {
+                                ego?.map((item, index) => (
+                                  <div className='mt-4' key={item._id || index}>
+                                    <button
+                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      onClick={() => setAudioUrl(item.audio)}
+                                      onMouseUp={() => setPlayerId(item._id)}
+                                    >
+                                      {
+                                        playerId === item._id ?
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          :
+                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                      }
+                                      <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                        {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                      </h2>
+                                    </button>
+                                  </div>
+                                ))
+                              }
+                            </div> :
+                              <div>
+                                {!selectedEgoitem && ego?.map((item, index) => (
+                                  <div
+                                    key={item._id || index}
+                                    className={`mt-4  rounded ${selectedEgoId.includes(item._id) ? "bg-blue-300" : "bg-white"
+                                      }`}
+                                  >
+                                    <button
+                                      onClick={() => toggleEgoId(item._id)}
+                                      className="w-full text-left text-black p-2 flex items-center"
+                                    >
+                                      <FaLock className="mr-4" />
+                                      {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                    </button>
+                                  </div>
+                                ))}
+
+                                {selectedEgoitem?.length > 0 &&
+                                  selectedEgoitem?.map((item, index) => (
+                                    <div className='mt-4' key={item._id || index}>
+                                      <button
+                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                        onClick={() => setAudioUrl(item.audio)}
+                                        onMouseUp={() => setPlayerId(item._id)}
+                                      >
+                                        {
+                                          playerId === item._id ?
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            :
+                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                        }
+                                        <h2 className="text-left w-full text-[14px] md:text-[16px]" >
+                                          {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
+                                        </h2>
+                                      </button>
+                                    </div>
+                                  ))
+                                }
+                              </div>
+                          }
+                        </div>
+
+                      </div>
+                    </div>
+                  )}
+
                 </div>
-              }
+              ) : (
+                <p>No audio files available.</p>
+              )}
             </div>
-
-
-            {/* ====================================================  emotional ========================================= */}
-            <div className={`grid grid-cols-2 gap-10 ${toggleCategory === "emotional" ? "block" : "hidden"} `}>
-
-              {/* Self Section */}
-              <div>
-                <h2 className='font-semibold mb-1 ' >Self ...</h2>
-
-                <div>
-
-                  {(userData?.data?.selectedSelfAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && self?.map((item) => (
-                    <div key={item.id} className="mb-2">
-                      <button
-                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedSelfItems?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
-                          }`}
-                        onClick={() => AudioSelectHandler(item)}
-                      >
-                        <FaLock />
-                        {item.name}
-                      </button>
-                    </div>
-                  ))}
-
-                  {(parseInt(userData?.data?.plan) === 365 ? self : self.filter(item => userData?.data?.selectedSelfAudios?.includes(item.id)))
-                    .map((item) => {
-                      return (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                          </button>
-                        </div>
-                      );
-                    })}
-
-                </div>
-
-              </div>
-
-              {/*================================== Ego Section===================================== */}
-              <div>
-                <h2 className='font-semibold mb-1 '>Ego ...</h2>
-                <div>
-
-                  {(userData?.data?.selectedEgoAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && ego?.map((item) => (
-                    <div key={item.id} className="mb-2">
-                      <button
-                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedEgoItems?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
-                          }`}
-                        onClick={() => AudioSelectHandler(item)}
-                      >
-                        <FaLock />
-                        {item.name}
-                      </button>
-                    </div>
-                  ))}
-
-
-                  {(parseInt(userData?.data?.plan) === 365 ? ego : ego.filter(item => userData?.data?.selectedEgoAudios?.includes(item.id)))
-                    .map((item) => {
-                      return (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                          </button>
-                        </div>
-                      );
-                    })}
-
-
-                </div>
-              </div>
-
-            </div>
-
-            {/* ====================================================  physical ========================================= */}
-            <div className={`grid grid-cols-2 gap-2 md:gap-10 ${toggleCategory === "emotional" ? "hidden" : "block"} `}>
-
-              {/* body Section */}
-              <div>
-                <h2 className='font-semibold mb-1 '>Body ...</h2>
-                <div>
-
-                  {/* ================================= selected audio ================================= */}
-                  {(userData?.data?.selectedBodyAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && body?.map((item) => (
-                    <div key={item.id} className="mb-2">
-                      <button
-                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedBodyItem?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
-                          }`}
-                        onClick={() => AudioSelectHandler(item)}
-                      >
-                        <FaLock />
-                        {item.name}
-                      </button>
-                    </div>
-                  ))}
-
-                  {/* ================================= Main Body audio ================================= */}
-
-
-                  {(parseInt(userData?.data?.plan) === 365 ? body : body.filter(item => userData?.data?.selectedBodyAudios?.includes(item.id)))
-                    .map((item) => {
-                      return (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                          </button>
-                        </div>
-                      );
-                    })}
-
-                </div>
-
-              </div>
-
-              {/* =======================================miend Section================================= */}
-              <div>
-
-                <h2 className='font-semibold mb-1 '>Mind ...</h2>
-                <div>
-
-                  {/* ================================= selected audio ================================= */}
-                  {(userData?.data?.selectedMindAudios?.length === 0 && parseInt(userData?.data?.plan) !== 365) && miend?.map((item) => (
-                    <div key={item.id} className="mb-2">
-                      <button
-                        className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${selectedMindItem?.includes(item.id) ? 'bg-blue-500' : 'bg-transparent'
-                          }`}
-                        onClick={() => AudioSelectHandler(item)}
-                      >
-                        <FaLock />
-                        {item.name}
-                      </button>
-                    </div>
-                  ))}
-
-                  {/* ================================= Main Mind audio ================================= */}
-
-                  {(parseInt(userData?.data?.plan) === 365 ? miend : miend.filter(item => userData?.data?.selectedMindAudios?.includes(item.id)))
-                    .map((item) => {
-                      return (
-                        <div key={item.id} className="mb-2">
-                          <button
-                            className={`w-full flex gap-2 items-center p-2 border border-gray-300 rounded ${playingAudio.category === item.category && item.id === playingAudio.id
-                              ? 'bg-blue-500'
-                              : 'bg-transparent'
-                              }`}
-                            onClick={() => handlePhysicalAudioSelect(item)}
-                          >
-                            {playingAudio.id === item.id && playingAudio.category === item.category ? (
-                              <div className="bg-green-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPause />
-                              </div>
-                            ) : (
-                              <div className="bg-sky-500 size-8 flex justify-center items-center rounded-full">
-                                <FaPlay />
-                              </div>
-                            )}
-
-                            <span className='block md:hidden '>{item.name.length > 10 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-                            <span className='hidden md:block' >{item.name.length > 30 ? `${item.name.slice(0, 10)} ...` : item.name}</span>
-
-                          </button>
-                        </div>
-                      );
-                    })}
-                </div>
-
-              </div>
-
-            </div>
-
 
           </div>
         </div>

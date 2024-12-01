@@ -21,19 +21,23 @@ import AudioDescriptions from "./pages/Audios/AudioDescriptions/AudioDescription
 import Physical from "./pages/Physical/Physical";
 import DailyAudios from "./pages/UserAudios/DailyAudios";
 import SignUpPage from "./pages/Login/SignUpPage";
-import PPurchesProtectorRoute from "./layout/PPurchesProtectorRoute";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import AllUsers from "./pages/allUsers/AllUsers";
 import Summary from "./pages/Summary/Summary";
 import Vault from "./pages/Vault/Vault";
 import Weight from "./pages/Weight/Weight";
+import SubPayment from "./pages/SubPayment/SubPayment";
+import Success from "./pages/SuccessPayment/Success";
+import Admin from "./layout/admin/Admin";
+import UsersControl from "./pages/AdminPages/UserControls/UsersControl";
+import AdminAudios from "./pages/AdminPages/Audio/AdminAudios";
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PPurchesProtectorRoute>
-        <Layout />
-      </PPurchesProtectorRoute>
+      // <PPurchesProtectorRoute>
+      <Layout />
+      // </PPurchesProtectorRoute>
     ),
     errorElement: <ErrorPage />,
     children: [
@@ -101,9 +105,9 @@ const router = createBrowserRouter([
         path: "/payment",
         element: (
           <ProtectedRoute>
-            <PPurchesProtectorRoute>
-              <Payment />
-            </PPurchesProtectorRoute>
+            {/* <PPurchesProtectorRoute> */}
+            <Payment />
+            {/* </PPurchesProtectorRoute> */}
           </ProtectedRoute>
         ),
       },
@@ -147,16 +151,38 @@ const router = createBrowserRouter([
   {
     path: "/daily-audios",
     element:
-      <ProtectedRoute>
-        <DailyAudios />
-      </ProtectedRoute>
+      // <ProtectedRoute>
+      <DailyAudios />
+    // </ProtectedRoute>
   },
   {
     path: "/vault",
     element:
-      <ProtectedRoute>
-        <Vault />
-      </ProtectedRoute>
+      // <ProtectedRoute>
+      <Vault />
+    // </ProtectedRoute>
+  },
+  {
+    path: "/subPayment",
+    element: <SubPayment />
+  },
+  {
+    path: "/success",
+    element: <Success />
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+    children: [
+      {
+        path: "users",
+        element: <UsersControl />
+      },
+      {
+        path: "audios",
+        element: <AdminAudios />
+      }
+    ]
   }
 ]);
 

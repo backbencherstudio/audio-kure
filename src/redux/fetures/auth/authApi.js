@@ -2,6 +2,18 @@ import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+
+    getALlUser: builder.query({
+      query: (status) => {
+        return {
+            url: "/auth/allUsers",
+            method: "GET",
+            params: { status }, 
+        };
+    },
+    providesTags: ["user"],
+    }),
+
     getSingleUser: builder.query({
       query: (email) => {
         return {        
@@ -12,11 +24,32 @@ const authApi = baseApi.injectEndpoints({
       providesTags: ["audio", "user"], 
     }),
 
+    userDelete: builder.mutation({
+      query: (email) => {
+        return {        
+            url: `/auth/userDelete`,
+            method: "PATCH",
+            body : {email}
+        }
+      },
+      providesTags: ["audio", "user"], 
+    }),
+
     registerUser: builder.mutation({
       query: (user) => {
         return {        
             url: "/auth/create-user",
             method: "POST",
+            body: { user },
+        }
+      },
+    }),
+
+    resetPassword: builder.mutation({
+      query: (user) => {
+        return {        
+            url: "/auth/resetPassword",
+            method: "PATCH",
             body: { user },
         }
       },
@@ -48,6 +81,7 @@ const authApi = baseApi.injectEndpoints({
           body: { purchasePlan },
         }
       },
+      invalidatesTags : ["audios"]
     }),
 
     updateAudioData: builder.mutation({
@@ -71,6 +105,56 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["audio", "user"], 
     }),
+    
+    sendEmail: builder.mutation({
+      query: (emailInfo) => {        
+        return {
+          url: "/auth/sendEmail",
+          method: "POST",
+          body: emailInfo,
+        }
+      },
+    }),
+
+
+    allAudioPaths: builder.query({
+      query: (categoryStatus) => {              
+        return {
+          url: `/get-path-name`,
+          method: "GET",
+          params : categoryStatus
+        }
+      },
+      providesTags : ["audios"],
+      // invalidatesTags:["audios"]
+    }),
+
+    updateAudioPaths: builder.mutation({
+      query: (data) => {             
+        console.log(data);
+         
+        return {
+          url: `/path-name`,
+          method: "PATCH",
+          body : data
+        }
+      },
+      invalidatesTags : ["audios"],
+    }),
+
+    
+    setSelectedAudios: builder.mutation({
+      query: (data) => {                 
+        return {
+          url: `/auth/selectedAudio`,
+          method: "PATCH",
+          body : data
+        }
+      },
+      invalidatesTags : ["audios"]
+    }),
+
+
   }),
 });
 

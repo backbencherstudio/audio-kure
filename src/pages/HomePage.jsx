@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { Link } from "react-router-dom";
 import star from "./../assets/images/home_stars.png";
@@ -26,11 +27,11 @@ function HomePage() {
   const expiresDate = new Date(user?.expiresDate);
   const currentData = new Date();
 
-  useEffect(() => {
-    if (token && currentData > expiresDate) {
-      dispatch(logOut());
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (token && currentData > expiresDate) {
+  //     dispatch(logOut());
+  //   }
+  // }, [])
 
 
 
@@ -50,8 +51,9 @@ function HomePage() {
 
           <div className="flex flex-col-reverse lg:flex-row-reverse items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="w-full lg:w-1/2 space-y-6">
-              <h2 className="text-4xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
-                Many Solutions to Many Problems
+
+              <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
+                Double the Impact: 2 Self-Hypnosis Audio = 8 Traditional Treatments! (Source: VA.gov):
               </h2>
               <h3 className="text-xl font-bold merriweather">Your Personalized Hypnosis Program is at your fingertips</h3>
               <p className="text-xl merriweather">Start by selecting one of the following</p>
@@ -98,14 +100,10 @@ function HomePage() {
             </div>
 
             <div className="flex-1 flex items-center justify-center relative">
-
               <img className="rounded-xl " alt="" src={heroImage} />
-
-
               <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
                 <BackgroundMusic />
               </div>
-
             </div>
           </div>
           <Footer />

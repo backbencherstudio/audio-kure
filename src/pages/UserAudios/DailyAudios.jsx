@@ -42,6 +42,8 @@ const DailyAudios = () => {
     navigate("/login");
   };
 
+  const showButton = currentUser?.email === "bbsfullstack@gmail.com"
+
   return (
     <div className="area overflow-y-scroll">
       <div className="max-w-7xl mx-auto">
@@ -59,12 +61,29 @@ const DailyAudios = () => {
             >
               <div className="flex justify-center items-center">
                 {currentUser ? (
-                  <button
-                    className="text-center"
-                    onClick={handleLogout}
-                  >
-                    Log Out
-                  </button>
+                  <div className="flex flex-col" >
+                    <button
+                      className="text-center"
+                      onClick={handleLogout}
+                    >
+                      Log Out
+                    </button>
+
+                    {
+                      showButton &&
+                      <div>
+                        <div className="w-full bg-slate-50 h-[1px] my-2 " ></div>
+                        <Link
+                          className="text-center"
+                          to="/admin/users"
+                        >
+                          Dashboard
+                        </Link>
+                      </div>
+                    }
+
+
+                  </div>
                 ) : (
                   <Link to={"/login"} className="text-center mx-auto">
                     Log In
@@ -78,7 +97,7 @@ const DailyAudios = () => {
 
       {isLoading && <div className="w-full h-[100vh] flex justify-center items-center " >
         <p className="text-center text-2xl " >Loading Data...</p>
-      </div> }
+      </div>}
 
       {data?.data ? (
         <CureSessions currentUser={data?.data} />

@@ -7,16 +7,15 @@ import CustomAudioPlayer from './CustomAudioPlayer';
 import data from "../../../public/sessions.json";
 import authApi from '../../redux/fetures/auth/authApi';
 import { useSelector } from 'react-redux';
-import { logOut, selectCurrentUser, useCurrentToken } from '../../redux/fetures/auth/authSlice';
+import { selectCurrentUser } from '../../redux/fetures/auth/authSlice';
 import goldCoin from "./../../assets/goldCoin.png"
 import "./Sessions.css"
 import ProgressBar from '@ramonak/react-progress-bar';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import gift_big from "./../../assets/images/free_gift_big.png";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const SessionsTest = ({ selectedMonth, sessions }) => {
+const Sessions = ({ selectedMonth, sessions }) => {
   const [currentAudio, setCurrentAudio] = useState(null);
   const [playingAudio, setPlayingAudio] = useState({ id: 0, category: "" });
   const [sessionImage, setSessionImage] = useState(sessionImg);
@@ -28,29 +27,47 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
   const currentUser = useSelector(selectCurrentUser);
   const { data: userData, isLoading } = authApi.useGetSingleUserQuery(currentUser?.email);
-  const [logOutUpdate] = authApi.useLogOutUpdateMutation()
   const [toggleCategory, setToggleCategory] = useState("")
   const [subscrieData, setSubscribeData] = useState(null)
   const [usbDataLoading, setSubDataloading] = useState(null)
   const navigation = useNavigate()
+  const { data: audioUrls , isLoading : dataLoading } = authApi.useAllAudioPathsQuery();
+
+
 
 
   if (isLoading) {
     return <p>Loading ...</p>
   }
 
-
-
-
   const selfAudioId = userData?.data?.selfId === "end" ? "end" : parseInt(userData?.data?.selfId);
   const egoAudioId = userData?.data?.egoId === "end" ? "end" : parseInt(userData?.data?.egoId);
   const bodyAudioId = userData?.data?.bodyId === "end" ? "end" : parseInt(userData?.data?.bodyId);
   const mindAudioId = userData?.data?.mindId === "end" ? "end" : parseInt(userData?.data?.mindId);
 
+  // const self = audioUrls?.self;
+  // const ego = audioUrls?.ego;
+  // const body = audioUrls?.body;
+  // const miend = audioUrls?.mind;
+
   const self = data?.emotional?.self;
   const ego = data?.emotional?.ego;
   const body = data?.physical?.body;
   const miend = data?.physical?.mind;
+
+  // console.log(58, audioUrls);
+  // console.log(59, audioUrls?.ego);
+  // console.log(60, audioUrls?.body);
+  // console.log(61, audioUrls?.mind);
+
+  // console.log("================================");
+
+  // console.log(65, self);
+  // console.log(66, ego);
+  // console.log(67, body);
+  // console.log(68, miend);
+
+
 
 
   const array1 = userData?.data?.selectedBodyAudios
@@ -73,7 +90,6 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
     sessionId = userData?.data.sessionId
   }
 
-  
   useEffect(() => {
     if (sessionId) {
       fetch(`http://localhost:5000/success?session_id=${sessionId}`)
@@ -111,7 +127,7 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
     if ((subscrieData && subscrieData?.status != "active") || (subscrieData && currentUser?.email != subscrieData?.subscription_email)) {
       navigation("/subscriptionplan")
     }
-  }, [usbDataLoading]) 
+  }, [usbDataLoading])
 
   useEffect(() => {
     const performUpdate = async () => {
@@ -178,6 +194,9 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
 
   const AudioSelectHandler = (item) => {
 
+    console.log(item);
+    
+
     if (parseInt(plan) === 25 && (totalBodyMindSelections >= 2 || totalSelfEgoSelections >= 2)) {
       toast.error("You Can Select Maximum 2 Content");
       return
@@ -188,23 +207,25 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
     }
     if (item.category === 'body') {
       setSelectedBodyItem((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     } else if (item.category === "mind") {
       setSelectedMindItem((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     }
     else if (item.category === "ego") {
       setSelectedEgoAudios((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     }
     else if (item.category === "self") {
       setSelectedSelfAudios((prev) =>
-        prev.includes(item.id) ? prev.filter(id => id !== item.id) : [...prev, item.id]
+        prev?.includes(item._id) ? prev?.filter(id => id !== item.id) : [...prev, item.id]
       );
     }
+
+
   };
 
 
@@ -247,14 +268,14 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0 ">
 
         <div>
-          S Data = {subscrieData?.subscription_email} S =  {subscrieData?.status} P =  {subscrieData?.plan}
+          S Data = {subscrieData?.subscription_email} S =  {subscrieData?.status} P =  {subscrieData?.plan} C_id = {subscrieData?.customer_id}
         </div>
 
         <div className="heading-div text-3xl  font-semibold my-8">
           {
             parseInt(plan) === 350 &&
             <p className='text-xl md:text-3xl' >
-              Your  cure session for Month {selectedMonth}
+              Your cure session for Month {selectedMonth}
             </p>
           }
 
@@ -274,7 +295,6 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
                 {
                   parseInt(plan) === 350 &&
                   <div className='inline-block flex '>
-
                     <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
                       <img
                         src={gift_big}
@@ -384,7 +404,13 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
                   )}
                 </div>
               </div>
+
+
             )}
+
+            <div>
+              <a className='bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md  ' href={`http://localhost:5000/customers/${subscrieData?.customer_id}`} target='_blank'> Plan  </a>
+            </div>
 
           </div>
 
@@ -434,7 +460,6 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
               {/* Self Section */}
               <div>
                 <h2 className='font-semibold mb-1 ' >Self ...</h2>
-
                 <div>
 
                   {(userData?.data?.selectedSelfAudios?.length === 0 && parseInt(plan) !== 350) && self?.map((item) => (
@@ -656,4 +681,4 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   );
 };
 
-export default SessionsTest;
+export default Sessions;

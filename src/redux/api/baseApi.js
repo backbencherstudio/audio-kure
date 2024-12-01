@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../fetures/auth/authSlice";
+// import { Navigate } from "react-router-dom";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://kure-server.vercel.app/api/v1",
+  baseUrl: "http://localhost:5000/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -13,8 +14,16 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
+
+
 const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+   
+
+  // if(result?.meta?.response.statusText === "Unauthorized" ){
+  //       Navigate("/login")
+  // }
+  
     
   if (result?.error?.status === 403) {
     // toast.error(`${result?.error?.data.message}`);
@@ -26,7 +35,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
 
   if (result?.error?.status === 401) {
     console.log("sending refresh token");
-    const res = await fetch("https://kure-server.vercel.app/api/v1/auth/refresh-token", {
+    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
       method: "POST",
       credentials: "include",
     });
@@ -50,6 +59,6 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["audio", "user"],
+  tagTypes: ["audio", "user", "audios"],
   endpoints: () => ({}),
 });

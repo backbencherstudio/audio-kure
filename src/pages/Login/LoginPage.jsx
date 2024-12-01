@@ -7,6 +7,8 @@ import authApi from "../../redux/fetures/auth/authApi";
 import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { toast } from "react-toastify";
 
 function LoginPage() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm({
@@ -18,10 +20,11 @@ function LoginPage() {
 
   const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
-  const [login, {isLoading}] = authApi.useLoginMutation();
+  const [login, { isLoading }] = authApi.useLoginMutation();
+  const [resetPassword, { isLoading: resetPasswordLoading }] = authApi.useResetPasswordMutation()
+
   const dispatch = useAppDispatch();
 
-  const currentDate = new Date();
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,7 +32,7 @@ function LoginPage() {
   };
 
   const onSubmit = async (data) => {
-    
+
     setErrorMsg(null);
 
     if (!data.email || !data.password) {
@@ -53,20 +56,62 @@ function LoginPage() {
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
 
-      const expiresDate = new Date(user?.expiresDate);
+      console.log(user);
 
-      if (response?.success) {
-        if (currentDate < expiresDate) {
-          navigate("/daily-audios");
-          return;
-        }
-        navigate("/payment");
+
+      // setCurrentEmail(user?.email);     
+
+      if (!user?.sessionId) {
+        navigate("/subscriptionplan");
+        return;
       }
+      else {
+        navigate("/daily-audios");
+      }
+
     } catch (error) {
       console.error("Login error:", error);
       setErrorMsg("Invalid email or password.");
     }
-    
+
+  };
+
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const [passEmail, setEmail] = useState("")
+  const [passPassword, setPassPassword] = useState("")
+  const [confirmPass, setPassConfirm] = useState("")
+
+  const changePasswordFun = async (e) => {
+    e.preventDefault();
+
+    if (passPassword !== confirmPass) {
+      toast.warning("Passwords do not match!");
+      return;
+    }
+    const changePassData = {
+      email: passEmail,
+      password: passPassword,
+    };
+
+    const res = await resetPassword(changePassData);
+    if (res?.error?.originalStatus === 404) {
+      toast.error("User not found")
+    }
+    if (res?.data?.success) {
+      toast.success("Password Reset SuccessFully")
+      handleClose()
+    }
+    console.log(res);
   };
 
   return (
@@ -122,15 +167,6 @@ function LoginPage() {
                 className="w-full text-sm bg-white/20 text-white rounded-md p-2 border border-white/20 focus:outline-none"
               />
 
-              <p className="mt-3 font-semibold">
-                {" "}
-                If you are not registrad go to{" "}
-                <Link to="/signup" className="text-blue-600">
-                  {" "}
-                  Registred{" "}
-                </Link>{" "}
-              </p>
-
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -143,10 +179,67 @@ function LoginPage() {
                 )}
               </button>
 
-            </form>
+              <div className="flex justify-end" >
+                <h2 onClick={handleClickOpen} className="mt-3 text-[14px] text-green-300 font-semibold cursor-pointer ">Forget Password</h2>
+              </div>
 
+              <p className="mt-2 font-semibold">
+                {" "}
+                If you are not registrad go to{" "}
+                <Link to="/signup" className="text-blue-600">
+                  {" "}
+                  Registred{" "}
+                </Link>{" "}
+              </p>
+            </form>
           </div>
         </div>
+
+        <Dialog
+          open={open}
+          keepMounted
+          onClose={handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>{"Change Your Password"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+
+              <form onSubmit={changePasswordFun}>
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 border mt-2 rounded-full py-2"
+                  type="email"
+                  placeholder="Email"
+                />
+                <input
+                  onChange={(e) => setPassPassword(e.target.value)}
+                  className="w-full px-4 border mt-2 rounded-full py-2"
+                  type="password"
+                  placeholder="Password"
+                />
+                <input
+                  onChange={(e) => setPassConfirm(e.target.value)}
+                  className="w-full px-4 border mt-2 rounded-full py-2"
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+                <button className="mt-4 border px-5 py-1 rounded-full" type="submit">
+                  {
+                    resetPasswordLoading ? "Loading..." : "Submit"
+                  }
+
+                </button>
+              </form>
+
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button className="text-2xl" onClick={handleClose}>X</Button>
+          </DialogActions>
+        </Dialog>
+
+
       </div>
     </div>
   );

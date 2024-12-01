@@ -10,7 +10,7 @@ import CountDownTimer from "../CountDownTimer/CountDownTimer";
 import GoogleReviews from "../GoogleReviews/GoogleReviews";
 import Footer from "../../shared/Footer";
 import Logo from "../../shared/Logo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
@@ -29,6 +29,7 @@ const PaymentPlan = ({
   isSelected,
   onSelect,
 }) => (
+
   <div
     className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900"
       }`}
@@ -93,11 +94,11 @@ const PaymentPlan = ({
       </div>
     )}
   </div>
+
 );
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("365");
-  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("");
   const [plans, setPlans] = useState([]);
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const paymentPlanRef = useRef(null);
@@ -119,6 +120,16 @@ const SubscriptionPlan = () => {
         discountedPrice: "49.99",
         perDay: "7.14",
         originalPerDay: "$14.28",
+        href: "http://localhost:5000/subscribe?plan=Silver"
+      },
+      {
+        id: "30",
+        duration: "30 Days",
+        originalPrice: "299.98",
+        discountedPrice: "149.99",
+        perDay: "4.99",
+        originalPerDay: "$9.9",
+        href: "http://localhost:5000/subscribe?plan=Gold"
       },
       {
         id: "365",
@@ -128,16 +139,10 @@ const SubscriptionPlan = () => {
         perDay: "1.47",
         originalPerDay: "$2.73",
         isPopular: true,
-        hasGift: true
+        hasGift: true,
+        href: "http://localhost:5000/subscribe?plan=Dimond"
       },
-      {
-        id: "30",
-        duration: "30 Days",
-        originalPrice: "299.98",
-        discountedPrice: "149.99",
-        perDay: "4.99",
-        originalPerDay: "$9.9",
-      },
+
     ];
 
     return basePlans.map((plan) => ({
@@ -183,11 +188,19 @@ const SubscriptionPlan = () => {
     }
   };
 
-  const counts = {
-    physical: 0,
-    emotional: 0,
-  };
   const usertype = localStorage.getItem('userType')
+
+  const [searchParams] = useSearchParams();
+  const section = searchParams.get("section");
+
+  useEffect(() => {
+    if (section) {
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [section]);
 
   return (
     <div className="text-white">
@@ -212,34 +225,37 @@ const SubscriptionPlan = () => {
         </div>
         <PlanDescription />
         <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
-          <div className="md:w-1/2 ">
+          <div id="subscription" className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
               Select your plan:
             </h2>
+
+            <a className="text-blue-600 bg-black p-2 " href="http://localhost:5000/subscribe?plan=test">1 day</a>
+
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
-                  <PaymentPlan
-                    key={plan.id}
-                    id={plan.id}
-                    duration={plan.duration}
-                    originalPrice={plan.originalPrice}
-                    discountedPrice={plan.discountedPrice}
-                    perDay={plan.perDay}
-                    originalPerDay={plan.originalPerDay}
-                    isSelected={selectedPlan === plan.id}
-                    isPopular={plan.isPopular}
-                    hasGift={plan.hasGift}
-                    onSelect={handlePlanSelect}
-                  />
+                  <a key={plan.id} href={plan.href} className="block" >
+                    <PaymentPlan
+                      id={plan.id}
+                      duration={plan.duration}
+                      originalPrice={plan.originalPrice}
+                      discountedPrice={plan.discountedPrice}
+                      perDay={plan.perDay}
+                      originalPerDay={plan.originalPerDay}
+                      isSelected={selectedPlan === plan.id}
+                      isPopular={plan.isPopular}
+                      hasGift={plan.hasGift}
+                    />
+                  </a>
                 ))}
               </div>
-              <button
+              {/* <button
                 type="submit"
                 className="w-full btnGrad font-bold p-4 rounded-3xl focus:outline-none focus:shadow-outline hover:scale-105 duration-100 ease-linear"
               >
                 Get my plan
-              </button>
+              </button> */}
 
               <p className="text-center text-xs my-4">
                 Guaranteed safe checkout
@@ -247,12 +263,13 @@ const SubscriptionPlan = () => {
               <img className="mx-auto w-[45%]" src={safe_payment} alt="safe-payment" />
             </form>
           </div>
-          <div className="md:w-1/2 flex flex-col justify-between">
-            <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
-              All plans include:
-            </h2>
-            <ul className="space-y-2">
 
+          <div  className="md:w-1/2 flex flex-col justify-between ">
+
+            <ul className="space-y-2">
+              <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
+                All plans include:
+              </h2>
               <li className="flex items-center text-base gap-2">
                 <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Digital
                 Extensive Audio Library: 4,000+ hours of expert hypnosis sessions across various topics
@@ -328,6 +345,7 @@ const SubscriptionPlan = () => {
               </div>
             </div>
           </div>
+
         </div>
 
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />

@@ -5,7 +5,7 @@ import { MdLockOpen } from "react-icons/md";
 import { toast } from "react-toastify";
 
 function EmailPage() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("e@g.com");
   const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
 
@@ -63,6 +63,7 @@ function EmailPage() {
                 className="w-full focus:bg-[#6e363652] md:max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#EEB5B4] placeholder:text-white"
                 type="text"
                 placeholder="Email"
+
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {

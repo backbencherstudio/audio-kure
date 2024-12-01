@@ -37,11 +37,9 @@ const WelcomePage = () => {
         {
           userCondition === "emotional" && <div>
             <ChatUi userCondition={userCondition} code={code}></ChatUi>
-
           </div>
         }
       </div>
-
     </div>
   );
 };
