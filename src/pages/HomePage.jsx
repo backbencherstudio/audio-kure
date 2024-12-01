@@ -50,9 +50,11 @@ function HomePage() {
 
           <div className="flex flex-col-reverse lg:flex-row-reverse items-center justify-center mt-10 gap-20 lg:px-20 px-5">
             <div className="w-full lg:w-1/2 space-y-6">
-              <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
-                Double the Impact: 2 Self-Hypnosis Audio = 8 Traditional Treatments! (Source: VA.gov):
+              <h2 className="text-4xl md:text-3xl lg:text-xl xl:text-3xl text-white merriweather font-bold leading-tight">
+                Many Solutions to Many Problems
               </h2>
+              <h3 className="text-xl font-bold merriweather">Your Personalized Hypnosis Program is at your fingertips</h3>
+              <p className="text-xl merriweather">Start by selecting one of the following</p>
               <div className="space-y-4">
                 <p className="text-sm md:text-base lg:text-xl">
                   4,000+ Hours of Custom Audio Hypnosis & Meditation

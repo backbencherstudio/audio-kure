@@ -99,9 +99,8 @@ function EmailPage() {
                     className="text-white text-sm cursor-pointer"
                     onClick={() => setIsChecked(!isChecked)}
                   >
-                    I would like to get an email about my body data report and
-                    agree to your{" "}
-                    <span className="p-text">Privacy Policy</span>.
+                    I would like to get an email about HYPNO 4 U audios and updated new programs and agree to your{" "}
+                    <span className="p-text cursor-pointer">Privacy Policy</span>.
                   </label>
                 </div>
               </div>
