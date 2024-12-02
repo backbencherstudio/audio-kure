@@ -31,18 +31,18 @@ const PaymentPlan = ({
 }) => (
 
   <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900"
+    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/10 border border-white/20 p-6 text-gray-900"
       }`}
     onClick={() => onSelect(id)}
   >
     <div className="flex items-center">
-      <div
+      {/* <div
         className={`w-5 h-5 rounded-full border-2 ${isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
           } mr-3 flex items-center justify-center ${isPopular ? "mt-8 mb-2" : ""
           }`}
       >
         {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
-      </div>
+      </div> */}
       <div
         className={`flex-grow flex justify-between items-center ${isPopular ? "pt-8 pb-2" : "py-2"
           }`}
@@ -82,7 +82,7 @@ const PaymentPlan = ({
               className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
                 }`}
             >
-              per day
+              Per day
             </p>
           </div>
         </div>
@@ -116,28 +116,28 @@ const SubscriptionPlan = () => {
       {
         id: "7",
         duration: "7 Days",
-        originalPrice: "99.98",
-        discountedPrice: "49.99",
-        perDay: "7.14",
-        originalPerDay: "$14.28",
+        originalPrice: "50",
+        discountedPrice: "25",
+        perDay: "3.58",
+        originalPerDay: "$7.14",
         href: "https://kure-server.vercel.app/subscribe?plan=Silver"
       },
       {
         id: "30",
         duration: "30 Days",
-        originalPrice: "299.98",
-        discountedPrice: "149.99",
-        perDay: "4.99",
-        originalPerDay: "$9.9",
+        originalPrice: "90",
+        discountedPrice: "45",
+        perDay: "1.5",
+        originalPerDay: "$3.00",
         href: "https://kure-server.vercel.app/subscribe?plan=Gold"
       },
       {
         id: "365",
         duration: "Annual",
-        originalPrice: "994",
-        discountedPrice: "494",
-        perDay: "1.47",
-        originalPerDay: "$2.73",
+        originalPrice: "700",
+        discountedPrice: "350",
+        perDay: "0.9",
+        originalPerDay: "$1.92",
         isPopular: true,
         hasGift: true,
         href: "https://kure-server.vercel.app/subscribe?plan=Dimond"
@@ -278,57 +278,57 @@ const SubscriptionPlan = () => {
                 All plans include:
               </h2>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Digital
+                <MdOutlineCheck className="p-text text-xl w-8" /> Digital
                 Extensive Audio Library: 4,000+ hours of expert hypnosis sessions across various topics
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Goal-Oriented Programs: Customized paths for goals like weight loss, stress relief, and better sleep
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Free Trial: Try HYPNO 4 U risk-free
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Personalized Onboarding: Guided platform tour to maximize every feature
+                <MdOutlineCheck className="p-text text-xl w-8" /> Personalized Onboarding: Guided platform tour to maximize every feature
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Exclusive New Content: Early access to innovative Quantum Medical HypnosisTM sessions
+                <MdOutlineCheck className="p-text text-xl w-8" /> Exclusive New Content: Early access to innovative Quantum Medical HypnosisTM sessions
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" /> Flexible Subscription Options: Affordable plans with easy cancellation
+                <MdOutlineCheck className="p-text text-xl w-8" /> Flexible Subscription Options: Affordable plans with easy cancellation
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Expertly Crafted Sessions: Developed by a Doctor in hypnosis, neuroscience, and Quantum Medicine
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Introductory Hypnosis: Smooth, guided start
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Daily Bedtime Hypnotherapy: Personalized sessions for nightly relaxation
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Constant Content Updates: Regularly refreshed audio hypnosis and meditations
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 24/7 Support: Always-on client assistance
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Privacy & Security: Guaranteed confidentiality
               </li>
               <li className="flex items-center text-base gap-2">
-                <MdOutlineCheck className="text-teal-400 text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Milestone Badges ACCESS THE VAULT: Earn rewards as you reach achievements
               </li>
             </ul>
             <div>
-              <h1 className="text-[1.125rem] text-white font-semibold mb-4">
+              <h1 className="text-[1.125rem] text-white font-semibold my-4 ">
                 If you select the Annual plan:
               </h1>
               <div className="bg-[#07001C]/20 border border-zinc-600 p-4 rounded-3xl">

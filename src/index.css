@@ -38,7 +38,7 @@
 }
 
 .p-bg {
-  @apply bg-[#EEB5B4]
+  @apply bg-[#fff201]
 }
 
 .s-bg {
@@ -54,7 +54,7 @@
 }
 
 .s-text {
-  @apply text-[#BFE5BE]
+  @apply text-[#197a70]
 }
 
 .t-text {

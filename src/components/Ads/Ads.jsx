@@ -107,7 +107,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                         <PlanCard
                             title="PLAN B"
                             price="45"
-                            perDay="3"
+                            perDay="1.5"
                             audioCount="15"
                             description="30 days of comprehensive access to '15' custom-selected hypnotherapy audios."
                             bestFor="Allows a full month to experience the benefits with more flexibility."
@@ -115,7 +115,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                         <PlanCard
                             title="PLAN C"
                             price="350"
-                            perDay="1.04"
+                            perDay="0.9"
                             audioCount="All"
                             description="All audios. A robust program designed for a longer-term, goal-oriented journey with exclusive support."
                             bestFor="Best value for long-term support, giving you a year of unlimited AUDIO access."
@@ -155,14 +155,13 @@ const Ads = ({ scrollToPaymentPlan }) => {
                         <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 blur-xl animate-pulse" />
                             <div className="relative space-y-2">
-                                <div className="text-2xl font-semibold text-gray-400 line-through">
-                                    $2.94/day
+                                <div className="text-2xl font-semibold text-gray-400">
+                                {planDetails[selectedPlan].perDay}
                                 </div>
                                 <div className="flex justify-center items-baseline space-x-2">
                                     <span className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200">
                                         {planDetails[selectedPlan].price}
                                     </span>
-                                    <span className="text-2xl text-gray-300">/day</span>
                                 </div>
                             </div>
                         </div>
