@@ -45,7 +45,7 @@ const ProgressBars = ({ value, navigate, page }) => {
         borderRadius="0px 10px 10px 0px"
         height="8px"
         // bgColor="#C4AFFF"
-        bgColor="#c1a75a"
+        bgColor="#ffcd38"
         baseBgColor="#2D2C2C"
       />
     </div>

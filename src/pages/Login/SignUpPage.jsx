@@ -266,7 +266,7 @@ const SignUpPage = () => {
           <div className="mt-3">
             <p>
               If You Are Already Registred Go To{" "}
-              <Link to="/login" className=" text-blue-400 font-semibold">
+              <Link to="/login" className=" text-blue-500 font-semibold">
                 Login{" "}
               </Link>{" "}
             </p>

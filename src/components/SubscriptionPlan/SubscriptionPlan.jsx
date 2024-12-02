@@ -120,7 +120,7 @@ const SubscriptionPlan = () => {
         discountedPrice: "49.99",
         perDay: "7.14",
         originalPerDay: "$14.28",
-        href: "http://localhost:5000/subscribe?plan=Silver"
+        href: "https://kure-server.vercel.app/subscribe?plan=Silver"
       },
       {
         id: "30",
@@ -129,7 +129,7 @@ const SubscriptionPlan = () => {
         discountedPrice: "149.99",
         perDay: "4.99",
         originalPerDay: "$9.9",
-        href: "http://localhost:5000/subscribe?plan=Gold"
+        href: "https://kure-server.vercel.app/subscribe?plan=Gold"
       },
       {
         id: "365",
@@ -140,7 +140,7 @@ const SubscriptionPlan = () => {
         originalPerDay: "$2.73",
         isPopular: true,
         hasGift: true,
-        href: "http://localhost:5000/subscribe?plan=Dimond"
+        href: "https://kure-server.vercel.app/subscribe?plan=Dimond"
       },
 
     ];
@@ -223,6 +223,13 @@ const SubscriptionPlan = () => {
             suggestible
           </h1>
         </div>
+        <div className="text-center space-y-6">
+          <h1 className="text-4xl font-bold text-white">
+            It's Easy as 1, 2, 3
+          </h1>
+        </div>
+        <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
+
         <PlanDescription />
         <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
           <div id="subscription" className="md:w-1/2 ">
@@ -230,7 +237,7 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
 
-            <a className="text-blue-600 bg-black p-2 " href="http://localhost:5000/subscribe?plan=test">1 day</a>
+            <a className="text-blue-600 bg-black p-2 " href="https://kure-server.vercel.app/subscribe?plan=test">1 day</a>
 
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
@@ -264,7 +271,7 @@ const SubscriptionPlan = () => {
             </form>
           </div>
 
-          <div  className="md:w-1/2 flex flex-col justify-between ">
+          <div className="md:w-1/2 flex flex-col justify-between ">
 
             <ul className="space-y-2">
               <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
@@ -348,7 +355,6 @@ const SubscriptionPlan = () => {
 
         </div>
 
-        <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
         <GoogleReviews />
       </div>
       <div className="container mx-auto px-4">

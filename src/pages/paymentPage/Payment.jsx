@@ -53,7 +53,7 @@ const Payment = () => {
     }
     try {
       await axios.post(
-        "http://localhost:5000/api/v1/payment/execute-payment",
+        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,

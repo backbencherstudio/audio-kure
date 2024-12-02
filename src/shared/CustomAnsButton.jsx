@@ -5,7 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 function CustomAnsButton({ text, onClick }) {
   return (
     <button
-      className="border flex border-[#c1a75a] rounded-2xl p-3 hover:bg-[#80808034] justify-between items-center"
+      className="border flex border-[#ffcd38] rounded-2xl p-3 hover:bg-[#80808034] justify-between items-center"
       onClick={onClick}
     >
       <p className="text-sm font-semibold">{text}</p>

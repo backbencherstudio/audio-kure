@@ -53,12 +53,12 @@ function AdminAudios() {
         formData.append('audio', audioFile);
         try {
             setUploadStatus('Uploading...');
-            const response = await axios.post('http://localhost:5000/upload-audio', formData, {
+            const response = await axios.post('https://kure-server.vercel.app/upload-audio', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            const newAudioUrl = `http://localhost:5000${response.data.filePath}`;
+            const newAudioUrl = `https://kure-server.vercel.app${response.data.filePath}`;
             setUploadStatus('Update successful');
             if (newAudioUrl) {
 
@@ -75,7 +75,7 @@ function AdminAudios() {
                 }
                 // ================================== For New Audio Upload
                 if (!getId) {
-                    await axios.post('http://localhost:5000/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
+                    await axios.post('https://kure-server.vercel.app/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
                     refetch();
                     setAudioFile(null);
                     setStatus('');

@@ -6,11 +6,11 @@ const PlanDescription = () => {
         <div className="p-4 xl:p-12 ">
             <div className="space-y-16">
                 {/* Header */}
-                <div className="text-center space-y-6">
+                {/* <div className="text-center space-y-6">
                     <h1 className="text-4xl font-bold text-white">
-                        Here is what you get
+                        It's Easy as 1, 2, 3
                     </h1>
-                </div>
+                </div> */}
 
                 {/* Plans */}
                 <div className="space-y-16">
@@ -75,7 +75,7 @@ const PlanDescription = () => {
                     </div>
 
                     {/* 3-Month Plan */}
-                    <div className="space-y-6 group backdrop-blur-sm bg-white/50 py-6 rounded-lg border border-white/20">
+                    <div className="space-y-6 group backdrop-blur-sm bg-white/10 py-6 rounded-lg border border-white/20">
                         <AudioNames />
                     </div>
                 </div>

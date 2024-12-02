@@ -42,7 +42,7 @@
 }
 
 .s-bg {
-  @apply bg-[#29313c]
+  @apply bg-[#59d7fe]
 }
 
 .t-bg {
@@ -50,7 +50,7 @@
 }
 
 .p-text {
-  @apply text-[#EEB5B4]
+  @apply text-[#fff201]
 }
 
 .s-text {
@@ -62,9 +62,9 @@
 }
 
 .btnGrad {
-  background: linear-gradient(45deg, #7a7400, 30%, #59d7fe 50%, #29313c 100%);
+  background: linear-gradient(45deg, #fff201, 30%, #59d7fe 50%, #5c8688 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  /* color: #4e4e4e !important */
+  color: #4e4e4e !important
 }
 
 img {
