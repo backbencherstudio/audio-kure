@@ -181,7 +181,7 @@ function LoginPage() {
               </button>
 
               <div className="flex justify-end" >
-                <h2 onClick={handleClickOpen} className="mt-3 text-[14px] text-zinc-500 font-semibold cursor-pointer ">Forget Password</h2>
+                <h2 onClick={handleClickOpen} className="mt-3 text-[14px] text-zinc-500 font-semibold cursor-pointer ">Forgot Password?</h2>
               </div>
 
               <p className="mt-2 font-semibold">
