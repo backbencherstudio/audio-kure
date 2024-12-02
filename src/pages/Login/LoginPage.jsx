@@ -9,6 +9,7 @@ import { setUser } from "../../redux/fetures/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { toast } from "react-toastify";
+import { IoClose } from "react-icons/io5";
 
 function LoginPage() {
   const { register, handleSubmit, formState: { isSubmitting } } = useForm({
@@ -201,42 +202,45 @@ function LoginPage() {
           onClose={handleClose}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle>{"Change Your Password"}</DialogTitle>
-          <DialogContent>
+          <DialogActions>
+            <Button className="text-2xl hover:bg-red-400/20" onClick={handleClose}><IoClose className="text-3xl text-red-500" /></Button>
+          </DialogActions>
+          <DialogTitle className="text-center">{"Change Your Password"}</DialogTitle>
+          <DialogContent className="w-full md:w-[450px] ">
             <DialogContentText id="alert-dialog-slide-description">
 
               <form onSubmit={changePasswordFun}>
                 <input
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 border mt-2 rounded-full py-2"
+                  className="w-full bg-slate-700/10 focus:outline-none px-4 border mt-2 rounded-full py-2"
                   type="email"
                   placeholder="Email"
                 />
                 <input
                   onChange={(e) => setPassPassword(e.target.value)}
-                  className="w-full px-4 border mt-2 rounded-full py-2"
+                  className="w-full bg-slate-700/10 focus:outline-none px-4 border mt-2 rounded-full py-2"
                   type="password"
                   placeholder="Password"
                 />
                 <input
                   onChange={(e) => setPassConfirm(e.target.value)}
-                  className="w-full px-4 border mt-2 rounded-full py-2"
+                  className="w-full bg-slate-700/10 focus:outline-none px-4 border mt-2 rounded-full py-2"
                   type="password"
                   placeholder="Confirm Password"
                 />
-                <button className="mt-4 border px-5 py-1 rounded-full" type="submit">
-                  {
-                    resetPasswordLoading ? "Loading..." : "Submit"
-                  }
+                <div className="w-full flex justify-center ">
+                  <button className="mt-4 border px-5 py-1 rounded-full bg-yellow-600 text-white" type="submit">
+                    {
+                      resetPasswordLoading ? "Loading..." : "Submit"
+                    }
 
-                </button>
+                  </button>
+                </div>
               </form>
 
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button className="text-2xl" onClick={handleClose}>X</Button>
-          </DialogActions>
+          
         </Dialog>
 
 

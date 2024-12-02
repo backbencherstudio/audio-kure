@@ -26,7 +26,7 @@ const Analyzing = () => {
           return 100;
         }
       });
-    }, 20000);
+    }, 20);
 
     return () => clearInterval(interval);
   }, []);
