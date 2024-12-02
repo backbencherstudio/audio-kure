@@ -38,7 +38,7 @@ const CheckoutForm = () => {
 
     useEffect(() => {
         if (amount > 0) {
-            axios.post('https://kure-server.vercel.app/api/v1/payment/create-payment-intent', { amount })
+            axios.post('https://admin.hypno4u.com/api/v1/payment/create-payment-intent', { amount })
                 .then(res => {
                     console.log(42, res?.data);
 

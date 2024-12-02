@@ -104,7 +104,7 @@ const Sessions = () => {
 
   useEffect(() => {
     if (sessionId) {
-      fetch(`https://kure-server.vercel.app/success?session_id=${sessionId}`)
+      fetch(`https://admin.hypno4u.com/success?session_id=${sessionId}`)
         .then((response) => response.json())
         .then((data) => setSubscribeData(data))
         .catch((error) => console.error("Error:", error));
@@ -346,7 +346,7 @@ const Sessions = () => {
               <div>
                 <a
                   className="bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md mt-10 inline-block"
-                  href={`https://kure-server.vercel.app/customers/${subscribeData?.customer_id}`}
+                  href={`https://admin.hypno4u.com/customers/${subscribeData?.customer_id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

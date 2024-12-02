@@ -116,16 +116,11 @@ const SubscriptionPlan = () => {
       {
         id: "7",
         duration: "7 Days",
-        originalPrice: "99.98",
-        discountedPrice: "49.99",
-        perDay: "7.14",
         originalPerDay: "$14.28",
-        href: "https://admin.hypno4u.com/subscribe?plan=Silver"
         originalPrice: "50",
         discountedPrice: "25",
         perDay: "3.58",
-        originalPerDay: "$7.14",
-        href: "https://kure-server.vercel.app/subscribe?plan=Silver"
+        href: "https://admin.hypno4u.com/subscribe?plan=Silver"
       },
       {
         id: "30",
@@ -134,7 +129,7 @@ const SubscriptionPlan = () => {
         discountedPrice: "45",
         perDay: "1.5",
         originalPerDay: "$3.00",
-        href: "https://kure-server.vercel.app/subscribe?plan=Gold"
+        href: "https://admin.hypno4u.com/subscribe?plan=Gold"
       },
       {
         id: "365",
@@ -145,7 +140,7 @@ const SubscriptionPlan = () => {
         originalPerDay: "$1.92",
         isPopular: true,
         hasGift: true,
-        href: "https://kure-server.vercel.app/subscribe?plan=Dimond"
+        href: "https://admin.hypno4u.com/subscribe?plan=Dimond"
       },
 
     ];
@@ -242,7 +237,7 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
 
-            <a className="text-blue-600 bg-black p-2 " href="https://kure-server.vercel.app/subscribe?plan=test">1 day</a>
+            <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a>
 
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">

@@ -53,7 +53,7 @@ const Payment = () => {
     }
     try {
       await axios.post(
-        "https://kure-server.vercel.app/api/v1/payment/execute-payment",
+        "https://admin.hypno4u.com/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,
