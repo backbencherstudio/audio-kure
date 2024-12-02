@@ -7,7 +7,7 @@ import { CircularProgress, Dialog } from "@mui/material";
 
 const SignUpPage = () => {
   const inputStyle =
-    "bg-white/20 text-white shadow appearance-none rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-white placeholder:text-sm";
+    "bg-white/10 text-white shadow appearance-none rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-white placeholder:text-sm";
   const [registerUser, { isLoading }] = authApi.useRegisterUserMutation();
   const [verifyOTP, { isLoading: verifyLoading }] =
     authApi.useVerifyOTPMutation();
@@ -266,7 +266,7 @@ const SignUpPage = () => {
           <div className="mt-3">
             <p>
               If You Are Already Registred Go To{" "}
-              <Link to="/login" className=" text-blue-600 font-semibold">
+              <Link to="/login" className=" text-blue-500 font-semibold">
                 Login{" "}
               </Link>{" "}
             </p>

@@ -3,7 +3,7 @@
   position: relative;
   background-color: var(--first-color);
   /* background: linear-gradient(90deg, #8a5eff 0%, #4675ff 50%, #34cbbf 100%); */
-  background: linear-gradient(90deg, #EEB5B4 0%, #BFE5BE 50%, #EFD0B3 100%);
+  background: linear-gradient(45deg, #fff201, 30%, #59d7fe 50%, #5c8688 100%);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   padding: 0.9rem 2.2rem;
   transition: 0.4s;
@@ -16,8 +16,8 @@
   height: 40%;
   background: linear-gradient(
     80deg,
-    hsl(49, 94%, 82%) 10%,
-    hsl(44, 87%, 76%) 48%
+    #fff201 5%,
+    #59d7fe 50%
   );
   position: absolute;
   left: 0;

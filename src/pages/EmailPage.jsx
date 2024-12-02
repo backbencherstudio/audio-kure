@@ -60,7 +60,7 @@ function EmailPage() {
               Join the HYPNO 4 U community of achievers who have reached their goals in life, boasting a success rate of over 90%.
               </p>
               <input
-                className="w-full focus:bg-[#6e363652] md:max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#EEB5B4] placeholder:text-white"
+                className="w-full focus:bg-[#21455069] md:max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#59d7fe] placeholder:text-white"
                 type="text"
                 placeholder="Email"
 
@@ -100,9 +100,8 @@ function EmailPage() {
                     className="text-white text-sm cursor-pointer"
                     onClick={() => setIsChecked(!isChecked)}
                   >
-                    I would like to get an email about my body data report and
-                    agree to your{" "}
-                    <span className="p-text">Privacy Policy</span>.
+                    I would like to get an email about HYPNO 4 U audios and updated new programs and agree to your{" "}
+                    <span className="p-text cursor-pointer">Privacy Policy</span>.
                   </label>
                 </div>
               </div>

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Analyzing.css";
 import Brain from "./Brain/BrainSVG";
 import BrainSVG from "./Brain/BrainSVG";
+import iceburg from './../../../assets/ice.jpg'
+import arrow from './../../../assets/images/arrow.png'
 
 const Analyzing = () => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const Analyzing = () => {
           return 100;
         }
       });
-    }, 200);
+    }, 200000);
 
     return () => clearInterval(interval);
   }, []);
@@ -42,15 +44,43 @@ const Analyzing = () => {
 
   return (
     <div className="flex  items-center justify-center  lg:mt-10 mx-5 py-2">
-      <div className=" backdrop-blur-md border rounded-md lg:w-1/3 p-2 lg:p-10">
+      <div className=" backdrop-blur-md rounded-md lg:w-1/2 p-2 lg:p-10">
 
-        <h1 className="text-3xl my-3 mb-4">
+        <h1 className="text-2xl my-3 mb-4 text-center">
 
           All set! Just a moment while we process your data...
         </h1>
-        <div className="h-52 my-5    ">
-
-          <BrainSVG />
+        <div className="my-5 relative flex justify-center">
+          <img src={iceburg} alt="ice" className="w-80 h-full" />
+          <div className="absolute hidden lg:block top-2 -left-56 xl:-left-40 xl:top-10 2xl:-left-32 2xl:top-10 p-bg p-2 rounded-md right-to-left">
+            <h1 className="text-xl uppercase">Conscious mind (5%)</h1>
+            <ul className="list-disc ml-5 text-sm">
+              <li>Logical Thinking</li>
+              <li>Will Power</li>
+              <li>Short Term Memory</li>
+              <li>Critical Thinking</li>
+            </ul>
+          </div>
+          <img src={arrow} alt="arrow" className="absolute hidden lg:block w-32 left-0 xl:w-32  xl:left-16 xl:-top-0 2xl:w-56 2xl:left-24 2xl:-top-16 rotate-[65deg] arrow-animation " />
+          <img src={arrow} alt="arrow" className="absolute hidden lg:block w-32 right-0 xl:w-32 xl:right-14  2xl:w-56 2xl:right-[132px] bottom-0 scale-x-[-1] scale-y-[-1] rotate-45 arrow-animation " />
+          <div className="absolute hidden lg:block bottom-0 -right-60 xl:-right-52 xl:bottom-0 2xl:-right-32 2xl:bottom-0 s-bg p-2 rounded-md left-to-right">
+            <h1 className="text-xl uppercase">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h1>
+            <ul className="list-disc ml-5 text-sm">
+              <li>Beliefs</li>
+              <li>Long Term Memory</li>
+              <li>Protective Reactions</li>
+              <li>Controls All Systems in the Bod</li>
+              <li>Programming</li>
+              <li>Emotions</li>
+              <li>Values</li>
+              <li>Intuition</li>
+              <li>Fears</li>
+              <li>Self-Image</li>
+            </ul>
+          </div>
+          <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase top-2 left-0">Conscious mind (5%)</h2>
+          <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase bottom-2 right-0">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h2>
+          {/* <BrainSVG /> */}
         </div>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${progress}%` }} />

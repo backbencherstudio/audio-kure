@@ -76,7 +76,7 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   
   useEffect(() => {
     if (sessionId) {
-      fetch(`https://admin.hypno4u.com/success?session_id=${sessionId}`)
+      fetch(`https://kure-server.vercel.app/success?session_id=${sessionId}`)
         .then(response => response.json())
         .then(data => {
           setSubscribeData(data);
