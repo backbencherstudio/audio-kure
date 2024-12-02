@@ -26,7 +26,7 @@ const Analyzing = () => {
           return 100;
         }
       });
-    }, 200);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, []);
@@ -52,7 +52,7 @@ const Analyzing = () => {
         </h1>
         <div className="my-5 relative flex justify-center">
           <img src={iceburg} alt="ice" className="w-80 h-full" />
-          <div className="absolute hidden lg:block top-2 -left-56 xl:-left-40 xl:top-10 2xl:-left-32 2xl:top-10 p-bg p-2 rounded-md right-to-left">
+          <div className="absolute hidden lg:block top-2 -left-56 xl:-left-40 xl:top-10 2xl:-left-32 2xl:top-10 bg-teal-800 p-2 rounded-md right-to-left">
             <h1 className="text-xl uppercase">Conscious mind (5%)</h1>
             <ul className="list-disc ml-5 text-sm">
               <li>Logical Thinking</li>
@@ -63,7 +63,7 @@ const Analyzing = () => {
           </div>
           <img src={arrow} alt="arrow" className="absolute hidden lg:block w-32 left-0 xl:w-32  xl:left-16 xl:-top-0 2xl:w-56 2xl:left-24 2xl:-top-16 rotate-[65deg] arrow-animation " />
           <img src={arrow} alt="arrow" className="absolute hidden lg:block w-32 right-0 xl:w-32 xl:right-14  2xl:w-56 2xl:right-[132px] bottom-0 scale-x-[-1] scale-y-[-1] rotate-45 arrow-animation " />
-          <div className="absolute hidden lg:block bottom-0 -right-60 xl:-right-52 xl:bottom-0 2xl:-right-32 2xl:bottom-0 s-bg p-2 rounded-md left-to-right">
+          <div className="absolute hidden lg:block bottom-0 -right-60 xl:-right-52 xl:bottom-0 2xl:-right-32 2xl:bottom-0 bg-amber-800 p-2 rounded-md left-to-right">
             <h1 className="text-xl uppercase">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h1>
             <ul className="list-disc ml-5 text-sm">
               <li>Beliefs</li>
@@ -95,6 +95,21 @@ const Analyzing = () => {
               {step}
             </div>
           ))}
+        </div>
+        <div className="mb-4 bg-black p-4 rounded-xl">
+          <p>Our minds operate on two levels, the conscious and the subconscious,
+            both working to keep us safe. Understanding how these two interact is
+            important for recognizing when hidden stress may be affecting your
+            well-being. Knowing this can help you shift out of constant defense
+            mode.</p>
+        </div>
+        <div className="bg-teal-600 p-4 text-center mb-4 rounded-lg">
+          <h1 className="text-2xl xl:text-3xl font-bold text-red-800">DID YOU KNOW?</h1>
+          <p>The subconscious mind is a powerhouse,
+            processing <span className="text-yellow-400"> 11 million bits of information per
+            second</span>! Meanwhile, our conscious mind—
+            what we're actually aware of—handles only
+            40-50 bits per second.</p>
         </div>
         <div className="testimonial">
           <div className="stars">Why Choose H4U?</div>
