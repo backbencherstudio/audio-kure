@@ -92,7 +92,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
 
   useEffect(() => {
     if (sessionId) {
-      fetch(`http://localhost:5000/success?session_id=${sessionId}`)
+      fetch(`https://admin.hypno4u.com/success?session_id=${sessionId}`)
         .then(response => response.json())
         .then(data => {
           setSubscribeData(data);
@@ -409,7 +409,7 @@ const Sessions = ({ selectedMonth, sessions }) => {
             )}
 
             <div>
-              <a className='bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md  ' href={`http://localhost:5000/customers/${subscrieData?.customer_id}`} target='_blank'> Plan  </a>
+              <a className='bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md  ' href={`https://admin.hypno4u.com/customers/${subscrieData?.customer_id}`} target='_blank'> Plan  </a>
             </div>
 
           </div>
