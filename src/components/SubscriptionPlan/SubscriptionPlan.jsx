@@ -16,6 +16,8 @@ import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
 import PlanDescription from "../PlanDescription/PlanDescription";
 import Ads from "../Ads/Ads";
+import authApi from './../../redux/fetures/auth/authApi';
+import AudioPlayer from "react-h5-audio-player";
 
 const PaymentPlan = ({
   id,
@@ -103,6 +105,8 @@ const SubscriptionPlan = () => {
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const paymentPlanRef = useRef(null);
   const navigate = useNavigate();
+  const { data: audioUrls } = authApi.useAllAudioPathsQuery();
+
   useEffect(() => {
     const type = localStorage.getItem("type");
     const adjustedPlans = getAdjustedPlans(type);
@@ -231,6 +235,31 @@ const SubscriptionPlan = () => {
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
 
         <PlanDescription />
+
+        <div>
+          <h1 className="text-4xl xl:text-5xl text-center my-10 uppercase font-bold px-4">
+            Try Before You Buy
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 xl:px-20">
+            {audioUrls?.intro?.map((item) => (
+              <div key={item?._id} className="mb-6">
+                <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
+                <AudioPlayer
+                  src={item.audio}
+                  onPlay={() => console.log(`Playing: ${item?.name}`)}
+                  showJumpControls={false}
+                  showSkipControls={false}
+                  customAdditionalControls={[]}
+                  customVolumeControls={[]}
+                  showDownloadProgress={false}
+                  className="rounded-lg bg-gradient-to-l to-black/10 via-yellow-400/10 from-zinc-100/50"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+
         <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
           <div id="subscription" className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
@@ -352,8 +381,9 @@ const SubscriptionPlan = () => {
               </div>
             </div>
           </div>
-
         </div>
+
+
 
         <GoogleReviews />
       </div>
