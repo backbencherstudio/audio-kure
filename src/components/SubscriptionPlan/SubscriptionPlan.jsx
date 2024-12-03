@@ -106,8 +106,6 @@ const SubscriptionPlan = () => {
   const paymentPlanRef = useRef(null);
   const navigate = useNavigate();
   const { data: audioUrls } = authApi.useAllAudioPathsQuery();
-  console.log(audioUrls);
-
 
   useEffect(() => {
     const type = localStorage.getItem("type");
@@ -243,7 +241,7 @@ const SubscriptionPlan = () => {
             Try Before You Buy
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 xl:px-20">
-            {audioUrls?.intro?.slice(0, 5).map((item) => (
+            {audioUrls?.intro?.map((item) => (
               <div key={item?._id} className="mb-6">
                 <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
                 <AudioPlayer
