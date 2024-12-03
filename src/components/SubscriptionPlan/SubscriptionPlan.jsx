@@ -237,7 +237,7 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
 
-            <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a>
+            {/* <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a> */}
 
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">

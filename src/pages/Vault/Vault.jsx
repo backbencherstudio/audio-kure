@@ -30,10 +30,6 @@ const Vault = () => {
         return counterValue >= thresholds[thresholdIndex];
     });
 
-    if (currentUser?.email !== "bbsfullstack@gmail.com") {
-        return navigate('/login');
-    }
-
     if (isLoading) {
         return (
             <div className="w-full h-[100vh] flex justify-center items-center">
