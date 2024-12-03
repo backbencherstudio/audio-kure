@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef } from 'react';
-import imageKure from './../../assets/images/cure_session.png'
+import imageKure from './../../assets/medation.png'
 
 
 const NewAudioPlayer = ({ audioUrl, setTotalDuration, setListeningTime }) => {
@@ -43,7 +43,7 @@ const NewAudioPlayer = ({ audioUrl, setTotalDuration, setListeningTime }) => {
 
     return (
         <div className="">
-            <div className="relative h-full md:h-[600px] overflow-hidden  ">
+            <div className="relative h-full md:h-[600px] overflow-hidden bg-green-50/10 rounded-lg ">
                 <img
                     className="rounded-lg h-full w-full object-cover"
                     src={imageKure}
