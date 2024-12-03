@@ -43,7 +43,7 @@ const NewAudioPlayer = ({ audioUrl, setTotalDuration, setListeningTime }) => {
 
     return (
         <div className="">
-            <div className="relative h-full md:h-[600px] overflow-hidden bg-gray-50/10 rounded-lg ">
+            <div className="relative h-full md:h-[600px] overflow-hidden bg-green-50/10 rounded-lg ">
                 <img
                     className="rounded-lg h-full w-full object-cover "
                     src={imageKure}
