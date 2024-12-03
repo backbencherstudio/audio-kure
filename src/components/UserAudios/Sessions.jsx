@@ -12,8 +12,10 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { FaLock } from "react-icons/fa";
 import gift_big from "./../../assets/images/free_gift_big.png";
 import play from "./../../assets/play.gif"
-import push from "./../../assets/push.jpeg"
+import push from "./../../assets/play.png"
 import goldCoin from "./../../assets/goldCoin.png"
+import treasure from './../../assets/treasure.png'
+import treasureOpen from './../../assets/treasure-open.png'
 
 const Sessions = () => {
   const [purchasePlan] = authApi.usePurchasePlanMutation();
@@ -39,8 +41,8 @@ const Sessions = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log({currentUser});
-  
+  console.log({ currentUser });
+
 
   const sessionId = new URLSearchParams(location.search).get("session_id") || userData?.data?.sessionId;
 
@@ -249,65 +251,96 @@ const Sessions = () => {
 
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
+      
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
 
         <div className="mb-5">
 
           {
-            count === 0 && <p className="text-green-700 text-[18px] font-semibold " > If you listen to all the audio tracks sequentially, from the first to the last, you will earn a reward of 100 coins. </p>}
+            count === 0 && <p className="text-white text-[18px] font-semibold " > If you listen to all the audio tracks sequentially, from the first to the last, you will earn a reward of 100 coins. </p>}
 
           {
             count > 0 &&
             <div className="" >
 
-              <div className="flex items-center flex-wrap">
+              <div className="flex items-center flex-wrap justify-between">
 
                 <div className="flex items-center">
                   You Achive
                   <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
                   <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
-                  <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >coins</span>
+                  <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >Coins</span>
                 </div>
 
-                <div className='inline-block flex '>
+                <div className='flex '>
                   <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10`}
-                    />
+                    {
+                      counterValue >= 1000 ? <img
+                        src={treasureOpen}
+                        alt="gift-image"
+                        className={`size-20`}
+                      /> : <img
+                        src={treasure}
+                        alt="gift-image"
+                        className={`size-16`}
+                      />
+                    }
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10`}
-                    />
+                  {
+                      counterValue >= 3000 ? <img
+                        src={treasureOpen}
+                        alt="gift-image"
+                        className={`size-20`}
+                      /> : <img
+                        src={treasure}
+                        alt="gift-image"
+                        className={`size-16`}
+                      />
+                    }
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
+                  {
+                      counterValue >= 8000 ? <img
+                        src={treasureOpen}
+                        alt="gift-image"
+                        className={`size-20`}
+                      /> : <img
+                        src={treasure}
+                        alt="gift-image"
+                        className={`size-16`}
+                      />
+                    }
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
+                  {
+                      counterValue >= 13000 ? <img
+                        src={treasureOpen}
+                        alt="gift-image"
+                        className={`size-20`}
+                      /> : <img
+                        src={treasure}
+                        alt="gift-image"
+                        className={`size-16`}
+                      />
+                    }
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
-                    <img
-                      src={gift_big}
-                      alt="gift-image"
-                      className={`size-10 `}
-                    />
+                  {
+                      counterValue >= 20000 ? <img
+                        src={treasureOpen}
+                        alt="gift-image"
+                        className={`size-20`}
+                      /> : <img
+                        src={treasure}
+                        alt="gift-image"
+                        className={`size-16`}
+                      />
+                    }
                   </button>
                 </div>
 
@@ -370,10 +403,10 @@ const Sessions = () => {
           </div>
 
           <div>
-            <div className="shadow-2xl p-5 rounded-lg min-h-[300px]">
+            <div className=" p-5 rounded-lg min-h-[300px] h-[600px] overflow-y-scroll custom-scroll bg-white/20">
 
               <div className="" >
-                <h2 className="bg-blue-500 text-center py-2 rounded-full text-xl">{userData?.data?.userType}</h2>
+                <h2 className="bg-zinc-900 text-center py-2 rounded-lg text-xl capitalize">{userData?.data?.userType}</h2>
 
                 {
                   selectedBodyitem?.length > 0 ||
@@ -384,7 +417,7 @@ const Sessions = () => {
                     <div className="grid grid-cols-2 gap-10 mt-5">
                       <button
                         disabled={showCategoryStatus === "withMusic"}
-                        className={`w-full border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus === "withMusic" ? "bg-blue-500 text-black" : ""
+                        className={`w-full border rounded-lg px-4 py-2 mr-4 font-semibold duration-300 capitalize ${showCategoryStatus === "withMusic" ? "bg-rose-900 text-white" : ""
                           }`}
                         onClick={() => categoryStatusChangeFun("withMusic")}
                       >
@@ -395,7 +428,7 @@ const Sessions = () => {
                       </button>
                       <button
                         disabled={showCategoryStatus === "withOutMusic"}
-                        className={`w-full border rounded-full px-4 py-2 mr-4 font-semibold duration-300 ${showCategoryStatus !== "withMusic" ? "bg-blue-500 text-black" : ""
+                        className={`w-full border rounded-lg px-4 py-2 mr-4 font-semibold duration-300 capitalize ${showCategoryStatus !== "withMusic" ? "bg-zinc-500 text-white" : ""
                           }`}
                         onClick={() => categoryStatusChangeFun("withOutMusic")}
                       >
@@ -415,7 +448,7 @@ const Sessions = () => {
                       selectedselfitem?.length > 0 ||
                       planNumber === 350
                       ? "" :
-                      <button onClick={() => allSelectedIdGetFun()} className="bg-blue-500 w-full mt-4 rounded-full py-2 " >Added  Your selected Audio Maximum
+                      <button onClick={() => allSelectedIdGetFun()} className="bg-red-500 w-full mt-4 rounded-md py-2 " >Added  Your selected Audio Maximum
                         <span className="w-[10px] inline-block ml-1" >{idArray?.length}/{planNumber === 25 ? 2 : 15}</span>
                       </button>
                   }
@@ -432,7 +465,7 @@ const Sessions = () => {
 
                     <div className="grid grid-cols-2 mt-3 gap-10">
                       <div>
-                        <h2>Body</h2>
+                        <h2 className="text-xl font-bold text-center">Body</h2>
 
                         <div>
                           {
@@ -441,15 +474,15 @@ const Sessions = () => {
                                 body?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      className='border border-zinc-500 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                       }
                                       <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -482,15 +515,15 @@ const Sessions = () => {
                                   <div className='mt-4' key={item._id || index}>
 
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      className='border border-zinc-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                       }
                                       <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -507,7 +540,7 @@ const Sessions = () => {
                       </div>
 
                       <div>
-                        <h2>Mind</h2>
+                        <h2 className="text-xl font-bold text-center">Mind</h2>
 
                         <div>
                           {
@@ -516,15 +549,15 @@ const Sessions = () => {
                                 mind?.map((item, index) => (
                                   <div className='mt-4' key={item._id || index}>
                                     <button
-                                      className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                      className='border border-zinc-500 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                       onClick={() => setAudioUrl(item.audio)}
                                       onMouseUp={() => setPlayerId(item._id)}
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                       }
                                       <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -555,15 +588,15 @@ const Sessions = () => {
                                   selectedMinditem?.map((item, index) => (
                                     <div className='mt-4' key={item._id || index}>
                                       <button
-                                        className='border border-blue-600 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
+                                        className='border border-zinc-500 w-full py-2 rounded-lg font-semibold flex justify-between items-center px-[4px] md:px-2  '
                                         onClick={() => setAudioUrl(item.audio)}
                                         onMouseUp={() => setPlayerId(item._id)}
                                       >
                                         {
                                           playerId === item._id ?
-                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                             :
-                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                            <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                         }
                                         <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                           {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -585,7 +618,7 @@ const Sessions = () => {
                   {userData?.data?.userType === "emotional" && (
                     <div className="grid grid-cols-2 mt-3 gap-10">
                       <div>
-                        <h2>Self</h2>
+                        <h2 className="text-xl font-bold text-center">Self</h2>
 
                         <div>
                           {
@@ -601,9 +634,9 @@ const Sessions = () => {
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                       }
                                       <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -641,9 +674,9 @@ const Sessions = () => {
                                       >
                                         {
                                           playerId === item._id ?
-                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                             :
-                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                            <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                         }
                                         <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                           {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -658,7 +691,7 @@ const Sessions = () => {
                       </div>
 
                       <div>
-                        <h2>Ego</h2>
+                        <h2 className="text-xl font-bold text-center">Ego</h2>
 
                         <div>
                           {
@@ -673,9 +706,9 @@ const Sessions = () => {
                                     >
                                       {
                                         playerId === item._id ?
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                           :
-                                          <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                          <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                       }
                                       <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                         {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
@@ -712,9 +745,9 @@ const Sessions = () => {
                                       >
                                         {
                                           playerId === item._id ?
-                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
+                                            <img className="size-[30px] md:size-[30px] rounded-full mr-2 mix-blend-color-burn  " src={play} alt="" />
                                             :
-                                            <img className="size-[30px] md:size-[45px] rounded-full mr-2 " src={push} alt="" />
+                                            <img className="size-[30px] md:size-[30px] rounded-full mr-2 " src={push} alt="" />
                                         }
                                         <h2 className="text-left w-full text-[14px] md:text-[16px]" >
                                           {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}

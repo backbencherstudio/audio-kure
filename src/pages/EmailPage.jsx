@@ -63,6 +63,7 @@ function EmailPage() {
                 className="w-full focus:bg-[#21455069] md:max-w-[450px] bg-transparent border border-white rounded-2xl h-14 mt-8 p-3  focus:outline-none focus:border-[#59d7fe] placeholder:text-white"
                 type="text"
                 placeholder="Email"
+                required
 
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => {

@@ -42,13 +42,13 @@ const DailyAudios = () => {
     navigate("/login");
   };
 
-  const showButton = currentUser?.email === "bbsfullstack@gmail.com"
+  const showButton = currentUser?.email === "mybesthealer@gmail.com" || "bbsfullstack@gmail.com"
 
   return (
-    <div className="area overflow-y-scroll">
+    <div className="area p-4 overflow-y-scroll">
       <div className="max-w-7xl mx-auto">
         <div className="relative">
-          <div className="grid justify-end my-4 mx-4">
+          <div className="grid justify-end mx-4">
             <button onClick={handleDropdown}>
               <FaRegUser className="text-2xl" />
             </button>
