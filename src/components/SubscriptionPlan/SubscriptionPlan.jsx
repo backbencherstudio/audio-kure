@@ -104,8 +104,6 @@ const SubscriptionPlan = () => {
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const paymentPlanRef = useRef(null);
   const navigate = useNavigate();
-
-
   const { data: audioUrls } = authApi.useAllAudioPathsQuery();
 
 
@@ -241,10 +239,10 @@ const SubscriptionPlan = () => {
         <div>
 
           {
-            audioUrls?.intro?.map(item => <div key={item?._id} >
+            audioUrls?.intro?.map(item => <div key={item?._id} > 
               <h2>{item?.name}</h2>
             </div>)
-          }
+          } 
 
         </div>
 
