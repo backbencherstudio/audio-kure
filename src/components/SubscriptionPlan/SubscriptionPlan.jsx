@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import PlanDescription from "../PlanDescription/PlanDescription";
 import Ads from "../Ads/Ads";
 import authApi from './../../redux/fetures/auth/authApi';
+import AudioPlayer from "react-h5-audio-player";
 
 const PaymentPlan = ({
   id,
@@ -107,6 +108,7 @@ const SubscriptionPlan = () => {
 
 
   const { data: audioUrls } = authApi.useAllAudioPathsQuery();
+  console.log(audioUrls);
 
 
   useEffect(() => {
@@ -239,13 +241,26 @@ const SubscriptionPlan = () => {
         <PlanDescription />
 
         <div>
-
-          {
-            audioUrls?.intro?.map(item => <div key={item?._id} >
-              <h2>{item?.name}</h2>
-            </div>)
-          }
-
+          <h1 className="text-4xl xl:text-5xl text-center my-10 uppercase font-bold px-4">
+            Try Before You Buy
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 xl:px-20">
+            {audioUrls?.intro?.slice(0, 5).map((item) => (
+              <div key={item?._id} className="mb-6">
+                <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
+                <AudioPlayer
+                  src={item.audio}
+                  onPlay={() => console.log(`Playing: ${item?.name}`)}
+                  showJumpControls={false}
+                  showSkipControls={false}
+                  customAdditionalControls={[]}
+                  customVolumeControls={[]}
+                  showDownloadProgress={false}
+                  className="rounded-lg bg-gradient-to-l to-black/10 via-yellow-400/10 from-zinc-100/50"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
 
