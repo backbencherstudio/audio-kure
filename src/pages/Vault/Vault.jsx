@@ -4,9 +4,9 @@ import hypno from './../../assets/hypno.jpg';
 import { useSelector } from 'react-redux';
 import { logOut, selectCurrentUser } from '../../redux/fetures/auth/authSlice';
 import authApi from '../../redux/fetures/auth/authApi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
-import { FaPauseCircle, FaPlayCircle, FaPushed } from 'react-icons/fa';
+import { FaArrowLeft, FaPauseCircle, FaPlayCircle, FaPushed } from 'react-icons/fa';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
@@ -29,6 +29,10 @@ const Vault = () => {
         const thresholdIndex = Math.floor(index / 3);
         return counterValue >= thresholds[thresholdIndex];
     });
+
+    if (currentUser?.email !== "bbsfullstack@gmail.com") {
+        return navigate('/login');
+    }
 
     if (isLoading) {
         return (
@@ -76,9 +80,9 @@ const Vault = () => {
 
             <div className="relative max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 z-10">
                 {/* Header */}
-                <div className="mb-6">
-                    <Logo />
-                </div>
+                <Link to='/daily-audios' className="mb-6 bg-yellow-500 w-20 flex justify-center py-2 rounded-md hover:bg-yellow-700 duration-200 ease-linear cursor-pointer">
+                     <FaArrowLeft /> 
+                </Link>
 
                 {/* Content */}
                 <div className="flex flex-col lg:flex-row gap-6 rounded-lg overflow-hidden backdrop-blur-md bg-white/10 shadow-xl">
