@@ -41,9 +41,6 @@ const Sessions = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  console.log({ currentUser });
-
-
   const sessionId = new URLSearchParams(location.search).get("session_id") || userData?.data?.sessionId;
 
   const body = audioUrls?.body;
