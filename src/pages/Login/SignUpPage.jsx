@@ -106,25 +106,32 @@ const SignUpPage = () => {
 
   const inputRefs = useRef([]);
 
-  const handleChange = (element, index) => {
-    if (/^[0-9]$/.test(element.value)) {
-      const newOtp = [...otp];
-      newOtp[index] = element.value;
-      setOtp(newOtp);
-
-      if (index < 5 && element.value !== "") {
+  const handleChange = (target, index) => {
+    const value = target.value;
+  
+    if (/^[0-9]*$/.test(value)) {
+      const updatedOtp = [...otp];
+      updatedOtp[index] = value.slice(-1);
+      setOtp(updatedOtp);
+  
+      if (value && index < otp.length - 1) {
         inputRefs.current[index + 1].focus();
       }
     }
   };
 
-  const handleBackspace = (event, index) => {
-    if (event.key === "Backspace" && otp[index] === "") {
+  const handleBackspace = (e, index) => {
+    if (e.key === "Backspace") {
+      const updatedOtp = [...otp];
+      updatedOtp[index] = ""; 
+      setOtp(updatedOtp);
+  
       if (index > 0) {
         inputRefs.current[index - 1].focus();
       }
     }
   };
+  
 
   const handleOTPSubmit = (e) => {
     e.preventDefault();
