@@ -272,7 +272,7 @@ const Sessions = () => {
                   <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >Coins</span>
                 </div>
 
-                <div className='flex '>
+                <div className='flex mb-4 '>
                   <button onClick={() => { valutFunction(counterValue, "one") }} className={`md:ml-4 ${counterValue >= 1000 ? "" : "opacity-50 "}`} >
                     {
                       counterValue >= 1000 ? <img
@@ -353,7 +353,7 @@ const Sessions = () => {
                 labelAlignment="center"
                 borderRadius="10px"
                 height="8px"
-                bgColor="#C4AFFF"
+                bgColor="#facc15"
                 baseBgColor="#2D2C2C"
               />
 
@@ -366,7 +366,7 @@ const Sessions = () => {
         <div className="grid lg:grid-cols-2 md:gap-10  ">
 
           <div>
-            <div className="lg:w-[80%] mx-auto">
+            <div className="lg:w-[100%] mx-auto">
               <div className="" >
                 <NewAudioPlayer
 
@@ -378,7 +378,7 @@ const Sessions = () => {
 
               <div>
                 <a
-                  className="bg-red-400 hover:bg-red-500 duration-300 px-10 py-2 text-black hover:text-white rounded-md text-md mt-10 inline-block"
+                  className="bg-red-500 hover:bg-red-600 duration-300 px-10 py-2 text-white font-bold hover:text-white rounded-md text-md mt-10 inline-block"
                   href={`https://admin.hypno4u.com/customers/${subscribeData?.customer_id}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -392,7 +392,7 @@ const Sessions = () => {
 
                 <button
                   onClick={() => navigate("/subscriptionplan?section=subscription")}
-                  className="text-green-400 duration-300 font-semibold px-2 py-2 rounded-md text-md mt-5 inline-block"
+                  className="text-green-900 duration-300 font-semibold px-2 py-2 rounded-md text-md mt-5 inline-block"
                 >
                   Click Here
                 </button>
@@ -417,7 +417,7 @@ const Sessions = () => {
                     <div className="grid grid-cols-2 gap-10 mt-5">
                       <button
                         disabled={showCategoryStatus === "withMusic"}
-                        className={`w-full border rounded-lg px-4 py-2 mr-4 font-semibold duration-300 capitalize ${showCategoryStatus === "withMusic" ? "bg-rose-900 text-white" : ""
+                        className={`w-full border rounded-lg px-4 py-2 mr-4 text-sm md:text-base font-semibold duration-300 capitalize ${showCategoryStatus === "withMusic" ? "bg-rose-900 text-white" : ""
                           }`}
                         onClick={() => categoryStatusChangeFun("withMusic")}
                       >
@@ -428,7 +428,7 @@ const Sessions = () => {
                       </button>
                       <button
                         disabled={showCategoryStatus === "withOutMusic"}
-                        className={`w-full border rounded-lg px-4 py-2 mr-4 font-semibold duration-300 capitalize ${showCategoryStatus !== "withMusic" ? "bg-zinc-500 text-white" : ""
+                        className={`w-full border rounded-lg px-4 py-2 mr-4 text-sm md:text-base font-semibold duration-300 capitalize ${showCategoryStatus !== "withMusic" ? "bg-zinc-500 text-white" : ""
                           }`}
                         onClick={() => categoryStatusChangeFun("withOutMusic")}
                       >

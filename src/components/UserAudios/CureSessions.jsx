@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import sessionImg from '../../assets/images/cure_session.png';
 import audio1 from '../../assets/audios/audio1.mp3';
@@ -15,11 +15,12 @@ import audio10 from '../../assets/audios/audio10.mp3';
 import 'swiper/css';
 import './CureSessions.css';
 import Sessions from './Sessions';
+import { TiStarFullOutline } from 'react-icons/ti';
 
 const CureSessions = ({ currentUser }) => {
   const [selectedMonth, setSelectedMonth] = useState(1)
   const [playedAudios, setPlayedAudios] = useState({});
-  const user = true; 
+  const user = true;
 
   const sessions = [
     {
@@ -88,7 +89,7 @@ const CureSessions = ({ currentUser }) => {
     const savedPlayedAudios = JSON.parse(localStorage.getItem('playedAudios')) || {};
     Object.keys(savedPlayedAudios).forEach(key => {
       if (!Array.isArray(savedPlayedAudios[key])) {
-        savedPlayedAudios[key] = []; 
+        savedPlayedAudios[key] = [];
       }
     });
 
@@ -131,12 +132,44 @@ const CureSessions = ({ currentUser }) => {
   const totalMonths = getTotalMonths(currentUser?.createdAt, currentUser?.expiresDate);
   const monthsData = Array.from({ length: totalMonths }, (_, index) => ({ month: index + 1 }));
   const calculatedMonths = monthsData.slice(0, -1);
-  
+
+  const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    const savedRating = localStorage.getItem("userRating");
+    if (savedRating) {
+      setRating(parseInt(savedRating, 10));
+    }
+  }, []);
+
+  const handleStarClick = (index) => {
+    const newRating = index + 1;
+    setRating(newRating);
+    localStorage.setItem("userRating", newRating);
+  };
   return (
     <div className={`${user === false && 'cursor-not-allowed opacity-50'} lg:mx-4`}>
       <div className='max-w-7xl mx-4 md:mx-auto md:px-2 lg:px-0 '>
-        <div className='text-4xl md:text-6xl text-[#dbd1fb]'>Hey {currentUser?.name}!</div>
-        <p className='text-[#f1f1f3] my-2 md:my-4'>You are enough, go Heal!.</p>
+        <div className="lg:flex justify-between pt-4">
+          <h1 className="text-4xl md:text-5xl text-[#dbd1fb]">
+            <span className="p-text">Hey -</span> {currentUser?.name}!
+          </h1>
+          <div className='py-4 lg:py-0'>
+            <p className="text-2xl capitalize">personal progress tracker</p>
+            <div className="flex text-3xl">
+              {[...Array(5)].map((_, index) => (
+                <TiStarFullOutline
+                  key={index}
+                  onClick={() => handleStarClick(index)}
+                  className={`cursor-pointer transition-colors ${index < rating ? "text-yellow-400" : "text-gray-200"
+                    }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <p className='text-[#f1f1f3] text-base md:text-xl my-2 md:my-4'>You have incredible potential to achieve your goals and thrive! <br />
+          Here’s your hypnosis session for today.</p>
         {calculatedMonths?.length === 12 && (
           <Swiper
             spaceBetween={20}
@@ -152,7 +185,7 @@ const CureSessions = ({ currentUser }) => {
           >
             {calculatedMonths.map((monthItem, index) => (
               <SwiperSlide key={index} className=' !w-[90px] !mr-7 md:!mr-auto'>
-                <button 
+                <button
                   className={`border-2 border-[#2f2861] p-4 rounded-3xl font-bold ${selectedMonth === monthItem.month ? 'bg-[#130e2b]' : ''}`}
                   style={isMonthUnlocked(monthItem.month) ? { borderColor: 'rgb(0, 255, 255)', borderWidth: '1px', borderStyle: 'solid' } : {}}
                   onClick={() => handleMonthSelection(monthItem.month)}
@@ -162,10 +195,10 @@ const CureSessions = ({ currentUser }) => {
                   <div className='grid justify-center text-slate-300'>{monthItem.month}</div>
                   <div className='grid justify-center'>
                     <div className={`grid justify-center items-center border w-7 h-7  rounded-full border-[#2f2861]`}>
-                      {selectedMonth === monthItem.month ? <div className='bg-cyan-400 p-2 rounded-full'></div> : '' }
+                      {selectedMonth === monthItem.month ? <div className='bg-cyan-400 p-2 rounded-full'></div> : ''}
                     </div>
                   </div>
-                </button>              
+                </button>
               </SwiperSlide>
             ))}
           </Swiper>
