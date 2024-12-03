@@ -16,6 +16,7 @@ import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
 import { toast } from "react-toastify";
 import PlanDescription from "../PlanDescription/PlanDescription";
 import Ads from "../Ads/Ads";
+import authApi from './../../redux/fetures/auth/authApi';
 
 const PaymentPlan = ({
   id,
@@ -103,6 +104,11 @@ const SubscriptionPlan = () => {
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const paymentPlanRef = useRef(null);
   const navigate = useNavigate();
+
+
+  const { data: audioUrls } = authApi.useAllAudioPathsQuery();
+
+
   useEffect(() => {
     const type = localStorage.getItem("type");
     const adjustedPlans = getAdjustedPlans(type);
@@ -231,13 +237,25 @@ const SubscriptionPlan = () => {
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
 
         <PlanDescription />
+
+        <div>
+
+          {
+            audioUrls?.intro?.map(item => <div key={item?._id} >
+              <h2>{item?.name}</h2>
+            </div>)
+          }
+
+        </div>
+
+
         <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
           <div id="subscription" className="md:w-1/2 ">
             <h2 className="text-[1.125rem] text-white font-semibold mb-4">
               Select your plan:
             </h2>
 
-            <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a>
+            {/* <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a> */}
 
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
@@ -352,8 +370,9 @@ const SubscriptionPlan = () => {
               </div>
             </div>
           </div>
-
         </div>
+
+
 
         <GoogleReviews />
       </div>
