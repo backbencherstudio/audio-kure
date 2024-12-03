@@ -42,7 +42,7 @@ const DailyAudios = () => {
     navigate("/login");
   };
 
-  const showButton = currentUser?.email === "mybesthealer@gmail.com" || "bbsfullstack@gmail.com"
+  const showButton = currentUser?.email === "mybesthealer@gmail.com"
 
   return (
     <div className="area pt-4 overflow-y-scroll">
