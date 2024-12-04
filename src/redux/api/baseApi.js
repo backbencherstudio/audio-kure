@@ -17,10 +17,6 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
    
-
-  // if(result?.meta?.response.statusText === "Unauthorized" ){
-  //       Navigate("/login")
-  // }
   
     
   if (result?.error?.status === 403) {
