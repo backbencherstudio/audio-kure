@@ -25,7 +25,7 @@ function AdminAudios() {
     const dispatch = useAppDispatch();
 
 
-    if (currentUser?.email != "bbsfullstack@gmail.com") {
+    if (currentUser?.email != "mybesthealer@gmail.com") {
         dispatch(logOut());
         return navigate("/login")
     }
