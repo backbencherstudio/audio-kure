@@ -1,0 +1,386 @@
+{
+    "emotional": {
+        "self": [
+            {
+                "id": 1,
+                "name": "Breakthrough to Self-Acceptance Embracing 'I Am Enough",
+                "audio": "../src/assets/audios/self/Breakthrough to Self-Acceptance Embracing 'I Am Enough.wav",
+                "category": "self"
+            },
+            {
+                "id": 2,
+                "name": "Confidence",
+                "audio": "../src/assets/audios/self/Confidence - 17 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 3,
+                "name": "Confidence Booster",
+                "audio": "../src/assets/audios/self/Confidence Booster in 2 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 4,
+                "name": "Inner Child",
+                "audio": "../src/assets/audios/self/Inner Child - 32 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 5,
+                "name": "inner child coversation",
+                "audio": "../src/assets/audios/self/inner child coversation - 3 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 6,
+                "name": "Invisible Power",
+                "audio": "../src/assets/audios/self/Invisible Power - 22 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 7,
+                "name": "Kleptomania",
+                "audio": "../src/assets/audios/self/Kleptomania - 17 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 8,
+                "name": "Manifestation",
+                "audio": "../src/assets/audios/self/Manifestation.wav",
+                "category": "self"
+            },
+            {
+                "id": 9,
+                "name": "Pat Life Regression",
+                "audio": "../src/assets/audios/self/Pat Life Regression - 37 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 10,
+                "name": "Power of choice",
+                "audio": "../src/assets/audios/self/Power of choice.wav",
+                "category": "self"
+            },
+            {
+                "id": 11,
+                "name": "Self Sabotage",
+                "audio": "../src/assets/audios/self/Self Sabotage.wav",
+                "category": "self"
+            },
+            {
+                "id": 12,
+                "name": "Self-Esteem",
+                "audio": "../src/assets/audios/self/Self-Esteem - 7 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 13,
+                "name": "Self-Image",
+                "audio": "../src/assets/audios/self/Self-Image - 9 min.wav",
+                "category": "self"
+            },
+            {
+                "id": 14,
+                "name": "Volunerability",
+                "audio": "../src/assets/audios/self/Volunerability - 3 min.wav",
+                "category": "self"
+            }
+        ],
+        "ego": [
+            {
+                "id": 1,
+                "name": "Attract wealth",
+                "audio": "../src/assets/audios/ego/Attract wealth - 25 min.wav",
+                "category": "ego"
+            },
+            {
+                "id": 2,
+                "name": "Be Present",
+                "audio": "../src/assets/audios/ego/Be Present.wav",
+                "category": "ego"
+            },
+            {
+                "id": 3,
+                "name": "Calm",
+                "audio": "../src/assets/audios/ego/Calm.wav",
+                "category": "ego"
+            },
+            {
+                "id": 4,
+                "name": "Fear of loosing control",
+                "audio": "../src/assets/audios/ego/Fear of loosing control .wav",
+                "category": "ego"
+            },
+            {
+                "id": 5,
+                "name": "Fear of making mistakes",
+                "audio": "../src/assets/audios/ego/Fear of making mistakes - 6 min.wav",
+                "category": "ego"
+            },
+            {
+                "id": 6,
+                "name": "Freedom",
+                "audio": "../src/assets/audios/ego/Freedom.wav",
+                "category": "ego"
+            },
+            {
+                "id": 7,
+                "name": "Freeze your fear",
+                "audio": "../src/assets/audios/ego/Freeze your fear.wav",
+                "category": "ego"
+            },
+            {
+                "id": 8,
+                "name": "Get Into Flow State",
+                "audio": "../src/assets/audios/ego/Get Into Flow State .wav",
+                "category": "ego"
+            },
+            {
+                "id": 9,
+                "name": "Let go of stagnation",
+                "audio": "../src/assets/audios/ego/Let go of stagnation - 18 min.wav",
+                "category": "ego"
+            },
+            {
+                "id": 10,
+                "name": "Manifest Your Dreams The Path to Achieving Your Desires",
+                "audio": "../src/assets/audios/ego/Manifest Your Dreams The Path to Achieving Your Desires.wav",
+                "category": "ego"
+            },
+            {
+                "id": 11,
+                "name": "Mindfulness ACR Technique",
+                "audio": "../src/assets/audios/ego/Mindfulness ACR Technique.wav",
+                "category": "ego"
+            },
+            {
+                "id": 12,
+                "name": "Practice mindfulness",
+                "audio": "../src/assets/audios/ego/Practice mindfulness - 26 min.wav",
+                "category": "ego"
+            },
+            {
+                "id": 13,
+                "name": "Remember your future",
+                "audio": "../src/assets/audios/ego/Remeber your future - 32 min .wav",
+                "category": "ego"
+            },
+            {
+                "id": 14,
+                "name": "Shame and Guilt",
+                "audio": "../src/assets/audios/ego/Shame and Guilt.wav",
+                "category": "ego"
+            },
+            {
+                "id": 15,
+                "name": "Transforming Awareness into Empowerment",
+                "audio": "../src/assets/audios/ego/Transforming Awareness into Empowerment.wav",
+                "category": "ego"
+            }
+        ]
+    },
+    "physical": {
+        "body": [
+            {
+                "id": 1,
+                "name": "Awaken Your Sensations",
+                "audio": "../src/assets/audios/body/Awaken Your Sensations.wav",
+                "category": "body"
+            },
+            {
+                "id": 2,
+                "name": "Fear of flying",
+                "audio": "../src/assets/audios/body/Fear of flying.wav",
+                "category": "body"
+            },
+            {
+                "id": 3,
+                "name": "Golden ball",
+                "audio": "../src/assets/audios/body/Golden ball .wav",
+                "category": "body"
+            },
+            {
+                "id": 4,
+                "name": "How can I relax my body and mind in 10 minutes",
+                "audio": "../src/assets/audios/body/How can I relax my body and mind in 10 minutes_.wav",
+                "category": "body"
+            },
+            {
+                "id": 5,
+                "name": "How to regulate your nervous system in 20 min",
+                "audio": "../src/assets/audios/body/How to regulate your nervous system in 20 min.wav",
+                "category": "body"
+            },
+            {
+                "id": 6,
+                "name": "Hypnosis For Chronic Pain",
+                "audio": "../src/assets/audios/body/Hypnosis For Chronic Pain - 20 min.wav",
+                "category": "body"
+            },
+            {
+                "id": 7,
+                "name": "Lack of Energy",
+                "audio": "../src/assets/audios/body/Lack of Energy.wav",
+                "category": "body"
+            },
+            {
+                "id": 8,
+                "name": "Panic Attack",
+                "audio": "../src/assets/audios/body/Panic Attack.wav",
+                "category": "body"
+            },
+            {
+                "id": 9,
+                "name": "Relaxed body",
+                "audio": "../src/assets/audios/body/Relaxed body.wav",
+                "category": "body"
+            },
+            {
+                "id": 10,
+                "name": "Sleep",
+                "audio": "../src/assets/audios/body/Sleep - 53 min.wav",
+                "category": "body"
+            },
+            {
+                "id": 11,
+                "name": "Smoking Cessation non-smoker",
+                "audio": "../src/assets/audios/body/Smoking Cessation non-smoker - 36 min.wav",
+                "category": "body"
+            },
+            {
+                "id": 12,
+                "name": "Transformation",
+                "audio": "../src/assets/audios/body/Transformation.wav",
+                "category": "body"
+            },
+            {
+                "id": 13,
+                "name": "Unwind & Let Go A Hypnotic Journey to Release Tension",
+                "audio": "../src/assets/audios/body/Unwind & Let Go A Hypnotic Journey to Release Tension.wav",
+                "category": "body"
+            },
+            {
+                "id": 14,
+                "name": "Weight Loss",
+                "audio": "../src/assets/audios/body/Weight Loss - 15 min.wav",
+                "category": "body"
+            },
+            {
+                "id": 15,
+                "name": "Weight loss - 2",
+                "audio": "../src/assets/audios/body/Weight loss - 30 min.wav",
+                "category": "body"
+            },
+            {
+                "id": 16,
+                "name": "Weight Loss (Physical)",
+                "audio": "../src/assets/audios/body/Weight Loss (Physical).wav",
+                "category": "body"
+            }
+        ],
+        "mind": [
+            {
+                "id": 1,
+                "name": "Anxiety",
+                "audio": "../src/assets/audios/mind/Anxiety - 43 min.wav",
+                "category": "mind"
+            },
+            {
+                "id": 2,
+                "name": "Calm the Chaos Hypnosis for Overcoming Overwhelm",
+                "audio": "../src/assets/audios/mind/Calm the Chaos Hypnosis for Overcoming Overwhelm - 30 min.wav",
+                "category": "mind"
+            },
+            {
+                "id": 3,
+                "name": "Clarity",
+                "audio": "../src/assets/audios/mind/Clarity.wav",
+                "category": "mind"
+            },
+            {
+                "id": 4,
+                "name": "Distraction Detox Clear Your Mind for Success",
+                "audio": "../src/assets/audios//mind/Distraction Detox Clear Your Mind for Success.wav",
+                "category": "mind"
+            },
+            {
+                "id": 5,
+                "name": "Fear of rejection",
+                "audio": "../src/assets/audios/mind/Fear of rejection - 10 min.wav",
+                "category": "mind"
+            },
+            {
+                "id": 6,
+                "name": "Fears and phobias",
+                "audio": "../src/assets/audios/mind/Fears and phobias - 21 min.wav",
+                "category": "mind"
+            },
+            {
+                "id": 7,
+                "name": "Focus",
+                "audio": "../src/assets/audios/mind/Focus.wav",
+                "category": "mind"
+            },
+            {
+                "id": 8,
+                "name": "Journey into the Mind",
+                "audio": "../src/assets/audios/mind/Journey into the Mind.wav",
+                "category": "mind"
+            },
+            {
+                "id": 9,
+                "name": "Life Purpose",
+                "audio": "../src/assets/audios/mind/Life Purpose.wav",
+                "category": "mind"
+            },
+            {
+                "id": 10,
+                "name": "Lift the Clouds Hypnosis for Releasing Sadness",
+                "audio": "../src/assets/audios/mind/Lift the Clouds Hypnosis for Releasing Sadness.wav",
+                "category": "mind"
+            },
+            {
+                "id": 11,
+                "name": "Love and Trust",
+                "audio": "../src/assets/audios/mind/Love and Trust.wav",
+                "category": "mind"
+            },
+            {
+                "id": 12,
+                "name": "PTSD",
+                "audio": "../src/assets/audios/mind/PTSD - 17 min .wav",
+                "category": "mind"
+            },
+            {
+                "id": 13,
+                "name": "Serenity Within Hypnosis for a Quiet Mind",
+                "audio": "../src/assets/audios/mind/Serenity Within Hypnosis for a Quiet Mind.wav",
+                "category": "mind"
+            },
+            {
+                "id": 14,
+                "name": "Social Anxiety",
+                "audio": "../src/assets/audios/mind/Social Anxiety - 29 min.wav",
+                "category": "mind"
+            },
+            {
+                "id": 15,
+                "name": "Spiritual Hypnosis for Chakra Balancing",
+                "audio": "../src/assets/audios/mind/Spiritual Hypnosis for Chakra Balancing.wav",
+                "category": "mind"
+            },
+            {
+                "id": 16,
+                "name": "The Secret Power of Your Subconscious",
+                "audio": "../src/assets/audios/mind/The Secret Power of Your Subconscious.wav",
+                "category": "mind"
+            },
+            {
+                "id": 17,
+                "name": "Transform Your Mindset",
+                "audio": "../src/assets/audios/mind/Transform Your Mindset.wav",
+                "category": "mind"
+            }
+        ]
+    }
+}
