@@ -15,7 +15,6 @@ const SessionAudioPlay = ({ setCurrentAudio, playedAudios, setSessionImage, data
         setSelectedSubCategory(subCategory);
     };
     
-    console.log('audioUnlockStates', audioUnlockStates)
     // if (data?.[category]?.[subCategory] )
 
     const renderAudios = () => {

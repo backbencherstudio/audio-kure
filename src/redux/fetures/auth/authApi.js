@@ -130,9 +130,7 @@ const authApi = baseApi.injectEndpoints({
     }),
 
     updateAudioPaths: builder.mutation({
-      query: (data) => {             
-        console.log(data);
-         
+      query: (data) => {          
         return {
           url: `/path-name`,
           method: "PATCH",

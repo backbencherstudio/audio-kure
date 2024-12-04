@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import  { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import WC from './../../assets/audios/introAudio/Intro - 14 sec.wav'
@@ -26,7 +27,7 @@ const BackgroundMusic = () => {
             setIsPlaying(true);
             setShowPrompt(false);
         } catch (err) {
-            console.log('Playback failed:', err);
+            console.log('Playback failed:');
         }
     };
 

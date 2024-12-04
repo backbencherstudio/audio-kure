@@ -175,7 +175,6 @@ const SubscriptionPlan = () => {
           originalPrice: selectedPlanDetails.originalPrice,
           duration: selectedPlanDetails.duration
         };
-        console.log(plan);
         localStorage.setItem("plan", JSON.stringify(plan));
 
         if (!currentUser) {
@@ -246,7 +245,7 @@ const SubscriptionPlan = () => {
                 <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
                 <AudioPlayer
                   src={item.audio}
-                  onPlay={() => console.log(`Playing: ${item?.name}`)}
+                  onPlay={() => console.log(`Playing`)}
                   showJumpControls={false}
                   showSkipControls={false}
                   customAdditionalControls={[]}

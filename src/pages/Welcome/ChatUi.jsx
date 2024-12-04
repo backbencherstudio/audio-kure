@@ -30,7 +30,6 @@ const ChatUi = ({ code, userCondition }) => {
             isMounted = false;
         };
     }, []);
-    console.log(messages);
 
     return (
         <div className='lg:w-2/3 mx-2   min-h-[470px] border lg:mx-auto rounded-xl p-5 shadow-2xl shadow-white/10 backdrop-blur-xl flex flex-col justify-between'>

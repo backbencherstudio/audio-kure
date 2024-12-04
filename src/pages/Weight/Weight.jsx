@@ -125,7 +125,6 @@ const Weight = () => {
                 <Link to='/email'>
                     <button
                         className={`w-full py-3 px-4 ${isNextButtonDisabled ? 'bg-gray-500 cursor-not-allowed' : 'bg-gradient-to-r from-blue-600 to-teal-500'} text-white rounded-lg mt-5`}
-                        onClick={() => console.log('Next clicked')}
                         disabled={isNextButtonDisabled}
                     >
                         Next

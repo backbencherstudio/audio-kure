@@ -11,7 +11,6 @@ const StripeBuyButton = ({ buyButtonId, onPaymentSuccess }) => {
   useEffect(() => {
     const checkoutStatus = searchParams.get("checkout");
     if (checkoutStatus === "success") {
-      console.log("Payment successful!");
       onPaymentSuccess({ status: "success" });
       navigate(window.location.pathname);
     }

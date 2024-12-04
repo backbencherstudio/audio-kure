@@ -40,8 +40,6 @@ const CheckoutForm = () => {
         if (amount > 0) {
             axios.post('https://admin.hypno4u.com/api/v1/payment/create-payment-intent', { amount })
                 .then(res => {
-                    console.log(42, res?.data);
-
                     setClientSecret(res?.data?.data?.clientSecret);
                 })
                 .catch(error => {
@@ -81,7 +79,6 @@ const CheckoutForm = () => {
         if (error) {
             setError(error.message);
         } else if (paymentIntent.status === 'succeeded') {
-            console.log({ paymentIntent });
 
             if (paymentIntent?.id) {
                 const persisData = {

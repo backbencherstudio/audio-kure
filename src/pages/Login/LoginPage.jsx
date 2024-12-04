@@ -57,9 +57,6 @@ function LoginPage() {
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
 
-      console.log(user);
-
-
       // setCurrentEmail(user?.email);     
 
       if (!user?.sessionId) {
@@ -112,7 +109,6 @@ function LoginPage() {
       toast.success("Password Reset SuccessFully")
       handleClose()
     }
-    console.log(res);
   };
 
   return (
