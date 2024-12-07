@@ -57,7 +57,7 @@ const ChatUi = ({ code, userCondition }) => {
                 </div>
             </div>
             {/* <Link to={`/subscriptionplan?code=${code}`} className='w-fit btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'> */}
-            <Link to={`/login`} className='w-40 text-center btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'>
+            <Link to={`/subscriptionplan`} className='w-40 text-center btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'>
                 Let's Start
             </Link>
             
