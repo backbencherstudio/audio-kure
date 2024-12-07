@@ -5,7 +5,7 @@ import { MdLockOpen } from "react-icons/md";
 import { toast } from "react-toastify";
 
 function EmailPage() {
-  const [email, setEmail] = useState("e@g.c");
+  const [email, setEmail] = useState(null);
   const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
 
@@ -53,10 +53,10 @@ function EmailPage() {
               <h1 className="text-4xl pt-5 md:pt-20 font-serif">
                 Your program is ready
               </h1>
-              <p className="mt-3 text-[#bebebe]">
+              <p className="mt-3 text-[#e9e9e9]">
                 Unlock access to a personalized program by entering your email
               </p>
-              <p className="text-[#bebebe]">
+              <p className="text-[#e9e9e9]">
               Join the HYPNO 4 U community of achievers who have reached their goals in life, boasting a success rate of over 90%.
               </p>
               <input

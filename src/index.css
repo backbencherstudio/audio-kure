@@ -62,7 +62,7 @@
 }
 
 .btnGrad {
-  background: linear-gradient(45deg, #fff201, 30%, #59d7fe 50%, #5c8688 100%);
+  background: linear-gradient(90deg, #eeb5b4, #bfe5be, #efd0b3);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   color: #4e4e4e !important
 }

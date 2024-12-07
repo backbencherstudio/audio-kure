@@ -58,12 +58,12 @@ function HomePage() {
               <h3 className="text-xl font-bold merriweather">Your Personalized Hypnosis Program is at your fingertips</h3>
               {/* <p className="text-xl merriweather">Start by selecting one of the following </p> */}
               <div className="space-y-4">
-                <p className="text-sm md:text-base lg:text-xl">
+                <p className="text-lg md:text-lg lg:text-xl mb-5">
                   For Anxiety, Pain, Weight Loss, Confidence, Trauma, Sports, & More
                 </p>
               </div>
-              <div className="pt-32" >
-                <p className="text-sm md:text-base lg:text-xl ">
+              <div className=" md:pt-10 2xl:pt-32" >
+                <p className="text-lg md:text-lg lg:text-xl mb-5">
                   What's your first pick?
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
@@ -84,7 +84,7 @@ function HomePage() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 pt-24">
+              <div className="flex flex-col sm:flex-row items-center gap-4 pt-10 2xl:pt-24">
                 <img className="h-[40px] w-[136px]" src={home_members} alt="" />
                 <div className="ml-5">
                   <img className="h-4" alt="" src={star} />
