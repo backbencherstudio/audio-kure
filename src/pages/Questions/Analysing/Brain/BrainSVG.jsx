@@ -3,7 +3,7 @@ import "./Brain.css"
 
 const BrainSVG = () => {
     return (
-        <svg className='' xmlns="http://www.w3.org/2000/svg" version="1.0" width="100%" height="100%" viewBox="0 0 1280.000000 1088.000000" preserveAspectRatio="xMidYMid meet">
+        <svg className='' xmlns="http://www.w3.org/2000/svg" version="1.0" width="40%" height="40%" viewBox="0 0 1280.000000 1088.000000" preserveAspectRatio="xMidYMid meet">
 
             <g className='' transform="translate(0.000000,1088.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                 <path fill='white' id="path1" d="M6335 10873 c-65 -5 -246 -34 -268 -42 -16 -6 -5 -14 58 -45 43 -20 106 -56 139 -80 82 -58 193 -178 236 -254 19 -34 40 -62 46 -62 28 0 139 81 225 166 110 108 187 150 328 180 l84 18 -34 14 c-100 42 -287 85 -441 101 -90 10 -281 12 -373 4z" />

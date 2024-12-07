@@ -53,42 +53,38 @@ function HomePage() {
             <div className="w-full lg:w-1/2 space-y-6">
 
               <h2 className="text-2xl md:text-3xl lg:text-xl xl:text-4xl text-white merriweather font-bold leading-tight">
-              Many Solutions to Many Problems
+                Many Solutions to Many Problems
               </h2>
               <h3 className="text-xl font-bold merriweather">Your Personalized Hypnosis Program is at your fingertips</h3>
-              <p className="text-xl merriweather">Start by selecting one of the following </p>
+              {/* <p className="text-xl merriweather">Start by selecting one of the following </p> */}
               <div className="space-y-4">
                 <p className="text-sm md:text-base lg:text-xl">
-                  4,000+ Hours of Custom Audio Hypnosis & Meditation
-                </p>
-                <p className="text-sm md:text-base lg:text-xl">
-                  New Audios Added Continuously
-                </p>
-                <p className="text-sm md:text-base lg:text-xl">
-                  5 Simple Questions for Personalization
-                </p>
-                <p className="text-sm md:text-base lg:text-xl">
-                  Tailored Audios for Anxiety, Pain, Weight Loss, Confidence, Trauma, Sports, & More
+                  For Anxiety, Pain, Weight Loss, Confidence, Trauma, Sports, & More
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
-                <Link
-                  onClick={() => handleAnswerSelect("physical")}
-                  className="w-full"
-                  to={"/question-2"}
-                >
-                  <LoveButton></LoveButton>
-                </Link>
-                <Link
-                  onClick={() => handleAnswerSelect("emotional")}
-                  className="w-full"
-                  to={"/question-2"}
-                >
-                  <MoneyButton />
-                </Link>
+              <div className="pt-32" >
+                <p className="text-sm md:text-base lg:text-xl ">
+                  What's your first pick?
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-8">
+                  <Link
+                    onClick={() => handleAnswerSelect("physical")}
+                    className="w-full"
+                    to={"/question-2"}
+                  >
+                    <LoveButton></LoveButton>
+                  </Link>
+                  <Link
+                    onClick={() => handleAnswerSelect("emotional")}
+                    className="w-full"
+                    to={"/question-2"}
+                  >
+                    <MoneyButton />
+                  </Link>
+                </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4 pt-24">
                 <img className="h-[40px] w-[136px]" src={home_members} alt="" />
                 <div className="ml-5">
                   <img className="h-4" alt="" src={star} />
@@ -102,7 +98,7 @@ function HomePage() {
             <div className="flex-1 flex items-center justify-center relative">
               <img className="rounded-xl " alt="" src={heroImage} />
               <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
-                <BackgroundMusic />
+                {/* <BackgroundMusic /> */}
               </div>
             </div>
           </div>

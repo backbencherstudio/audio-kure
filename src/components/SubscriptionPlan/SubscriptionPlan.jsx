@@ -2,109 +2,23 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect, useRef } from "react";
 import { MdOutlineCheck } from "react-icons/md";
-import gift from "./../../assets/images/gift.png";
 import gift_big from "./../../assets/images/free_gift_big.png";
 import safe_payment from "./../../assets/images/safe_checkout_brands.png";
-import refund from "./../../assets/images/refund_badge.png";
 import CountDownTimer from "../CountDownTimer/CountDownTimer";
 import GoogleReviews from "../GoogleReviews/GoogleReviews";
-import Footer from "../../shared/Footer";
 import Logo from "../../shared/Logo";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../redux/fetures/auth/authSlice";
-import { toast } from "react-toastify";
+import {  useSearchParams } from "react-router-dom";
 import PlanDescription from "../PlanDescription/PlanDescription";
 import Ads from "../Ads/Ads";
 import authApi from './../../redux/fetures/auth/authApi';
 import AudioPlayer from "react-h5-audio-player";
+import PaymentPlan from "./PaymentPlan/PaymentPlan";
 
-const PaymentPlan = ({
-  id,
-  duration,
-  originalPrice,
-  discountedPrice,
-  perDay,
-  originalPerDay,
-  isPopular,
-  hasGift,
-  isSelected,
-  onSelect,
-}) => (
-
-  <div
-    className={`relative  rounded-2xl p-4 cursor-pointer ${isPopular ? "backdrop-blur-sm bg-white/30 border border-white/20 p-6 text-gray-900" : "backdrop-blur-sm bg-white/10 border border-white/20 p-6 text-gray-900"
-      }`}
-    onClick={() => onSelect(id)}
-  >
-    <div className="flex items-center">
-      {/* <div
-        className={`w-5 h-5 rounded-full border-2 ${isSelected ? "border-teal-500 bg-teal-500" : "border-gray-300"
-          } mr-3 flex items-center justify-center ${isPopular ? "mt-8 mb-2" : ""
-          }`}
-      >
-        {isSelected && <div className="w-2 h-2 bg-white rounded-full"></div>}
-      </div> */}
-      <div
-        className={`flex-grow flex justify-between items-center ${isPopular ? "pt-8 pb-2" : "py-2"
-          }`}
-      >
-        <div className="space-y-1">
-          <p className="font-semibold">{duration} plan</p>
-          <div className="flex gap-2">
-            <p
-              className={`text-sm line-through ${isPopular ? "text-gray-500" : "text-gray-500"
-                }`}
-            >
-              ${originalPrice}
-            </p>
-            <p
-              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
-                }`}
-            >
-              ${discountedPrice}
-            </p>
-          </div>
-          {hasGift && (
-            <div className="flex items-center text-xs text-white bg-teal-500  w-[140px] font-semibold  py-1.5 px-2 rounded-full">
-              <img src={gift} alt="gift image" className="w-4 mr-2" />
-              <span>Get secret gift!</span>
-            </div>
-          )}
-        </div>
-        <div className="my-1">
-          <div className={`text-center border-l border-zinc-50 pl-2 py-2 `}>
-            <p className="text-xs text-[#5817E9] line-through ">
-              {originalPerDay}
-            </p>
-            <p className="text-xl " style={{ fontFamily: "Merriweather" }}>
-              ${perDay}
-            </p>
-            <p
-              className={`text-sm ${isPopular ? "text-gray-500" : "text-gray-500"
-                }`}
-            >
-              Per day
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    {isPopular && (
-      <div className="absolute top-0 left-0 right-0 p-bg text-gray-800 text-center text-xs py-2.5 rounded-t-xl">
-        MOST POPULAR
-      </div>
-    )}
-  </div>
-
-);
 
 const SubscriptionPlan = () => {
-  const [selectedPlan, setSelectedPlan] = useState("");
   const [plans, setPlans] = useState([]);
   const [isDiscountPeriod, setIsDiscountPeriod] = useState(true);
   const paymentPlanRef = useRef(null);
-  const navigate = useNavigate();
   const { data: audioUrls } = authApi.useAllAudioPathsQuery();
 
   useEffect(() => {
@@ -113,9 +27,8 @@ const SubscriptionPlan = () => {
     setPlans(adjustedPlans);
   }, [isDiscountPeriod]);
 
-  const currentUser = useSelector(selectCurrentUser);
 
-  const getAdjustedPlans = (type) => {
+  const getAdjustedPlans = () => {
     const basePlans = [
       {
         id: "7",
@@ -155,42 +68,10 @@ const SubscriptionPlan = () => {
     }));
   };
 
-  const handlePlanSelect = (planId) => {
-    setSelectedPlan(planId);
-  };
   const handleCountdownEnd = () => {
     setIsDiscountPeriod(false);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (selectedPlan) {
-      const selectedPlanDetails = plans.find(
-        (plan) => plan.id === selectedPlan
-      );
-
-      if (selectedPlanDetails) {
-        const plan = {
-          plan: selectedPlan,
-          price: selectedPlanDetails.currentPrice,
-          originalPrice: selectedPlanDetails.originalPrice,
-          duration: selectedPlanDetails.duration
-        };
-        localStorage.setItem("plan", JSON.stringify(plan));
-
-        if (!currentUser) {
-          navigate("/login");
-          return;
-        }
-
-        navigate("/payment");
-      } else {
-        toast.warning("Selected plan not found");
-      }
-    } else {
-      toast.warning("Please select a plan");
-    }
-  };
-
+ 
   const usertype = localStorage.getItem('userType')
 
   const [searchParams] = useSearchParams();
@@ -217,7 +98,7 @@ const SubscriptionPlan = () => {
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
-            className="text-[1.75rem]  md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
+            className="text-[1.75rem]  md:text-[2rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
           >
             Congratulations! you are{" "}
             <span className="s-text merriweather capitalize">
@@ -226,10 +107,18 @@ const SubscriptionPlan = () => {
             suggestible
           </h1>
         </div>
-        <div className="text-center space-y-6">
-          <h1 className="text-4xl font-bold text-white">
-            It's Easy as 1, 2, 3
+        <div className="text-center space-y-6 mt-10 xl:mt-20 p-4 xl:p-0">
+          <h1 className="text-3xl font-bold text-white">
+            READY TO GET STARTED?
           </h1>
+          <p className="text-2xl font-bold ">It’s easy to take the first step towards transformation! Simply follow these 4 simple steps:</p>
+          <ul className="list-decimal md:w-[350px] lg:w-[500px] mx-auto text-left text-base  lg:text-xl font-bold space-y-3 pl-8 md:px-0">
+            <li><span>Choose a Payment Plan</span> that works best for you</li>
+            <li><span>Select Your Topic or Issue</span>hat you’d like to focus on</li>
+            <li><span>Set Your Goals</span> and start your journey</li>
+            <li><span>Track Your Success</span> and earn rewards along the way!</li>
+          </ul>
+          <p className="text-xl font-bold">We’re here to support you every step of the way. Let’s make progress together!</p>
         </div>
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
 
@@ -245,13 +134,13 @@ const SubscriptionPlan = () => {
                 <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
                 <AudioPlayer
                   src={item.audio}
-                  onPlay={() => console.log(`Playing`)}
                   showJumpControls={false}
                   showSkipControls={false}
                   customAdditionalControls={[]}
                   customVolumeControls={[]}
                   showDownloadProgress={false}
-                  className="rounded-lg bg-gradient-to-l to-black/10 via-yellow-400/10 from-zinc-100/50"
+                  className="rounded-lg bg-gradient-to-tl to-black/10 via-yellow-500/10
+                   from-zinc-100/50"
                 />
               </div>
             ))}
@@ -267,22 +156,27 @@ const SubscriptionPlan = () => {
 
             {/* <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a> */}
 
-            <form onSubmit={handleSubmit}>
+            <div >
               <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
-                   <a key={plan.id} href={plan.href} className="block" >
+                  // <a key={plan.id} href={plan.href} className="block" >
+                  // onClick={handleSubmit(plan.href) }
+                  <div key={plan.id}>
+
                     <PaymentPlan
+                      plan={plan.href}
                       id={plan.id}
                       duration={plan.duration}
                       originalPrice={plan.originalPrice}
                       discountedPrice={plan.discountedPrice}
                       perDay={plan.perDay}
                       originalPerDay={plan.originalPerDay}
-                      isSelected={selectedPlan === plan.id}
                       isPopular={plan.isPopular}
                       hasGift={plan.hasGift}
                     />
-                  </a>
+
+                  </div>
+                  // </a>
                 ))}
               </div>
               {/* <button
@@ -296,7 +190,7 @@ const SubscriptionPlan = () => {
                 Guaranteed safe checkout
               </p>
               <img className="mx-auto w-[45%]" src={safe_payment} alt="safe-payment" />
-            </form>
+            </div>
           </div>
 
           <div className="md:w-1/2 flex flex-col justify-between ">
@@ -385,9 +279,6 @@ const SubscriptionPlan = () => {
 
 
         <GoogleReviews />
-      </div>
-      <div className="container mx-auto px-4">
-        <Footer />
       </div>
     </div>
   );

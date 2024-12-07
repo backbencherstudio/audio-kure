@@ -47,7 +47,7 @@ const BackgroundMusic = () => {
                     {/* <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"></div> */}
                     <div className="w-[250px] md:w-[300px] xl:w-[400px]">
                         <div className="bg-white/10 backdrop-blur-md py-2 md:p-6 rounded-xl shadow-lg text-center">
-                            <h3 className="text-xl font-semibold mb-4  ">Experience a moment of calm</h3>
+                            <h3 className="text-xl font-semibold mb-4  "></h3>
                             <button
                                 onClick={startMusic}
                                 className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors duration-200 "

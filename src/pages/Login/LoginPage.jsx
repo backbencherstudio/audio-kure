@@ -127,9 +127,7 @@ function LoginPage() {
           <li></li>
         </ul>
       </div>
-      <div className="flex justify-center">
         <Logo />
-      </div>
       <div className="flex flex-col justify-center min-h-[70vh]">
         <div className="flex justify-center">
           <div className="md:w-[450px] lg:w-[450px] w-full mx-5">

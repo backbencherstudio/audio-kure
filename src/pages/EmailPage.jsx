@@ -5,7 +5,7 @@ import { MdLockOpen } from "react-icons/md";
 import { toast } from "react-toastify";
 
 function EmailPage() {
-  const [email, setEmail] = useState("e@g.com");
+  const [email, setEmail] = useState("e@g.c");
   const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
 

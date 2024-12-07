@@ -6,7 +6,7 @@ const MoneyButton = () => {
   return (
     <div className="w-full">
       <button className="button w-full  lg:my-5 mx-auto rounded-xl">
-        <span className="button__text ">Money</span>
+        <span className="button__text text-2xl font-bold ">Money</span>
         <img src={money} alt="" className="button__cone" />
         <img src={money} alt="" className="button__torus" />
         <img src={money} alt="" className="button__icosahedron" />
