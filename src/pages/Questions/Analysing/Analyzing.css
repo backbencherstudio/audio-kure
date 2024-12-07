@@ -14,16 +14,16 @@ h1 {
 }
 
 .progress-bar-container {
-  background-color: #2c1348;
+  background-color: #3a3a3ad3;
   border-radius: 10px;
   overflow: hidden;
-  height: 8px;
+  height: 16px;
   margin-bottom: 20px;
 }
 
 .progress-bar {
   height: 100%;
-  background-color: #5e4dd1;
+  background-color: #ffc400;
   transition: width 0.5s ease;
 }
 
@@ -46,7 +46,7 @@ h1 {
 }
 
 .testimonial {
-  background-color: #2c1348;
+  background-color: #27272a;
   padding: 20px;
   border-radius: 10px;
 }

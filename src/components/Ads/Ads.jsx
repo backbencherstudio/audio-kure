@@ -68,6 +68,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
         "PLAN A": {
             heading: "🌟 Plan A: 7-Day Access 🌟",
             price: "$25",
+            previousPrice: "$50",
             perDay: "$3.58/day",
             description: "7 days of streaming access to a personalized hypnotherapy session targeting '2' selected audio.",
             bestFor: "Perfect for a short-term boost or to try out the session.",
@@ -76,6 +77,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
         "PLAN B": {
             heading: "🌟 Plan B: Monthly Access 🌟",
             price: "$45",
+            previousPrice: "$90",
             perDay: "$3/day",
             description: "30 days of comprehensive access to '15' custom-selected hypnotherapy audios.",
             bestFor: "Allows a full month to experience the benefits with more flexibility.",
@@ -84,6 +86,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
         "PLAN C": {
             heading: "🌟 Plan C: Annual Access 🌟",
             price: "$350",
+            previousPrice: "$700",
             perDay: "$1.04/day",
             description: "All audios. A robust program designed for a longer-term, goal-oriented journey with exclusive support.",
             bestFor: "Best value for long-term support, giving you a year of unlimited AUDIO access.",
@@ -128,6 +131,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                     <div className="absolute -bottom-12 -left-12 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 opacity-20 blur-lg transform -rotate-45 animate-pulse" />
 
                     <div className="text-center space-y-6 relative">
+                        <h1 className='bg-yellow-500 absolute -top-6 -right-20 px-10 rotate-45'>50% Discount</h1>
                         <div className="space-y-2">
                             <h2 className="text-3xl font-bold bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200 text-transparent bg-clip-text animate-gradient">
                                 {planDetails[selectedPlan].heading}
@@ -155,13 +159,18 @@ const Ads = ({ scrollToPaymentPlan }) => {
                         <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 blur-xl animate-pulse" />
                             <div className="relative space-y-2">
-                                <div className="text-2xl font-semibold text-gray-400">
-                                {planDetails[selectedPlan].perDay}
-                                </div>
-                                <div className="flex justify-center items-baseline space-x-2">
-                                    <span className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200">
-                                        {planDetails[selectedPlan].price}
-                                    </span>
+                                <div className='relative'>
+                                    <p className='absolute text-2xl left-44 top-1 -rotate-45 bg-yellow-500 px-3 py-1 rounded-md  line-through text-white'> {planDetails[selectedPlan].previousPrice}</p>
+                                    <div>
+                                        <div className="text-2xl font-semibold text-gray-400">
+                                            {planDetails[selectedPlan].perDay}
+                                        </div>
+                                        <div className="flex justify-center items-baseline space-x-2">
+                                            <span className="text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-300 to-yellow-200">
+                                                {planDetails[selectedPlan].price}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

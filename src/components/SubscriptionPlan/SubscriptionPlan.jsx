@@ -217,7 +217,7 @@ const SubscriptionPlan = () => {
         <div>
           <h1
             style={{ fontFamily: "Merriweather" }}
-            className="text-[1.75rem]  md:text-[2.5rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
+            className="text-[1.75rem]  md:text-[2rem] md:w-3/5 text-center mx-auto font-semibold mb-4 px-4 xl:px-0"
           >
             Congratulations! you are{" "}
             <span className="s-text merriweather capitalize">
@@ -226,10 +226,18 @@ const SubscriptionPlan = () => {
             suggestible
           </h1>
         </div>
-        <div className="text-center space-y-6">
-          <h1 className="text-4xl font-bold text-white">
-            It's Easy as 1, 2, 3
+        <div className="text-center space-y-6 mt-10 xl:mt-20 p-4 xl:p-0">
+          <h1 className="text-3xl font-bold text-white">
+            READY TO GET STARTED?
           </h1>
+          <p className="text-2xl font-bold ">It’s easy to take the first step towards transformation! Simply follow these 4 simple steps:</p>
+          <ul className="list-decimal md:w-[350px] lg:w-[500px] mx-auto text-left text-base  lg:text-xl font-bold space-y-3 pl-8 md:px-0">
+            <li><span>Choose a Payment Plan</span> that works best for you</li>
+            <li><span>Select Your Topic or Issue</span>hat you’d like to focus on</li>
+            <li><span>Set Your Goals</span> and start your journey</li>
+            <li><span>Track Your Success</span> and earn rewards along the way!</li>
+          </ul>
+          <p className="text-xl font-bold">We’re here to support you every step of the way. Let’s make progress together!</p>
         </div>
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
 
@@ -245,13 +253,13 @@ const SubscriptionPlan = () => {
                 <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
                 <AudioPlayer
                   src={item.audio}
-                  onPlay={() => console.log(`Playing`)}
                   showJumpControls={false}
                   showSkipControls={false}
                   customAdditionalControls={[]}
                   customVolumeControls={[]}
                   showDownloadProgress={false}
-                  className="rounded-lg bg-gradient-to-l to-black/10 via-yellow-400/10 from-zinc-100/50"
+                  className="rounded-lg bg-gradient-to-tl to-black/10 via-yellow-500/10
+                   from-zinc-100/50"
                 />
               </div>
             ))}
@@ -385,9 +393,6 @@ const SubscriptionPlan = () => {
 
 
         <GoogleReviews />
-      </div>
-      <div className="container mx-auto px-4">
-        <Footer />
       </div>
     </div>
   );
