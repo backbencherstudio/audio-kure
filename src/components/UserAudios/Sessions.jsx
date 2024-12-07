@@ -138,7 +138,7 @@ const Sessions = () => {
 
         const res = await userDelete(currentUser?.email)
         if (res?.data?.success) {
-          navigate("/subscriptionplan");
+          // navigate("/subscriptionplan");
         }
       }
     }

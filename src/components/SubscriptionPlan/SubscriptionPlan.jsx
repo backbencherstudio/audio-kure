@@ -270,7 +270,7 @@ const SubscriptionPlan = () => {
             <form onSubmit={handleSubmit}>
               <div className="space-y-4 mb-4">
                 {plans.map((plan) => (
-                  <a key={plan.id} href={plan.href} className="block" >
+                   <a key={plan.id} href={plan.href} className="block" >
                     <PaymentPlan
                       id={plan.id}
                       duration={plan.duration}
