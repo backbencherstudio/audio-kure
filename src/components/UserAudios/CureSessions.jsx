@@ -147,6 +147,15 @@ const CureSessions = ({ currentUser }) => {
     setRating(newRating);
     localStorage.setItem("userRating", newRating);
   };
+
+  const affirmations = [
+    "I Am Stuck",
+    "I Am Moving Forward",
+    "I Am Gaining Clarity",
+    "I Am Aligned With My Goal",
+    "I Am Achieving My Goal"
+  ];
+
   return (
     <div className={`${user === false && 'cursor-not-allowed opacity-50'} lg:mx-4`}>
       <div className='max-w-7xl mx-4 md:mx-auto md:px-2 lg:px-0 '>
@@ -154,9 +163,16 @@ const CureSessions = ({ currentUser }) => {
           <h1 className="text-4xl md:text-5xl text-[#dbd1fb]">
             <span className="p-text">Hey -</span> {currentUser?.name}!
           </h1>
-          <div className='py-4 lg:py-0'>
-            <p className="text-2xl capitalize">personal progress tracker</p>
-            <div className="flex text-3xl">
+          <div className="py-4 lg:py-0">
+            <p className="text-2xl capitalize">Personal Progress Tracker</p>
+            <div className="text-xl mb-2">
+              {rating > 0 && (
+                <p className=" text-yellow-200 font-semibold ">
+                  {affirmations[rating - 1]}
+                </p>
+              )}
+            </div>
+            <div className="flex items-center text-3xl">
               {[...Array(5)].map((_, index) => (
                 <TiStarFullOutline
                   key={index}
@@ -166,6 +182,7 @@ const CureSessions = ({ currentUser }) => {
                 />
               ))}
             </div>
+
           </div>
         </div>
         <p className='text-[#f1f1f3] text-base md:text-xl my-2 md:my-4'>You have incredible potential to achieve your goals and thrive! <br />
