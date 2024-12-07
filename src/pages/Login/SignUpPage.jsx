@@ -51,7 +51,6 @@ const SignUpPage = () => {
     setUserEmail(data?.email);
 
     const res = await registerUser(data);
-x
 
     if (res?.data?.success) {
       toast("Check Your Email For Verify OTP");
