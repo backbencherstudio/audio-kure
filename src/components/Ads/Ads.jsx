@@ -160,7 +160,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 blur-xl animate-pulse" />
                             <div className="relative space-y-2">
                                 <div className='relative'>
-                                    <p className='absolute text-2xl left-44 top-1 -rotate-45 bg-yellow-500 px-3 py-1 rounded-md  line-through text-white'> {planDetails[selectedPlan].previousPrice}</p>
+                                    <p className='absolute text-2xl left-4 md:left-5 xl:left-24 2xl:left-44 top-1 -rotate-45 bg-yellow-500 px-3 py-1 rounded-md  line-through text-white'> {planDetails[selectedPlan].previousPrice}</p>
                                     <div>
                                         <div className="text-2xl font-semibold text-gray-400">
                                             {planDetails[selectedPlan].perDay}
