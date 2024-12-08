@@ -15,7 +15,7 @@ const PlanDescription = () => {
                 {/* Plans */}
                 <div className="space-y-16">
                     {/* 7-Day Plan */}
-                    <div className="space-y-6 group backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20">
+                    <div className="space-y-6 group backdrop-blur-sm bg-white/10 p-4 rounded-lg border border-white/20">
                         <div className="flex items-baseline justify-between border-b border-white/20 pb-2">
                             <h2 className="text-3xl font-bold text-white">Enjoy Full Access to Over 200 Self-Hypnosis Audios All Year Round:</h2>
                         </div>
@@ -37,13 +37,13 @@ const PlanDescription = () => {
 
                             <div className="backdrop-blur-sm bg-white/5 p-4 rounded-lg border border-white/10">
                                 <h3 className="text-xl font-semibold text-white mb-2">The best part?</h3>
-                                <p className="text-white/80">You get rewarded for your success—“ACCESS THE VAULT!</p>
+                                <p className="text-white">You get rewarded for your success—“ACCESS THE VAULT!</p>
                             </div>
                         </div>
                     </div>
 
                     {/* 1-Month Plan */}
-                    <div className="space-y-6 group backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 relative">
+                    <div className="space-y-6 group backdrop-blur-sm bg-white/10 p-4 rounded-lg border border-white/20 relative">
                         {/* <div className="absolute -left-1 top-4 bg-white px-4 py-1 rounded-r-full text-purple-900 text-sm font-semibold">
                             Most Popular!
                         </div> */}

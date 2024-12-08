@@ -27,7 +27,7 @@ const WelcomePage = () => {
     <div>
       <div className="container mx-auto"> <Logo /></div>
       <div className="container mx-auto">
-        <h4 className="text-center lg:text-4xl lg:my-10 mb-5   backdrop-blur-md bg-gray-600/20 w-fit mx-auto lg:p-5 p-1 rounded-xl">Congratulations! <br /> You are {userCondition} suggestible!</h4>
+        <h4 className="text-center lg:text-4xl lg:my-10 my-5   backdrop-blur-md bg-gray-600/20 w-fit mx-auto lg:p-5 p-1 rounded-xl">Congratulations! <br /> You are {userCondition} suggestible!</h4>
         {
           userCondition === "physical" && <div>
             <ChatUi userCondition={userCondition} code={code}></ChatUi>
