@@ -83,7 +83,7 @@ const Analyzing = () => {
             </ul>
           </div>
           <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase top-2 left-0">Conscious mind (5%)</h2>
-          <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase bottom-2 right-0">SubConscious & <br /> UNCONSCIOUS MIND (95%)</h2>
+          <h2 className="block lg:hidden absolute bg-black text-sm p-2 rounded-md text-center uppercase bottom-2 right-0">UNCONSCIOUS MIND (95%)</h2>
         </div>
         <div className="progress-bar-container">
           <div className="progress-bar" style={{ width: `${progress}%` }} />
