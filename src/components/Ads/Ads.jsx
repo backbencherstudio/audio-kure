@@ -78,7 +78,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
             heading: "🌟 Plan B: Monthly Access 🌟",
             price: "$45",
             previousPrice: "$90",
-            perDay: "$3/day",
+            perDay: "$1.5/day",
             description: "30 days of comprehensive access to '15' custom-selected hypnotherapy audios.",
             bestFor: "Allows a full month to experience the benefits with more flexibility.",
             bonus: "Includes 15 Audio files"
@@ -87,7 +87,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
             heading: "🌟 Plan C: Annual Access 🌟",
             price: "$350",
             previousPrice: "$700",
-            perDay: "$1.04/day",
+            perDay: "$0.95/day",
             description: "All audios. A robust program designed for a longer-term, goal-oriented journey with exclusive support.",
             bestFor: "Best value for long-term support, giving you a year of unlimited AUDIO access.",
             bonus: "Includes unlimited Audio files"

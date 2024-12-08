@@ -199,52 +199,52 @@ const SubscriptionPlan = () => {
             </h2>
             <ul className="space-y-2 list-disc md:list-none">
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" /> Digital
+                <MdOutlineCheck className="p-text text-xl w-8" /> Digital
                 Extensive Audio Library: 4,000+ hours of expert hypnosis sessions across various topics
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Goal-Oriented Programs: Customized paths for goals like weight loss, stress relief, and better sleep
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Free Trial: Try HYPNO 4 U risk-free
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" /> Personalized Onboarding: Guided platform tour to maximize every feature
+                <MdOutlineCheck className="p-text text-xl w-8" /> Personalized Onboarding: Guided platform tour to maximize every feature
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" /> Exclusive New Content: Early access to innovative Quantum Medical HypnosisTM sessions
+                <MdOutlineCheck className="p-text text-xl w-8" /> Exclusive New Content: Early access to innovative Quantum Medical HypnosisTM sessions
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" /> Flexible Subscription Options: Affordable plans with easy cancellation
+                <MdOutlineCheck className="p-text text-xl w-8" /> Flexible Subscription Options: Affordable plans with easy cancellation
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Expertly Crafted Sessions: Developed by a Doctor in hypnosis, neuroscience, and Quantum Medicine
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Introductory Hypnosis: Smooth, guided start
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Daily Bedtime Hypnotherapy: Personalized sessions for nightly relaxation
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Constant Content Updates: Regularly refreshed audio hypnosis and meditations
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 24/7 Support: Always-on client assistance
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Privacy & Security: Guaranteed confidentiality
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="hidden lg:block p-text text-xl w-8" />{" "}
+                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
                 Milestone Badges ACCESS THE VAULT: Earn rewards as you reach achievements
               </li>
             </ul>
