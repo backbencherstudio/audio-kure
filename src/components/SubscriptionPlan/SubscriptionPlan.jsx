@@ -33,7 +33,7 @@ const SubscriptionPlan = () => {
       {
         id: "7",
         duration: "7 Days",
-        originalPerDay: "$14.28",
+        originalPerDay: "$7.14",
         originalPrice: "50",
         discountedPrice: "25",
         perDay: "3.58",
