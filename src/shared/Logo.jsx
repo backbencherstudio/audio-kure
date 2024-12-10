@@ -18,13 +18,10 @@ const Logo = () => {
             </span>
           </Link>
         </div>
-
         {
           currentUser?.email === "mybesthealer@gmail.com" &&
           <Link className="block  " to="/admin/users" >Dashboard</Link>
         }
-
-
       </div>
 
     </div>
