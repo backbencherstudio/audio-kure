@@ -10,7 +10,6 @@ import NewAudioPlayer from "./NewAudioPlayer";
 import { toast } from "react-toastify";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaLock } from "react-icons/fa";
-import gift_big from "./../../assets/images/free_gift_big.png";
 import play from "./../../assets/play.gif"
 import push from "./../../assets/play.png"
 import goldCoin from "./../../assets/goldCoin.png"
