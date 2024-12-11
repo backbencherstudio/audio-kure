@@ -87,7 +87,9 @@ function HomePage() {
               <div className="flex flex-col sm:flex-row items-center gap-4 pt-10 2xl:pt-24">
                 <img className="h-[40px] w-[136px]" src={home_members} alt="" />
                 <div className="ml-5">
-                  <img className="h-4" alt="" src={star} />
+                  <div className=" flex justify-center md:block">
+                    <img className="h-4" alt="" src={star} />
+                  </div>
                   <p className="text-xs mt-2 font-medium">
                     98% satisfaction rate *based on user interviews
                   </p>

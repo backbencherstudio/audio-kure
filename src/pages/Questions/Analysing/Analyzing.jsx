@@ -44,15 +44,15 @@ const Analyzing = () => {
   );
 
   return (
-    <div className="flex  items-center justify-center  lg:mt-10 mx-5 py-2">
-      <div className=" backdrop-blur-md rounded-md lg:w-1/2 p-2 lg:p-10">
+    <div className="flex  items-center justify-center  lg:mt-10 mx-4 py-2">
+      <div className=" backdrop-blur-md rounded-md lg:w-1/2 lg:p-10">
 
         <h1 className="text-2xl my-3 mb-4 text-center">
 
           All set! Just a moment while we process your data...
         </h1>
         <div className="flex justify-center my-10">
-          <BrainSVG />
+          <BrainSVG  />
         </div>
         <div className="my-5 relative flex justify-center">
           <img src={iceburg} alt="ice" className="w-80 h-full" />
@@ -115,7 +115,7 @@ const Analyzing = () => {
             40-50 bits per second.</p>
         </div>
         <div className="testimonial">
-          <div className="stars">Why Choose H4U?</div>
+          <div className="stars">Why Choose Hypno4u?</div>
           <p className="space-y-2">
             1. Set and Track Goals: Define your goals and monitor your progress. <br />
             2. Rewards for Success: Earn free sessions as you achieve milestones. <br />

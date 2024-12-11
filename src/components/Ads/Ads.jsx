@@ -29,7 +29,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
         }
     }, []);
 
-    const PlanCard = ({ title, price, perDay, audioCount, description, bestFor }) => (
+    const PlanCard = ({ title, price, perDay, audioCount, description, bestFor,previousPrice }) => (
         <div
             className={`bg-gray-800/50 rounded-xl p-4 border ${selectedPlan === title ? 'border-yellow-500/50' : 'border-gray-700'} hover:border-yellow-500/50 cursor-pointer`}
             onClick={() => setSelectedPlan(title)}
@@ -38,7 +38,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
             <div className="space-y-2 text-gray-300">
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Price:</span>
-                    <span className="text-lg font-semibold">${price} (${perDay}/day)</span>
+                    <p className="text-lg font-semibold"> <span className='line-through text-sm text-gray-800'>${previousPrice}</span> ${price} (${perDay}/day)</p>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Access:</span>
@@ -106,6 +106,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             audioCount="2"
                             description="7 days of streaming access to a personalized hypnotherapy session targeting '2' selected audio."
                             bestFor="Perfect for a short-term boost or to try out the session."
+                            previousPrice="50"
                         />
                         <PlanCard
                             title="PLAN B"
@@ -114,6 +115,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             audioCount="15"
                             description="30 days of comprehensive access to '15' custom-selected hypnotherapy audios."
                             bestFor="Allows a full month to experience the benefits with more flexibility."
+                            previousPrice="90"
                         />
                         <PlanCard
                             title="PLAN C"
@@ -122,6 +124,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             audioCount="All"
                             description="All audios. A robust program designed for a longer-term, goal-oriented journey with exclusive support."
                             bestFor="Best value for long-term support, giving you a year of unlimited AUDIO access."
+                             previousPrice="700"
                         />
                     </div>
                 </div>
