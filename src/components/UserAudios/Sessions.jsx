@@ -262,7 +262,7 @@ const Sessions = () => {
               <div className="flex items-center flex-wrap justify-between">
 
                 <div className="flex items-center">
-                  You achieve
+                  You Achieve
                   <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
                   <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
                   <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >Coins</span>
