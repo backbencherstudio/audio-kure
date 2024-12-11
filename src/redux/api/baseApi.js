@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setUser } from "../fetures/auth/authSlice";
-// import { Navigate } from "react-router-dom";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://admin.hypno4u.com/api/v1",

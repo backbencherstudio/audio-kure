@@ -10,7 +10,6 @@ import NewAudioPlayer from "./NewAudioPlayer";
 import { toast } from "react-toastify";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { FaLock } from "react-icons/fa";
-import gift_big from "./../../assets/images/free_gift_big.png";
 import play from "./../../assets/play.gif"
 import push from "./../../assets/play.png"
 import goldCoin from "./../../assets/goldCoin.png"
@@ -263,7 +262,7 @@ const Sessions = () => {
               <div className="flex items-center flex-wrap justify-between">
 
                 <div className="flex items-center">
-                  You Achive
+                  You Achieve
                   <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2' >{counterValue}</span>
                   <img className='size-8 inline-block -mr-[5px]' src={goldCoin} alt="" />
                   <span className='animation-text text-[30px] md:text-[44px] font-extrabold mx-2 ml-3' >Coins</span>

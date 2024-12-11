@@ -105,17 +105,10 @@ const router = createBrowserRouter([
         path: "/payment",
         element: (
           <ProtectedRoute>
-            {/* <PPurchesProtectorRoute> */}
             <Payment />
-            {/* </PPurchesProtectorRoute> */}
           </ProtectedRoute>
         ),
       },
-
-      // {
-      //   path: "/orderConfirmation",
-      //   element: <OrderConfirmation />,
-      // },
     ],
   },
 
@@ -131,7 +124,6 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
-  // ============================================>>>> just for testing
   {
     path: "/audios",
     element: <AudioLayout />,
@@ -147,20 +139,15 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // ============================================>>>> just for testing
   {
     path: "/daily-audios",
     element:
-      // <ProtectedRoute>
       <DailyAudios />
-    // </ProtectedRoute>
   },
   {
     path: "/vault",
     element:
-      // <ProtectedRoute>
       <Vault />
-    // </ProtectedRoute>
   },
   {
     path: "/subPayment",
