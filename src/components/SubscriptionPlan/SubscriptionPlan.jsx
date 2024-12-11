@@ -124,10 +124,12 @@ const SubscriptionPlan = () => {
 
         <PlanDescription />
 
-        <div className="px-4 2xl:px-0">
+        <div className="px-4 2xl:px-0 relative">
           <div className="max-w-[1440px] mx-auto backdrop-blur-sm bg-black/30 p-4 rounded-lg border border-white/20 mb-14">
             <h1 className="text-4xl xl:text-5xl text-center my-10 uppercase font-bold px-4">
-              <span className="animated-gradient-text bg-clip-text text-transparent">
+              <span className="animated-gradient-text bg-clip-text text-transparent relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/50 to-orange-500/50 blur-xl animate-pulse" />
+
                 Try Before You Buy
               </span>
             </h1>
