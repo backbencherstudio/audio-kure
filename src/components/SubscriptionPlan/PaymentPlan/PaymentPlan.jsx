@@ -21,8 +21,6 @@ const PaymentPlan = ({
     const navigate = useNavigate()
 
     const handleSubscription = (plan) => {
-        console.log(plan);
-
         if(!currentUser){
            return navigate("/login")
         }        

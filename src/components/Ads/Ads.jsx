@@ -38,7 +38,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
             <div className="space-y-2 text-gray-300">
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Price:</span>
-                    <p className="text-lg font-semibold"> <span className='line-through text-sm text-gray-800'>${previousPrice}</span> ${price} (${perDay}/day)</p>
+                    <p className="text-lg font-semibold"> <span className='line-through text-[15px] text-red-400'> ${previousPrice}</span> ${price} (${perDay}/day)</p>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Access:</span>
