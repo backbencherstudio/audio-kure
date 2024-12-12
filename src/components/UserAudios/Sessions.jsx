@@ -95,7 +95,6 @@ const Sessions = () => {
           toast.success("Congratulations! You've earned 100 coins!");
         };
       }
-
       updateCoin()
     }
   }, [listeningTime])
