@@ -57,7 +57,6 @@ function LoginPage() {
       const user = verifyToken(token);
       dispatch(setUser({ user, token }));
 
-      // setCurrentEmail(user?.email);     
 
       if (!user?.sessionId) {
         navigate("/subscriptionplan");
