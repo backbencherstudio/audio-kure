@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef } from 'react';
-import imageKure from './../../assets/medation2.png'
+import imageKure from './../../assets/images/cure_session.png'
 
 
 const NewAudioPlayer = ({ audioUrl, setTotalDuration, setListeningTime }) => {

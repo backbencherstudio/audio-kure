@@ -110,6 +110,7 @@ const SubscriptionPlan = () => {
         <div className="text-center space-y-6 mt-10 xl:mt-20 p-4 xl:p-0">
           <h1 className="text-3xl font-bold text-white">
             READY TO GET STARTED?
+
           </h1>
           <p className="text-lg md:text-2xl font-bold ">It’s easy to take the first step towards transformation! Simply follow these 4 simple steps:</p>
           <ul className="list-decimal md:w-[350px] lg:w-[500px] mx-auto text-left text-sm  lg:text-xl font-bold space-y-3 pl-8 md:px-0">
@@ -125,12 +126,13 @@ const SubscriptionPlan = () => {
 
           <div className="max-w-[1440px] mx-auto backdrop-blur-sm  p-4 rounded-lg border border-white/20 mb-14">
 
-            <h1 className=" text-2xl md:text-4xl xl:text-5xl text-center my-10 uppercase font-bold bg-black/30 p-5 rounded-lg px-4">
+            <h1 className=" text-2xl md:text-4xl xl:text-5xl text-center mt-10 mb-3 uppercase font-bold bg-black/30 p-5 rounded-lg px-4">
               <span className="animated-gradient-text bg-clip-text text-transparent relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/50 to-orange-500/50 blur-xl animate-pulse" />
                 Try Before You Buy
               </span>
             </h1>
+              <p className="text-[16px] text-center mb-2 " >Do not listen to hypnosis recordings while driving, operating machinery</p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {audioUrls?.intro?.map((item) => (

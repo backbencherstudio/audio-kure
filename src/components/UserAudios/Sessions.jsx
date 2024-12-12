@@ -126,14 +126,16 @@ const Sessions = () => {
 
     if (subscribeData) fetchPurchasePlan();
   }, [subscribeData, currentUser?.email, sessionId, purchasePlan]);
+  
 
   useEffect(() => {
     const deleteFun = async () => {
       if (
         (subscribeData && subscribeData?.status !== "active") ||
-        (subscribeData && currentUser?.email !== subscribeData?.subscription_email)
+        (subscribeData && currentUser?.email !== subscribeData?.subscription_email)||
+        (subscribeData === null )   //========================================================== notun  update kota hoyeche
       ) {
-
+        navigate("/subscriptionplan");   //==========================================================  notun  update kota hoyeche
         const res = await userDelete(currentUser?.email)
         if (res?.data?.success) {
           navigate("/subscriptionplan");
@@ -246,7 +248,7 @@ const Sessions = () => {
 
   return (
     <div className="session-main-dev border-t mt-5 border-[#2f2861]">
-      
+
       <div className="session-second-child max-w-7xl mx-4 md:mx-auto my-8 md:px-4 lg:px-0">
 
         <div className="mb-5">
@@ -283,7 +285,7 @@ const Sessions = () => {
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "two") }} className={`ml-2 ${counterValue >= 3000 ? "" : "opacity-50 "}`} >
-                  {
+                    {
                       counterValue >= 3000 ? <img
                         src={treasureOpen}
                         alt="gift-image"
@@ -297,7 +299,7 @@ const Sessions = () => {
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "three") }} className={`ml-2 ${counterValue >= 8000 ? "" : "opacity-50 "}`} >
-                  {
+                    {
                       counterValue >= 8000 ? <img
                         src={treasureOpen}
                         alt="gift-image"
@@ -311,7 +313,7 @@ const Sessions = () => {
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "four") }} className={`ml-2 ${counterValue >= 13000 ? "" : "opacity-50 "}`} >
-                  {
+                    {
                       counterValue >= 13000 ? <img
                         src={treasureOpen}
                         alt="gift-image"
@@ -325,7 +327,7 @@ const Sessions = () => {
                   </button>
 
                   <button onClick={() => { valutFunction(counterValue, "five") }} className={`ml-2 ${counterValue >= 20000 ? "" : "opacity-50 "}`} >
-                  {
+                    {
                       counterValue >= 20000 ? <img
                         src={treasureOpen}
                         alt="gift-image"
@@ -372,7 +374,7 @@ const Sessions = () => {
               </div>
 
               <div>
-              If You Want To Cancel Your Plan
+                If You Want To Cancel Your Plan
                 <a
                   className="duration-300 ml-1 text-red-500 font-bold hover:text-red-700 rounded-md text-md mt-10 inline-block"
                   href={`https://admin.hypno4u.com/customers/${subscribeData?.customer_id}`}

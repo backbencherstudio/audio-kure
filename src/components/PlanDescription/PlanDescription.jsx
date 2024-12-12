@@ -37,8 +37,9 @@ const PlanDescription = () => {
 
                             <div className="backdrop-blur-sm bg-white/5 p-4 rounded-lg border border-white/10">
                                 <h3 className="text-xl font-semibold text-white mb-2">The best part?</h3>
-                                <p className="text-white">You get rewarded for your success—“ACCESS THE VAULT!</p>
+                                <p className="text-white/80">You get rewarded for your success—“ACCESS THE VAULT!</p>
                             </div>
+
                         </div>
                     </div>
 
