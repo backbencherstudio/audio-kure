@@ -373,13 +373,14 @@ const Sessions = () => {
               </div>
 
               <div>
+              If You Want To Cancel Your Plan
                 <a
-                  className="bg-red-500 hover:bg-red-600 duration-300 px-10 py-2 text-white font-bold hover:text-white rounded-md text-md mt-10 inline-block"
+                  className="duration-300 ml-1 text-red-500 font-bold hover:text-red-700 rounded-md text-md mt-10 inline-block"
                   href={`https://admin.hypno4u.com/customers/${subscribeData?.customer_id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Cancel Plan
+                  Click Here
                 </a>
               </div>
               <div>
@@ -388,7 +389,7 @@ const Sessions = () => {
 
                 <button
                   onClick={() => navigate("/subscriptionplan?section=subscription")}
-                  className="text-green-900 duration-300 font-semibold px-2 py-2 rounded-md text-md mt-5 inline-block"
+                  className="text-green-900 hover:text-green-700 duration-300 font-semibold px-2 py-2 rounded-md text-md mt-5 inline-block"
                 >
                   Click Here
                 </button>

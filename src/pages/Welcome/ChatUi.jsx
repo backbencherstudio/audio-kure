@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 const ChatUi = ({ code, userCondition }) => {
     const [messages, setMessages] = useState([]);
     const messageQueue = [
-        { text: "What does this means?", sender: "patient" },
-        { text: `That means you learn by ${userCondition === "emotional" ? "in-direct" : "direct"} hypnosis.`, sender: "doctor" },
+        { text: "What does this mean?", sender: "patient" },
+        { text: `This means you learn by ${userCondition === "emotional" ? "in-direct" : "direct"} hypnosis.`, sender: "doctor" },
         { text: "How is this going to help me?", sender: "patient" },
-        { text: "To know, let the journey start.", sender: "doctor" },
+        { text: "To learn more, let the journey begin.", sender: "doctor" },
     ];
 
     useEffect(() => {
@@ -58,7 +58,7 @@ const ChatUi = ({ code, userCondition }) => {
             </div>
             {/* <Link to={`/subscriptionplan?code=${code}`} className='w-fit btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'> */}
             <Link to={`/subscriptionplan`} className='w-40 text-center btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'>
-                Let's Start
+                Start Here
             </Link>
             
             {/* <Link to='/summary' className='w-fit btnGrad mx-auto lg:text-xl rounded-2xl px-5 py-3 transition-colors duration-300  hover:bg-indigo-500 hover:text-white'>
