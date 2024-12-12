@@ -125,14 +125,15 @@ const SubscriptionPlan = () => {
         <PlanDescription />
 
         <div className="px-4 2xl:px-0 relative">
-          <div className="max-w-[1440px] mx-auto backdrop-blur-sm bg-black/30 p-4 rounded-lg border border-white/20 mb-14">
-            <h1 className="text-4xl xl:text-5xl text-center my-10 uppercase font-bold px-4">
+
+          <div className="max-w-[1440px] mx-auto backdrop-blur-sm  p-4 rounded-lg border border-white/20 mb-14">
+            <h1 className="text-4xl xl:text-5xl text-center my-10 uppercase font-bold bg-black/30 p-5 rounded-lg px-4">
               <span className="animated-gradient-text bg-clip-text text-transparent relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/50 to-orange-500/50 blur-xl animate-pulse" />
-
                 Try Before You Buy
               </span>
             </h1>
+
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {audioUrls?.intro?.map((item) => (
                 <div key={item?._id} className="mb-6">
@@ -149,6 +150,7 @@ const SubscriptionPlan = () => {
                 </div>
               ))}
             </div>
+
           </div>
         </div>
         <div ref={paymentPlanRef} className="md:flex gap-6 px-4 mt-4 backdrop-blur-sm bg-white/10 p-6 rounded-lg border border-white/20 mx-4 xl:mx-12">
