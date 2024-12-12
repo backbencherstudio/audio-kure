@@ -120,16 +120,11 @@ const SubscriptionPlan = () => {
           </ul>
           <p className="text-lg md:text-xl font-bold">We’re here to support you every step of the way. Let’s make progress together!</p>
         </div>
-
-
-
-
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
-
-
         <div className="px-4 2xl:px-0 relative mt-10 md:mt-20">
 
           <div className="max-w-[1440px] mx-auto backdrop-blur-sm  p-4 rounded-lg border border-white/20 mb-14">
+
             <h1 className=" text-2xl md:text-4xl xl:text-5xl text-center my-10 uppercase font-bold bg-black/30 p-5 rounded-lg px-4">
               <span className="animated-gradient-text bg-clip-text text-transparent relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/50 to-orange-500/50 blur-xl animate-pulse" />
