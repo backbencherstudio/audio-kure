@@ -132,12 +132,16 @@ const SubscriptionPlan = () => {
                 Try Before You Buy
               </span>
             </h1>
-              <p className="text-[16px] text-center mb-2 " >Do not listen to hypnosis recordings while driving, operating machinery</p>
+            <p className="text-[16px] text-center mb-2 " >Do not listen to hypnosis recordings while driving, operating machinery</p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {audioUrls?.intro?.map((item) => (
                 <div key={item?._id} className="mb-6">
-                  <h2 className="text-lg font-semibold mb-2">{item?.name}</h2>
+                  <h2 title={item?.name} className="text-lg font-semibold mb-2">{item?.name
+                    ? item.name.split(' ').length > 4
+                      ? `${item.name.split(' ').slice(0, 4).join(' ')}...`
+                      : item.name
+                    : ''}</h2>
                   <AudioPlayer
                     src={item.audio}
                     showJumpControls={false}
