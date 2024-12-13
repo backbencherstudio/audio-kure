@@ -124,7 +124,7 @@ const SubscriptionPlan = () => {
         <Ads scrollToPaymentPlan={() => paymentPlanRef.current.scrollIntoView({ behavior: 'smooth' })} />
         <div className="px-4 2xl:px-0 relative mt-10 md:mt-20">
 
-          <div className="max-w-[1440px] mx-auto backdrop-blur-sm  p-4 rounded-lg border border-white/20 mb-14">
+          <div className="xl:max-w-[1187px] 2xl:max-w-[1440px] mx-auto backdrop-blur-sm  p-4 rounded-lg border border-white/20 mb-14">
 
             <h1 className=" text-2xl md:text-4xl xl:text-5xl text-center mt-10 mb-3 uppercase font-bold bg-black/30 p-5 rounded-lg px-4">
               <span className="animated-gradient-text bg-clip-text text-transparent relative">
