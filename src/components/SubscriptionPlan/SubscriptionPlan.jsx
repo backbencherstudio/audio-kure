@@ -106,6 +106,16 @@ const SubscriptionPlan = () => {
             </span>{" "}
             suggestible
           </h1>
+          <div>
+            {
+              usertype === "physical" ?
+                <p  className="text-center text-lg max-w-4xl mx-auto px-4 2xl:px-0">A physical suggestible is a person who processes and responds to suggestions primarily through direct,
+                  literal communication and relies on concrete, sensory-based experiences.</p>
+                :
+                <p  className="text-center text-lg max-w-4xl mx-auto px-4 2xl:px-0">An emotional suggestible is a person who processes and responds to suggestions based on implied
+                  meanings, emotions, and indirect communication rather than direct, literal instructions.</p>
+            }
+          </div>
         </div>
         <div className="text-center space-y-6 mt-10 xl:mt-20 p-4 xl:p-0">
           <h1 className="text-3xl font-bold text-white">
@@ -205,59 +215,42 @@ const SubscriptionPlan = () => {
             </div>
           </div>
 
-          <div className="md:w-1/2 flex flex-col justify-between ">
-            <h2 className="text-[1.125rem] text-white font-semibold mb-4 my-10">
+          <div className="md:w-1/2 flex flex-col space-y-4 ">
+            <h2 className="text-[1.125rem] text-white font-semibold mb-4">
               All plans include:
             </h2>
             <ul className="space-y-2 list-disc md:list-none">
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Digital
-                Extensive Audio Library: 4,000+ hours of expert hypnosis sessions across various topics
+                <MdOutlineCheck className="p-text text-xl w-8" /> Extensive Audio Library: 4,000+ hours of hypnosis sessions for various goals.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
                 <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Goal-Oriented Programs: Customized paths for goals like weight loss, stress relief, and better sleep
+                Goal-Oriented Programs: Customized paths for weight loss, Anxiety, sleep, and more.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
                 <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Free Trial: Try HYPNO 4 U risk-free
+                Personalized bedtime hypnosis sessions for nightly relaxation.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Personalized Onboarding: Guided platform tour to maximize every feature
+                <MdOutlineCheck className="p-text text-xl w-8" /> Constant Updates: Regularly refreshed audio hypnosis and meditations.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Exclusive New Content: Early access to innovative Quantum Medical HypnosisTM sessions
+                <MdOutlineCheck className="p-text text-xl w-8" /> Milestone Rewards: Earn badges and unlock "The Vault" as you achieve goals.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Flexible Subscription Options: Affordable plans with easy cancellation
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Expertly Crafted Sessions: Developed by a Doctor in hypnosis, neuroscience, and Quantum Medicine
+                <MdOutlineCheck className="p-text text-xl w-8" />Expertly Crafted Sessions: Designed by a Doctor in hypnosis, and Quantum Medicine.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
                 <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Introductory Hypnosis: Smooth, guided start
+                Flexible Subscriptions: Affordable, risk-free plans with easy cancellation.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
                 <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Daily Bedtime Hypnotherapy: Personalized sessions for nightly relaxation
+                Free Trial: Experience HYPNO 4 U - Audio Hypnosis with no commitment.
               </li>
               <li className="flex items-center text-[12px] lg:text-base gap-2">
                 <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Constant Content Updates: Regularly refreshed audio hypnosis and meditations
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                24/7 Support: Always-on client assistance
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Privacy & Security: Guaranteed confidentiality
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Milestone Badges ACCESS THE VAULT: Earn rewards as you reach achievements
+                Expert Support & Security: 24/7 assistance with guaranteed privacy.
               </li>
             </ul>
             <div>
@@ -270,7 +263,7 @@ const SubscriptionPlan = () => {
                     <img
                       src={gift_big}
                       alt="gift-image"
-                      className=" w-48 lg:w-28 "
+                      className=" w-48 lg:w-36 "
                     />
                   </div>
                   <div className="text-center md:text-left space-y-2">

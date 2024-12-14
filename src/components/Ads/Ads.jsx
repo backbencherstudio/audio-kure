@@ -42,7 +42,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Access:</span>
-                    <span className="text-lg font-semibold">{audioCount} Audio</span>
+                    <span className="text-lg font-semibold">{audioCount} Audios</span>
                 </div>
                 <div className="mt-4">
                     <h4 className="text-yellow-400 font-semibold mb-2">What's Included:</h4>
@@ -66,7 +66,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
     // Content based on selected plan
     const planDetails = {
         "PLAN A": {
-            heading: "🌟 Plan A: 7-Day Access 🌟",
+            heading: "🌟 Plan A: 7-Days Access 🌟",
             price: "$25",
             previousPrice: "$50",
             perDay: "$3.58/day",

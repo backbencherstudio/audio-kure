@@ -35,7 +35,7 @@ const PlanDescription = () => {
                                 </ul>
                             </div>
 
-                            <div className="backdrop-blur-sm bg-black/5 p-4 rounded-lg border border-white/10">
+                            <div className="p-4 rounded-lg border border-white/10">
                                 <h3 className="text-xl font-semibold text-white mb-2">The best part?</h3>
                                 <p className="text-white">You get rewarded for your success—“ACCESS THE VAULT!</p>
                             </div>
@@ -69,7 +69,7 @@ const PlanDescription = () => {
                                 </ul>
                             </div>
 
-                            <div className="backdrop-blur-sm bg-black/5 p-4 rounded-lg border border-white/10">
+                            <div className="p-4 rounded-lg border border-white/10">
                                 <p className="text-white">When subscribing, pick a topic from the pillar that best matches your suggestibility type—how your unconscious mind learns.</p>
                             </div>
                         </div>
