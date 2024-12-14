@@ -53,7 +53,7 @@ function HomePage() {
             <div className="w-full lg:w-1/2 space-y-6">
 
               <h2 className="text-xl md:text-xl lg:text-xl xl:text-3xl 2xl:text-4xl text-white merriweather font-[900] leading-tight">
-              Many Problems to Many Solutions
+              Many Problems, Many Solutions
               </h2>
               <h3 className="text-xl font-bold merriweather">Your Personalized Hypnosis Program is at your fingertips</h3>
               {/* <p className="text-xl merriweather">Start by selecting one of the following </p> */}

@@ -109,10 +109,10 @@ const SubscriptionPlan = () => {
           <div>
             {
               usertype === "physical" ?
-                <p  className="text-center text-lg max-w-4xl mx-auto px-4 2xl:px-0">A physical suggestible is a person who processes and responds to suggestions primarily through direct,
+                <p className="text-center text-lg max-w-4xl mx-auto px-4 2xl:px-0">A physical suggestible is a person who processes and responds to suggestions primarily through direct,
                   literal communication and relies on concrete, sensory-based experiences.</p>
                 :
-                <p  className="text-center text-lg max-w-4xl mx-auto px-4 2xl:px-0">An emotional suggestible is a person who processes and responds to suggestions based on implied
+                <p className="text-center text-lg max-w-4xl mx-auto px-4 2xl:px-0">An emotional suggestible is a person who processes and responds to suggestions based on implied
                   meanings, emotions, and indirect communication rather than direct, literal instructions.</p>
             }
           </div>
@@ -220,38 +220,27 @@ const SubscriptionPlan = () => {
               All plans include:
             </h2>
             <ul className="space-y-2 list-disc md:list-none">
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Extensive Audio Library: 4,000+ hours of hypnosis sessions for various goals.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Goal-Oriented Programs: Customized paths for weight loss, Anxiety, sleep, and more.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Personalized bedtime hypnosis sessions for nightly relaxation.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Constant Updates: Regularly refreshed audio hypnosis and meditations.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" /> Milestone Rewards: Earn badges and unlock "The Vault" as you achieve goals.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />Expertly Crafted Sessions: Designed by a Doctor in hypnosis, and Quantum Medicine.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Flexible Subscriptions: Affordable, risk-free plans with easy cancellation.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Free Trial: Experience HYPNO 4 U - Audio Hypnosis with no commitment.
-              </li>
-              <li className="flex items-center text-[12px] lg:text-base gap-2">
-                <MdOutlineCheck className="p-text text-xl w-8" />{" "}
-                Expert Support & Security: 24/7 assistance with guaranteed privacy.
-              </li>
+              {[
+                "Extensive Audio Library: 4,000+ hours of hypnosis sessions for various goals.",
+                "Goal-Oriented Programs: Customized paths for weight loss, Anxiety, sleep, and more.",
+                "Personalized bedtime hypnosis sessions for nightly relaxation.",
+                "Constant Updates: Regularly refreshed audio hypnosis and meditations.",
+                "Milestone Rewards: Earn badges and unlock 'The Vault' as you achieve goals.",
+                "Expertly Crafted Sessions: Designed by a Doctor in hypnosis, and Quantum Medicine.",
+                "Flexible Subscriptions: Affordable, risk-free plans with easy cancellation.",
+                "Free Trial: Experience HYPNO 4 U - Audio Hypnosis with no commitment.",
+                "Expert Support & Security: 24/7 assistance with guaranteed privacy.",
+              ].map((item, index) => (
+                <li
+                  key={index}
+                  className="flex items-start text-[12px] lg:text-base gap-2"
+                >
+                  <div className="flex-shrink-0 text-xl">
+                    <MdOutlineCheck className="p-text" />
+                  </div>
+                  <span className="text-[12px] lg:text-base">{item}</span>
+                </li>
+              ))}
             </ul>
             <div>
               <h1 className="text-[1.125rem] text-white font-semibold my-4 ">

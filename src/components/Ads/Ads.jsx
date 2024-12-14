@@ -29,7 +29,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
         }
     }, []);
 
-    const PlanCard = ({ title, price, perDay, audioCount, description, bestFor,previousPrice }) => (
+    const PlanCard = ({ title, price, perDay, audioCount, description, bestFor, previousPrice,days }) => (
         <div
             className={`bg-gray-800/50 rounded-xl p-4 border ${selectedPlan === title ? 'border-yellow-500/50' : 'border-gray-700'} hover:border-yellow-500/50 cursor-pointer`}
             onClick={() => setSelectedPlan(title)}
@@ -42,7 +42,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-400">Access:</span>
-                    <span className="text-lg font-semibold">{audioCount} Audios</span>
+                    <span className="text-lg font-semibold">{audioCount} Audios / {days} </span>
                 </div>
                 <div className="mt-4">
                     <h4 className="text-yellow-400 font-semibold mb-2">What's Included:</h4>
@@ -78,6 +78,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
             heading: "🌟 Plan B: Monthly Access 🌟",
             price: "$45",
             previousPrice: "$90",
+            days: "30 Days",
             perDay: "$1.5/day",
             description: "30 days of comprehensive access to '15' custom-selected hypnotherapy audios.",
             bestFor: "Allows a full month to experience the benefits with more flexibility.",
@@ -87,6 +88,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
             heading: "🌟 Plan C: Annual Access 🌟",
             price: "$350",
             previousPrice: "$700",
+            days: "365 Days",
             perDay: "$0.95/day",
             description: "All audios. A robust program designed for a longer-term, goal-oriented journey with exclusive support.",
             bestFor: "Best value for long-term support, giving you a year of unlimited AUDIO access.",
@@ -103,6 +105,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             title="PLAN A"
                             price="25"
                             perDay="3.58"
+                            days="7 Days"
                             audioCount="2"
                             description="7 days of streaming access to a personalized hypnotherapy session targeting '2' selected audio."
                             bestFor="Perfect for a short-term boost or to try out the session."
@@ -112,6 +115,7 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             title="PLAN B"
                             price="45"
                             perDay="1.5"
+                            days="30 Days"
                             audioCount="15"
                             description="30 days of comprehensive access to '15' custom-selected hypnotherapy audios."
                             bestFor="Allows a full month to experience the benefits with more flexibility."
@@ -121,10 +125,11 @@ const Ads = ({ scrollToPaymentPlan }) => {
                             title="PLAN C"
                             price="350"
                             perDay="0.9"
+                            days="365 Days"
                             audioCount="All"
                             description="All audios. A robust program designed for a longer-term, goal-oriented journey with exclusive support."
                             bestFor="Best value for long-term support, giving you a year of unlimited AUDIO access."
-                             previousPrice="700"
+                            previousPrice="700"
                         />
                     </div>
                 </div>
