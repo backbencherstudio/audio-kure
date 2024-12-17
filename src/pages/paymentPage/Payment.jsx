@@ -53,7 +53,7 @@ const Payment = () => {
     }
     try {
       await axios.post(
-        "https://admin.hypno4u.com/api/v1/payment/execute-payment",
+        "http://localhost:5000/api/v1/payment/execute-payment",
         {
           orderID: data.orderID,
           payerID: data.payerID,

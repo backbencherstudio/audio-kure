@@ -4,12 +4,10 @@ import { selectCurrentUser } from "../redux/fetures/auth/authSlice";
 const Logo = () => {
 
   const currentUser = useSelector(selectCurrentUser);
-  
+
   return (
     <div className=" px-4 xl:px-0 container mx-auto ">
-
       <div className="flex w-full  items-center gap-20" >
-
         <div className="w-full">
           <Link className="flex flex-col  items-center lg:gap-2 xl:gap-0  lg:items-start relative" to={"/"}>
             <h1 className="text-4xl  py-3 uppercase font-serif font-bold ">Hypno4u <sup className="text-xs absolute top-3 ml-1">TM</sup></h1>
@@ -23,7 +21,6 @@ const Logo = () => {
           <Link className="block  " to="/admin/users" >Dashboard</Link>
         }
       </div>
-
     </div>
   );
 };

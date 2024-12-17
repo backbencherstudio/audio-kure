@@ -152,6 +152,16 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags : ["audios"]
     }),
 
+    removeAudios: builder.mutation({
+      query: (id) => {                         
+        return {
+          url: `/removeAudio/${id}`,
+          method: "DELETE",
+        }
+      },
+      invalidatesTags : ["audios"]
+    }),
+
 
   }),
 });

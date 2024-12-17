@@ -8,6 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
 import { logOut, selectCurrentUser } from '../../../redux/fetures/auth/authSlice';
 import { useSelector } from 'react-redux';
+import { MdDeleteForever } from 'react-icons/md';
+import Swal from 'sweetalert2';
+import { toast } from 'react-toastify';
 
 function AdminAudios() {
     const [audioFile, setAudioFile] = useState(null);
@@ -19,6 +22,7 @@ function AdminAudios() {
     const [updateAudioPaths] = authApi.useUpdateAudioPathsMutation()
     const [name, setAudioTitle] = useState("");
     const [getId, setGetId] = useState("")
+    const [removeAudios] = authApi.useRemoveAudiosMutation()
 
     const currentUser = useSelector(selectCurrentUser);
     const navigate = useNavigate()
@@ -29,7 +33,7 @@ function AdminAudios() {
         dispatch(logOut());
         return navigate("/login")
     }
-    
+
     const handleChange = (event) => {
         setStatus(event.target.value);
     };
@@ -51,12 +55,12 @@ function AdminAudios() {
         formData.append('audio', audioFile);
         try {
             setUploadStatus('Uploading...');
-            const response = await axios.post('https://admin.hypno4u.com/upload-audio', formData, {
+            const response = await axios.post('http://localhost:5000/upload-audio', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            const newAudioUrl = `https://admin.hypno4u.com${response.data.filePath}`;
+            const newAudioUrl = `http://localhost:5000${response.data.filePath}`;
             setUploadStatus('Update successful');
             if (newAudioUrl) {
 
@@ -73,7 +77,7 @@ function AdminAudios() {
                 }
                 // ================================== For New Audio Upload
                 if (!getId) {
-                    await axios.post('https://admin.hypno4u.com/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
+                    await axios.post('http://localhost:5000/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
                     refetch();
                     setAudioFile(null);
                     setStatus('');
@@ -88,6 +92,25 @@ function AdminAudios() {
             console.error('Error:', error);
         }
     };
+
+    const deleteFun = async (item) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await removeAudios(item?._id);
+                if (res) {
+                    toast.success("Audio Delete Success Fully")
+                }
+            }
+        });
+    }
 
 
     return (
@@ -203,6 +226,7 @@ function AdminAudios() {
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
 
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
@@ -222,7 +246,7 @@ function AdminAudios() {
 
                         </div>
                         <div>
-                            <h2  className='text-xl font-semibold' >Mind </h2>
+                            <h2 className='text-xl font-semibold' >Mind </h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -233,6 +257,7 @@ function AdminAudios() {
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -248,7 +273,7 @@ function AdminAudios() {
                             </div>
                         </div>
                         <div>
-                            <h2  className='text-xl font-semibold' >Self</h2>
+                            <h2 className='text-xl font-semibold' >Self</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -259,6 +284,7 @@ function AdminAudios() {
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -274,7 +300,7 @@ function AdminAudios() {
                             </div>
                         </div>
                         <div>
-                            <h2  className='text-xl font-semibold' >Ego</h2>
+                            <h2 className='text-xl font-semibold' >Ego</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -285,6 +311,7 @@ function AdminAudios() {
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -306,7 +333,7 @@ function AdminAudios() {
                     <div className='mt-10  flex gap-10 '>
 
                         <div>
-                            <h2  className='text-xl font-semibold' >Vault</h2>
+                            <h2 className='text-xl font-semibold' >Vault</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -318,6 +345,7 @@ function AdminAudios() {
 
                                                 <span className='text-black' > {index + 1}</span>
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
@@ -335,7 +363,7 @@ function AdminAudios() {
                         </div>
 
                         <div>
-                            <h2  className='text-xl font-semibold' >Intro</h2>
+                            <h2 className='text-xl font-semibold' >Intro</h2>
 
                             <div className='bg-slate-50 rounded-2xl overflow-hidden  ' >
                                 <div className='p-5 max-h-[600px] overflow-y-scroll ' >
@@ -346,7 +374,10 @@ function AdminAudios() {
                                             ${getId === item._id && "bg-green-200"} duration-300 relative `}>
 
                                                 <span className='text-black' > {index + 1}</span>
+
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
+
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.

@@ -81,7 +81,7 @@ const SessionsTest = ({ selectedMonth, sessions }) => {
   useEffect(() => {
     if (sessionId) {
       setSubDataloading(true)
-      fetch(`https://admin.hypno4u.com/success?session_id=${sessionId}`)
+      fetch(`http://localhost:5000/success?session_id=${sessionId}`)
         .then(response => response.json())
         .then(data => {
           setSubscribeData(data);

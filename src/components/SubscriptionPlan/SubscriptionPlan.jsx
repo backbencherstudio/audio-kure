@@ -37,7 +37,7 @@ const SubscriptionPlan = () => {
         originalPrice: "50",
         discountedPrice: "25",
         perDay: "3.58",
-        href: "https://admin.hypno4u.com/subscribe?plan=Silver"
+        href: "http://localhost:5000/subscribe?plan=Silver"
       },
       {
         id: "30",
@@ -46,7 +46,7 @@ const SubscriptionPlan = () => {
         discountedPrice: "45",
         perDay: "1.5",
         originalPerDay: "$3.00",
-        href: "https://admin.hypno4u.com/subscribe?plan=Gold"
+        href: "http://localhost:5000/subscribe?plan=Gold"
       },
       {
         id: "365",
@@ -57,7 +57,7 @@ const SubscriptionPlan = () => {
         originalPerDay: "$1.92",
         isPopular: true,
         hasGift: true,
-        href: "https://admin.hypno4u.com/subscribe?plan=Dimond"
+        href: "http://localhost:5000/subscribe?plan=Dimond"
       },
 
     ];
@@ -147,11 +147,16 @@ const SubscriptionPlan = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {audioUrls?.intro?.map((item) => (
                 <div key={item?._id} className="mb-6">
-                  <h2 title={item?.name} className="text-lg font-semibold mb-2">{item?.name
+
+                  <h2 title={item?.name} className="text-lg font-semibold mb-2">
+                    {/* {item?.name
                     ? item.name.split(' ').length > 4
                       ? `${item.name.split(' ').slice(0, 4).join(' ')}...`
                       : item.name
-                    : ''}</h2>
+                    : ''} */}
+                    {item?.name.length > 15 ? item?.name.substring(0, 15) + "..." : item?.name}
+                  </h2>
+
                   <AudioPlayer
                     src={item.audio}
                     showJumpControls={false}
@@ -175,7 +180,7 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
 
-            {/* <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a> */}
+            {/* <a className="text-blue-600 bg-black p-2 " href="http://localhost:5000/subscribe?plan=test">1 day</a> */}
 
             <div >
               <div className="space-y-4 mb-4">

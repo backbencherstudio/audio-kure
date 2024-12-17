@@ -101,7 +101,7 @@ const Sessions = () => {
 
   useEffect(() => {
     if (sessionId) {
-      fetch(`https://admin.hypno4u.com/success?session_id=${sessionId}`)
+      fetch(`http://localhost:5000/success?session_id=${sessionId}`)
         .then((response) => response.json())
         .then((data) => setSubscribeData(data))
         .catch((error) => console.error("Error:", error));
@@ -134,7 +134,7 @@ const Sessions = () => {
         (subscribeData && subscribeData?.status !== "active") ||
         (subscribeData && currentUser?.email !== subscribeData?.subscription_email)||
         (subscribeData === null )   //========================================================== notun  update kota hoyeche
-      ) {
+      ) {        
         navigate("/subscriptionplan");   //==========================================================  notun  update kota hoyeche
         const res = await userDelete(currentUser?.email)
         if (res?.data?.success) {
@@ -377,7 +377,7 @@ const Sessions = () => {
                 If You Want To Cancel Your Plan
                 <a
                   className="duration-300 ml-1 text-red-500 font-bold hover:text-red-700 rounded-md text-md mt-10 inline-block"
-                  href={`https://admin.hypno4u.com/customers/${subscribeData?.customer_id}`}
+                  href={`http://localhost:5000/customers/${subscribeData?.customer_id}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
