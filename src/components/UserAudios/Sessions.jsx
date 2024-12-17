@@ -135,7 +135,7 @@ const Sessions = () => {
         (subscribeData && currentUser?.email !== subscribeData?.subscription_email)||
         (subscribeData === null )   //========================================================== notun  update kota hoyeche
       ) {        
-        navigate("/subscriptionplan");   //==========================================================  notun  update kota hoyeche
+        await navigate("/subscriptionplan");   //==========================================================  notun  update kota hoyeche
         const res = await userDelete(currentUser?.email)
         if (res?.data?.success) {
           navigate("/subscriptionplan");
