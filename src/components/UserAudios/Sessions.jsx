@@ -142,7 +142,7 @@ const Sessions = () => {
         }
       }
     }
-    deleteFun()
+    deleteFun() 
 
   }, [usbDataLoading, subscribeData, currentUser?.email, navigate]);
 
