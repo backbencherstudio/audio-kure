@@ -154,7 +154,6 @@ const SubscriptionPlan = () => {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
         <PlanDescription />
