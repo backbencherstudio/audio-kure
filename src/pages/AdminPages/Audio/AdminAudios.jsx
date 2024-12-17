@@ -55,12 +55,12 @@ function AdminAudios() {
         formData.append('audio', audioFile);
         try {
             setUploadStatus('Uploading...');
-            const response = await axios.post('http://localhost:5000/upload-audio', formData, {
+            const response = await axios.post('https://admin.hypno4u.com/upload-audio', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            const newAudioUrl = `http://localhost:5000${response.data.filePath}`;
+            const newAudioUrl = `https://admin.hypno4u.com${response.data.filePath}`;
             setUploadStatus('Update successful');
             if (newAudioUrl) {
 
@@ -77,7 +77,7 @@ function AdminAudios() {
                 }
                 // ================================== For New Audio Upload
                 if (!getId) {
-                    await axios.post('http://localhost:5000/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
+                    await axios.post('https://admin.hypno4u.com/path-name', { audio: newAudioUrl, category: status, categoryStatus, name });
                     refetch();
                     setAudioFile(null);
                     setStatus('');

@@ -37,7 +37,7 @@ const SubscriptionPlan = () => {
         originalPrice: "50",
         discountedPrice: "25",
         perDay: "3.58",
-        href: "http://localhost:5000/subscribe?plan=Silver"
+        href: "https://admin.hypno4u.com/subscribe?plan=Silver"
       },
       {
         id: "30",
@@ -46,7 +46,7 @@ const SubscriptionPlan = () => {
         discountedPrice: "45",
         perDay: "1.5",
         originalPerDay: "$3.00",
-        href: "http://localhost:5000/subscribe?plan=Gold"
+        href: "https://admin.hypno4u.com/subscribe?plan=Gold"
       },
       {
         id: "365",
@@ -57,7 +57,7 @@ const SubscriptionPlan = () => {
         originalPerDay: "$1.92",
         isPopular: true,
         hasGift: true,
-        href: "http://localhost:5000/subscribe?plan=Dimond"
+        href: "https://admin.hypno4u.com/subscribe?plan=Dimond"
       },
 
     ];
@@ -180,7 +180,7 @@ const SubscriptionPlan = () => {
               Select your plan:
             </h2>
 
-            {/* <a className="text-blue-600 bg-black p-2 " href="http://localhost:5000/subscribe?plan=test">1 day</a> */}
+            {/* <a className="text-blue-600 bg-black p-2 " href="https://admin.hypno4u.com/subscribe?plan=test">1 day</a> */}
 
             <div >
               <div className="space-y-4 mb-4">
