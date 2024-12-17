@@ -28,7 +28,6 @@ function AdminAudios() {
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
 
-
     if (currentUser?.email != "mybesthealer@gmail.com") {
         dispatch(logOut());
         return navigate("/login")
@@ -104,20 +103,18 @@ function AdminAudios() {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await removeAudios(item?._id);
-                if (res) {
-                    toast.success("Audio Delete Success Fully")
+                const res = await removeAudios(item?._id);                
+                if (res?.data?.message) {
+                    toast.success(res?.data.message)
                 }
             }
         });
     }
 
-
     return (
         <div className="text-black">
             <div className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mt-10">
                 <h2 className="text-2xl font-semibold text-gray-700 mb-4 text-center">Upload Audio</h2>
-
                 <div className={`flex flex-col items-center border rounded-lg ${getId && "border border-green-400 bg-green-50 "} p-2 duration-300 `}>
                     <label className="w-full">
                         <input
@@ -357,7 +354,6 @@ function AdminAudios() {
                                             </div>
                                         ))
                                     }
-
                                 </div>
                             </div>
                         </div>
@@ -372,17 +368,13 @@ function AdminAudios() {
                                         audioUrls?.intro?.map((item, index) => (
                                             <div key={item._id} className={`mb-5 flex items-center shadow-md justify-between rounded-full pl-4 p-1
                                             ${getId === item._id && "bg-green-200"} duration-300 relative `}>
-
                                                 <span className='text-black' > {index + 1}</span>
-
                                                 <button className=' mx-2' onClick={() => setGetId(item._id)} > <CiEdit className='text-xl' /> </button>
-                                                <button className=' mx-2' onClick={() => deleteFun(item)} > <MdDeleteForever className='text-xl' /> </button>
-
+                                                <button className=' mx-2' onClick={() => deleteFun(item)} >  <MdDeleteForever className='text-xl' /> </button>
                                                 <audio controls>
                                                     <source src={item?.audio} type="audio/mp3" />
                                                     Your browser does not support the audio element.
                                                 </audio>
-
                                                 <h2 className=' absolute -top-[2%] right-5 bg-gray-600 text-white rounded-full px-2 text-[12px] ' >
                                                     {item?.name.length > 20 ? item?.name.substring(0, 20) + "..." : item?.name}
                                                 </h2>
